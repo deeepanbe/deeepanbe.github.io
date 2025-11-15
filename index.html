@@ -237,5 +237,298 @@
             <p>© 2025 DEEPANRAJ A | Built with ❤️ | <a href="https://github.com/deeepanbe" target="_blank">View on GitHub</a></p>
         </footer>
     </div>
+
+        <!-- AI Chatbot Assistant -->
+    <div id="chatbot" class="chatbot-container">
+        <div class="chatbot-header" onclick="toggleChatbot()">
+            <span>💬 Ask me anything!</span>
+            <span id="chatbot-toggle">▼</span>
+        </div>
+        <div id="chatbot-body" class="chatbot-body" style="display:none;">
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type your question..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Modal -->
+    <button class="floating-contact-btn" onclick="openContactForm()">📧 Contact Me</button>
+    
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactForm()">&times;</span>
+            <h2>📬 Get In Touch</h2>
+            <form id="contactForm" onsubmit="sendEmail(event)">
+                <input type="text" id="name" placeholder="Your Name *" required>
+                <input type="email" id="email" placeholder="Your Email *" required>
+                <input type="text" id="subject" placeholder="Subject *" required>
+                <textarea id="message" placeholder="Your Message *" rows="5" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-body {
+            max-height: 400px;
+            background: #f9f9f9;
+        }
+        .chat-messages {
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .chat-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .bot-message {
+            background: #e3e3e3;
+            margin-right: auto;
+        }
+        .user-message {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-radius: 0 0 15px 15px;
+        }
+        .chat-input-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .chat-input-container button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        /* Contact Form Styles */
+        .floating-contact-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(102, 126, 234, 0.4);
+            z-index: 999;
+            transition: transform 0.3s;
+        }
+        .floating-contact-btn:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover { color: #000; }
+        #contactForm input, #contactForm textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover { opacity: 0.9; }
+        
+        @media (max-width: 768px) {
+            .chatbot-container {
+                width: 90%;
+                right: 5%;
+            }
+        }
+    </style>
+
+    <script>
+        // Chatbot functionality
+        function toggleChatbot() {
+            const body = document.getElementById('chatbot-body');
+            const toggle = document.getElementById('chatbot-toggle');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                toggle.textContent = '▲';
+                // Welcome message
+                if (document.getElementById('chat-messages').children.length === 0) {
+                    addBotMessage('Hi! I\'m DEEPANRAJ\'s AI assistant. Ask me about his skills, projects, or experience!');
+                }
+            } else {
+                body.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            setTimeout(() => {
+                const response = getBotResponse(message.toLowerCase());
+                addBotMessage(response);
+            }, 500);
+        }
+
+        function addUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'chat-message user-message';
+            div.textContent = text;
+            document.getElementById('chat-messages').appendChild(div);
+            scrollToBottom();
+        }
+
+        function addBotMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'chat-message bot-message';
+            div.innerHTML = text;
+            document.getElementById('chat-messages').appendChild(div);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const messages = document.getElementById('chat-messages');
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            // Simple keyword-based responses
+            if (message.includes('skill') || message.includes('technology')) {
+                return 'DEEPANRAJ is skilled in: Python, SQL, Excel, Power BI, Machine Learning, Pandas, NumPy, Scikit-Learn, and Data Visualization tools!';
+            }
+            else if (message.includes('project')) {
+                return 'Key projects include:<br>• IBM HR Attrition Analysis<br>• Digital Marketing Leads Performance<br>• Hotel Booking Analysis<br>Check the Projects section for details!';
+            }
+            else if (message.includes('experience') || message.includes('work')) {
+                return 'DEEPANRAJ has experience in HR Analytics, Marketing Analytics, Crime Analysis & Business Intelligence. He\'s passionate about solving complex problems through data-driven decision making!';
+            }
+            else if (message.includes('contact') || message.includes('email') || message.includes('reach')) {
+                return 'You can reach DEEPANRAJ at:<br>📧 Email: <a href="mailto:deeepanbe@gmail.com">deeepanbe@gmail.com</a><br>🐙 GitHub: <a href="https://github.com/deeepanbe" target="_blank">github.com/deeepanbe</a>';
+            }
+            else if (message.includes('location') || message.includes('where')) {
+                return 'DEEPANRAJ is based in Karur, Tamil Nadu, India 🇮🇳';
+            }
+            else if (message.includes('education') || message.includes('certification')) {
+                return 'Certifications:<br>🎓 BCG Data Science Virtual Internship<br>📊 Microsoft Power BI Certified (PL-300)<br>🐍 Python for Data Analysis<br>📊 SQL for Data Science';
+            }
+            else if (message.includes('hello') || message.includes('hi')) {
+                return 'Hello! How can I help you learn more about DEEPANRAJ\'s qualifications?';
+            }
+            else {
+                return 'I can tell you about DEEPANRAJ\'s skills, projects, experience, certifications, or contact information. What would you like to know?';
+            }
+        }
+
+        // Contact Form functionality
+        function openContactForm() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+
+        function closeContactForm() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        function sendEmail(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:deeepanbe@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
+            
+            window.location.href = mailtoLink;
+            
+            alert('✅ Your email client will open to send the message!');
+            closeContactForm();
+            document.getElementById('contactForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
