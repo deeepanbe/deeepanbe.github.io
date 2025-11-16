@@ -1,308 +1,524 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Deepanraj A — Senior Data Analyst | Portfolio</title>
-  <meta name="description" content="Deepanraj A — Senior Data Analyst. Python, SQL, Power BI, Tableau, Machine Learning, BI solutions, dashboards and analytics." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <title>DEEPANRAJ A — Portfolio</title>
+  <meta name="description" content="DEEPANRAJ A | Data Analyst — Power BI, Tableau, Excel, Python" />
+
+  <!--
+    Single-file portfolio for GitHub Pages.
+    - Place Deepanraj_A_Data_Analyst.pdf in same folder to enable resume download.
+    - Replace placeholder images in /assets or same folder and update src attributes.
+    - To add a new project: copy a <article class="project-card"> block and update data-tool attribute.
+  -->
+
   <style>
+    /* ======================
+       Reset & base
+       ====================== */
     :root{
-      --bg:#0f1724; --card:#0f1724; --glass:rgba(255,255,255,0.04); --accent:#667eea; --accent-2:#764ba2; --muted:#94a3b8;
-      --glass-2:rgba(255,255,255,0.03);
-      --max-width:1100px;
+      --bg1:#3b82f6;    /* blue */
+      --bg2:#7c3aed;    /* purple */
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#06b6d4;
+      --glass: rgba(255,255,255,0.06);
+      --maxW:1100px;
+      --radius:12px;
+      --shadow: 0 8px 24px rgba(15,23,42,0.08);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;color:#e6eef8;background:linear-gradient(180deg,#071025 0%, #0f1724 60%)}
-    a{color:inherit}
-    .wrap{max-width:var(--max-width);margin:32px auto;padding:28px}
-
-    /* HEADER */
-    header.site{display:flex;gap:24px;align-items:center;background:linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.05));padding:30px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px)}
-    .profile-photo{width:140px;height:140px;border-radius:18px;overflow:hidden;border:4px solid rgba(255,255,255,0.03)}
-    .profile-photo img{width:100%;height:100%;object-fit:cover;display:block}
-    .profile-content{flex:1}
-    .name{font-size:28px;font-weight:700;margin:0}
-    .role{color:var(--muted);margin:8px 0 14px}
-    .tagline{font-size:14px;color:#cfe0ff;margin-bottom:10px}
-
-    /* typing */
-    .typing { display:inline-block; font-weight:600; color:var(--accent); }
-    .typing > span { border-right: 2px solid rgba(255,255,255,0.18); padding-right:6px; }
-
-    /* badges */
-    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .badge{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px;color:white}
-
-    /* ACTIONS */
-    .actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
-    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:10px}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
-    /* GRID SECTIONS */
-    .section{margin-top:28px}
-    .section h2{font-size:18px;margin:0 0 18px}
-    .grid{display:grid;gap:18px}
-
-    /* CERTS & SKILLS */
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .card{background:var(--glass);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);display:flex;gap:12px;align-items:center}
-    .card img{width:56px;height:56px;object-fit:contain;border-radius:8px}
-    .card .meta{flex:1}
-    .card .meta h3{margin:0;font-size:15px}
-    .card .meta p{margin:6px 0 0;color:var(--muted);font-size:13px}
-
-    /* projects */
-    .projects{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .project{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-    .project h3{margin:0 0 8px;font-size:16px}
-    .project p{color:var(--muted);margin:0 0 12px}
-    .project .links{display:flex;gap:8px}
-    .repo-link{font-size:13px;padding:8px 10px;border-radius:8px;background:rgba(0,0,0,0.25);color:#dfeeff;text-decoration:none}
-
-    /* timeline */
-    .timeline{position:relative;padding:20px 0}
-    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent-2));transform:translateX(-50%)}
-    .tl-item{position:relative;width:50%;padding:12px 24px}
-    .tl-item .box{background:var(--glass-2);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-    .tl-left{left:0;text-align:right}
-    .tl-right{left:50%}
-    .dot{position:absolute;width:14px;height:14px;border-radius:50%;left:50%;transform:translateX(-50%);background:var(--accent);top:24px;border:3px solid #0f1724}
-
-    /* stats */
-    .stats{display:flex;gap:12px;flex-wrap:wrap}
-    .stat{background:var(--glass);padding:14px;border-radius:10px;min-width:140px;text-align:center}
-    .stat h4{margin:0;font-size:20px}
-    .stat p{margin:6px 0 0;color:var(--muted)}
-
-    /* contribution */
-    .contrib{display:flex;gap:14px;align-items:center}
-    .gh-stats img{border-radius:8px}
-
-    /* footer */
-    footer{margin-top:30px;text-align:center;color:var(--muted);font-size:13px}
-
-    /* responsive */
-    @media(max-width:900px){
-      .projects{grid-template-columns:1fr}
-      .tl-item{width:100%;left:0;padding-left:40px;padding-right:20px}
-      .timeline::before{left:18px}
-      .dot{left:18px}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      color:#0f172a;
+      background: linear-gradient(135deg, var(--bg2) 0%, var(--bg1) 50%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:36px 20px;
     }
 
-    /* subtle animations */
-    .fade-up{opacity:0;transform:translateY(18px);transition:all .6s ease}
-    .fade-up.visible{opacity:1;transform:none}
+    /* Container */
+    .wrap{
+      width:100%;
+      max-width:var(--maxW);
+      background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 100%);
+      border-radius:16px;
+      box-shadow: 0 12px 40px rgba(2,6,23,0.25);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.6);
+    }
 
-    /* typing caret blink */
-    @keyframes blink{50%{border-color:transparent}}
-    .typing > span{animation:blink .9s steps(1) infinite}
+    header{
+      padding:28px 32px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border-bottom:1px solid rgba(15,23,42,0.03);
+      backdrop-filter: blur(4px);
+    }
+    .left{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      line-height:1;
+    }
+    .brand .name{
+      font-weight:700;
+      letter-spacing:0.6px;
+      font-size:18px;
+      color:#071133;
+    }
+    .brand .tagline{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:3px;
+    }
+
+    .cta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .btn{
+      border-radius:10px;
+      padding:10px 14px;
+      font-size:14px;
+      cursor:pointer;
+      border:0;
+      transition:transform .18s ease, box-shadow .18s ease;
+      box-shadow: none;
+      background:linear-gradient(90deg,var(--bg1),var(--bg2));
+      color:white;
+      font-weight:600;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(15,23,42,0.06);
+      color:#071133;
+      font-weight:600;
+    }
+
+    /* Main content */
+    .main{
+      padding:28px 32px;
+    }
+
+    .controls{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .resume-block{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .resume-block .resume-note{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* Filter dropdown */
+    .filter{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .select{
+      appearance:none;
+      -webkit-appearance:none;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.06);
+      background:white;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    /* Grid */
+    .projects-grid{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+
+    /* Card */
+    .project-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(15,23,42,0.03);
+      transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s ease;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height:220px;
+    }
+    .project-card:hover{
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(2,6,23,0.12);
+    }
+
+    .thumb{
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(14,165,233,0.06), rgba(124,58,237,0.04));
+      height:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      font-weight:600;
+      font-size:13px;
+      overflow:hidden;
+      border:1px dashed rgba(15,23,42,0.04);
+    }
+    .thumb img{max-width:100%; max-height:100%; object-fit:cover; display:block}
+
+    .meta{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .tool-tag{
+      padding:6px 8px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      color:white;
+    }
+    .tool-pbi{ background:linear-gradient(90deg,#0ea5a4,#0284c7) }
+    .tool-tableau{ background:linear-gradient(90deg,#f97316,#ef4444) }
+    .tool-excel{ background:linear-gradient(90deg,#16a34a,#15803d) }
+
+    .proj-title{ font-weight:700; font-size:15px; color:#071133 }
+
+    .proj-bullets{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      flex:1;
+    }
+    .proj-footer{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .link{
+      font-size:13px;
+      color: #065f46;
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:8px;
+      border:1px solid rgba(6,95,70,0.08);
+      background:rgba(6,95,70,0.03);
+      font-weight:600;
+    }
+
+    /* Footer */
+    footer{
+      padding:20px 32px;
+      border-top:1px solid rgba(15,23,42,0.03);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    }
+    .contact{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .socials a{ color:var(--muted); text-decoration:none; margin-left:12px; font-weight:700 }
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .projects-grid{ grid-template-columns: repeat(2, 1fr) }
+    }
+    @media (max-width:640px){
+      header{ padding:18px }
+      .main{ padding:18px }
+      .projects-grid{ grid-template-columns: 1fr }
+      .brand .name{ font-size:16px }
+      .brand .tagline{ font-size:12px }
+      .resume-block{ width:100%; justify-content:flex-start }
+      footer{ flex-direction:column; align-items:flex-start; gap:8px }
+    }
+
+    /* subtle reveal animation */
+    .project-card{ opacity:0; transform:translateY(14px); animation: reveal .5s forwards ease; }
+    .project-card:nth-child(1){ animation-delay: .05s }
+    .project-card:nth-child(2){ animation-delay: .10s }
+    .project-card:nth-child(3){ animation-delay: .15s }
+    .project-card:nth-child(4){ animation-delay: .20s }
+    .project-card:nth-child(5){ animation-delay: .25s }
+    .project-card:nth-child(6){ animation-delay: .30s }
+
+    @keyframes reveal{
+      to{ opacity:1; transform:none }
+    }
+
+    /* small helper */
+    .muted{ color:var(--muted); font-size:13px }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="site fade-up" id="header">
-      <div class="profile-photo"><img src="https://github.com/deeepanbe.png" alt="Deepanraj A"></div>
-      <div class="profile-content">
-        <h1 class="name">Deepanraj A <span style="font-weight:500;color:var(--muted);font-size:16px">• Senior Data Analyst</span></h1>
-        <div class="role">BI Developer · Data Science · Automation · Insights for Decisioning</div>
-        <div class="tagline">I build reliable ETL pipelines, production-ready dashboards and ML-backed insights that drive measurable business outcomes.</div>
-
-        <div style="margin-top:10px">
-          <span class="typing"> <span id="typed"></span></span>
-          <div class="badges" style="margin-top:8px">
-            <div class="badge">Python</div>
-            <div class="badge">SQL</div>
-            <div class="badge">Power BI</div>
-            <div class="badge">Tableau</div>
-            <div class="badge">Machine Learning</div>
-          </div>
+  <div class="wrap" role="main" aria-labelledby="portfolioTitle">
+    <header>
+      <div class="left">
+        <div class="brand" id="portfolioTitle">
+          <div class="name">DEEPANRAJ A</div>
+          <div class="tagline">Data Analyst | Power BI | Tableau | Excel | Python</div>
         </div>
+      </div>
 
-        <div class="actions">
-          <a class="btn" href="https://github.com/deeepanbe" target="_blank">🐙 View GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/deepanraj-data-analyst/" target="_blank">💼 LinkedIn</a>
-          <a class="btn secondary" href="mailto:deepanraj.a@outlook.com">📧 Email</a>
-          <a class="btn secondary" href="#resume">📥 Resume</a>
-        </div>
+      <div class="cta" aria-hidden="false">
+        <!-- Resume button (place PDF in same repo) -->
+        <a class="btn" href="Deepanraj_A_Data_Analyst.pdf" download title="Download Resume">Download Resume</a>
+        <!-- Optional Hero CTA -->
+        <a class="btn secondary" href="#contact">Contact</a>
       </div>
     </header>
 
-    <!-- quick stats and contributions -->
-    <section class="section grid fade-up" id="overview" style="grid-template-columns:1fr 320px;align-items:start">
-      <div>
-        <h2>Highlights</h2>
-        <div class="cards" style="margin-top:12px">
-          <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Microsoft_Power_BI_Logo.svg" alt="Power BI">
-            <div class="meta"><h3>Power BI (PL‑300)</h3><p>Enterprise dashboards, DAX, data modeling & automation.</p></div>
-          </div>
-          <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Coursera-Logo.webp" alt="Coursera">
-            <div class="meta"><h3>Google Data Analytics</h3><p>Data cleaning, analysis & visualization best practices.</p></div>
-          </div>
-          <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
-            <div class="meta"><h3>BCG / IBM Internships</h3><p>Virtual internships & problem-solving simulations.</p></div>
-          </div>
-          <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Python-logo-notext.svg" alt="Python">
-            <div class="meta"><h3>Python & ML</h3><p>Pandas, NumPy, scikit-learn — production data pipelines.</p></div>
-          </div>
+    <main class="main">
+      <div class="controls">
+        <div class="resume-block" aria-hidden="true">
+          <div class="resume-note">Resume available for download. File: <strong>Deepanraj_A_Data_Analyst.pdf</strong></div>
         </div>
 
-        <!-- Pinned Projects -->
-        <div style="margin-top:22px">
-          <h2>Pinned Projects</h2>
-          <div class="projects" style="margin-top:10px">
-            <div class="project">
-              <h3>IBM HR Attrition Analysis</h3>
-              <p>Exploratory analysis and predictive model to identify attrition risk drivers. Tools: Python, Pandas, Jupyter.</p>
-              <div class="links"><a class="repo-link" href="https://github.com/deeepanbe/IBM-HR-ATTRITION-ANALYSIS" target="_blank">View Repo</a><a class="repo-link" href="#">Live Notebook</a></div>
-            </div>
-            <div class="project">
-              <h3>Digital Marketing Leads Performance</h3>
-              <p>SQL ETL for 10k+ leads, Tableau dashboards with forecasting and ROI analysis.</p>
-              <div class="links"><a class="repo-link" href="https://github.com/deeepanbe/DIGITAL-MARKETING-LEADS-PERFORMANCE" target="_blank">View Repo</a><a class="repo-link" href="#">Dashboard Preview</a></div>
-            </div>
-            <div class="project">
-              <h3>Hotel Booking Analysis</h3>
-              <p>Customer behaviour analysis and seasonality insights. Tools: Python, HTML dashboards.</p>
-              <div class="links"><a class="repo-link" href="https://github.com/deeepanbe/hotel-booking-analysis" target="_blank">View Repo</a></div>
-            </div>
-            <div class="project">
-              <h3>ATS Resume Automation (In progress)</h3>
-              <p>Python NLP pipeline (spaCy, NLTK) to generate ATS-ready resumes with JD matching & PDF export.</p>
-              <div class="links"><a class="repo-link" href="https://github.com/deeepanbe" target="_blank">View Repo</a></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <aside style="padding-left:18px">
-        <div class="stats">
-          <div class="stat"><h4 id="stat-projects">0</h4><p>Projects</p></div>
-          <div class="stat"><h4 id="stat-certs">0</h4><p>Certifications</p></div>
-          <div class="stat"><h4 id="stat-years">0</h4><p>Years Experience</p></div>
-        </div>
-
-        <div style="margin-top:18px" class="contrib">
-          <div class="gh-stats"><img src="https://github-readme-stats.vercel.app/api?username=deeepanbe&show_icons=true&theme=transparent&hide_border=true" alt="GitHub stats"></div>
-        </div>
-
-        <div style="margin-top:12px">
-          <h3 style="margin:8px 0 6px">Contribution Graph</h3>
-          <img src="https://ghchart.rshah.org/deeepanbe" alt="Contributions Chart" style="width:100%;border-radius:8px">
-        </div>
-
-      </aside>
-    </section>
-
-    <!-- Experience timeline -->
-    <section class="section fade-up">
-      <h2>Work Experience</h2>
-      <div class="timeline">
-        <div class="tl-item tl-left" style="position:relative">
-          <div class="dot"></div>
-          <div class="box" style="margin-left:auto;max-width:520px">
-            <h3 style="margin:0">Dakshin Home Fashions — Junior Data Analyst <small style="display:block;color:var(--muted)">Mar 2021 – Present</small></h3>
-            <p style="color:var(--muted);margin-top:8px">Designed & automated 12+ enterprise dashboards using DAX & Power Query, built SQL ETL pipelines processing 3k+ daily records and improved data accuracy to 99.2%.</p>
-          </div>
-        </div>
-
-        <div class="tl-item tl-right" style="position:relative">
-          <div class="dot"></div>
-          <div class="box" style="max-width:520px">
-            <h3 style="margin:0">Pilot Industries — Quality Engineer <small style="display:block;color:var(--muted)">Feb 2018 – Feb 2021</small></h3>
-            <p style="color:var(--muted);margin-top:8px">Led QC dashboards and statistical process control initiatives; reduced defect escape rate by 15% and automated monthly reporting.</p>
-          </div>
-        </div>
-
-        <div class="tl-item tl-left" style="position:relative">
-          <div class="dot"></div>
-          <div class="box" style="margin-left:auto;max-width:520px">
-            <h3 style="margin:0">Sundaram Fasteners — Graduate Apprentice <small style="display:block;color:var(--muted)">May 2016 – Oct 2017</small></h3>
-            <p style="color:var(--muted);margin-top:8px">Managed QC operations for high-volume components and supported ISO 9001 implementation with process standardization.</p>
-          </div>
+        <div class="filter" role="region" aria-label="Filter projects">
+          <label for="toolFilter" class="muted" style="margin-right:6px">Filter:</label>
+          <select id="toolFilter" class="select" aria-controls="projectsGrid">
+            <option value="all">All</option>
+            <option value="powerbi">Power BI</option>
+            <option value="tableau">Tableau</option>
+            <option value="excel">Excel</option>
+          </select>
         </div>
       </div>
-    </section>
 
-    <!-- Certifications expanded + Resume -->
-    <section class="section fade-up" id="resume">
-      <h2>Certifications & Resume</h2>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
-        <div style="min-width:260px">
-          <div class="card" style="display:flex;flex-direction:column;align-items:flex-start">
-            <h3 style="margin:0 0 8px">Selected Certifications</h3>
-            <ul style="margin:0;padding-left:18px;color:var(--muted)">
-              <li>Microsoft Power BI Data Analyst (PL‑300)</li>
-              <li>Google Data Analytics — Coursera</li>
-              <li>BCG Data Science Virtual Internship</li>
-              <li>Python for Data Analysis</li>
-            </ul>
-            <div style="margin-top:12px;display:flex;gap:8px">
-              <a class="btn" href="/">📄 View Full Resume</a>
-              <a class="btn secondary" href="/">🖨️ Download (PDF)</a>
-            </div>
+      <!-- Projects Grid -->
+      <section id="projectsGrid" class="projects-grid" aria-live="polite">
+        <!--
+          To add a new project:
+          1) Copy a <article class="project-card" ...> block below.
+          2) Update data-tool="powerbi|tableau|excel" and content.
+          3) Replace thumbnail src or text inside .thumb with your screenshot.
+        -->
+
+        <!-- Power BI — Sales Dashboard -->
+        <article class="project-card" data-tool="powerbi">
+          <div class="thumb" aria-hidden="true">
+            <!-- replace src with your image path (e.g., assets/sales-dashboard.png) -->
+            <img src="placeholder-pbi-sales.png" alt="Sales Dashboard - placeholder" onerror="this.style.opacity=0.6; this.alt='Placeholder: Sales Dashboard'; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2270%22><rect width=%22120%22 height=%2270%22 fill=%22%23eef2ff%22/><text x=%2260%22 y=%2238%22 font-size=%2212%22 font-family=%22Arial%22 fill=%22%23707e93%22 text-anchor=%22middle%22>Sales Dashboard</text></svg>';">
           </div>
-        </div>
-
-        <div style="flex:1">
-          <h3 style="margin:0 0 8px">Certification Gallery</h3>
-          <div class="cards">
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Microsoft_Power_BI_Logo.svg"><div class="meta"><h3>PL‑300</h3><p>Microsoft Power BI</p></div></div>
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Coursera-Logo.webp"><div class="meta"><h3>Google Data Analytics</h3><p>Coursera</p></div></div>
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg"><div class="meta"><h3>BCG / IBM</h3><p>Virtual Internship</p></div></div>
-            <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Python-logo-notext.svg"><div class="meta"><h3>Python Track</h3><p>Python & ML</p></div></div>
+          <div class="meta">
+            <div class="proj-title">Sales Dashboard</div>
+            <div class="tool-tag tool-pbi" title="Power BI">Power BI</div>
           </div>
-        </div>
-      </div>
-    </section>
+          <ul class="proj-bullets" aria-label="Sales Dashboard features">
+            <li>End-to-end ETL & data model for daily sales ingestion.</li>
+            <li>Key metrics: MTD, YTD, YoY growth and product-level KPIs.</li>
+            <li>Interactive slicers: region, channel and product hierarchy.</li>
+            <li>Forecasting & trend analysis to guide inventory decisions.</li>
+          </ul>
+          <div class="proj-footer">
+            <a class="link" href="#" onclick="alert('Link placeholder — replace with your file or live link')">View Dashboard</a>
+            <a class="link" href="#" onclick="alert('Download placeholder — add PBIX file to repo and link it')">Download PBIX</a>
+          </div>
+        </article>
 
-    <!-- Contact -->
-    <section class="section fade-up">
-      <h2>Contact</h2>
-      <p style="color:var(--muted)">I am actively open to opportunities in Data Analytics, BI and Data Science. Reach out for collaborative projects, consulting or full-time roles.</p>
-      <div style="margin-top:12px">
-        <a class="btn" href="mailto:deepanraj.a@outlook.com">📧 Email</a>
-        <a class="btn" href="https://github.com/deeepanbe" target="_blank">🐙 GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/deepanraj-data-analyst/" target="_blank">💼 LinkedIn</a>
-        <a class="btn secondary" href="tel:+918940991095">📞 +91 8940991095</a>
-      </div>
-    </section>
+        <!-- Power BI — HR Analytics -->
+        <article class="project-card" data-tool="powerbi">
+          <div class="thumb" aria-hidden="true">
+            <img src="placeholder-pbi-hr.png" alt="HR Analytics - placeholder" onerror="this.style.opacity=0.6; this.alt='Placeholder: HR Analytics'; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2270%22><rect width=%22120%22 height=%2270%22 fill=%22%23eef2ff%22/><text x=%2260%22 y=%2238%22 font-size=%2212%22 font-family=%22Arial%22 fill=%22%23707e93%22 text-anchor=%22middle%22>HR Analytics</text></svg>';">
+          </div>
+          <div class="meta">
+            <div class="proj-title">HR Analytics</div>
+            <div class="tool-tag tool-pbi" title="Power BI">Power BI</div>
+          </div>
+          <ul class="proj-bullets">
+            <li>Attrition risk model integrated with dashboard visualisations.</li>
+            <li>Demographic & tenure-based segmentation and cohort analysis.</li>
+            <li>Drill-through pages for manager-level insights and action items.</li>
+            <li>Automated monthly report export using Power Automate (notes included).</li>
+          </ul>
+          <div class="proj-footer">
+            <a class="link" href="#">View Dashboard</a>
+            <a class="link" href="#">Download PBIX</a>
+          </div>
+        </article>
+
+        <!-- Tableau — Customer Segmentation -->
+        <article class="project-card" data-tool="tableau">
+          <div class="thumb" aria-hidden="true">
+            <img src="placeholder-tableau-cust.png" alt="Customer Segmentation - placeholder" onerror="this.style.opacity=0.6; this.alt='Placeholder: Customer Segmentation'; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2270%22><rect width=%22120%22 height=%2270%22 fill=%22%23fff7ed%22/><text x=%2260%22 y=%2238%22 font-size=%2212%22 font-family=%22Arial%22 fill=%22%23707e93%22 text-anchor=%22middle%22>Customer Segmentation</text></svg>';">
+          </div>
+          <div class="meta">
+            <div class="proj-title">Customer Segmentation</div>
+            <div class="tool-tag tool-tableau" title="Tableau">Tableau</div>
+          </div>
+          <ul class="proj-bullets">
+            <li>Segmentation via RFM analysis and clustering for targeted marketing.</li>
+            <li>Behavioral funnels & cohort retention visualization.</li>
+            <li>Dashboard actions for campaign-level conversion analysis.</li>
+            <li>Documentation for data pipeline and Tableau workbook.</li>
+          </ul>
+          <div class="proj-footer">
+            <a class="link" href="#">View Workbook</a>
+            <a class="link" href="#">Download TWBX</a>
+          </div>
+        </article>
+
+        <!-- Tableau — Financial Performance -->
+        <article class="project-card" data-tool="tableau">
+          <div class="thumb" aria-hidden="true">
+            <img src="placeholder-tableau-fin.png" alt="Financial Performance - placeholder" onerror="this.style.opacity=0.6; this.alt='Placeholder: Financial Performance'; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2270%22><rect width=%22120%22 height=%2270%22 fill=%22%23fff7ed%22/><text x=%2260%22 y=%2238%22 font-size=%2212%22 font-family=%22Arial%22 fill=%22%23707e93%22 text-anchor=%22middle%22>Financial Performance</text></svg>';">
+          </div>
+          <div class="meta">
+            <div class="proj-title">Financial Performance</div>
+            <div class="tool-tag tool-tableau" title="Tableau">Tableau</div>
+          </div>
+          <ul class="proj-bullets">
+            <li>Multi-year P&L, revenue and cost center dashboards.</li>
+            <li>Variance analysis and waterfall charts for executive reviews.</li>
+            <li>Scenario simulations and sensitivity analysis for forecasting.</li>
+            <li>Export-ready views for board reporting.</li>
+          </ul>
+          <div class="proj-footer">
+            <a class="link" href="#">View Workbook</a>
+            <a class="link" href="#">Download TWBX</a>
+          </div>
+        </article>
+
+        <!-- Excel — Inventory Tracker -->
+        <article class="project-card" data-tool="excel">
+          <div class="thumb" aria-hidden="true">
+            <img src="placeholder-excel-inv.png" alt="Inventory Tracker - placeholder" onerror="this.style.opacity=0.6; this.alt='Placeholder: Inventory Tracker'; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2270%22><rect width=%22120%22 height=%2270%22 fill=%22%23eefaf1%22/><text x=%2260%22 y=%2238%22 font-size=%2212%22 font-family=%22Arial%22 fill=%22%23707e93%22 text-anchor=%22middle%22>Inventory Tracker</text></svg>';">
+          </div>
+          <div class="meta">
+            <div class="proj-title">Inventory Tracker</div>
+            <div class="tool-tag tool-excel" title="Excel">Excel</div>
+          </div>
+          <ul class="proj-bullets">
+            <li>Dynamic inventory dashboard using PivotTables and Power Query.</li>
+            <li>Safety stock & reorder point automation with formulas and conditional formatting.</li>
+            <li>Monthly restock scheduler with alerts and KPI summary.</li>
+            <li>Clean documentation and easy-to-update data sheet.</li>
+          </ul>
+          <div class="proj-footer">
+            <a class="link" href="#">View File</a>
+            <a class="link" href="#">Download XLSX</a>
+          </div>
+        </article>
+
+        <!-- Excel — Budget Planner -->
+        <article class="project-card" data-tool="excel">
+          <div class="thumb" aria-hidden="true">
+            <img src="placeholder-excel-budget.png" alt="Budget Planner - placeholder" onerror="this.style.opacity=0.6; this.alt='Placeholder: Budget Planner'; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2270%22><rect width=%22120%22 height=%2270%22 fill=%22%23eefaf1%22/><text x=%2260%22 y=%2238%22 font-size=%2212%22 font-family=%22Arial%22 fill=%22%23707e93%22 text-anchor=%22middle%22>Budget Planner</text></svg>';">
+          </div>
+          <div class="meta">
+            <div class="proj-title">Budget Planner</div>
+            <div class="tool-tag tool-excel" title="Excel">Excel</div>
+          </div>
+          <ul class="proj-bullets">
+            <li>Monthly budget tracker with scenario toggles and charts (editable).</li>
+            <li>Automated summary with variance-to-plan calculations and alerts.</li>
+            <li>Template-ready for finance team handover.</li>
+            <li>Protected cells and clear input sections for non-technical users.</li>
+          </ul>
+          <div class="proj-footer">
+            <a class="link" href="#">View File</a>
+            <a class="link" href="#">Download XLSX</a>
+          </div>
+        </article>
+
+      </section>
+    </main>
 
     <footer>
-      <p>© 2025 Deepanraj A — Built for senior Data Analyst roles · <span style="color:var(--muted)">Open to work</span></p>
+      <div class="contact" id="contact">
+        <div>
+          <strong>Contact</strong>
+          <div class="muted" style="margin-top:6px">deeepanbe@gmail.com • +91 8940991095</div>
+        </div>
+
+        <div style="margin-left:18px" class="muted">Open to: Full-time / Contract roles</div>
+      </div>
+
+      <div class="socials">
+        <a href="https://github.com/deeepanbe" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/deepanraj-data-analyst" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </footer>
   </div>
 
   <script>
-    // Simple reveal on scroll
-    const fadeEls = document.querySelectorAll('.fade-up');
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); })
-    },{threshold:0.15});
-    fadeEls.forEach(el=>obs.observe(el));
+    // ============================
+    // Filtering functionality
+    // ============================
+    (function(){
+      const select = document.getElementById('toolFilter');
+      const grid = document.getElementById('projectsGrid');
+      const cards = Array.from(grid.querySelectorAll('.project-card'));
 
-    // Typed skills
-    const skills = ['Python', 'Advanced SQL', 'Power BI', 'Tableau', 'Machine Learning', 'ETL Pipelines'];
-    let i=0, pos=0, forward=true; const el = document.getElementById('typed');
-    function tick(){
-      const current = skills[i];
-      if(forward){ el.textContent = current.slice(0,++pos); if(pos===current.length){ forward=false; setTimeout(tick,900); return } }
-      else { el.textContent = current.slice(0,--pos); if(pos===0){ forward=true; i=(i+1)%skills.length } }
-      setTimeout(tick, forward?70:30);
-    }
-    tick();
+      function applyFilter(){
+        const val = select.value; // all | powerbi | tableau | excel
+        cards.forEach(card => {
+          const tool = card.getAttribute('data-tool');
+          if(val === 'all' || tool === val){
+            card.style.display = '';
+            // create a small reflow animation
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(10px)';
+            setTimeout(()=>{ card.style.opacity = 1; card.style.transform = 'none' }, 15);
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
 
-    // Stats animation
-    function animateStat(id,target){const el=document.getElementById(id);let c=0;const step=Math.ceil(target/40);const t=setInterval(()=>{c+=step;if(c>=target){el.textContent=target;clearInterval(t)}else el.textContent=c},20)}
-    // estimate numbers from resume
-    animateStat('stat-projects',55);animateStat('stat-certs',6);animateStat('stat-years',8);
+      select.addEventListener('change', applyFilter);
+
+      // ensure default is all
+      window.addEventListener('DOMContentLoaded', ()=> {
+        select.value = 'all';
+        applyFilter();
+      });
+
+      // Accessibility: allow keyboard filter via keys 1-4
+      window.addEventListener('keydown', (e) => {
+        if(document.activeElement.tagName.toLowerCase() === 'input' || document.activeElement.tagName.toLowerCase() === 'textarea') return;
+        if(e.key === '1') { select.value='all'; applyFilter(); }
+        if(e.key === '2') { select.value='powerbi'; applyFilter(); }
+        if(e.key === '3') { select.value='tableau'; applyFilter(); }
+        if(e.key === '4') { select.value='excel'; applyFilter(); }
+      });
+    })();
   </script>
 </body>
 </html>
