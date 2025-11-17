@@ -3,7 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Deepanraj A - Data Analytics Professional | 8+ years experience | SQL, Python, Power BI, Tableau, Machine Learning">
+  <meta name="keywords" content="Data Analyst, Business Intelligence, Python, SQL, Power BI, Tableau, Machine Learning, ETL">
+  <meta name="author" content="Deepanraj A">
   <title>Deepanraj A | Data Analyst Portfolio</title>
+  
+  <!-- Tawk.to Live Chat Widget -->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/673983054304e3196ae0b7c0/1icvai3bu';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  
   <style>
     :root {
       --bg-dark: #0a0e27;
@@ -20,12 +37,32 @@
       box-sizing: border-box;
     }
     
+    html {
+      scroll-behavior: smooth;
+    }
+    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1f3a 100%);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
+    }
+    
+    /* Skip to content for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent-blue);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 100;
+    }
+    
+    .skip-link:focus {
+      top: 0;
     }
     
     /* Animated background stars */
@@ -54,6 +91,35 @@
       50% { opacity: 0.8; }
     }
     
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent-blue);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 999;
+      transition: all 0.3s;
+      border: none;
+      font-size: 1.5rem;
+    }
+    
+    .back-to-top:hover {
+      background: var(--accent-purple);
+      transform: translateY(-5px);
+    }
+    
+    .back-to-top.show {
+      display: flex;
+    }
+    
     nav {
       position: sticky;
       top: 0;
@@ -71,12 +137,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
     
     nav ul {
       display: flex;
       list-style: none;
       gap: 2rem;
+      flex-wrap: wrap;
     }
     
     nav a {
@@ -86,8 +154,10 @@
       font-weight: 500;
     }
     
-    nav a:hover {
+    nav a:hover, nav a:focus {
       color: var(--accent-blue);
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 4px;
     }
     
     .btn-connect {
@@ -100,9 +170,10 @@
       transition: all 0.3s;
     }
     
-    .btn-connect:hover {
+    .btn-connect:hover, .btn-connect:focus {
       background: var(--accent-purple);
       transform: translateY(-2px);
+      outline: 2px solid var(--accent-purple);
     }
     
     section {
@@ -134,7 +205,14 @@
     .hero .tagline {
       font-size: 1.5rem;
       color: var(--accent-blue);
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 1rem auto 2rem;
     }
     
     .hero-buttons {
@@ -142,9 +220,10 @@
       gap: 1.5rem;
       justify-content: center;
       margin-top: 2rem;
+      flex-wrap: wrap;
     }
     
-    .btn-primary, .btn-secondary {
+    .btn-primary, .btn-secondary, .btn-download {
       padding: 1rem 2.5rem;
       border-radius: 30px;
       font-size: 1.1rem;
@@ -153,15 +232,16 @@
       transition: all 0.3s;
       text-decoration: none;
       display: inline-block;
+      border: 2px solid;
     }
     
     .btn-primary {
       background: var(--accent-blue);
       color: white;
-      border: 2px solid var(--accent-blue);
+      border-color: var(--accent-blue);
     }
     
-    .btn-primary:hover {
+    .btn-primary:hover, .btn-primary:focus {
       background: transparent;
       transform: translateY(-3px);
       box-shadow: 0 10px 30px rgba(96, 165, 250, 0.3);
@@ -170,13 +250,28 @@
     .btn-secondary {
       background: transparent;
       color: var(--accent-blue);
-      border: 2px solid var(--accent-blue);
+      border-color: var(--accent-blue);
     }
     
-    .btn-secondary:hover {
+    .btn-secondary:hover, .btn-secondary:focus {
       background: var(--accent-blue);
       color: white;
       transform: translateY(-3px);
+    }
+    
+    .btn-download {
+      background: var(--accent-purple);
+      color: white;
+      border-color: var(--accent-purple);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-download:hover, .btn-download:focus {
+      background: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
     }
     
     /* About Section */
@@ -203,10 +298,42 @@
     .about-content {
       max-width: 800px;
       margin: 0 auto;
-      text-align: center;
       font-size: 1.1rem;
       color: var(--text-secondary);
       line-height: 1.8;
+    }
+    
+    .contact-info {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    /* Certifications */
+    .certifications {
+      margin-top: 2rem;
+    }
+    
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .cert-item {
+      background: var(--bg-card);
+      padding: 1rem;
+      border-radius: 10px;
+      border-left: 3px solid var(--accent-blue);
     }
     
     /* Skills Section */
@@ -225,7 +352,7 @@
       transition: all 0.3s;
     }
     
-    .skill-category:hover {
+    .skill-category:hover, .skill-category:focus-within {
       transform: translateY(-5px);
       border-color: var(--accent-blue);
       box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
@@ -262,7 +389,7 @@
       transition: all 0.3s;
     }
     
-    .experience-item:hover {
+    .experience-item:hover, .experience-item:focus-within {
       transform: translateX(10px);
       box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
     }
@@ -299,10 +426,11 @@
       display: block;
     }
     
-    .project-card:hover {
+    .project-card:hover, .project-card:focus {
       transform: translateY(-10px);
       border-color: var(--accent-blue);
       box-shadow: 0 15px 40px rgba(96, 165, 250, 0.3);
+      outline: 2px solid var(--accent-blue);
     }
     
     .project-card h3 {
@@ -362,9 +490,10 @@
       padding: 0.5rem 1rem;
     }
     
-    .contact-link:hover {
+    .contact-link:hover, .contact-link:focus {
       color: var(--accent-purple);
       transform: scale(1.1);
+      outline: 2px solid var(--accent-purple);
     }
     
     footer {
@@ -389,7 +518,6 @@
       }
       
       nav ul {
-        flex-direction: column;
         gap: 1rem;
       }
       
@@ -400,13 +528,35 @@
       .projects-grid {
         grid-template-columns: 1fr;
       }
+      
+      .contact-links {
+        flex-direction: column;
+      }
+    }
+    
+    @media print {
+      nav, .back-to-top, .hero-buttons, footer {
+        display: none;
+      }
+      
+      body {
+        background: white;
+        color: black;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Back to Top Button -->
+  <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
+    ↑
+  </button>
 
   <!-- Navigation -->
-  <nav>
+  <nav role="navigation" aria-label="Main navigation">
     <div class="container">
       <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-blue);">DEEPANRAJ A</div>
       <ul>
@@ -415,372 +565,339 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact"><button class="btn-connect">Connect</button></a></li>
+        <li><a href="#contact"><button class="btn-connect" aria-label="Contact">Connect</button></a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <h1>Hey there, I'm <span class="name-highlight">Deepanraj</span>.</h1>
-    <p class="tagline">Senior Data Analyst • Python • Power BI • Machine Learning</p>
-    <p style="color: var(--text-secondary); max-width: 700px; margin: 2rem auto; font-size: 1.1rem;">
-      Aspiring Data Analyst with 8 years in Mechanical Quality Control, now passionate about transforming raw data into actionable insights using Python, SQL, and advanced analytics.
-    </p>
-    <div class="hero-buttons">
-      <a href="#projects" class="btn-primary">View My Projects</a>
-      <a href="#contact" class="btn-secondary">Let's Connect</a>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="about" id="about">
-    <h2 class="section-title">A Glimpse of Me</h2>
-    <div class="about-content">
-      <p>
-        I'm a Data Analyst with a unique journey—starting from 8 years in Mechanical Quality Control to now diving deep into the world of data. 
-        My work blends technical precision with creativity, turning raw data into meaningful insights. 
-        I'm skilled in Python, SQL, Power BI, Tableau, and Machine Learning, and I love building dashboards and predictive models that drive real business impact.
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <h1>Hey there, I'm <span class="name-highlight">Deepanraj A</span>.</h1>
+      <p class="tagline">Data Analytics Professional | 8+ Years Experience</p>
+      <p class="subtitle">
+        Expert in SQL, Python, Power BI, Tableau & Machine Learning | Building ETL pipelines, designing interactive dashboards, and performing statistical analysis | Translating complex datasets into actionable business intelligence
       </p>
-      <p style="margin-top: 1.5rem;">
-        📍 Based in Karur, Tamil Nadu <br>
-        💼 Open to Data Analyst opportunities <br>
-        📧 Contact: deeepanbe@gmail.com
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary" aria-label="View my projects">View My Projects</a>
+        <a href="#contact" class="btn-secondary" aria-label="Contact me">Let's Connect</a>
+        <a href="https://docs.google.com/document/d/1XmEb8p8VQZ7YHQgKXp6JKF5vZWj8FJmh/export?format=pdf" class="btn-download" download="Deepanraj_A_Resume.pdf" aria-label="Download my resume">
+          <span>📄</span> Download Resume
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <h2 class="section-title">Professional Summary</h2>
+      <div class="about-content">
+        <p>
+          Data Analytics professional with <strong>8+ years of cross-functional experience</strong> in Quality Engineering, Operations, and Data-Driven Business Solutions. Expert in SQL, Python, Power BI, Tableau, and Advanced Excel for building ETL pipelines, designing interactive dashboards, and performing statistical analysis.
+        </p>
+        <p style="margin-top: 1.5rem;">
+          Proven track record of translating complex datasets into actionable business intelligence for Fortune 500 clients. Specialized in data modeling, business intelligence reporting, and process optimization through data-driven insights.
+        </p>
+        
+        <div class="contact-info">
+          <div class="contact-item">
+            <span>📧</span>
+            <span>deepanraj.a@outlook.com</span>
+          </div>
+          <div class="contact-item">
+            <span>📱</span>
+            <span>+91 8940991095</span>
+          </div>
+          <div class="contact-item">
+            <span>📍</span>
+            <span>Karur, Tamil Nadu</span>
+          </div>
+        </div>
+        
+        <div class="certifications">
+          <h3 style="color: var(--accent-blue); text-align: center; margin-top: 2rem;">Certifications</h3>
+          <div class="cert-grid">
+            <div class="cert-item">
+              <strong>Google Certified Data Analytics</strong>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Coursera</div>
+            </div>
+            <div class="cert-item">
+              <strong>Business Analyst Master Certification</strong>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Edureka</div>
+            </div>
+            <div class="cert-item">
+              <strong>Tata Data Visualization</strong>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Forage Virtual Internship</div>
+            </div>
+            <div class="cert-item">
+              <strong>BCG Data Science Job Simulation</strong>
+              <div style="font-size: 0.9rem; color: var(--text-secondary);">Forage</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2 class="section-title">Technical Expertise</h2>
+      <p class="section-subtitle">Comprehensive skill set spanning data analytics, visualization, and machine learning</p>
+      
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3>Data Analytics & Visualization</h3>
+          <div class="skill-list">
+            <span class="skill-tag">Excel (PivotTables, VLOOKUP, Power Query)</span>
+            <span class="skill-tag">SQL (queries, joins, CTEs)</span>
+            <span class="skill-tag">Power BI (DAX, dashboards)</span>
+            <span class="skill-tag">Tableau (drill-down, trend forecasting)</span>
+            <span class="skill-tag">Python (Pandas, NumPy, Matplotlib, Seaborn)</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Data Handling & Processing</h3>
+          <div class="skill-list">
+            <span class="skill-tag">Data Cleaning</span>
+            <span class="skill-tag">Data Transformation</span>
+            <span class="skill-tag">Data Validation</span>
+            <span class="skill-tag">Exploratory Data Analysis (EDA)</span>
+            <span class="skill-tag">Forecasting</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Database & ETL</h3>
+          <div class="skill-list">
+            <span class="skill-tag">Database Design</span>
+            <span class="skill-tag">SQL Server</span>
+            <span class="skill-tag">T-SQL</span>
+            <span class="skill-tag">Data Modeling</span>
+            <span class="skill-tag">ETL Processes</span>
+            <span class="skill-tag">Data Pipelines</span>
+            <span class="skill-tag">Data Warehouse Architecture</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Business Intelligence</h3>
+          <div class="skill-list">
+            <span class="skill-tag">Power BI Report Builder</span>
+            <span class="skill-tag">Dashboard Design</span>
+            <span class="skill-tag">Business Intelligence Reporting</span>
+            <span class="skill-tag">Advanced Filtering</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Quality & Governance</h3>
+          <div class="skill-list">
+            <span class="skill-tag">Data Quality Assurance</span>
+            <span class="skill-tag">Data Governance</span>
+            <span class="skill-tag">Statistical Analysis</span>
+            <span class="skill-tag">Root Cause Analysis</span>
+            <span class="skill-tag">Process Optimization</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>Cloud & Advanced Tools</h3>
+          <div class="skill-list">
+            <span class="skill-tag">Azure Data Services</span>
+            <span class="skill-tag">Power Query M Language</span>
+            <span class="skill-tag">API Integration</span>
+            <span class="skill-tag">Automation Scripting</span>
+            <span class="skill-tag">GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2 class="section-title">Professional Experience</h2>
+      <p class="section-subtitle">8+ years driving data-driven business decisions</p>
+      
+      <div class="experience-item">
+        <h3>Junior Data Analyst</h3>
+        <div class="experience-meta">Dakshin Home Fashions | Mar 2021 - Present</div>
+        <ul style="color: var(--text-secondary); line-height: 1.8;">
+          <li>Designed and automated 12 enterprise-grade Power BI dashboards and Excel reports using DAX and Power Query, eliminating 15 hours of manual reporting per week and improving data accessibility for 40+ business stakeholders</li>
+          <li>Built SQL-based ETL pipeline to extract, transform, and load 3,000+ daily sales records from 5 disparate sources, achieving 99.2% data accuracy</li>
+          <li>Ensured data integrity, security, and governance in reporting by validating datasets, controlling access, and standardizing processes</li>
+        </ul>
+      </div>
+      
+      <div class="experience-item">
+        <h3>Quality Engineer</h3>
+        <div class="experience-meta">Pilot Industries | Feb 2018 - Feb 2021</div>
+        <ul style="color: var(--text-secondary); line-height: 1.8;">
+          <li>Inspected 1,200+ production batches monthly against ISO 9001 standards, maintaining 98.7% compliance rate and reducing defect escape rate by 15%</li>
+          <li>Built automated QC dashboards in Power BI and Excel to track 200+ quality metrics across 4 production lines, reducing manual report generation by 20 hours/month</li>
+          <li>Conducted root-cause analysis on 50+ recurring defects using statistical methods, improving first-pass yield by 12%</li>
+        </ul>
+      </div>
+      
+      <div class="experience-item">
+        <h3>Graduate Apprentice</h3>
+        <div class="experience-meta">Sundaram Fasteners Limited | May 2016 - Oct 2017</div>
+        <ul style="color: var(--text-secondary); line-height: 1.8;">
+          <li>Managed QC operations for 2,000+ components daily using statistical sampling methods</li>
+          <li>Assisted in ISO 9001 implementation project, establishing standardized data collection procedures that reduced scrap rates by 8% ($45K annual savings)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">Real-world data analytics solutions and dashboards</p>
+      
+      <div class="projects-grid">
+        
+        <!-- Featured Projects from Resume -->
+        <a href="https://github.com/deeepanbe/digital-marketing-leads-dashboard" target="_blank" class="project-card">
+          <h3>📊 Digital Marketing Leads Dashboard</h3>
+          <p>Engineered SQL-based ETL pipeline to extract 10,000+ leads from 8 sources. Designed 15 interactive Tableau dashboards with drill-down analysis and predictive trend forecasting. Improved lead data accuracy from 85% to 98%.</p>
+          <div class="project-tech">
+            <span class="tech-badge">SQL</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Tableau</span>
+            <span class="tech-badge">ETL</span>
+          </div>
+        </a>
+        
+        <!-- Continue with top GitHub projects -->
+        <a href="https://github.com/deeepanbe/hr-workforce-analytics-dashboard" target="_blank" class="project-card">
+          <h3>📈 HR Workforce Analytics Dashboard</h3>
+          <p>Comprehensive HR analytics dashboard combining Tableau and Python. Tracks employee performance metrics, predicts turnover patterns, and provides diversity insights for data-driven HR decisions.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Tableau</span>
+            <span class="tech-badge">Pandas</span>
+            <span class="tech-badge">HR Analytics</span>
+          </div>
+        </a>
+        
+        <a href="https://github.com/deeepanbe/retail-inventory-management" target="_blank" class="project-card">
+          <h3>🛍️ Retail Inventory Management</h3>
+          <p>Smart inventory optimization system using Python and Power BI. Reduced waste by 22% through predictive stock management and demand forecasting dashboards.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Power BI</span>
+            <span class="tech-badge">Forecasting</span>
+          </div>
+        </a>
+        
+        <a href="https://github.com/deeepanbe/customer-churn-prediction-ml" target="_blank" class="project-card">
+          <h3>📊 Customer Churn Prediction</h3>
+          <p>Machine Learning model predicting customer churn with scikit-learn. Includes feature engineering, model comparison (Random Forest, XGBoost), and interactive Tableau dashboard.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Scikit-learn</span>
+            <span class="tech-badge">Tableau</span>
+            <span class="tech-badge">ML</span>
+          </div>
+        </a>
+        
+        <a href="https://github.com/deeepanbe/sales-forecasting-dashboard-powerbi" target="_blank" class="project-card">
+          <h3>📉 Sales Forecasting Dashboard</h3>
+          <p>Advanced time series forecasting with Power BI and Python integration. Achieves 94% accuracy using SARIMA and Prophet models for monthly sales predictions.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Power BI</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">SARIMA</span>
+            <span class="tech-badge">Prophet</span>
+          </div>
+        </a>
+        
+        <a href="https://github.com/deeepanbe/powerbi-universal-analytics-dashboard" target="_blank" class="project-card">
+          <h3>📊 Universal Power BI Dashboard</h3>
+          <p>Professional multi-domain Power BI dashboard for Finance, Sales, HR, and Marketing. Features DAX measures, custom themes, drillthroughs, and comprehensive documentation.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Power BI</span>
+            <span class="tech-badge">DAX</span>
+            <span class="tech-badge">Multi-domain</span>
+          </div>
+        </a>
+        
+        <p style="text-align: center; margin-top: 3rem; color: var(--text-secondary);">
+          <a href="https://github.com/deeepanbe?tab=repositories" target="_blank" style="color: var(--accent-blue); text-decoration: none;" class="contact-link">
+            View all 18+ projects on GitHub →
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <h2>Let's Connect!</h2>
+      <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 1.1rem;">
+        I'm always open to discussing data analytics projects, collaborations, or opportunities.
       </p>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills">
-    <h2 class="section-title">Tech & Tools I Love</h2>
-    <p class="section-subtitle">Skills are like stars — countless, bright, and waiting to guide me in my next adventure.</p>
-    
-    <div class="skills-container">
-      <div class="skill-category">
-        <h3>Programming & Core Languages</h3>
-        <div class="skill-list">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">SQL</span>
-          <span class="skill-tag">R</span>
-        </div>
+      <div class="contact-links">
+        <a href="mailto:deepanraj.a@outlook.com" class="contact-link" aria-label="Email me">📧 Email</a>
+        <a href="tel:+918940991095" class="contact-link" aria-label="Call me">📱 Phone</a>
+        <a href="https://www.linkedin.com/in/deepanraj-data-analyst" target="_blank" class="contact-link" aria-label="LinkedIn profile">👤 LinkedIn</a>
+        <a href="https://github.com/deeepanbe" target="_blank" class="contact-link" aria-label="GitHub profile">👨‍💻 GitHub</a>
       </div>
       
-      <div class="skill-category">
-        <h3>Data Visualization</h3>
-        <div class="skill-list">
-          <span class="skill-tag">Power BI</span>
-          <span class="skill-tag">Tableau</span>
-          <span class="skill-tag">Matplotlib</span>
-          <span class="skill-tag">Seaborn</span>
-          <span class="skill-tag">Plotly</span>
-        </div>
+      <div style="margin-top: 2rem;">
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">💬 Have a question? Click the chat widget in the bottom-right corner to talk with me instantly!</p>
       </div>
-      
-      <div class="skill-category">
-        <h3>Machine Learning & AI</h3>
-        <div class="skill-list">
-          <span class="skill-tag">Scikit-learn</span>
-          <span class="skill-tag">Pandas</span>
-          <span class="skill-tag">NumPy</span>
-          <span class="skill-tag">TensorFlow</span>
-          <span class="skill-tag">NLP</span>
-          <span class="skill-tag">Predictive Modeling</span>
-        </div>
-      </div>
-      
-      <div class="skill-category">
-        <h3>Data Engineering & Databases</h3>
-        <div class="skill-list">
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">ETL</span>
-          <span class="skill-tag">Data Warehousing</span>
-        </div>
-      </div>
-      
-      <div class="skill-category">
-        <h3>Tools & Frameworks</h3>
-        <div class="skill-list">
-          <span class="skill-tag">Excel</span>
-          <span class="skill-tag">Jupyter</span>
-          <span class="skill-tag">Streamlit</span>
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">VS Code</span>
-        </div>
-      </div>
-      
-      <div class="skill-category">
-        <h3>Soft Skills</h3>
-        <div class="skill-list">
-          <span class="skill-tag">Problem Solving</span>
-          <span class="skill-tag">Communication</span>
-          <span class="skill-tag">Critical Thinking</span>
-          <span class="skill-tag">Team Collaboration</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience">
-    <h2 class="section-title">My Professional Journey</h2>
-    <p class="section-subtitle">Experiences that shaped me and constellations I followed</p>
-    
-    <div class="experience-item">
-      <h3>Aspiring Data Analyst (Career Transition)</h3>
-      <div class="experience-meta">2024 - Present | Self-Learning & Projects</div>
-      <p>
-        Transitioned from 8 years in Mechanical Quality Control to Data Analytics. Completed multiple end-to-end data projects including ML models, 
-        dashboards, and analytics solutions. Built expertise in Python, SQL, Power BI, and Machine Learning through hands-on project work.
-      </p>
-    </div>
-    
-    <div class="experience-item">
-      <h3>Quality Control Specialist (Mechanical Domain)</h3>
-      <div class="experience-meta">2016 - 2024 | 8 Years Experience</div>
-      <p>
-        Worked extensively in quality assurance and control in the mechanical manufacturing sector. 
-        Developed strong analytical skills, attention to detail, and process optimization capabilities. 
-        Managed quality metrics, inspection protocols, and compliance documentation.
-      </p>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects">
-    <h2 class="section-title">Featured Projects</h2>
-    <p class="section-subtitle">Each project is a new adventure — a star in the sky of my journey</p>
-    
-    <div class="projects-grid">
-      
-      <!-- Project 1 -->
-      <a href="https://github.com/deeepanbe/hr-workforce-analytics-dashboard" target="_blank" class="project-card">
-        <h3>📈 HR Workforce Analytics Dashboard</h3>
-        <p>Comprehensive HR analytics dashboard combining Tableau and Python. Tracks employee performance metrics, predicts turnover patterns, and provides diversity insights for data-driven HR decisions.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Tableau</span>
-          <span class="tech-badge">Pandas</span>
-          <span class="tech-badge">HR Analytics</span>
-        </div>
-      </a>
-      
-      <!-- Project 2 -->
-      <a href="https://github.com/deeepanbe/retail-inventory-management" target="_blank" class="project-card">
-        <h3>🛍️ Retail Inventory Management System</h3>
-        <p>Smart inventory optimization system using Python and Power BI. Reduced waste by 22% through predictive stock management and demand forecasting dashboards.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Power BI</span>
-          <span class="tech-badge">Forecasting</span>
-          <span class="tech-badge">Optimization</span>
-        </div>
-      </a>
-      
-      <!-- Project 3 -->
-      <a href="https://github.com/deeepanbe/customer-churn-prediction-ml" target="_blank" class="project-card">
-        <h3>📊 Customer Churn Prediction</h3>
-        <p>Machine Learning model predicting customer churn with scikit-learn. Includes feature engineering, model comparison (Random Forest, XGBoost), and interactive Tableau dashboard for business insights.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Scikit-learn</span>
-          <span class="tech-badge">Tableau</span>
-          <span class="tech-badge">ML</span>
-        </div>
-      </a>
-      
-      <!-- Project 4 -->
-      <a href="https://github.com/deeepanbe/sales-forecasting-dashboard-powerbi" target="_blank" class="project-card">
-        <h3>📉 Sales Forecasting Dashboard</h3>
-        <p>Advanced time series forecasting with Power BI and Python integration. Achieves 94% accuracy using SARIMA and Prophet models for monthly sales predictions.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Power BI</span>
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">SARIMA</span>
-          <span class="tech-badge">Prophet</span>
-        </div>
-      </a>
-      
-      <!-- Project 5 -->
-      <a href="https://github.com/deeepanbe/marketing-campaign-roi-analysis" target="_blank" class="project-card">
-        <h3>💰 Marketing Campaign ROI Analysis</h3>
-        <p>End-to-end marketing analytics using Python, SQL, and Excel. Attribution modeling, conversion tracking, and budget optimization delivering 156% ROI improvement.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">SQL</span>
-          <span class="tech-badge">Excel</span>
-          <span class="tech-badge">Attribution</span>
-        </div>
-      </a>
-      
-      <!-- Project 6 -->
-      <a href="https://github.com/deeepanbe/real-estate-price-prediction-ml" target="_blank" class="project-card">
-        <h3>🏠 Real Estate Price Prediction</h3>
-        <p>ML-powered property valuation with interactive Streamlit web app. Achieves 92% R² score using advanced regression models for accurate price predictions.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Streamlit</span>
-          <span class="tech-badge">Regression</span>
-          <span class="tech-badge">ML</span>
-        </div>
-      </a>
-      
-      <!-- Project 7 -->
-      <a href="https://github.com/deeepanbe/supply-chain-optimization-ml" target="_blank" class="project-card">
-        <h3>🚚 Supply Chain Optimization</h3>
-        <p>Python-based supply chain optimization using linear programming and ML. Reduces transportation costs by 28% and improves delivery times by 35%.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Optimization</span>
-          <span class="tech-badge">Linear Programming</span>
-          <span class="tech-badge">ML</span>
-        </div>
-      </a>
-      
-      <!-- Project 8 -->
-      <a href="https://github.com/deeepanbe/financial-risk-assessment-model" target="_blank" class="project-card">
-        <h3>💳 Financial Risk Assessment</h3>
-        <p>Credit scoring and risk assessment model using ML and Power BI. Achieves 89% accuracy in default prediction with interactive risk dashboards.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Power BI</span>
-          <span class="tech-badge">Classification</span>
-          <span class="tech-badge">Risk Analysis</span>
-        </div>
-      </a>
-      
-      <!-- Project 9 -->
-      <a href="https://github.com/deeepanbe/social-media-sentiment-analysis-nlp" target="_blank" class="project-card">
-        <h3>💬 Social Media Sentiment Analysis</h3>
-        <p>NLP-based sentiment analysis using Python, VADER, and transformers. Analyzes 500K+ tweets with 91% sentiment classification accuracy.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">NLP</span>
-          <span class="tech-badge">VADER</span>
-          <span class="tech-badge">Transformers</span>
-        </div>
-      </a>
-      
-      <!-- Project 10 -->
-      <a href="https://github.com/deeepanbe/healthcare-patient-analytics" target="_blank" class="project-card">
-        <h3>⚕️ Healthcare Patient Analytics</h3>
-        <p>Tableau and SQL-based healthcare dashboard tracking patient outcomes, readmission rates, and operational efficiency with predictive insights.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Tableau</span>
-          <span class="tech-badge">SQL</span>
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Healthcare</span>
-        </div>
-      </a>
-      
-      <!-- Project 11 -->
-      <a href="https://github.com/deeepanbe/powerbi-universal-analytics-dashboard" target="_blank" class="project-card">
-        <h3>📊 Universal Power BI Dashboard</h3>
-        <p>Professional multi-domain Power BI dashboard for Finance, Sales, HR, and Marketing. Features DAX measures, custom themes, drillthroughs, and comprehensive documentation.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Power BI</span>
-          <span class="tech-badge">DAX</span>
-          <span class="tech-badge">Multi-domain</span>
-        </div>
-      </a>
-      
-      <!-- Project 12 -->
-      <a href="https://github.com/deeepanbe/deepanraj-ecommerce-analytics" target="_blank" class="project-card">
-        <h3>🛍️ E-Commerce Analytics</h3>
-        <p>Comprehensive e-commerce data analytics project with dataset, exploratory data analysis, interactive dashboards, and complete documentation.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">EDA</span>
-          <span class="tech-badge">Dashboards</span>
-        </div>
-      </a>
-      
-      <!-- Project 13 -->
-      <a href="https://github.com/deeepanbe/IBM-HR-ATTRITION-ANALYSIS" target="_blank" class="project-card">
-        <h3>📄 IBM HR Attrition Analysis</h3>
-        <p>Deep dive into employee attrition patterns using IBM HR dataset. Identifies key factors driving employee turnover to help HR professionals make data-driven retention strategies.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Jupyter</span>
-          <span class="tech-badge">HR Analytics</span>
-        </div>
-      </a>
-      
-      <!-- Project 14 -->
-      <a href="https://github.com/deeepanbe/Customer-Segmentation" target="_blank" class="project-card">
-        <h3>🎯 Customer Segmentation (RFM)</h3>
-        <p>RFM (Recency, Frequency, Monetary) segmentation analysis to categorize customers based on purchasing behavior for targeted marketing strategies.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">RFM Analysis</span>
-          <span class="tech-badge">Clustering</span>
-        </div>
-      </a>
-      
-      <!-- Project 15 -->
-      <a href="https://github.com/deeepanbe/TAMILNADU-CRIME-STATUS-2014---2022" target="_blank" class="project-card">
-        <h3>🕵️ Tamil Nadu Crime Analysis</h3>
-        <p>Crime data analysis for Tamil Nadu (2014-2022) using NCRB and state police data. Analyzes crime trends, patterns, and insights for public safety awareness.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">Data Analysis</span>
-          <span class="tech-badge">Visualization</span>
-        </div>
-      </a>
-      
-      <!-- Project 16 -->
-      <a href="https://github.com/deeepanbe/hotel-booking-analysis" target="_blank" class="project-card">
-        <h3>🏨 Hotel Booking Analysis</h3>
-        <p>Analyzes hotel booking patterns, cancellation trends, and revenue optimization opportunities using Python for hospitality industry insights.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">HTML</span>
-          <span class="tech-badge">Analytics</span>
-        </div>
-      </a>
-      
-      <!-- Project 17 -->
-      <a href="https://github.com/deeepanbe/DIGITAL-MARKETING-LEADS-PERFORMANCE" target="_blank" class="project-card">
-        <h3>📧 Digital Marketing Leads</h3>
-        <p>Comprehensive analysis of digital marketing lead generation performance, conversion rates, and campaign effectiveness metrics.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Marketing Analytics</span>
-          <span class="tech-badge">Lead Scoring</span>
-        </div>
-      </a>
-      
-      <!-- Project 18 -->
-      <a href="https://github.com/deeepanbe/Unemployment-Analysis-in-India" target="_blank" class="project-card">
-        <h3>📉 Unemployment Analysis - India</h3>
-        <p>Statistical analysis of unemployment trends in India, exploring factors, demographics, and economic indicators affecting employment rates.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Python</span>
-          <span class="tech-badge">HTML</span>
-          <span class="tech-badge">Statistics</span>
-        </div>
-      </a>
-      
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <h2>Let's Connect!</h2>
-    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 1.1rem;">
-      I'm always open to discussing data analytics projects, collaborations, or opportunities.
-    </p>
-    <div class="contact-links">
-      <a href="mailto:deeepanbe@gmail.com" class="contact-link">📧 Email</a>
-      <a href="https://www.linkedin.com/in/deepanraj-a-data-analyst" target="_blank" class="contact-link">👤 LinkedIn</a>
-      <a href="https://github.com/deeepanbe" target="_blank" class="contact-link">👨‍💻 GitHub</a>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer>
     <p>&copy; 2024 Deepanraj A. Built with passion for data and insights. ✨</p>
     <p style="margin-top: 0.5rem; font-size: 0.9rem;">Transforming data into decisions, one insight at a time.</p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">B.E. Mechanical Engineering | Pavai College of Technology (2012-2016)</p>
   </footer>
 
+  <!-- JavaScript for Interactive Features -->
+  <script>
+    // Back to top button functionality
+    window.onscroll = function() {
+      const button = document.querySelector('.back-to-top');
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        button.classList.add('show');
+      } else {
+        button.classList.remove('show');
+      }
+    };
+    
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Add keyboard navigation support
+    document.querySelectorAll('a, button').forEach(element => {
+      element.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          this.click();
+        }
+      });
+    });
+    
+    // Announce page changes for screen readers
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionTitle = entry.target.querySelector('h2');
+          if (sectionTitle) {
+            document.title = `${sectionTitle.textContent} - Deepanraj A | Data Analyst Portfolio`;
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
