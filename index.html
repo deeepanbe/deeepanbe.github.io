@@ -738,6 +738,17 @@
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
+
+                /* Responsive: LinkedIn Banner for Mobile */
+        @media (max-width: 768px) {
+            .linkedin-banner {
+                width: 90% !important;
+                gap: 20px !important;
+            }
+            .linkedin-banner img {
+                height: 40px !important;
+            }
+        }
     </style>
 
         <script>
@@ -814,6 +825,14 @@
 
     
     <header>
+                <!-- LinkedIn-Style Clean Banner -->
+        <div class="linkedin-banner" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);width:90%;display:flex;justify-content:center;align-items:center;gap:40px;opacity:0.20;filter:blur(1px);z-index:0;pointer-events:none;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/excel/excel-original.svg" alt="Excel" style="height:60px;width:auto;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" style="height:60px;width:auto;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" style="height:60px;width:auto;">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" style="height:60px;width:auto;">
+            <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau" style="height:60px;width:auto;">
+        </div>
         <div class="profile-container" data-aos="fade-down">
             <img src="WhatsApp Image 2025-11-22 at 16.00.23.jpeg" alt="Deepanraj A" class="profile-img">
             <h1>Deepanraj A</h1>
