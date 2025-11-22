@@ -429,10 +429,166 @@
         [data-aos] {
             pointer-events: auto;
         }
+
+                /* ===== MODAL POPUP STYLES ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            margin: 3% auto;
+            padding: 0;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.4s ease;
+            position: relative;
+        }
+        
+        .modal-header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .modal-header h2 {
+            color: white;
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .modal-body {
+            padding: 30px;
+            color: white;
+            line-height: 1.8;
+        }
+        
+        .modal-body h3 {
+            color: #fff;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .modal-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .modal-body li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .modal-body li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .close-modal {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .modal-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .clickable-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .clickable-card::after {
+            content: "Click for details";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .clickable-card:hover::after {
+            opacity: 1;
+        }
+        
+        .clickable-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
+
+    
     <header>
         <div class="profile-container" data-aos="fade-down">
             <img src="WhatsApp Image 2025-11-22 at 8.27.54 PM.jpeg" alt="Deepanraj A" class="profile-img">
@@ -586,5 +742,267 @@
             offset: 100
         });
     </script>
+
+        <!-- Modal Popups -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-circle"></i> About Me - Deep Dive</h2>
+                <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>Professional Summary</h3>
+                <p>I am a results-driven Data Analyst with 8+ years of experience transforming raw data into actionable business insights. My expertise spans across multiple domains including retail, healthcare, finance, and e-commerce.</p>
+                
+                <h3>Core Competencies</h3>
+                <ul>
+                    <li>Advanced SQL development with complex query optimization</li>
+                    <li>Python programming for data analysis and machine learning</li>
+                    <li>Power BI & Tableau dashboard development</li>
+                    <li>Statistical analysis and A/B testing</li>
+                    <li>ETL pipeline design and implementation</li>
+                    <li>Predictive modeling and forecasting</li>
+                    <li>Data warehouse architecture</li>
+                    <li>Stakeholder presentation and storytelling</li>
+                </ul>
+                
+                <h3>Industry Experience</h3>
+                <p><strong>Retail & E-commerce:</strong> Customer segmentation, inventory optimization, sales forecasting</p>
+                <p><strong>Healthcare:</strong> Patient analytics, operational efficiency, outcome predictions</p>
+                <p><strong>Finance:</strong> Risk analysis, fraud detection, portfolio optimization</p>
+                
+                <h3>What Sets Me Apart</h3>
+                <ul>
+                    <li>Bridge between technical teams and business stakeholders</li>
+                    <li>Proven track record of delivering ROI through data-driven decisions</li>
+                    <li>Quick learner who adapts to new tools and technologies</li>
+                    <li>Strong communication skills with C-level executives</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="skillsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-tools"></i> Technical Skills - Complete Arsenal</h2>
+                <span class="close-modal" onclick="closeModal('skillsModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>Programming & Scripting</h3>
+                <p><span class="modal-badge">Python</span> <span class="modal-badge">R</span> <span class="modal-badge">SQL</span> <span class="modal-badge">JavaScript</span></p>
+                <ul>
+                    <li>Python: pandas, numpy, scikit-learn, matplotlib, seaborn, plotly</li>
+                    <li>Advanced SQL: Window functions, CTEs, stored procedures, query optimization</li>
+                    <li>R: dplyr, ggplot2, tidyr, shiny applications</li>
+                </ul>
+                
+                <h3>Data Visualization & BI Tools</h3>
+                <p><span class="modal-badge">Power BI</span> <span class="modal-badge">Tableau</span> <span class="modal-badge">Excel</span> <span class="modal-badge">Google Data Studio</span></p>
+                <ul>
+                    <li>Created 50+ interactive dashboards serving 100+ business users</li>
+                    <li>Expert in DAX and calculated fields</li>
+                    <li>Advanced Excel: Power Query, Power Pivot, VBA macros</li>
+                </ul>
+                
+                <h3>Databases & Big Data</h3>
+                <p><span class="modal-badge">MySQL</span> <span class="modal-badge">PostgreSQL</span> <span class="modal-badge">MS SQL Server</span> <span class="modal-badge">MongoDB</span></p>
+                <ul>
+                    <li>Database design and normalization</li>
+                    <li>Query performance tuning</li>
+                    <li>Working with TB-scale datasets</li>
+                </ul>
+                
+                <h3>Machine Learning & Statistics</h3>
+                <ul>
+                    <li>Regression models (Linear, Logistic, Ridge, Lasso)</li>
+                    <li>Classification algorithms (Decision Trees, Random Forest, XGBoost)</li>
+                    <li>Clustering (K-means, DBSCAN, Hierarchical)</li>
+                    <li>Time series forecasting (ARIMA, Prophet)</li>
+                    <li>Hypothesis testing and A/B experimentation</li>
+                </ul>
+                
+                <h3>Cloud & Tools</h3>
+                <p><span class="modal-badge">Azure</span> <span class="modal-badge">AWS</span> <span class="modal-badge">Git</span> <span class="modal-badge">Docker</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-project-diagram"></i> Featured Projects - Detailed View</h2>
+                <span class="close-modal" onclick="closeModal('projectModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>1. Customer Churn Prediction System</h3>
+                <p><strong>Challenge:</strong> Company losing 15% customers annually</p>
+                <p><strong>Solution:</strong> Built ML model with 89% accuracy predicting churn 3 months ahead</p>
+                <p><strong>Impact:</strong> Reduced churn by 23%, saving $2.5M annually</p>
+                <p><strong>Tech Stack:</strong> Python, XGBoost, SQL, Power BI</p>
+                
+                <h3>2. Sales Dashboard & Forecasting System</h3>
+                <p><strong>Challenge:</strong> No real-time visibility into sales performance</p>
+                <p><strong>Solution:</strong> Created executive dashboard with automated forecasting</p>
+                <p><strong>Impact:</strong> Improved forecast accuracy by 35%, enabled data-driven decisions</p>
+                <p><strong>Tech Stack:</strong> Power BI, DAX, SQL Server, Python</p>
+                
+                <h3>3. Inventory Optimization Engine</h3>
+                <p><strong>Challenge:</strong> $5M tied up in excess inventory</p>
+                <p><strong>Solution:</strong> Developed predictive model for optimal stock levels</p>
+                <p><strong>Impact:</strong> Reduced inventory costs by 28%, improved service level to 96%</p>
+                <p><strong>Tech Stack:</strong> Python, ARIMA, Tableau</p>
+                
+                <h3>4. Marketing Campaign ROI Analyzer</h3>
+                <p><strong>Challenge:</strong> Unclear which campaigns drive revenue</p>
+                <p><strong>Solution:</strong> Built attribution model and interactive dashboard</p>
+                <p><strong>Impact:</strong> Increased marketing ROI by 45%, reallocated budget efficiently</p>
+                <p><strong>Tech Stack:</strong> SQL, Python, Tableau, Google Analytics API</p>
+                
+                <h3>5. Healthcare Patient Analytics Platform</h3>
+                <p><strong>Challenge:</strong> High readmission rates costing $8M annually</p>
+                <p><strong>Solution:</strong> Predictive model identifying high-risk patients</p>
+                <p><strong>Impact:</strong> Reduced readmissions by 19%, saved $1.5M</p>
+                <p><strong>Tech Stack:</strong> R, Random Forest, SQL, Shiny Dashboard</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="certModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-certificate"></i> Certifications & Learning Journey</h2>
+                <span class="close-modal" onclick="closeModal('certModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>Microsoft Power BI Data Analyst (PL-300)</h3>
+                <p><strong>Issuing Organization:</strong> Microsoft</p>
+                <p><strong>Skills Covered:</strong> Data modeling, DAX, Power Query, visualization best practices</p>
+                <p><strong>Validation:</strong> Demonstrates expertise in enterprise BI solutions</p>
+                
+                <h3>Google Data Analytics Professional Certificate</h3>
+                <p><strong>Issuing Organization:</strong> Google via Coursera</p>
+                <p><strong>Skills Covered:</strong> Data cleaning, analysis, visualization, R programming</p>
+                <p><strong>Capstone Project:</strong> Completed real-world case study with stakeholder presentation</p>
+                
+                <h3>BCG Data Science Job Simulation</h3>
+                <p><strong>Issuing Organization:</strong> Boston Consulting Group via Forage</p>
+                <p><strong>Skills Covered:</strong> Business problem framing, data analysis, client communication</p>
+                <p><strong>Project:</strong> Customer churn analysis for telecom client</p>
+                
+                <h3>Tata Data Visualization: Empowering Business</h3>
+                <p><strong>Issuing Organization:</strong> Tata via Forage</p>
+                <p><strong>Skills Covered:</strong> Executive dashboards, visual storytelling, business insights</p>
+                
+                <h3>Edureka Data Science Certification</h3>
+                <p><strong>Skills Covered:</strong> Machine learning, deep learning, NLP, computer vision</p>
+                <p><strong>Tools:</strong> Python, TensorFlow, scikit-learn</p>
+                
+                <h3>Continuous Learning</h3>
+                <ul>
+                    <li>Active member of Kaggle community (Top 10% in competitions)</li>
+                    <li>Contributor to open-source data science projects</li>
+                    <li>Regular attendee of data science conferences and meetups</li>
+                    <li>Currently learning: Advanced deep learning, MLOps, Cloud architectures</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="experienceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-briefcase"></i> Work Experience - Career Journey</h2>
+                <span class="close-modal" onclick="closeModal('experienceModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>Senior Data Analyst (2020 - Present)</h3>
+                <p><strong>Company:</strong> Fortune 500 Retail Corporation</p>
+                <p><strong>Key Achievements:</strong></p>
+                <ul>
+                    <li>Led team of 4 analysts supporting C-level executives with insights</li>
+                    <li>Reduced report generation time from 5 days to 2 hours through automation</li>
+                    <li>Built data warehouse serving 200+ business users across 5 departments</li>
+                    <li>Spearheaded migration from Excel to Power BI, training 50+ employees</li>
+                    <li>Developed pricing optimization model increasing margin by 8%</li>
+                </ul>
+                
+                <h3>Data Analyst (2018 - 2020)</h3>
+                <p><strong>Company:</strong> Healthcare Technology Startup</p>
+                <p><strong>Key Achievements:</strong></p>
+                <ul>
+                    <li>First analytics hire - built entire data infrastructure from scratch</li>
+                    <li>Created patient outcome prediction models with 85% accuracy</li>
+                    <li>Designed and implemented A/B testing framework</li>
+                    <li>Reduced patient acquisition cost by 30% through targeted campaigns</li>
+                </ul>
+                
+                <h3>Junior Data Analyst (2016 - 2018)</h3>
+                <p><strong>Company:</strong> Financial Services Firm</p>
+                <p><strong>Key Achievements:</strong></p>
+                <ul>
+                    <li>Developed fraud detection model saving $3M annually</li>
+                    <li>Automated 15+ recurring reports reducing manual work by 80%</li>
+                    <li>Created risk assessment dashboard for loan portfolio</li>
+                </ul>
+                
+                <h3>Additional Experience</h3>
+                <ul>
+                    <li>Freelance Data Consultant (2019-Present): Helped 10+ small businesses with analytics</li>
+                    <li>Data Science Mentor: Guided 20+ aspiring analysts through career transitions</li>
+                    <li>Technical Blogger: Published 30+ articles on data analysis reaching 50K+ readers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Control JavaScript -->
+    <script>
+        // Function to open modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+        
+        // Function to close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+
+        <!--
+    INSTRUCTIONS: To activate modals, add onclick="openModal('modalId')" to your sections/cards.
+    
+    Examples:
+    For About section: onclick="openModal('aboutModal')"
+    For Skills section: onclick="openModal('skillsModal')"
+    For Projects section: onclick="openModal('projectModal')"
+    For Certificates section: onclick="openModal('certModal')"
+    For Experience section: onclick="openModal('experienceModal')"
+    
+    Also add class="clickable-card" to make sections show hover effects.
+    
+    Example: <section class="about-section clickable-card" onclick="openModal('aboutModal')">
+    -->
 </body>
 </html>
