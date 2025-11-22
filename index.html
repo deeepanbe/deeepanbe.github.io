@@ -754,6 +754,103 @@
         <script>
         // ===== PREMIUM HEADER INTERACTIONS =====
 
+
+                    /* Projects Section Styles - Added by ChatGPT */
+            .projects-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.projects-title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(90deg, #005bea, #00c6fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    border-color: #d0e4ff;
+}
+
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #005bea, #00c6fb);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.project-description {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.tech-badges {
+    margin-bottom: 18px;
+}
+
+.badge {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 40px;
+    background: #f0f7ff;
+    color: #075ebe;
+    border: 1px solid #d2e7ff;
+}
+
+.project-links a {
+    text-decoration: none;
+    color: #005bea;
+    font-weight: 600;
+    transition: color 0.25s ease;
+}
+
+.project-links a:hover {
+    color: #003d94;
+}
+
         // 3. PARALLAX EFFECT ON TECH BANNER
         document.addEventListener('DOMContentLoaded', function() {
             const banner = document.querySelector('.tech-banner');
@@ -892,6 +989,138 @@
             </div>
         </div>
     </header>
+
+
+        <!-- Projects Section -->
+            <section class="projects-section">
+    <h2 class="projects-title">Projects</h2>
+
+    <div class="projects-grid">
+
+        <!-- Project 1 -->
+        <div class="project-card">
+            <h3 class="project-title">E-Commerce Sales Analytics Pipeline</h3>
+            <p class="project-description">
+                End-to-end e-commerce analytics pipeline with data collection, ETL, analysis, and dashboard deployment.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+            <h3 class="project-title">HR Workforce Analytics Dashboard</h3>
+            <p class="project-description">
+                Workforce analytics dashboard with Tableau & Python. Covers turnover prediction and diversity metrics.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+                <span class="badge">Tableau</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+            <h3 class="project-title">Retail Inventory Management</h3>
+            <p class="project-description">
+                Inventory management system with forecasting dashboards. Reduced waste by 22%.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+                <span class="badge">Power BI</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+            <h3 class="project-title">Customer Churn Prediction ML</h3>
+            <p class="project-description">
+                ML churn prediction with feature engineering, model comparison, and Tableau visual insights.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+                <span class="badge">Machine Learning</span>
+                <span class="badge">Tableau</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card">
+            <h3 class="project-title">Sales Forecasting Dashboard (Power BI)</h3>
+            <p class="project-description">
+                Time-series forecasting dashboard using SARIMA & Prophet achieving 94% accuracy.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+                <span class="badge">Power BI</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card">
+            <h3 class="project-title">Marketing Campaign ROI Analysis</h3>
+            <p class="project-description">
+                ROI analysis using Python, SQL & Excel with attribution modeling and 156% ROI improvement.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+                <span class="badge">SQL</span>
+                <span class="badge">Excel</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+        <!-- Project 7 -->
+        <div class="project-card">
+            <h3 class="project-title">Real Estate Price Prediction ML</h3>
+            <p class="project-description">
+                Streamlit app predicting real estate prices with 92% R² score.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+                <span class="badge">Machine Learning</span>
+                <span class="badge">Streamlit</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+        <!-- Project 8 -->
+        <div class="project-card">
+            <h3 class="project-title">Supply Chain Optimization ML</h3>
+            <p class="project-description">
+                ML + OR optimization reducing supply chain costs by 18%.
+            </p>
+            <div class="tech-badges">
+                <span class="badge">Python</span>
+                <span class="badge">Machine Learning</span>
+            </div>
+            <div class="project-links">
+                <a href="#" target="_blank">View Repository →</a>
+            </div>
+        </div>
+
+    </div>
+</section>
 
     <!-- Skills Section -->
     <section class="container">
