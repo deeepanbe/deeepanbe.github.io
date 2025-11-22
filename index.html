@@ -157,6 +157,32 @@
             margin-bottom: 30px;
         }
 
+                /* Tool Logos Background */
+        .logo-background {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 0;
+        }
+
+        .tool-logo {
+            width: 130px;
+            height: auto;
+            opacity: 0.10;
+            transition: opacity 0.3s ease;
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
         /* Social Buttons Container */
         .social-buttons {
             display: flex;
@@ -656,6 +682,14 @@
                     <span>LinkedIn</span>
                 </a>
             </div>
+
+                <!-- Tool Logos Background -->
+    <div class="logo-background">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Analytics" class="tool-logo">        <img src="excel-logo.png" alt="Microsoft Excel" class="tool-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Microsoft Excel" class="tool-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" class="tool-logo">
+                <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau" class="tool-logo">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" class="tool-logo">    </div>
             
             <!-- Contact Information -->
             <div class="contact-info">
