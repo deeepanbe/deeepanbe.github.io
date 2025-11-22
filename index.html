@@ -124,11 +124,11 @@
 
         .profile-container {
             position: relative;
-            z-index: 1;
+            z-index:21
         }
 
         .profile-img {
-            width: 180px;
+            width: 120px;
             height: 180px;
             border-radius: 50%;
             border: 6px solid white;
@@ -157,32 +157,34 @@
             margin-bottom: 30px;
         }
 
-                /* Tool Logos Background */
-        .logo-background {
+                        /* Tool Logos Background */
+        .tech-banner {
             position: absolute;
-            right: 50px;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
             display: flex;
-            flex-direction: column;
-            gap: 25px;
+            justify-content: center;
+            gap: 40px;
+            opacity: 0.25;
             z-index: 0;
+            pointer-events: none;
+            filter: blur(0.5px);
+            animation: floatLogos 6s ease-in-out infinite;
         }
 
-        .tool-logo {
-            width: 130px;
-            height: auto;
-            opacity: 0.10;
-            transition: opacity 0.3s ease;
-            animation: logoFloat 4s ease-in-out infinite;
+        .tb-icon {
+            height: 60px;
+            width: auto;
+            opacity: 0.85;
         }
 
-        @keyframes logoFloat {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        @keyframes floatLogos {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+            100% { transform: translateX(-50%) translateY(0); }
         }
-
         /* Social Buttons Container */
         .social-buttons {
             display: flex;
@@ -683,15 +685,14 @@
                 </a>
             </div>
 
-                <!-- Tool Logos Background -->
-    <div class="logo-background">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Analytics" class="tool-logo">        <img src="excel-logo.png" alt="Microsoft Excel" class="tool-logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Microsoft Excel" class="tool-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" class="tool-logo">
-                <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau" class="tool-logo">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" class="tool-logo">    </div>
-            
-            <!-- Contact Information -->
+                    <!-- Tool Logos Background -->
+    <div class="tech-banner">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" class="tb-icon">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/excel/excel-original.svg" class="tb-icon">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="tb-icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="tb-icon">
+        <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" class="tb-icon">
+    </div> Contact Information -->
             <div class="contact-info">
                 <a href="mailto:deepanrajanalyst@gmail.com" class="contact-item">
                     <i class="fas fa-envelope"></i>
