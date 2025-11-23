@@ -1,109 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deepanraj A – Data Analyst</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deepanraj A - Data Analyst Portfolio</title>
 
+<style>
+/* ------------------------------------------------------
+   THEME VARIABLES
+------------------------------------------------------ */
+:root {
+  --primary: #FF6B35;
+  --bg: #ffffff;
+  --text: #222;
+  --card: #f5f5f5;
+  --nav-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #eaeaea;
+  --card: #1e1e1e;
+  --nav-bg: #1a1a1a;
+}
+
+/* ------------------------------------------------------
+   GLOBAL
+------------------------------------------------------ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s;
+  line-height: 1.6;
+}
+img { max-width: 100%; border-radius: 6px; }
+a { color: var(--primary); text-decoration: none; font-weight: bold; }
+
+/* ------------------------------------------------------
+   NAVBAR
+------------------------------------------------------ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--nav-bg);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  z-index: 1000;
+}
+nav .logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+nav ul li a {
+  font-weight: 600;
+  font-size: 16px;
+}
+nav .theme-toggle {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.menu-btn { display: none; font-size: 26px; cursor: pointer; }
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: var(--nav-bg);
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    padding: 15px;
+    border: 1px solid #ccc;
+  }
+  nav ul.active { display: block; }
+  .menu-btn { display: block; }
+}
+
+/* ------------------------------------------------------
+   HERO SECTION
+------------------------------------------------------ */
+.hero {
+  padding: 150px 40px 80px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hero img {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--primary);
+}
+.hero h1 { font-size: 40px; }
+.hero p { max-width: 600px; font-size: 18px; }
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  margin-right: 10px;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 6px;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
+/* ------------------------------------------------------
+   TECHNOLOGY ICONS
+------------------------------------------------------ */
+.tech-icons {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.tech-icons img {
+  width: 70px;
+  height: 70px;
+}
+
+/* ------------------------------------------------------
+   SECTIONS
+------------------------------------------------------ */
+section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+section h2 {
+  color: var(--primary);
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+/* ------------------------------------------------------
+   SKILLS
+------------------------------------------------------ */
+.skills-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.skill-box {
+  background: var(--card);
+  padding: 12px 20px;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary);
+  font-weight: bold;
+}
+
+/* ------------------------------------------------------
+   PROJECTS
+------------------------------------------------------ */
+.projects-grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.project-card {
+  background: var(--card);
+  border-left: 6px solid var(--primary);
+  padding: 20px;
+  border-radius: 10px;
+}
+.project-card h3 { margin-bottom: 10px; }
+
+/* Power BI Embed */
+.dashboard-container {
+  margin-top: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--primary);
+}
+.dashboard-container iframe {
+  width: 100%;
+  height: 430px;
+  border: none;
+}
+
+/* ------------------------------------------------------
+   NOTES
+------------------------------------------------------ */
+.notes-list li {
+  margin-bottom: 12px;
+  background: var(--card);
+  padding: 10px 15px;
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+}
+
+/* ------------------------------------------------------
+   INTERVIEW Q&A
+------------------------------------------------------ */
+.qa-box {
+  background: var(--card);
+  padding: 15px;
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.qa-box h3 { margin-bottom: 8px; }
+
+/* ------------------------------------------------------
+   CONTACT
+------------------------------------------------------ */
+.contact-box p {
+  font-size: 18px;
+}
+
+/* ------------------------------------------------------
+   FOOTER
+------------------------------------------------------ */
+footer {
+  text-align: center;
+  padding: 30px;
+  background: var(--nav-bg);
+  margin-top: 40px;
+}
+
+/* ------------------------------------------------------
+   SCROLL ANIMATION
+------------------------------------------------------ */
+.reveal { opacity: 0; transform: translateY(40px); transition: .6s; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+</style>
+
+</head>
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <div class="header-left">
-            <h1 class="site-name">Deepanraj A</h1>
-            <p class="site-title">Data Analyst</p>
-        </div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#certifications">Certifications</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">Deepanraj A</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section">
-        <div class="profile-section">
-            <img src="profile.jpg" alt="Profile Photo">
-            <div class="profile-text">
-                <h2>About Me</h2>
-                <p>I am a Data Analyst with experience in BI, dashboard development, and analytical problem-solving. I work with SQL, Python, Power BI, Tableau, and advanced analytics to convert raw data into meaningful insights that support business decision-making.</p>
-            </div>
-        </div>
-    </section>
+  <ul id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#notes">Notes</a></li>
+    <li><a href="#interview">Interview Q&A</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 
-    <!-- SKILLS SECTION -->
-    <section id="skills" class="section">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">Python</div>
-            <div class="skill-card">SQL</div>
-            <div class="skill-card">Power BI</div>
-            <div class="skill-card">Tableau</div>
-            <div class="skill-card">Excel / VBA</div>
-            <div class="skill-card">Data Cleaning</div>
-            <div class="skill-card">EDA</div>
-            <div class="skill-card">Machine Learning</div>
-        </div>
-    </section>
+  <button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+</nav>
 
-    <!-- PROJECTS SECTION -->
-    <section id="projects" class="section">
-        <h2>Projects</h2>
+<!-- HERO -->
+<section id="home" class="hero reveal">
+  <img src="WhatsApp%20Image%202025-11-22%20at%2016.00.23.jpeg" alt="Profile Photo">
 
-        <div class="projects-container">
+  <div>
+    <h1>Deepanraj A</h1>
+    <p>Data Analyst with 8+ years of experience delivering dashboards, automation, and business insights using Power BI, SQL, Python, and ML.</p>
 
-            <div class="project-card">
-                <h3>Sales Analytics Dashboard (Power BI)</h3>
-                <p>Created a complete BI dashboard analyzing revenue, KPIs, customer segments, and regional performance.</p>
-            </div>
+    <a href="Deepanraj A Data Analyst.pdf" class="btn" download>Download Resume</a>
+    <a href="https://www.linkedin.com/in/deepanraj-a-data-analyst" target="_blank" class="btn-secondary">LinkedIn</a>
+    <a href="https://github.com/deeepanbe" target="_blank" class="btn-secondary">GitHub</a>
+  </div>
+</section>
 
-            <div class="project-card">
-                <h3>HR Workforce Dashboard</h3>
-                <p>Analyzed employee turnover, hiring pipeline, tenure distribution, and diversity metrics using Power BI.</p>
-            </div>
+<!-- TECH LOGOS -->
+<section id="tech" class="reveal">
+  <h2>Technologies I Use</h2>
+  <div class="tech-icons">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powerbi/powerbi-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tableau/tableau-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg">
+  </div>
+</section>
 
-            <div class="project-card">
-                <h3>Customer Churn Prediction (Python)</h3>
-                <p>Developed a machine-learning model achieving 91% accuracy to identify churn-risk customers.</p>
-            </div>
+<!-- SKILLS -->
+<section id="skills" class="reveal">
+  <h2>Skills</h2>
 
-        </div>
-    </section>
+  <div class="skills-container">
+    <div class="skill-box">Power BI</div>
+    <div class="skill-box">SQL</div>
+    <div class="skill-box">Python</div>
+    <div class="skill-box">Tableau</div>
+    <div class="skill-box">Excel</div>
+    <div class="skill-box">Machine Learning</div>
+  </div>
+</section>
 
-    <!-- CERTIFICATIONS SECTION -->
-    <section id="certifications" class="section">
-        <h2>Certifications</h2>
+<!-- PROJECTS -->
+<section id="projects" class="reveal">
+  <h2>Projects</h2>
 
-        <ul class="cert-list">
-            <li>Google Data Analytics Professional Certificate</li>
-            <li>Power BI Data Analyst Certificate</li>
-            <li>Business Analysis Foundations</li>
-            <li>Tableau Desktop Specialist – Training Completed</li>
-            <li>Python for Data Science – IBM</li>
-        </ul>
-    </section>
+  <div class="projects-grid">
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="section">
-        <h2>Contact</h2>
+    <div class="project-card">
+      <h3>Sales Analytics Dashboard (Power BI)</h3>
+      <p>KPIs, forecasting, segmentation.</p>
 
-        <div class="contact-box">
-            <p><strong>Email:</strong> deepanraj.a@outlook.com</p>
-            <p><strong>Phone:</strong> +91 8940991095</p>
-            <p><strong>LinkedIn:</strong> <a href="#" target="_blank">linkedin.com/in/deepanraj-data-analyst</a></p>
-            <p><strong>GitHub:</strong> <a href="#" target="_blank">github.com/deeepanbe</a></p>
-        </div>
+      <div class="dashboard-container">
+        <iframe src="YOUR_POWER_BI_EMBED_URL_HERE"></iframe>
+      </div>
 
-    </section>
+      <a href="https://github.com/deeepanbe" target="_blank">GitHub Link</a>
+    </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2025 Deepanraj A. All Rights Reserved.</p>
-    </footer>
+    <div class="project-card">
+      <h3>HR Workforce Dashboard</h3>
+      <p>Turnover & hiring insights.</p>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+
+    <div class="project-card">
+      <h3>Churn Prediction ML Model</h3>
+      <p>Python-based prediction model.</p>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+
+    <div class="project-card">
+      <h3>Financial Performance Dashboard</h3>
+      <p>Power BI financial metrics.</p>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- NOTES -->
+<section id="notes" class="reveal">
+  <h2>Notes & Tips</h2>
+  <ul class="notes-list">
+    <li>SQL Interview Cheatsheet</li>
+    <li>Power BI DAX Tips</li>
+    <li>Python EDA Steps</li>
+    <li>ML Model Deployment Basics</li>
+    <li>Tableau Storytelling Techniques</li>
+  </ul>
+</section>
+
+<!-- INTERVIEW -->
+<section id="interview" class="reveal">
+  <h2>Interview Q&A</h2>
+
+  <div class="qa-box">
+    <h3>1. What is the purpose of DAX?</h3>
+    <p>DAX is used in Power BI for advanced calculations.</p>
+  </div>
+
+  <div class="qa-box">
+    <h3>2. Difference between JOIN types?</h3>
+    <p>INNER returns matches, LEFT keeps all left rows.</p>
+  </div>
+
+  <div class="qa-box">
+    <h3>3. What is EDA?</h3>
+    <p>Exploratory analysis to understand data patterns.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <h2>Contact</h2>
+  <div class="contact-box">
+    <p><strong>Email:</strong> deepanraj.a@outlook.com</p>
+    <p><strong>Phone:</strong> +91 8940991095</p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/deeepanbe">deeepanbe</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/deepanraj-a-data-analyst">Profile</a></p>
+  </div>
+</section>
+
+<footer>© 2025 Deepanraj A — All Rights Reserved</footer>
+
+<script>
+/* Mobile Menu */
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('active');
+}
+
+/* Theme Toggle */
+function toggleTheme() {
+  const theme = document.documentElement.getAttribute("data-theme");
+  const newTheme = theme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+}
+
+if (localStorage.getItem("theme")) {
+  document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+}
+
+/* Scroll Reveal */
+const reveals = document.querySelectorAll(".reveal");
+window.addEventListener("scroll", () => {
+  for (let r of reveals) {
+    if (r.getBoundingClientRect().top < window.innerHeight - 120) {
+      r.classList.add("active");
+    }
+  }
+});
+</script>
 
 </body>
 </html>
