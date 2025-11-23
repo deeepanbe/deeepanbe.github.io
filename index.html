@@ -1,1846 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Deepanraj A - Data Analyst Professional | 8+ years experience | SQL, Python, Power BI, Tableau, Machine Learning">
-    <meta name="keywords" content="Data Analyst, Business Intelligence, Python, SQL, Power BI, Tableau, Machine Learning">
-    <meta name="author" content="Deepanraj A">
-    <title>Deepanraj A | Data Analyst Portfolio</title>
-    
-    <!-- Tawk.to Live Chat Widget -->
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/673983054304e3196ae0b7c0/1icvai3bu';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        
-    <!-- Google Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --accent-color: #9f7aea;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --background: #ffffff;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-        }
-
-                /* Dark Mode Variables */
-        body.dark-mode {
-            --primary-color: #8b9aff;
-            --secondary-color: #9d87d9;
-            --text-dark: #e4e4e7;
-            --text-light: #a1a1aa;
-            --background: #18181b;
-            --gray-50: #27272a;
-            --gray-100: #3f3f46;
-        }
-        
-        /* Theme Toggle Button */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        }
-        
-        .theme-toggle i {
-            font-size: 1.3rem;
-            color: white;
-        }
-        
-        /* Smooth transitions for theme change */
-        body, header, .skill-category, .cert-card, footer {
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--background);
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-            background-size: cover;
-            opacity: 0.3;
-        }
-
-        .profile-container {
-            position: relative;
-            z-index:21
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 180px;
-            border-radius: 50%;
-            border: 6px solid white;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            margin: 0 auto 25px;
-            object-fit: cover;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .subtitle {
-            font-size: 1.4rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-            opacity: 0.95;
-        }
-
-        .experience {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-
-                        /* Tool Logos Background */
-        .tech-banner {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            opacity: 0.25;
-            z-index: 0;
-            pointer-events: none;
-            filter: blur(0.5px);
-            animation: floatLogos 6s ease-in-out infinite;
-        }
-
-        .tb-icon {
-            height: 60px;
-            width: auto;
-            opacity: 0.85;
-        }
-
-        @keyframes floatLogos {
-            0% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-            100% { transform: translateX(-50%) translateY(0); }
-        }
-
-                /* ===== PREMIUM HEADER UPGRADES ===== */
-
-        /* Canvas for BI Pipeline Particles */
-        #pipelineCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Rotating Tech Ring */
-        .tech-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            z-index: 1;
-            animation: rotateTechRing 18s linear infinite;
-            pointer-events: none;
-        }
-
-        .ring-icon {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            opacity: 0.20;
-            filter: blur(0.5px);
-        }
-
-        .ring-icon:nth-child(1) { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-        .ring-icon:nth-child(2) { top: 20%; right: 5%; }
-        .ring-icon:nth-child(3) { bottom: 20%; right: 5%; }
-        .ring-icon:nth-child(4) { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        .ring-icon:nth-child(5) { top: 20%; left: 5%; }
-
-        @keyframes rotateTechRing {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Multi-Layer Floating Background */
-        .tech-banner-back {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-50%);
-            width: 95%;
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            opacity: 0.10;
-            z-index: 0;
-            pointer-events: none;
-            filter: blur(2px);
-            animation: floatBack 10s ease-in-out infinite;
-        }
-
-        .tb-back-icon {
-            height: 100px;
-            width: auto;
-            opacity: 0.70;
-        }
-
-        @keyframes floatBack {
-            0% { transform: translateX(-50%) translateY(-52%); }
-            50% { transform: translateX(-50%) translateY(-48%); }
-            100% { transform: translateX(-50%) translateY(-52%); }
-        }
-
-        /* Soft Glow + Hover Pulse on Tech Banner */
-        .tech-banner img:hover,
-        .tech-banner-back img:hover {
-            filter: drop-shadow(0px 0px 8px rgba(255,255,255,0.7));
-            transform: scale(1.08);
-            transition: 0.25s ease;
-        }
-        /* Social Buttons Container */
-        .social-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        /* GitHub and LinkedIn Buttons - PROMINENT STYLE */
-        .btn-social {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-social::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.2);
-            transition: left 0.5s ease;
-        }
-
-        .btn-social:hover::before {
-            left: 100%;
-        }
-
-        .btn-github {
-            background: linear-gradient(135deg, #24292e 0%, #000000 100%);
-            color: white;
-        }
-
-        .btn-github:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(36, 41, 46, 0.4);
-        }
-
-        .btn-linkedin {
-            background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
-            color: white;
-        }
-
-        .btn-linkedin:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
-        }
-
-        .btn-social i {
-            font-size: 1.3rem;
-        }
-
-        /* Contact Icons */
-        .contact-info {
-            margin-top: 25px;
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            text-decoration: none;
-            font-size: 0.95rem;
-            padding: 8px 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-        }
-
-        .section-header p {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-top: 20px;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
-        }
-
-        .skill-category h3 {
-            color: var(--primary-color);
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .skill-category h3 i {
-            font-size: 1.6rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Certifications Section */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .cert-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border-top: 4px solid var(--primary-color);
-        }
-
-        .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
-        }
-
-        .cert-badge {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: white;
-            font-size: 1.8rem;
-        }
-
-        .cert-card h3 {
-            color: var(--text-dark);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .cert-card .provider {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .cert-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Resume Button */
-        .resume-section {
-            text-align: center;
-            padding: 60px 20px;
-            background: var(--gray-50);
-        }
-
-        .btn-resume {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 40px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-resume:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-resume i {
-            font-size: 1.4rem;
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        footer p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-            
-            .skills-grid,
-            .cert-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-social {
-                padding: 12px 28px;
-                font-size: 1rem;
-            }
-
-            .social-buttons {
-                gap: 12px;
-            }
-        }
-
-        /* Animation delays for AOS */
-        [data-aos] {
-            pointer-events: auto;
-        }
-
-                /* ===== MODAL POPUP STYLES ===== */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal-content {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            margin: 3% auto;
-            padding: 0;
-            border-radius: 20px;
-            max-width: 900px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            animation: slideIn 0.4s ease;
-            position: relative;
-        }
-        
-        .modal-header {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px 30px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 20px 20px 0 0;
-        }
-        
-        .modal-header h2 {
-            color: white;
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-        
-        .modal-body {
-            padding: 30px;
-            color: white;
-            line-height: 1.8;
-        }
-        
-        .modal-body h3 {
-            color: #fff;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 10px;
-        }
-        
-        .modal-body ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .modal-body li {
-            padding: 10px 0;
-            padding-left: 30px;
-            position: relative;
-        }
-        
-        .modal-body li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #4ade80;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .close-modal {
-            color: white;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .close-modal:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
-        }
-        
-        .modal-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin: 5px;
-            font-size: 0.9rem;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .clickable-card {
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .clickable-card::after {
-            content: "Click for details";
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--primary-color);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.75rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .clickable-card:hover::after {
-            opacity: 1;
-        }
-        
-        .clickable-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-                /* Responsive: LinkedIn Banner for Mobile */
-        @media (max-width: 768px) {
-            .linkedin-banner {
-                width: 90% !important;
-                gap: 20px !important;
-            }
-            .linkedin-banner img {
-                height: 40px !important;
-            }
-        }
-
-                /* Skill Filter Buttons */
-        .skills-filter {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .skill-btn {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .skill-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .skill-btn.active {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
-        }
-
-        .project-card.hidden {
-            display: none;
-        }
-    </style>
-
-
-    
-            /* ========== ENHANCED GRAPHICS & VISUAL IMPROVEMENTS ========== */
-        
-        /* Add icons to skill badges */
-        .skill-btn i, .skill-btn .fa {
-            font-size: 16px;
-            margin-right: 6px;
-            opacity: 0.9;
-        }
-        
-        /* Project cards enhanced shadows and 3D effect */
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.25), 0 0 0 1px rgba(102, 126, 234, 0.1);
-        }
-        
-        /* Add gradient overlay to project cards */
-        .project-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .project-card:hover::before {
-            left: 100%;
-        }
-        
-        /* Section headers with gradient text */
-        .section-header h2,
-        .projects-title,
-        h2 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-        }
-        
-        /* Add animated underline to headers */
-        .section-header h2::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
-            animation: slideIn 0.6s ease;
-        }
-        
-        @keyframes slideIn {
-            from { width: 0; }
-            to { width: 60px; }
-        }
-        
-        /* Tech badges with icons and gradient */
-        .tech-badges .badge,
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: linear-gradient(135deg, #f0f7ff 0%, #e6f1ff 100%);
-            border: 2px solid #d2e7ff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .badge::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.4s ease;
-        }
-        
-        .badge:hover::before {
-            left: 100%;
-        }
-        
-        .badge:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-        }
-        
-        /* Enhanced container backgrounds */
-        .container {
-            position: relative;
-        }
-        
-        .container::before {
-            content: "";
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        /* Floating animation for decorative elements */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        /* Add pulse animation to active elements */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        /* Loading skeleton animation */
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-        
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Enhanced link styling with icons */
-        a {
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        a:hover {
-            transform: translateX(2px);
-        }
-        
-        /* GitHub/LinkedIn icons styling */
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            margin: 0 8px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-        
-        .social-links a:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
-        }
-        
-        /* Skills section enhanced */
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        
-        /* Add glow effect to buttons */
-        .btn, button, .skill-btn {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::after, button::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-        
-        .btn:active::after, button:active::after {
-            width: 300px;
-            height: 300px;
-        }<script>
-        // ===== PREMIUM HEADER INTERACTIONS =====
-
-
-            
-
-                    /* Projects Section Styles - Added by ChatGPT */
-            .projects-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deepanraj A - Data Analyst Portfolio</title>
+
+<style>
+/* --------------------------------------------------
+   ROOT THEME VARIABLES
+-------------------------------------------------- */
+:root {
+  --primary: #FF6B35;
+  --bg: #ffffff;
+  --text: #222;
+  --card: #f6f6f6;
+  --nav-bg: #ffffff;
 }
 
-.projects-title {
-    font-size: 36px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 40px;
-    background: linear-gradient(90deg, #005bea, #00c6fb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+[data-theme='dark'] {
+  --bg: #121212;
+  --text: #eaeaea;
+  --card: #1d1d1d;
+  --nav-bg: #1a1a1a;
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-    gap: 30px;
+/* --------------------------------------------------
+   GLOBAL
+-------------------------------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+img { max-width: 100%; }
+a { color: var(--primary); text-decoration: none; font-weight: bold; }
+
+/* --------------------------------------------------
+   NAVBAR
+-------------------------------------------------- */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--nav-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  border-bottom: 1px solid #ddd;
+  z-index: 1000;
+  transition: background 0.3s;
+}
+nav .logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+nav ul li a {
+  font-size: 16px;
+  font-weight: 600;
+}
+nav .theme-toggle {
+  background: var(--primary);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
 }
 
-.project-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 24px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-    border: 1px solid #eee;
-    transition: all 0.35s ease;
-    position: relative;
-    overflow: hidden;
+/* Mobile menu */
+.menu-btn {
+  display: none;
+  font-size: 25px;
+  cursor: pointer;
 }
 
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-    border-color: #d0e4ff;
-}
-
-.project-card::before {
-    content: "";
+@media(max-width:768px){
+  nav ul {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #005bea, #00c6fb);
-    opacity: 0;
-    transition: opacity 0.35s ease;
+    top: 70px;
+    right: 0;
+    background: var(--nav-bg);
+    width: 200px;
+    flex-direction: column;
+    padding: 20px;
+    display: none;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  nav ul.active { display: flex; }
+  .menu-btn { display: block; }
 }
 
-.project-card:hover::before {
-    opacity: 1;
+/* --------------------------------------------------
+   HERO SECTION
+-------------------------------------------------- */
+.hero {
+  padding: 150px 40px 80px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero img {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--primary);
+}
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+.hero p {
+  font-size: 18px;
+  max-width: 600px;
 }
 
-.project-title {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 10px;
+/* --------------------------------------------------
+   SECTIONS
+-------------------------------------------------- */
+section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: var(--primary);
 }
 
-.project-description {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 18px;
+/* --------------------------------------------------
+   SKILLS
+-------------------------------------------------- */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.skill-box {
+  background: var(--card);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 2px solid var(--primary);
 }
 
-.tech-badges {
-    margin-bottom: 18px;
+/* --------------------------------------------------
+   PROJECTS
+-------------------------------------------------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+.project-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 6px solid var(--primary);
+  transition: transform .3s;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+}
+.project-card h3 {
+  margin-bottom: 10px;
 }
 
-.badge {
-    display: inline-block;
-    margin: 4px 6px 4px 0;
-    padding: 6px 12px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 40px;
-    background: #f0f7ff;
-    color: #075ebe;
-    border: 1px solid #d2e7ff;
+/* --------------------------------------------------
+   CERTIFICATIONS
+-------------------------------------------------- */
+.cert-list {
+  list-style: none;
+  line-height: 2.2;
+  font-size: 18px;
 }
 
-.project-links a {
-    text-decoration: none;
-    color: #005bea;
-    font-weight: 600;
-    transition: color 0.25s ease;
+/* --------------------------------------------------
+   RESUME BUTTON
+-------------------------------------------------- */
+.resume-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  margin-top: 20px;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.project-links a:hover {
-    color: #003d94;
+/* --------------------------------------------------
+   CONTACT
+-------------------------------------------------- */
+.contact-box {
+  font-size: 18px;
+  line-height: 2;
 }
 
-        // 3. PARALLAX EFFECT ON TECH BANNER
-        document.addEventListener('DOMContentLoaded', function() {
-            const banner = document.querySelector('.tech-banner');
-            const bannerBack = document.querySelector('.tech-banner-back');
-            
-            document.querySelector('header').addEventListener('mousemove', (e) => {
-                const x = (window.innerWidth / 2 - e.clientX) / 40;
-                const y = (window.innerHeight / 2 - e.clientY) / 40;
-                banner.style.transform = `translateX(-50%) translateY($${y}px)`;
-            });
-        });
+/* --------------------------------------------------
+   FOOTER
+-------------------------------------------------- */
+footer {
+  text-align: center;
+  padding: 40px;
+  background: var(--nav-bg);
+  border-top: 1px solid #ddd;
+  margin-top: 50px;
+  font-weight: bold;
+}
 
-        // 5. BI PIPELINE PARTICLE ANIMATION
-        const canvas = document.getElementById('pipelineCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = 200;
+/* --------------------------------------------------
+   SCROLL ANIMATION
+-------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .8s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
 
-        let particles = [];
-        for (let i=0; i<25; i++) {
-            particles.push({
-                x: Math.random()*canvas.width,
-                y: Math.random()*180+10,
-                r: 2,
-                dx: (Math.random()-0.5)*0.6,
-                dy: (Math.random()-0.5)*0.6,
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            particles.forEach((p,i)=>{
-                p.x+=p.dx; p.y+=p.dy;
-                if(p.x<0||p.x>canvas.width) p.dx*=-1;
-                if(p.y<0||p.y>canvas.height) p.dy*=-1;
-                ctx.beginPath();
-                ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-                ctx.fillStyle='rgba(255,255,255,0.3)';
-                ctx.fill();
-                // Draw connections
-                particles.forEach((p2,j)=>{
-                    if(j>i){
-                        let dist=Math.hypot(p.x-p2.x,p.y-p2.y);
-                        if(dist<120){
-                            ctx.beginPath();
-                            ctx.moveTo(p.x,p.y);
-                            ctx.lineTo(p2.x,p2.y);
-                            ctx.strokeStyle=`rgba(150,180,255,${0.15*(1-dist/120)})`;
-                            ctx.lineWidth=1;
-                            ctx.stroke();
-                        }
-                    }
-                });
-            });829
-                gap:40px;opacity:0.08;.08
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-
-        <!-- Lottie Player for Animated Icons -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
-        <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
-        <i class="fas fa-moon"></i>
-    </button>
-    <!-- Header Section -->
 
-    
-    <header>
-                <!-- LinkedIn-Style Clean Banner -->
-        <div class="linkedin-banner" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);width:90%;display:flex;justify-content:center;align-items:center;gap:40px;opacity:0.08;filter:blur(2px);z-index:0;pointer-events:none;">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/excel/excel-original.svg" alt="Excel" style="height:60px;width:auto;">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" style="height:60px;width:auto;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" style="height:60px;width:auto;">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" style="height:60px;width:auto;">
-            <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau" style="height:60px;width:auto;">
-        </div>
-        <div class="profile-container" data-aos="fade-down">
-            <img src="WhatsApp Image 2025-11-22 at 16.00.23.jpeg" alt="Deepanraj A" class="profile-img">
-            <h1>Deepanraj A</h1>
-            <p class="subtitle">Data Analyst | Business Intelligence Expert</p>
-            <p class="experience">8+ Years of Experience in Data Analytics & BI</p>
-            
-            <!-- GitHub and LinkedIn Buttons -->
-            <div class="social-buttons">
-                <a href="https://github.com/deeepanbe" target="_blank" class="btn-social btn-github">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/deepanraj-a-data-analyst" target="_blank" class="btn-social btn-linkedin">
-                    <i class="fab fa-linkedin-in"></i>
-                    <span>LinkedIn</span>
-                </a>
-            </div>
+<!-- --------------------------------------------------
+     NAVIGATION BAR
+-------------------------------------------------- -->
+<nav>
+  <div class="logo">Deepanraj A</div>
 
-                    <!-- Tool Logos Background -->
-            
-        <!-- BI Pipeline Particle Animation Canvas -->
-        <canvas id="pipelineCanvas"></canvas>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-        <!-- Rotating Tech Ring -->
-        <div class="tech-ring">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" class="ring-icon" alt="Google">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" class="ring-icon" alt="Excel">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="ring-icon" alt="MySQL">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="ring-icon" alt="Power BI">
-            <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" class="ring-icon" alt="Tableau">
-        </div>
+  <ul id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 
-        <!-- Multi-Layer Floating Background -->
-        <div class="tech-banner-back">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" class="tb-back-icon" alt="Google">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" class="tb-back-icon" alt="Excel">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="tb-back-icon" alt="MySQL">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="tb-back-icon" alt="Power BI">
-            <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" class="tb-back-icon" alt="Tableau">
-        </div>
-    <div class="tech-banner">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" class="tb-icon">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" class="tb-icon">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="tb-icon">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="tb-icon">
-        <img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" class="tb-icon">
-    </div> Contact Information -->
-            <div class="contact-info">
-                <a href="mailto:deepanraj.a@outlook.com" class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>deepanraj.a@outlook.com</span>
-                </a>
-                <a href="tel:+918940991095" class="contact-item">
-                    <i class="fas fa-phone"></i>
-                        <span>+91 8940991095</span>                </a>
-            </div>
-        </div>
-    </header>
+  <button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+</nav>
 
-
-            <!-- Skills Filter for Project Filtering -->
-            <div class="skill-filters-container">
-                            <button class="skill-badge active-skill" data-filter="all">Show All</button>
-                            <button class="skill-badge" data-filter="python">Python</button>
-                            <button class="skill-badge" data-filter="sql">SQL</button>
-                            <button class="skill-badge" data-filter="power bi">Power BI</button>
-                            <button class="skill-badge" data-filter="tableau">Tableau</button>
-                            <button class="skill-badge" data-filter="machine learning">Machine Learning</button>
-                            <button class="skill-badge" data-filter="excel">Excel</button>
-                            <button class="skill-badge" data-filter="streamlit">Streamlit</button>
-                        </div>
-    
-        <!-- Projects Section -->
-    <!-- ================================
-     PROJECTS SECTION (PATCHED)
-=================================== -->
-<section class="projects-section" id="projects">
-    <h2>Projects</h2>
-
-    <div class="projects-grid">
-
-        <!-- Project 1 -->
-        <div class="project-card" data-tech="Python">
-            <h3 class="project-title">E-Commerce Sales Analytics Pipeline</h3>
-            <p class="project-description">
-                End-to-end e-commerce analytics pipeline including data collection, ETL, cleaning, analysis,
-                and dashboard deployment for real-world decision-making.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card" data-tech="Python, Tableau">
-            <h3 class="project-title">HR Workforce Analytics Dashboard</h3>
-            <p class="project-description">
-                HR analytics dashboard built using Tableau + Python. Includes turnover prediction, performance insights,
-                and diversity metrics for workforce optimization.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-                <span class="badge">Tableau</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-card" data-tech="Python, Power BI">
-            <h3 class="project-title">Retail Inventory Management</h3>
-            <p class="project-description">
-                Retail inventory optimization system with demand forecasting dashboards and stock-level analytics.
-                Reduced operational waste by 22%.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-                <span class="badge">Power BI</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project-card" data-tech="Python, Machine Learning, Tableau">
-            <h3 class="project-title">Customer Churn Prediction ML</h3>
-            <p class="project-description">
-                Machine learning model to predict customer churn using feature engineering, model comparison,
-                and an interactive Tableau insights dashboard.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-                <span class="badge">Machine Learning</span>
-                <span class="badge">Tableau</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="project-card" data-tech="Python, Power BI">
-            <h3 class="project-title">Sales Forecasting Dashboard (Power BI)</h3>
-            <p class="project-description">
-                Time-series forecasting dashboard integrating Python with Power BI.  
-                Achieved 94% accuracy using SARIMA & Prophet models.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-                <span class="badge">Power BI</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-        <!-- Project 6 -->
-        <div class="project-card" data-tech="Python, SQL, Excel">
-            <h3 class="project-title">Marketing Campaign ROI Analysis</h3>
-            <p class="project-description">
-                End-to-end marketing ROI analysis using SQL, Python and Excel. Includes attribution modeling,
-                conversion tracking, and 156% ROI improvement insights.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-                <span class="badge">SQL</span>
-                <span class="badge">Excel</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-        <!-- Project 7 -->
-        <div class="project-card" data-tech="Python, Machine Learning, Streamlit">
-            <h3 class="project-title">Real Estate Price Prediction ML</h3>
-            <p class="project-description">
-                A Streamlit-based interactive ML app predicting real estate prices with a 92% R² score.
-                Includes model explainability and feature importance insights.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-                <span class="badge">Machine Learning</span>
-                <span class="badge">Streamlit</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-        <!-- Project 8 -->
-        <div class="project-card" data-tech="Python, Machine Learning">
-            <h3 class="project-title">Supply Chain Optimization ML</h3>
-            <p class="project-description">
-                Supply chain optimization using machine learning and operations research techniques.
-                Reduced logistics & demand forecasting costs by 18%.
-            </p>
-            <div class="tech-badges">
-                <span class="badge">Python</span>
-                <span class="badge">Machine Learning</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/deeepanbe/your-repo-here" target="_blank">View Repository →</a>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-    <section class="container">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Technical Skills</h2>
-            <p>Expertise in Data Analytics, Business Intelligence & Visualization Tools</p>
-        </div>
-        
-        <div class="skills-grid">
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                <h3><i class="fas fa-chart-line"></i> Data Analytics & BI</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">Advanced DAX</span>
-                    <span class="skill-tag">Tableau</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Excel</span>
-                    <span class="skill-tag">ETL Development</span>
-                    <span class="skill-tag">EDA</span>
-                </div>
-            </div>
-            
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                <h3><i class="fas fa-database"></i> Data Engineering</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">SQL Server</span>
-                    <span class="skill-tag">T-SQL</span>
-                    <span class="skill-tag">Data Modeling</span>
-                    <span class="skill-tag">Data Validation</span>
-                    <span class="skill-tag">ETL Pipelines</span>
-                    <span class="skill-tag">Data Warehousing</span>
-                    <span class="skill-tag">Data Quality Management</span>
-                </div>
-            </div>
-            
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                <h3><i class="fas fa-briefcase"></i> Business & Functional</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Dashboard Development</span>
-                    <span class="skill-tag">Reporting Automation</span>
-                    <span class="skill-tag">Trend Analysis</span>
-                    <span class="skill-tag">Root-Cause Analysis</span>
-                    <span class="skill-tag">Process Optimization</span>
-                    <span class="skill-tag">Stakeholder Reporting</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section class="container">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Certifications</h2>
-            <p>Professional Certifications & Training</p>
-        </div>
-        
-        <div class="cert-grid">
-            <div class="cert-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="cert-badge">
-                    <i class="fas fa-certificate"></i>
-                </div>
-                <h3>Google Certified Data Analytics Professional</h3>
-                <p class="provider">Google | Coursera</p>
-                <p>Comprehensive data analytics training covering data collection, processing, analysis, and visualization using industry-standard tools.</p>
-            </div>
-            
-            <div class="cert-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="cert-badge">
-                    <i class="fas fa-award"></i>
-                </div>
-                <h3>Business Analyst Master Certification</h3>
-                <p class="provider">Edureka</p>
-                <p>Advanced business analysis techniques, requirements gathering, process modeling, and stakeholder management.</p>
-            </div>
-            
-            <div class="cert-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="cert-badge">
-                    <i class="fas fa-chart-bar"></i>
-                </div>
-                <h3>Tata Data Visualization</h3>
-                <p class="provider">Tata Group | Forage</p>
-                <p>Data visualization best practices, creating impactful dashboards, and communicating insights effectively.</p>
-            </div>
-            
-            <div class="cert-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="cert-badge">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h3>BCG Data Science Job Simulation</h3>
-                <p class="provider">Boston Consulting Group | Forage</p>
-                <p>Real-world data science project simulation covering problem-solving, analysis, and strategic recommendations.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resume Download Section -->
-    <section class="resume-section" data-aos="fade-up">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: var(--text-dark);">Download My Resume</h2>
-        <p style="color: var(--text-light); margin-bottom: 30px;">Get a detailed overview of my experience, skills, and achievements</p>
-        <a href="Deepanraj A Data Analyst.pdf" download class="btn-resume">
-            <i class="fas fa-download"></i>
-            <span>Download Resume</span>
-        </a>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Deepanraj A - Data Analyst Portfolio | All Rights Reserved</p>
-        <p style="margin-top: 10px; font-size: 0.9rem;">Built with passion for data and analytics</p>
-    </footer>
-
-    <!-- AOS Animation Script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-    </script>
-
-        <!-- Modal Popups -->
-    <div id="aboutModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-user-circle"></i> About Me - Deep Dive</h2>
-                <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <h3>Professional Summary</h3>
-                <p>I am a results-driven Data Analyst with 8+ years of experience transforming raw data into actionable business insights. My expertise spans across multiple domains including retail, healthcare, finance, and e-commerce.</p>
-                
-                <h3>Core Competencies</h3>
-                <ul>
-                    <li>Advanced SQL development with complex query optimization</li>
-                    <li>Python programming for data analysis and machine learning</li>
-                    <li>Power BI & Tableau dashboard development</li>
-                    <li>Statistical analysis and A/B testing</li>
-                    <li>ETL pipeline design and implementation</li>
-                    <li>Predictive modeling and forecasting</li>
-                    <li>Data warehouse architecture</li>
-                    <li>Stakeholder presentation and storytelling</li>
-                </ul>
-                
-                <h3>Industry Experience</h3>
-                <p><strong>Retail & E-commerce:</strong> Customer segmentation, inventory optimization, sales forecasting</p>
-                <p><strong>Healthcare:</strong> Patient analytics, operational efficiency, outcome predictions</p>
-                <p><strong>Finance:</strong> Risk analysis, fraud detection, portfolio optimization</p>
-                
-                <h3>What Sets Me Apart</h3>
-                <ul>
-                    <li>Bridge between technical teams and business stakeholders</li>
-                    <li>Proven track record of delivering ROI through data-driven decisions</li>
-                    <li>Quick learner who adapts to new tools and technologies</li>
-                    <li>Strong communication skills with C-level executives</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div id="skillsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-tools"></i> Technical Skills - Complete Arsenal</h2>
-                <span class="close-modal" onclick="closeModal('skillsModal')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <h3>Programming & Scripting</h3>
-                <p><span class="modal-badge">Python</span> <span class="modal-badge">R</span> <span class="modal-badge">SQL</span> <span class="modal-badge">JavaScript</span></p>
-                <ul>
-                    <li>Python: pandas, numpy, scikit-learn, matplotlib, seaborn, plotly</li>
-                    <li>Advanced SQL: Window functions, CTEs, stored procedures, query optimization</li>
-                    <li>R: dplyr, ggplot2, tidyr, shiny applications</li>
-                </ul>
-                
-                <h3>Data Visualization & BI Tools</h3>
-                <p><span class="modal-badge">Power BI</span> <span class="modal-badge">Tableau</span> <span class="modal-badge">Excel</span> <span class="modal-badge">Google Data Studio</span></p>
-                <ul>
-                    <li>Created 50+ interactive dashboards serving 100+ business users</li>
-                    <li>Expert in DAX and calculated fields</li>
-                    <li>Advanced Excel: Power Query, Power Pivot, VBA macros</li>
-                </ul>
-                
-                <h3>Databases & Big Data</h3>
-                <p><span class="modal-badge">MySQL</span> <span class="modal-badge">PostgreSQL</span> <span class="modal-badge">MS SQL Server</span> <span class="modal-badge">MongoDB</span></p>
-                <ul>
-                    <li>Database design and normalization</li>
-                    <li>Query performance tuning</li>
-                    <li>Working with TB-scale datasets</li>
-                </ul>
-                
-                <h3>Machine Learning & Statistics</h3>
-                <ul>
-                    <li>Regression models (Linear, Logistic, Ridge, Lasso)</li>
-                    <li>Classification algorithms (Decision Trees, Random Forest, XGBoost)</li>
-                    <li>Clustering (K-means, DBSCAN, Hierarchical)</li>
-                    <li>Time series forecasting (ARIMA, Prophet)</li>
-                    <li>Hypothesis testing and A/B experimentation</li>
-                </ul>
-                
-                <h3>Cloud & Tools</h3>
-                <p><span class="modal-badge">Azure</span> <span class="modal-badge">AWS</span> <span class="modal-badge">Git</span> <span class="modal-badge">Docker</span></p>
-            </div>
-        </div>
-    </div>
-
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-project-diagram"></i> Featured Projects - Detailed View</h2>
-                <span class="close-modal" onclick="closeModal('projectModal')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <h3>1. Customer Churn Prediction System</h3>
-                <p><strong>Challenge:</strong> Company losing 15% customers annually</p>
-                <p><strong>Solution:</strong> Built ML model with 89% accuracy predicting churn 3 months ahead</p>
-                <p><strong>Impact:</strong> Reduced churn by 23%, saving $2.5M annually</p>
-                <p><strong>Tech Stack:</strong> Python, XGBoost, SQL, Power BI</p>
-                
-                <h3>2. Sales Dashboard & Forecasting System</h3>
-                <p><strong>Challenge:</strong> No real-time visibility into sales performance</p>
-                <p><strong>Solution:</strong> Created executive dashboard with automated forecasting</p>
-                <p><strong>Impact:</strong> Improved forecast accuracy by 35%, enabled data-driven decisions</p>
-                <p><strong>Tech Stack:</strong> Power BI, DAX, SQL Server, Python</p>
-                
-                <h3>3. Inventory Optimization Engine</h3>
-                <p><strong>Challenge:</strong> $5M tied up in excess inventory</p>
-                <p><strong>Solution:</strong> Developed predictive model for optimal stock levels</p>
-                <p><strong>Impact:</strong> Reduced inventory costs by 28%, improved service level to 96%</p>
-                <p><strong>Tech Stack:</strong> Python, ARIMA, Tableau</p>
-                
-                <h3>4. Marketing Campaign ROI Analyzer</h3>
-                <p><strong>Challenge:</strong> Unclear which campaigns drive revenue</p>
-                <p><strong>Solution:</strong> Built attribution model and interactive dashboard</p>
-                <p><strong>Impact:</strong> Increased marketing ROI by 45%, reallocated budget efficiently</p>
-                <p><strong>Tech Stack:</strong> SQL, Python, Tableau, Google Analytics API</p>
-                
-                <h3>5. Healthcare Patient Analytics Platform</h3>
-                <p><strong>Challenge:</strong> High readmission rates costing $8M annually</p>
-                <p><strong>Solution:</strong> Predictive model identifying high-risk patients</p>
-                <p><strong>Impact:</strong> Reduced readmissions by 19%, saved $1.5M</p>
-                <p><strong>Tech Stack:</strong> R, Random Forest, SQL, Shiny Dashboard</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="certModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-certificate"></i> Certifications & Learning Journey</h2>
-                <span class="close-modal" onclick="closeModal('certModal')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <h3>Microsoft Power BI Data Analyst (PL-300)</h3>
-                <p><strong>Issuing Organization:</strong> Microsoft</p>
-                <p><strong>Skills Covered:</strong> Data modeling, DAX, Power Query, visualization best practices</p>
-                <p><strong>Validation:</strong> Demonstrates expertise in enterprise BI solutions</p>
-                
-                <h3>Google Data Analytics Professional Certificate</h3>
-                <p><strong>Issuing Organization:</strong> Google via Coursera</p>
-                <p><strong>Skills Covered:</strong> Data cleaning, analysis, visualization, R programming</p>
-                <p><strong>Capstone Project:</strong> Completed real-world case study with stakeholder presentation</p>
-                
-                <h3>BCG Data Science Job Simulation</h3>
-                <p><strong>Issuing Organization:</strong> Boston Consulting Group via Forage</p>
-                <p><strong>Skills Covered:</strong> Business problem framing, data analysis, client communication</p>
-                <p><strong>Project:</strong> Customer churn analysis for telecom client</p>
-                
-                <h3>Tata Data Visualization: Empowering Business</h3>
-                <p><strong>Issuing Organization:</strong> Tata via Forage</p>
-                <p><strong>Skills Covered:</strong> Executive dashboards, visual storytelling, business insights</p>
-                
-                <h3>Edureka Data Science Certification</h3>
-                <p><strong>Skills Covered:</strong> Machine learning, deep learning, NLP, computer vision</p>
-                <p><strong>Tools:</strong> Python, TensorFlow, scikit-learn</p>
-                
-                <h3>Continuous Learning</h3>
-                <ul>
-                    <li>Active member of Kaggle community (Top 10% in competitions)</li>
-                    <li>Contributor to open-source data science projects</li>
-                    <li>Regular attendee of data science conferences and meetups</li>
-                    <li>Currently learning: Advanced deep learning, MLOps, Cloud architectures</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div id="experienceModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-briefcase"></i> Work Experience - Career Journey</h2>
-                <span class="close-modal" onclick="closeModal('experienceModal')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <h3>Senior Data Analyst (2020 - Present)</h3>
-                <p><strong>Company:</strong> Fortune 500 Retail Corporation</p>
-                <p><strong>Key Achievements:</strong></p>
-                <ul>
-                    <li>Led team of 4 analysts supporting C-level executives with insights</li>
-                    <li>Reduced report generation time from 5 days to 2 hours through automation</li>
-                    <li>Built data warehouse serving 200+ business users across 5 departments</li>
-                    <li>Spearheaded migration from Excel to Power BI, training 50+ employees</li>
-                    <li>Developed pricing optimization model increasing margin by 8%</li>
-                </ul>
-                
-                <h3>Data Analyst (2018 - 2020)</h3>
-                <p><strong>Company:</strong> Healthcare Technology Startup</p>
-                <p><strong>Key Achievements:</strong></p>
-                <ul>
-                    <li>First analytics hire - built entire data infrastructure from scratch</li>
-                    <li>Created patient outcome prediction models with 85% accuracy</li>
-                    <li>Designed and implemented A/B testing framework</li>
-                    <li>Reduced patient acquisition cost by 30% through targeted campaigns</li>
-                </ul>
-                
-                <h3>Junior Data Analyst (2016 - 2018)</h3>
-                <p><strong>Company:</strong> Financial Services Firm</p>
-                <p><strong>Key Achievements:</strong></p>
-                <ul>
-                    <li>Developed fraud detection model saving $3M annually</li>
-                    <li>Automated 15+ recurring reports reducing manual work by 80%</li>
-                    <li>Created risk assessment dashboard for loan portfolio</li>
-                </ul>
-                
-                <h3>Additional Experience</h3>
-                <ul>
-                    <li>Freelance Data Consultant (2019-Present): Helped 10+ small businesses with analytics</li>
-                    <li>Data Science Mentor: Guided 20+ aspiring analysts through career transitions</li>
-                    <li>Technical Blogger: Published 30+ articles on data analysis reaching 50K+ readers</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Control JavaScript -->
-    <script>
-        // Function to open modal
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-        
-        // Function to close modal
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-        
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.querySelectorAll('.modal');
-                modals.forEach(modal => {
-                    modal.style.display = 'none';
-                });
-                document.body.style.overflow = 'auto';
-            }
-        });
-    </script>
-
-        <!--
-    INSTRUCTIONS: To activate modals, add onclick="openModal('modalId')" to your sections/cards.
-    
-    Examples:
-    For About section: onclick="openModal('aboutModal')"
-    For Skills section: onclick="openModal('skillsModal')"
-    For Projects section: onclick="openModal('projectModal')"
-    For Certificates section: onclick="openModal('certModal')"
-    For Experience section: onclick="openModal('experienceModal')"
-    
-    Also add class="clickable-card" to make sections show hover effects.
-    
-    Example: <section class="about-section clickable-card" onclick="openModal('aboutModal')">
-    -->
-
-    <!-- Theme Toggle Script -->
-    <script>
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-        }
-
-        // Toggle theme function
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-
-        // Set initial icon based on current theme
-        if (document.body.classList.contains('dark-mode')) {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            // Toggle icon between moon and sun
-            if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    </script>
-
-        <script>
-        // Skill Filter Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const skillButtons = document.querySelectorAll('.skill-btn');
-            const projectCards = document.querySelectorAll('.project-card');
-
-            skillButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const filter = this.getAttribute('data-filter');
-                    
-                    // Remove active class from all buttons
-                    skillButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Filter projects
-                    projectCards.forEach(card => {
-                        if (filter === 'all') {
-                            card.classList.remove('hidden');
-                        } else {
-                            const cardTech = card.getAttribute('data-tech');
-                            if (cardTech && cardTech.toLowerCase().includes(filter.toLowerCase())) {
-                                card.classList.remove('hidden');
-                            } else {
-                                card.classList.add('hidden');
-                            }
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+<!-- --------------------------------------------------
+     HERO SECTION
+-------------------------------------------------- -->
+<section id="home" class="hero reveal">
+  <img src="WhatsApp I
