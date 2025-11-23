@@ -749,11 +749,49 @@
                 height: 40px !important;
             }
         }
+
+                /* Skill Filter Buttons */
+        .skills-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .skill-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .skill-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .skill-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
     </style>
 
         <script>
         // ===== PREMIUM HEADER INTERACTIONS =====
 
+
+            
 
                     /* Projects Section Styles - Added by ChatGPT */
             .projects-section {
@@ -991,6 +1029,18 @@
     </header>
 
 
+            <!-- Skills Filter for Project Filtering -->
+            <div class="skill-filters-container">
+                            <button class="skill-badge active-skill" data-filter="all">Show All</button>
+                            <button class="skill-badge" data-filter="python">Python</button>
+                            <button class="skill-badge" data-filter="sql">SQL</button>
+                            <button class="skill-badge" data-filter="power bi">Power BI</button>
+                            <button class="skill-badge" data-filter="tableau">Tableau</button>
+                            <button class="skill-badge" data-filter="machine learning">Machine Learning</button>
+                            <button class="skill-badge" data-filter="excel">Excel</button>
+                            <button class="skill-badge" data-filter="streamlit">Streamlit</button>
+                        </div>
+    
         <!-- Projects Section -->
             <section class="projects-section">
     <h2 class="projects-title">Projects</h2>
@@ -998,7 +1048,7 @@
     <div class="projects-grid">
 
         <!-- Project 1 -->
-        <div class="project-card">
+        <div class="project-card" data-tech="Python">
             <h3 class="project-title">E-Commerce Sales Analytics Pipeline</h3>
             <p class="project-description">
                 End-to-end e-commerce analytics pipeline with data collection, ETL, analysis, and dashboard deployment.
@@ -1012,7 +1062,7 @@
         </div>
 
         <!-- Project 2 -->
-        <div class="project-card">
+        <div class="project-card" data-tech="Python, Tableau">
             <h3 class="project-title">HR Workforce Analytics Dashboard</h3>
             <p class="project-description">
                 Workforce analytics dashboard with Tableau & Python. Covers turnover prediction and diversity metrics.
@@ -1027,7 +1077,7 @@
         </div>
 
         <!-- Project 3 -->
-        <div class="project-card">
+        <div class="project-card" data-tech="Python, Power BI">
             <h3 class="project-title">Retail Inventory Management</h3>
             <p class="project-description">
                 Inventory management system with forecasting dashboards. Reduced waste by 22%.
@@ -1042,7 +1092,7 @@
         </div>
 
         <!-- Project 4 -->
-        <div class="project-card">
+        <div class="project-card" data-tech="Python, Machine Learning, Tableau">
             <h3 class="project-title">Customer Churn Prediction ML</h3>
             <p class="project-description">
                 ML churn prediction with feature engineering, model comparison, and Tableau visual insights.
@@ -1058,7 +1108,7 @@
         </div>
 
         <!-- Project 5 -->
-        <div class="project-card">
+        <div class="project-card" data-tech="Python, Power BI">
             <h3 class="project-title">Sales Forecasting Dashboard (Power BI)</h3>
             <p class="project-description">
                 Time-series forecasting dashboard using SARIMA & Prophet achieving 94% accuracy.
@@ -1073,7 +1123,7 @@
         </div>
 
         <!-- Project 6 -->
-        <div class="project-card">
+        <div class="project-card" data-tech="Python, SQL, Excel">
             <h3 class="project-title">Marketing Campaign ROI Analysis</h3>
             <p class="project-description">
                 ROI analysis using Python, SQL & Excel with attribution modeling and 156% ROI improvement.
@@ -1089,7 +1139,7 @@
         </div>
 
         <!-- Project 7 -->
-        <div class="project-card">
+        <div class="project-card data-tech="Python, Machine Learning, Streamlit"">
             <h3 class="project-title">Real Estate Price Prediction ML</h3>
             <p class="project-description">
                 Streamlit app predicting real estate prices with 92% R² score.
@@ -1105,7 +1155,7 @@
         </div>
 
         <!-- Project 8 -->
-        <div class="project-card">
+        <div class="project-card data-tech="Python, Machine Learning"">
             <h3 class="project-title">Supply Chain Optimization ML</h3>
             <p class="project-description">
                 ML + OR optimization reducing supply chain costs by 18%.
@@ -1536,6 +1586,39 @@
                 themeIcon.classList.add('fa-moon');
                 localStorage.setItem('theme', 'light');
             }
+        });
+    </script>
+
+        <script>
+        // Skill Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillButtons = document.querySelectorAll('.skill-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            skillButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Remove active class from all buttons
+                    skillButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.classList.remove('hidden');
+                        } else {
+                            const cardTech = card.getAttribute('data-tech');
+                            if (cardTech && cardTech.toLowerCase().includes(filter.toLowerCase())) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                    });
+                });
+            });
         });
     </script>
 </body>
