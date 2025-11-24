@@ -1,335 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Deepanraj A — Data Analyst Portfolio</title>
-<style>
-:root{
-  --primary:#0a66c2; --accent:#FF6B35;
-  --bg:#ffffff; --muted:#6b7280; --text:#111827;
-  --card:#f7f8fa; --border:#e6e9ef; --glass:rgba(10,10,10,0.03);
-  --radius:12px; --shadow:0 8px 24px rgba(2,6,23,0.06)
-}
-[data-theme="dark"]{
-  --bg:#0b1220; --muted:#9aa4b2; --text:#e6eef8;
-  --card:#0f1720; --border:rgba(255,255,255,0.06); --glass:rgba(255,255,255,0.02);
-  --shadow:0 18px 50px rgba(0,0,0,0.6)
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
-  background:var(--bg); color:var(--text); line-height:1.5;
-  -webkit-font-smoothing:antialiased; transition:background .2s,color .2s;
-  padding-bottom:60px;
-}
-
-/* NAV */
-nav{position:fixed;left:0;right:0;top:0;height:66px;display:flex;align-items:center;justify-content:space-between;padding:10px 26px;background:var(--bg);border-bottom:1px solid var(--border);z-index:1200}
-.logo{display:flex;gap:12px;align-items:center;font-weight:700;color:var(--primary)}
-.logo .mark{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--accent));display:inline-flex;align-items:center;justify-content:center;color:white;font-weight:800}
-.nav-links{display:flex;gap:18px;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px}
-.nav-links a:hover{color:var(--text)}
-
-/* HEADER SPACER */
-.header-spacer{height:86px}
-
-/* HERO */
-.container{max-width:1100px;margin:24px auto;padding:0 20px}
-.hero{display:flex;gap:22px;align-items:center;padding:18px;border-radius:12px}
-.profile-photo{width:140px;height:140px;border-radius:16px;object-fit:cover;border:4px solid var(--primary);box-shadow:var(--shadow)}
-.hero-left{flex:1}
-h1{font-size:26px;margin-bottom:6px}
-.lead{color:var(--muted);font-size:15px;max-width:720px}
-.actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
-.btn{padding:10px 14px;border-radius:10px;background:var(--primary);color:#fff;text-decoration:none;font-weight:700}
-.btn-ghost{background:transparent;border:2px solid var(--primary);color:var(--primary);padding:8px 12px;border-radius:10px;font-weight:700}
-
-/* SKILLS */
-section{margin-top:18px}
-h2{font-size:20px;color:var(--primary);margin-bottom:12px}
-.skills-container{display:flex;gap:10px;flex-wrap:wrap}
-.skill-box{background:var(--card);padding:10px 14px;border-radius:10px;border:1px solid var(--border);font-weight:700;color:var(--muted)}
-
-/* PROJECTS */
-.project-area{padding:10px}
-.project-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.filter-btn{padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:transparent;font-weight:700;cursor:pointer;color:var(--muted)}
-.filter-btn.active{background:linear-gradient(90deg, rgba(10,102,194,0.09), rgba(255,107,53,0.03));border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-
-/* Project card */
-.project-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:320px;box-shadow:var(--shadow);transition:transform .16s}
-.project-card:hover{transform:translateY(-6px)}
-.thumb-wrap{height:160px;overflow:hidden;background:var(--glass);display:flex;align-items:center;justify-content:center}
-.project-thumb{width:100%;height:100%;object-fit:cover;display:block}
-.project-meta{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
-.project-meta h3{margin:0;color:var(--text);font-size:17px}
-.project-meta p{margin:0;color:var(--muted);font-size:14px}
-.project-tags{display:flex;gap:8px;flex-wrap:wrap}
-.project-tag{background:transparent;border:1px solid var(--border);padding:6px 8px;border-radius:999px;font-weight:700;color:var(--muted);font-size:12px}
-.project-actions{display:flex;gap:10px;padding:12px;border-top:1px solid var(--border);background:transparent}
-.project-actions a,.project-actions button{padding:8px 12px;border-radius:10px;border:1px solid var(--primary);background:transparent;color:var(--primary);font-weight:800;text-decoration:none;cursor:pointer}
-.project-actions a.primary{background:var(--primary);color:#fff;border-color:transparent}
-
-/* Modal */
-.proj-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,6,23,0.5);z-index:1400;padding:20px}
-.proj-modal.open{display:flex}
-.modal-card{width:min(1100px,98%);max-height:92vh;overflow:auto;border-radius:12px;background:var(--bg);padding:18px;border:1px solid var(--border);box-shadow:0 30px 80px rgba(2,6,23,0.4)}
-.modal-header{display:flex;align-items:center;gap:12px}
-.modal-title{font-size:18px;font-weight:800;color:var(--text)}
-.modal-close{margin-left:auto;background:transparent;border:none;font-size:20px;cursor:pointer}
-.modal-desc{color:var(--muted);margin-top:8px;margin-bottom:12px}
-.modal-embed{width:100%;height:520px;border-radius:8px;border:1px solid var(--border);overflow:hidden;background:var(--card)}
-.modal-embed iframe{width:100%;height:100%;border:0}
-
-/* responsive */
-@media (max-width:900px){.hero{flex-direction:column;align-items:flex-start;padding:12px}.profile-photo{width:120px;height:120px}.modal-embed{height:420px}}
-@media (max-width:560px){.project-thumb{object-position:center top}.modal-embed{height:300px}.hero{padding:12px}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deepanraj A — Data Analyst Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <div class="brand">Deepanraj A</div>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
-<nav>
-  <div class="logo"><div class="mark">DA</div><div>Deepanraj A</div></div>
-  <div class="nav-links" role="navigation" aria-label="Main">
-    <a href="#home">Home</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<div class="header-spacer"></div>
-
-<!-- HERO -->
-<div class="container">
-  <section id="home" class="hero" aria-labelledby="hero-title">
-    <img class="profile-photo" src="Thumbnail/sales_thumb.png" alt="Profile photo - replace with your photo">
+  <header class="hero" id="home" role="banner">
     <div class="hero-left">
-      <h1 id="hero-title">Deepanraj A</h1>
-      <div class="lead">Data Analyst with 8+ years’ experience delivering dashboards, automation, and business insights using Power BI, SQL, Python, Tableau and applied ML.</div>
-      <div class="actions">
-        <a class="btn" href="Deepanraj A Data Analyst.pdf" download>Download Resume</a>
-        <a class="btn-ghost" href="https://www.linkedin.com/in/deepanraj-a-data-analyst" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn-ghost" href="https://github.com/deeepanbe" target="_blank" rel="noopener">GitHub</a>
+      <h1>Deepanraj A</h1>
+      <p class="role">Data Analyst — Power BI • SQL • Python • Machine Learning</p>
+      <p class="lead">I build dashboards, automate workflows, and derive actionable insights to help teams make faster, data-driven decisions.</p>
+      <div class="cta">
+        <a class="btn primary" href="deepanraj%20a%20data%20analyst.pdf" download>Download Resume</a>
+        <a class="btn" href="mailto:deepanraj.a@outlook.com">Contact Me</a>
+      </div>
+      <div class="badges" aria-hidden="true">
+        <span class="badge">Power BI</span>
+        <span class="badge">Python</span>
+        <span class="badge">SQL</span>
+        <span class="badge">Tableau</span>
       </div>
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills" aria-labelledby="skills-title">
-    <h2 id="skills-title">Skills & Tools</h2>
-    <div class="skills-container">
-      <div class="skill-box">Power BI</div>
-      <div class="skill-box">Tableau</div>
-      <div class="skill-box">SQL (MySQL / Postgres)</div>
-      <div class="skill-box">Python (Pandas, Scikit-learn)</div>
-      <div class="skill-box">Excel & DAX</div>
-      <div class="skill-box">Data Modelling</div>
+    <div class="hero-right" aria-hidden="false">
+      <div class="photo-wrap" role="img" aria-label="Profile photo of Deepanraj">
+        <img src="assets/Photo.jpeg" alt="Deepanraj Photo" class="photo">
+        <div class="shape-bg"></div>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="project-area" aria-labelledby="projects-title">
-    <h2 id="projects-title">Projects</h2>
+  <main class="container" role="main">
+    <section id="skills" class="panel" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills & Tools</h2>
+      <div class="skills-grid" role="list">
+        <div class="skill" role="listitem"><strong>Power BI</strong><span>Dashboards & DAX</span></div>
+        <div class="skill" role="listitem"><strong>SQL</strong><span>Postgres / MySQL</span></div>
+        <div class="skill" role="listitem"><strong>Python</strong><span>Pandas, Scikit-learn</span></div>
+        <div class="skill" role="listitem"><strong>Tableau</strong><span>Visual storytelling</span></div>
+        <div class="skill" role="listitem"><strong>Excel & DAX</strong><span>Advanced modelling</span></div>
+        <div class="skill" role="listitem"><strong>Machine Learning</strong><span>Modeling & evaluation</span></div>
+      </div>
+    </section>
 
-    <div class="project-filters" role="toolbar" aria-label="Filter projects">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="powerbi">Power BI</button>
-      <button class="filter-btn" data-filter="tableau">Tableau</button>
-      <button class="filter-btn" data-filter="python">Python</button>
-      <button class="filter-btn" data-filter="ml">ML</button>
-    </div>
+    <section id="projects" class="panel" aria-labelledby="projects-title">
+      <h2 id="projects-title">Featured Projects</h2>
 
-    <div class="projects-grid" id="projects-grid">
+      <div class="filters" role="toolbar" aria-label="project filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="powerbi">Power BI</button>
+        <button class="filter" data-filter="python">Python</button>
+        <button class="filter" data-filter="ml">ML</button>
+        <button class="filter" data-filter="automation">Automation</button>
+      </div>
 
-      <!-- Sales -->
-      <article class="project-card" data-tags="powerbi">
-        <div class="thumb-wrap">
-          <img class="project-thumb" src="Thumbnail/sales_thumb.png" alt="Sales Analytics thumbnail" loading="lazy" style="object-position:center;">
-        </div>
-        <div class="project-meta">
-          <h3>Sales Analytics Dashboard</h3>
-          <p>Interactive Power BI dashboard with KPIs, forecasting and cohort segmentation.</p>
-          <div class="project-tags">
-            <span class="project-tag">Power BI</span>
-            <span class="project-tag">Forecasting</span>
+      <div class="projects-grid" id="projects-grid">
+        <article class="card" data-tags="powerbi">
+          <img src="assets/thumb_sales.png" alt="Sales Analytics">
+          <div class="card-body">
+            <h3>Sales Analytics Dashboard</h3>
+            <p>Power BI dashboard with KPIs, forecasting and segmentation.</p>
+            <div class="card-actions"><a href="#" class="btn">Preview</a><a href="#" class="btn ghost">Code</a></div>
           </div>
-        </div>
-        <div class="project-actions">
-          <a href="https://github.com/deeepanbe" target="_blank" rel="noopener">View Code</a>
-          <button class="open-details" data-title="Sales Analytics Dashboard" data-desc="Power BI report with revenue, gross margin and interactive drill-throughs." data-embed="YOUR_POWER_BI_EMBED_URL_HERE">Preview</button>
-        </div>
-      </article>
+        </article>
 
-      <!-- HR -->
-      <article class="project-card" data-tags="powerbi,ml">
-        <div class="thumb-wrap">
-          <img class="project-thumb" src="Thumbnail/hr_thumb.png" alt="HR Workforce thumbnail" loading="lazy" style="object-position:center;">
-        </div>
-        <div class="project-meta">
-          <h3>HR Workforce Dashboard</h3>
-          <p>Attrition & hiring analytics: tenure, diversity and pipeline insights.</p>
-          <div class="project-tags">
-            <span class="project-tag">Power BI</span>
-            <span class="project-tag">People Analytics</span>
+        <article class="card" data-tags="powerbi automation">
+          <img src="assets/thumb_hr.png" alt="HR Workforce">
+          <div class="card-body">
+            <h3>HR Workforce Dashboard</h3>
+            <p>Attrition & hiring analytics with cohort analysis.</p>
+            <div class="card-actions"><a href="#" class="btn">Preview</a><a href="#" class="btn ghost">Code</a></div>
           </div>
-        </div>
-        <div class="project-actions">
-          <a href="#" target="_blank" rel="noopener">View Code</a>
-          <button class="open-details" data-title="HR Workforce Dashboard" data-desc="Cohort analysis and attrition risk scoring." data-embed="">Preview</button>
-        </div>
-      </article>
+        </article>
 
-      <!-- Churn -->
-      <article class="project-card" data-tags="python,ml">
-        <div class="thumb-wrap">
-          <img class="project-thumb" src="Thumbnail/churn_thumb.png" alt="Churn Model thumbnail" loading="lazy" style="object-position:center;">
-        </div>
-        <div class="project-meta">
-          <h3>Churn Prediction Model</h3>
-          <p>End-to-end ML pipeline with feature engineering, model training and evaluation.</p>
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag">Scikit-learn</span>
-            <span class="project-tag">ML</span>
+        <article class="card" data-tags="python ml">
+          <img src="assets/thumb_churn.png" alt="Churn Prediction">
+          <div class="card-body">
+            <h3>Churn Prediction Model</h3>
+            <p>End-to-end ML pipeline with feature engineering and explainability.</p>
+            <div class="card-actions"><a href="#" class="btn">Preview</a><a href="#" class="btn ghost">Code</a></div>
           </div>
-        </div>
-        <div class="project-actions">
-          <a href="#" target="_blank" rel="noopener">View Code</a>
-          <button class="open-details" data-title="Churn Prediction Model" data-desc="Reproducible pipeline and model explainability." data-embed="">Preview</button>
-        </div>
-      </article>
+        </article>
 
-      <!-- Finance -->
-      <article class="project-card" data-tags="powerbi,tableau">
-        <div class="thumb-wrap">
-          <img class="project-thumb" src="Thumbnail/finance_thumb.png" alt="Financial Performance thumbnail" loading="lazy" style="object-position:center;">
-        </div>
-        <div class="project-meta">
-          <h3>Financial Performance Dashboard</h3>
-          <p>Profitability & variance analysis with trend decomposition and unit economics.</p>
-          <div class="project-tags">
-            <span class="project-tag">Power BI</span>
-            <span class="project-tag">Tableau</span>
+        <article class="card" data-tags="powerbi tableau">
+          <img src="assets/thumb_finance.png" alt="Financial Performance">
+          <div class="card-body">
+            <h3>Financial Performance Dashboard</h3>
+            <p>Profitability, margins and variance analysis using Power BI and Tableau.</p>
+            <div class="card-actions"><a href="#" class="btn">Preview</a><a href="#" class="btn ghost">Code</a></div>
           </div>
-        </div>
-        <div class="project-actions">
-          <a href="#" target="_blank" rel="noopener">View Code</a>
-          <button class="open-details" data-title="Financial Performance Dashboard" data-desc="Margins, trend decomposition and unit economics." data-embed="">Preview</button>
-        </div>
-      </article>
+        </article>
 
-    </div>
-  </section>
+        <article class="card" data-tags="automation">
+          <img src="assets/thumb_automation.png" alt="Automation">
+          <div class="card-body">
+            <h3>Google Sheets HR Email Automation</h3>
+            <p>Automatic email notifications to HR using Google Apps Script.</p>
+            <div class="card-actions"><a href="#" class="btn">Preview</a><a href="#" class="btn ghost">Code</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact" aria-labelledby="contact-title">
-    <h2 id="contact-title">Contact</h2>
-    <p style="color:var(--muted)">Email: <strong>deepanraj.a@outlook.com</strong> · Phone: <strong>+91 8940991095</strong></p>
-    <p style="color:var(--muted);margin-top:10px">GitHub: <a href="https://github.com/deeepanbe" target="_blank" rel="noopener">deeepanbe</a> · LinkedIn: <a href="https://www.linkedin.com/in/deepanraj-a-data-analyst" target="_blank" rel="noopener">Profile</a></p>
-  </section>
-</div>
+    <section id="contact" class="panel" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p>Email: <a href="mailto:deepanraj.a@outlook.com">deepanraj.a@outlook.com</a> · Phone: +91 8940991095</p>
+    </section>
+  </main>
 
-<footer style="text-align:center;padding:28px;color:var(--muted);border-top:1px solid var(--border);margin-top:24px">© 2025 Deepanraj A — All Rights Reserved</footer>
+  <footer class="site-footer" role="contentinfo">© 2025 Deepanraj A — All Rights Reserved</footer>
 
-<!-- Modal -->
-<div class="proj-modal" id="proj-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-card" role="document">
-    <div class="modal-header">
-      <div class="modal-title" id="modal-title">Project Preview</div>
-      <button class="modal-close" id="modal-close" aria-label="Close preview">✕</button>
-    </div>
-    <div class="modal-desc" id="modal-desc">Description</div>
-    <div class="modal-embed" id="modal-embed">
-      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-weight:700">Preview not available — provide an embed URL or open on GitHub.</div>
-    </div>
-    <div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end">
-      <a id="modal-github" class="btn-ghost" href="#" target="_blank" rel="noopener">Open on GitHub</a>
-      <a id="modal-open" class="btn" href="#" target="_blank" rel="noopener">Open Report</a>
-    </div>
-  </div>
-</div>
-
-<script>
-/* Theme persistence */
-(function(){
-  const userTheme = localStorage.getItem('theme');
-  if(userTheme) document.documentElement.setAttribute('data-theme', userTheme);
-})();
-
-/* Filters logic */
-(function(){
-  const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
-  const cards = Array.from(document.querySelectorAll('.project-card'));
-  filterBtns.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      filterBtns.forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      cards.forEach(c=>{
-        const tags = (c.dataset.tags||'').split(',').map(t=>t.trim());
-        c.style.display = (f==='all' || tags.includes(f)) ? '' : 'none';
-      });
-    });
-  });
-})();
-
-/* Modal preview */
-(function(){
-  const modal = document.getElementById('proj-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalDesc = document.getElementById('modal-desc');
-  const modalEmbed = document.getElementById('modal-embed');
-  const modalGithub = document.getElementById('modal-github');
-  const modalOpen = document.getElementById('modal-open');
-  const modalClose = document.getElementById('modal-close');
-
-  document.querySelectorAll('.open-details').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const title = btn.dataset.title || 'Project Preview';
-      const desc = btn.dataset.desc || '';
-      const embed = btn.dataset.embed || '';
-      modalTitle.textContent = title;
-      modalDesc.textContent = desc;
-      modalEmbed.innerHTML = '';
-
-      if(embed && embed.includes('http')) {
-        const iframe = document.createElement('iframe');
-        iframe.setAttribute('loading','lazy'); iframe.src = embed;
-        modalEmbed.appendChild(iframe);
-        modalOpen.href = embed; modalOpen.style.display = '';
-      } else {
-        modalEmbed.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-weight:700">Preview not available — provide an embed URL or open on GitHub.</div>';
-        modalOpen.href = '#'; modalOpen.style.display = 'none';
-      }
-
-      const parent = btn.closest('.project-card');
-      const gh = parent ? parent.querySelector('a[target="_blank"]') : null;
-      modalGithub.href = gh ? gh.href : '#';
-      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  function closeModal(){
-    modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); modalEmbed.innerHTML = ''; document.body.style.overflow = '';
-  }
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', (ev)=> { if(ev.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeModal(); });
-})();
-
-/* Keyboard support for filters */
-(function(){
-  document.querySelectorAll('.filter-btn').forEach(btn=>{
-    btn.setAttribute('role','button'); btn.setAttribute('tabindex','0');
-    btn.addEventListener('keypress',(e)=>{ if(e.key==='Enter' || e.key===' ') btn.click(); });
-  });
-})();
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
