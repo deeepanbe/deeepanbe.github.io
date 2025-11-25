@@ -219,6 +219,101 @@
         .social-link.github {
             background: linear-gradient(135deg, #333 0%, #24292e 100%);
         }
+
+                  /* Contact Form Styles */
+        .contact-form {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+        }
+
+        /* Typewriter Animation for Hero */
+        .typewriter-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .typewriter-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .typewriter-text .word {
+            display: inline;
+            opacity: 0;
+            animation: fadeInWord 0.5s ease forwards;
+        }
+        
+        @keyframes fadeInWord {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .highlight-blue { color: #3498db; font-weight: 600; }
+        .highlight-green { color: #27ae60; font-weight: 600; }
+        .highlight-purple { color: #9b59b6; font-weight: 600; }
+        .highlight-orange { color: #e67e22; font-weight: 600; }
+        .highlight-red { color: #e74c3c; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -235,6 +330,10 @@
     <div class="hero-left">
       <h1>Deepanraj A</h1>
       <p class="role">Data Analyst — Power BI • SQL • Python • Machine Learning</p>
+                      <!-- Typewriter About Me Section -->
+                <div class="typewriter-container" id="about-typewriter">
+                    <div class="typewriter-text" id="typewriter-content"></div>
+                </div>
       <p class="lead">I build dashboards, automate workflows, and derive actionable insights to help teams make faster, data-driven decisions.</p>
       <div class="cta">
         <a class="btn primary" href="deepanraj%20a%20data%20analyst.pdf" download>Download Resume</a>
@@ -404,6 +503,34 @@
     <section id="contact" class="panel" aria-labelledby="contact-title">
       <h2 id="contact-title">Contact</h2>
       <p>Email: <a href="mailto:deepanraj.a@outlook.com">deepanraj.a@outlook.com</a> · Phone: +91 8940991095</p>
+                  <!-- Contact Request Form -->
+            <form class="contact-form" action="https://formsubmit.co/info@deepanraj.work.gd" method="POST">
+                <input type="hidden" name="_subject" value="New Contact Request from Portfolio">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://deeepanbe.github.io/thank-you.html">
+                
+                <div class="form-group">
+                    <label for="name">📝 Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mobile">📱 Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">📧 Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">💬 Your Message</label>
+                    <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">🚀 Send Message</button>
+            </form>
                   <!-- Social Media Links in Contact -->
             <div class="social-links" style="margin-top: 15px;">
                 <a href="https://www.linkedin.com/in/deepanraj-a" class="social-link linkedin" target="_blank" title="Connect on LinkedIn">
@@ -441,6 +568,54 @@
         document.getElementById('chatbot-toggle').addEventListener('click', function() {
             var chatWindow = document.getElementById('chatbot-window');
             chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+
+                  // Typewriter Effect for Hero Section
+        const typewriterText = `I'm <span class="highlight-blue">Deepanraj A</span> 👨‍💻, a <span class="highlight-green">Data Analyst</span> 📊 with a strong foundation in <span class="highlight-purple">business intelligence</span>, <span class="highlight-orange">data visualization</span>, and end-to-end analytical problem-solving.
+
+🔧 My career began in <span class="highlight-blue">Mechanical and Quality Engineering</span>, where I spent several years improving manufacturing processes, analyzing defects, and driving operational performance through data. This experience built my strengths in <span class="highlight-green">structured thinking</span>, <span class="highlight-orange">root-cause problem solving</span>, and <span class="highlight-purple">process optimization</span>.
+
+💡 Over time, I realized that my passion is in <span class="highlight-red">data-driven decision making</span>, which inspired my transition into Data Analytics. For the past few years, I've been upskilling intensively and working on real projects involving:
+
+📊 <span class="highlight-blue">Power BI</span>, <span class="highlight-orange">Tableau</span> dashboards
+🐍 <span class="highlight-green">Python</span> (Pandas, NumPy, Matplotlib, Scikit-Learn)
+🗃️ <span class="highlight-purple">SQL</span> for data extraction and transformation
+📈 Business analysis and reporting
+🤖 Machine learning basics and predictive modelling
+⚙️ Automation using AI tools and scripts
+
+🏆 I've completed certifications like the <span class="highlight-blue">Google Data Analytics Certificate</span>, <span class="highlight-green">Business Analysis</span>, and <span class="highlight-orange">Power BI</span>, and built multiple practical projects, including AI resume automation, sales dashboards, workforce analytics, and exploratory data analysis.
+
+⭐ Today, I bring a <span class="highlight-purple">hybrid advantage</span> —
+✔️ Experience from engineering operations,
+✔️ Analytical and technical skills in data,
+✔️ And a mindset focused on <span class="highlight-green">continuous improvement</span>.
+
+🎯 My goal is to become a strong contributor in a forward-thinking data team where I can <span class="highlight-blue">analyze problems</span>, <span class="highlight-orange">build insights</span>, <span class="highlight-purple">automate workflows</span>, and support better decisions for the business 🚀`;
+
+        function startTypewriter() {
+            const container = document.getElementById('typewriter-content');
+            if (!container) return;
+            
+            const words = typewriterText.split(/\s+/);
+            let html = '';
+            const colors = ['highlight-blue', 'highlight-green', 'highlight-purple', 'highlight-orange', 'highlight-red'];
+            
+            words.forEach((word, index) => {
+                const delay = index * 0.08;
+                if (word.includes('<span') || word.includes('</span>')) {
+                    html += word + ' ';
+                } else {
+                    html += `<span class="word" style="animation-delay: ${delay}s">${word}</span> `;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Start typewriter when page loads
+        window.addEventListener('load', function() {
+            setTimeout(startTypewriter, 500);
+        });
         });
     </script>
 </body>
