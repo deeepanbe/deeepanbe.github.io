@@ -5,6 +5,48 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Deepanraj A — Data Analyst Portfolio</title>
   <link rel="stylesheet" href="style.css">
+      <style>
+        /* Fade-in animation for hero section */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero { animation: fadeIn 1s ease-out; }
+        
+        /* Slide-in animation for sections */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        section { animation: slideIn 0.8s ease-out; }
+        
+        /* Hover effects for buttons */
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        /* Hover effect for project cards */
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Pulse animation for badges */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .badge:hover { animation: pulse 0.5s ease; }
+        
+        /* Smooth scroll behavior */
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
 <body>
   <nav class="nav" role="navigation" aria-label="Main">
@@ -142,7 +184,7 @@
                           <h2 id="certifications-title">Certifications</h2>
             <div class="cert-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
                 
-                <a href="_certificate_977ac7e4eecdec007a6ba48f67fade66.pdf" target="_blank" style="text-decoration: none; color: inherit;"><div class="cert-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; text-align: center;">
+                <a href="certificate_977ac7e4eecdec007a6ba48f67fade66.pdf" target="_blank" style="text-decoration: none; color: inherit;"><div class="cert-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; text-align: center;">
                     <div style="font-size: 48px; margin-bottom: 10px;">📊</div>
                     <h3 style="margin: 10px 0; font-size: 18px;">Microsoft Power BI</h3>
                     <p style="color: #666; font-size: 14px;">Data Analytics Professional</p>
