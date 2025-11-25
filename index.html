@@ -46,6 +46,137 @@
         
         /* Smooth scroll behavior */
         html { scroll-behavior: smooth; }
+
+                                                /* ========== ENHANCED STYLES ========== */
+
+        /* Technology icons behind profile photo */
+        .photo-wrap {
+            position: relative;
+        }
+        
+        .tech-icons-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            opacity: 0.15;
+            animation: floatIcons 6s ease-in-out infinite;
+        }
+        
+        .tech-icons-bg img {
+            width: 50px;
+            height: 50px;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes floatIcons {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Power BI Dashboard Video/GIF Animation */
+        .dashboard-preview {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .dashboard-preview:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .dashboard-preview video,
+        .dashboard-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Enhanced Certification Cards with Provider Logos */
+        .cert-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cert-card:hover::before {
+            left: 100%;
+        }
+        
+        .cert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+        
+        .cert-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .cert-card:hover .cert-logo {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* Notes Download Button */
+        .download-notes-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+        }
+        
+        .download-notes-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.5);
+        }
+        
+        .download-notes-btn svg {
+            width: 20px;
+            height: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
@@ -78,6 +209,14 @@
     <div class="hero-right" aria-hidden="false">
       <div class="photo-wrap" role="img" aria-label="Profile photo of Deepanraj">
         <img src="Photo.jpeg" alt="Deepanraj Photo" class="photo">
+                        <!-- Technology Icons Background -->
+                <div class="tech-icons-bg">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                    <img src="https://img.icons8.com/color/96/power-bi.png" alt="Power BI">
+                    <img src="https://img.icons8.com/color/96/microsoft-excel-2019--v1.png" alt="Excel">
+                    <img src="https://img.icons8.com/color/96/tableau-software.png" alt="Tableau">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL">
+                </div>
         <div class="shape-bg"></div>
       </div>
     </div>
@@ -159,6 +298,10 @@
                 <li role="listitem">ML Model Deployment Basics</li>
                 <li role="listitem">Tableau Storytelling Techniques</li>
             </ul>
+                              <a href="https://download-directory.github.io/?url=https://github.com/deeepanbe/deeepanbe.github.io/tree/main/notes" class="download-notes-btn" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Download All Notes
+                </a>
         </section>
 
             <section id="interview" class="panel" aria-labelledby="interview-title">
@@ -185,26 +328,22 @@
             <div class="cert-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
                 
                 <a href="certificate_977ac7e4eecdec007a6ba48f67fade66.pdf" target="_blank" style="text-decoration: none; color: inherit;"><div class="cert-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 48px; margin-bottom: 10px;">📊</div>
-                    <h3 style="margin: 10px 0; font-size: 18px;">Microsoft Power BI</h3>
+                    <img src="https://img.icons8.com/color/96/power-bi.png" alt="Microsoft" class="cert-logo">                    <h3 style="margin: 10px 0; font-size: 18px;">Microsoft Power BI</h3>
                     <p style="color: #666; font-size: 14px;">Data Analytics Professional</p>
                 </div></a>
                 
                 <div class="cert-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 48px; margin-bottom: 10px;">🗄️</div>
-                    <h3 style="margin: 10px 0; font-size: 18px;">SQL Certification</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" class="cert-logo">                    <h3 style="margin: 10px 0; font-size: 18px;">SQL Certification</h3>
                     <p style="color: #666; font-size: 14px;">Database Management</p>
                 </div></a>
                 
                 <div class="cert-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 48px; margin-bottom: 10px;">🐍</div>
-                    <h3 style="margin: 10px 0; font-size: 18px;">Python for Data Science</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="cert-logo">                    <h3 style="margin: 10px 0; font-size: 18px;">Python for Data Science</h3>
                     <p style="color: #666; font-size: 14px;">Advanced Analytics</p>
                 </div></a>
                 
                 <div class="cert-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 48px; margin-bottom: 10px;">🤖</div>
-                    <h3 style="margin: 10px 0; font-size: 18px;">Machine Learning</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="ML" class="cert-logo">                    <h3 style="margin: 10px 0; font-size: 18px;">Machine Learning</h3>
                     <p style="color: #666; font-size: 14px;">AI & Predictive Analytics</p>
                 </div></a>
                 
