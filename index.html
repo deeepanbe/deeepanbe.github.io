@@ -108,6 +108,36 @@
       </div>
     </section>
 
+            <section id="notes" class="panel" aria-labelledby="notes-title">
+            <h2 id="notes-title">Notes & Tips</h2>
+            <ul role="list">
+                <li role="listitem">SQL Interview Cheatsheet</li>
+                <li role="listitem">Power BI DAX Tips</li>
+                <li role="listitem">Python EDA Steps</li>
+                <li role="listitem">ML Model Deployment Basics</li>
+                <li role="listitem">Tableau Storytelling Techniques</li>
+            </ul>
+        </section>
+
+            <section id="interview" class="panel" aria-labelledby="interview-title">
+            <h2 id="interview-title">Interview Q&A</h2>
+            
+            <div class="qa-box">
+                <h3>1. What is the purpose of DAX?</h3>
+                <p>DAX (Data Analysis Expressions) is used in Power BI for advanced calculations and creating custom measures and calculated columns.</p>
+            </div>
+            
+            <div class="qa-box">
+                <h3>2. Difference between JOIN types?</h3>
+                <p>INNER JOIN returns only matching rows from both tables, LEFT JOIN keeps all left rows, RIGHT JOIN keeps all right rows, and FULL JOIN keeps all rows from both tables.</p>
+            </div>
+            
+            <div class="qa-box">
+                <h3>3. What is EDA?</h3>
+                <p>Exploratory Data Analysis (EDA) is the process of analyzing data to understand patterns, detect anomalies, and test hypotheses using summary statistics and visualizations.</p>
+            </div>
+        </section>
+
     <section id="contact" class="panel" aria-labelledby="contact-title">
       <h2 id="contact-title">Contact</h2>
       <p>Email: <a href="mailto:deepanraj.a@outlook.com">deepanraj.a@outlook.com</a> · Phone: +91 8940991095</p>
@@ -117,5 +147,29 @@
   <footer class="site-footer" role="contentinfo">© 2025 Deepanraj A — All Rights Reserved</footer>
 
   <script src="script.js"></script>
+
+        <!-- Simple Chatbot Widget -->
+    <div id="chatbot" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <button id="chatbot-toggle" style="width: 60px; height: 60px; border-radius: 50%; background: #FF6B35; color: white; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">💬</button>
+        <div id="chatbot-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 300px; height: 400px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); padding: 15px;">
+            <div style="font-weight: bold; margin-bottom: 10px; color: #FF6B35;">Portfolio Assistant</div>
+            <div style="height: 320px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                <p><strong>Welcome!</strong> I'm here to help you navigate my portfolio.</p>
+                <p>You can ask me about:</p>
+                <ul style="font-size: 14px;">
+                    <li>My skills and experience</li>
+                    <li>Project details</li>
+                    <li>Contact information</li>
+                </ul>
+            </div>
+            <button onclick="document.getElementById('chatbot-window').style.display='none';" style="width: 100%; padding: 8px; background: #FF6B35; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('chatbot-toggle').addEventListener('click', function() {
+            var chatWindow = document.getElementById('chatbot-window');
+            chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
 </body>
 </html>
