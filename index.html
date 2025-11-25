@@ -618,5 +618,337 @@
         });
         });
     </script>
+
+  <!-- AI Chatbot Widget -->
+<div id="chatbot-container">
+    <div id="chatbot-toggle" onclick="toggleChatbot()">
+        <span class="chat-icon">🤖</span>
+        <span class="chat-text">Ask AI</span>
+    </div>
+    <div id="chatbot-window" class="hidden">
+        <div id="chatbot-header">
+            <div class="bot-avatar">🤖</div>
+            <div class="bot-info">
+                <span class="bot-name">Deepanraj AI Assistant</span>
+                <span class="bot-status">● Online</span>
+            </div>
+            <button onclick="toggleChatbot()" class="close-btn">×</button>
+        </div>
+        <div id="chatbot-messages">
+            <div class="message bot-message">
+                <span class="typing-text">👋 Hi! I'm Deepanraj's AI assistant. Ask me anything about his skills, experience, or projects!</span>
+            </div>
+        </div>
+        <div id="chatbot-input-area">
+            <input type="text" id="user-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" class="send-btn">➤</button>
+        </div>
+    </div>
+</div>
+
+  <style>
+/* AI Chatbot Styles */
+#chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#chatbot-toggle {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+#chatbot-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+    50% { box-shadow: 0 4px 25px rgba(102, 126, 234, 0.8); }
+}
+
+.chat-icon { font-size: 24px; }
+.chat-text { font-weight: 600; }
+
+#chatbot-window {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 380px;
+    height: 500px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#chatbot-window.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+#chatbot-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bot-avatar {
+    font-size: 30px;
+    background: rgba(255,255,255,0.2);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.bot-info { flex: 1; }
+.bot-name { display: block; font-weight: 600; font-size: 16px; }
+.bot-status { font-size: 12px; color: #90EE90; }
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+#chatbot-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    border-radius: 18px;
+    max-width: 85%;
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bot-message {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom-left-radius: 5px;
+}
+
+.user-message {
+    background: #e9ecef;
+    color: #333;
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+}
+
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 15px;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-10px); }
+}
+
+#chatbot-input-area {
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    gap: 10px;
+}
+
+#user-input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+#user-input:focus {
+    border-color: #667eea;
+}
+
+.send-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.send-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Typing animation for bot responses */
+.typing-text {
+    overflow: hidden;
+    display: inline-block;
+}
+
+@media (max-width: 480px) {
+    #chatbot-window {
+        width: 95vw;
+        right: -10px;
+        height: 70vh;
+    }
+}
+</style>
+
+  <script>
+// AI Chatbot JavaScript
+const chatbotResponses = {
+    'hi': '👋 Hello! I\'m Deepanraj\'s AI assistant. How can I help you today?',
+    'hello': '👋 Hi there! Welcome to Deepanraj\'s portfolio. What would you like to know?',
+    'hey': '👋 Hey! Great to meet you. Ask me anything about Deepanraj!',
+    'who': '🧑‍💻 Deepanraj A is a passionate Business & Data Analyst with expertise in transforming raw data into actionable insights. With a background in Mechanical and Quality Engineering, he brings a unique hybrid advantage combining operational experience with cutting-edge data analytics skills.',
+    'skills': '💪 Deepanraj\'s core skills include:\n\n📊 Power BI & Tableau - Advanced dashboards\n🐍 Python - Pandas, NumPy, Scikit-Learn\n🗄️ SQL - Data extraction & transformation\n📊 Excel - Advanced analytics & automation\n🤖 Machine Learning - Predictive modeling\n⚙️ AI Tools - Workflow automation',
+    'experience': '💼 Deepanraj started his career in Mechanical and Quality Engineering, spending years improving manufacturing processes and driving operational performance through data. This experience built strong foundations in structured thinking, root-cause analysis, and process optimization before transitioning into full-time Data Analytics.',
+    'education': '🎓 Deepanraj has completed multiple professional certifications including:\n\n✅ Google Data Analytics Certificate\n✅ Python for Data Science (Edureka)\n✅ MS Excel Expert\n✅ Business Intelligence Certification\n✅ Power BI Professional',
+    'projects': '🚀 Notable projects include:\n\n1️⃣ Used Car Price Prediction - ML model using Python\n2️⃣ HR Data Analysis - Power BI dashboard\n3️⃣ IBM HR Attrition Analysis - Employee retention insights\n\nEach project demonstrates end-to-end analytical problem-solving!',
+    'contact': '📧 You can reach Deepanraj at:\n\n📩 Email: deepanraj.a@outlook.com\n🔗 LinkedIn: /in/deepanraj-data-analyst\n🐙 GitHub: /deeepanbe',
+    'hire': '🌟 Deepanraj brings a hybrid advantage - operational experience from engineering + analytical skills in data. He can analyze problems, build insights, automate workflows, and support better business decisions. Ready to contribute to your data-driven team!',
+    'power bi': '📊 Deepanraj is proficient in Power BI, creating interactive dashboards with DAX calculations, data modeling, and visual storytelling. His HR Analytics Dashboard showcases employee analysis, tenure tracking, and real-time insights.',
+    'python': '🐍 Deepanraj uses Python for data analysis with libraries like Pandas, NumPy, Matplotlib, and Scikit-Learn. His Used Car Price Prediction project demonstrates machine learning model development.',
+    'sql': '🗄️ Deepanraj is skilled in SQL for data extraction, transformation, and analysis. He uses it extensively for querying databases and preparing data for visualization.',
+    'tableau': '📊 Deepanraj creates compelling data stories with Tableau, building dashboards that drive data-driven decision making.',
+    'certifications': '🏆 Deepanraj holds 19+ certifications including Google Data Analytics, Python for Data Science, MS Excel Expert, Business Intelligence, and more from Google, Edureka, Microsoft, and LinkedIn Learning.',
+    'default': '🤔 That\'s an interesting question! Deepanraj is a Data Analyst skilled in Power BI, Python, SQL, and Machine Learning. Try asking about his skills, projects, experience, or how to contact him!'
+};
+
+function toggleChatbot() {
+    const window = document.getElementById('chatbot-window');
+    window.classList.toggle('hidden');
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function sendMessage() {
+    const input = document.getElementById('user-input');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    addMessage(message, 'user');
+    input.value = '';
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    // Simulate AI thinking delay
+    setTimeout(() => {
+        removeTypingIndicator();
+        const response = getResponse(message);
+        typeMessage(response);
+    }, 1000 + Math.random() * 1000);
+}
+
+function addMessage(text, sender) {
+    const messagesDiv = document.getElementById('chatbot-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+    messageDiv.innerHTML = `<span>${text}</span>`;
+    messagesDiv.appendChild(messageDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const messagesDiv = document.getElementById('chatbot-messages');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message bot-message typing-indicator';
+    typingDiv.id = 'typing-indicator';
+    typingDiv.innerHTML = '<span></span><span></span><span></span>';
+    messagesDiv.appendChild(typingDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const indicator = document.getElementById('typing-indicator');
+    if (indicator) indicator.remove();
+}
+
+function typeMessage(text) {
+    const messagesDiv = document.getElementById('chatbot-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message bot-message';
+    const span = document.createElement('span');
+    span.className = 'typing-text';
+    messageDiv.appendChild(span);
+    messagesDiv.appendChild(messageDiv);
+    
+    let i = 0;
+    const typeInterval = setInterval(() => {
+        if (i < text.length) {
+            span.textContent += text.charAt(i);
+            i++;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        } else {
+            clearInterval(typeInterval);
+        }
+    }, 20);
+}
+
+function getResponse(message) {
+    const lowerMsg = message.toLowerCase();
+    
+    for (const [key, response] of Object.entries(chatbotResponses)) {
+        if (key !== 'default' && lowerMsg.includes(key)) {
+            return response;
+        }
+    }
+    
+    return chatbotResponses.default;
+}
+</script>
 </body>
 </html>
