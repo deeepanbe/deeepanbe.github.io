@@ -452,25 +452,73 @@
       <div class="container">
         <h2>Overview</h2>
         <div class="overview-grid">
-          <div class="overview-card">
+          <div class="overview-card" clickable" onclick="toggleDetail('experience')">
             <div class="overview-number">9</div>
             <div class="overview-label">Years of Professional Experience</div>
           </div>
-          <div class="overview-card">
+          <div class="overview-card" clickable" onclick="toggleDetail('education')">
             <div class="overview-number">4</div>
             <div class="overview-label">Years of Post-Secondary Education</div>
           </div>
-          <div class="overview-card">
+          <div class="overview-card" clickable" onclick="toggleDetail('languages')">
             <div class="overview-number">2</div>
             <div class="overview-label">Languages</div>
           </div>
-          <div class="overview-card">
+          <div class="overview-card" clickable" onclick="toggleDetail('certificates')">
             <div class="overview-number">6</div>
             <div class="overview-label">Certificates</div>
           </div>
         </div>
       </div>
     </section>
+
+      <!-- Detail Sections -->
+    <div id="detail-experience" class="detail-section">
+        <div class="container">
+            <h3>Professional Experience Timeline</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2016 - Present</div>
+                    <div class="timeline-content">
+                        <h4>Data Analyst - DAKSHIN HOME FASHIONS</h4>
+                        <p>Led data analytics initiatives, created Power BI dashboards, and automated workflows</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-education" class="detail-section">
+        <div class="container">
+            <h3>Education Background</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2021 - 2025</div>
+                    <div class="timeline-content">
+                        <h4>Post-Secondary Education</h4>
+                        <p>Specialized in Data Analytics and Business Intelligence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-languages" class="detail-section">
+        <div class="container">
+            <h3>Languages</h3>
+            <div class="language-list">
+                <div class="language-item">🇬🇧 English - Fluent</div>
+                <div class="language-item">🇮🇳 Tamil - Native</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-certificates" class="detail-section">
+        <div class="container">
+            <h3>Certifications</h3>
+            <p>Click the Certifications link in the navigation to see all certificates.</p>
+        </div>
+    </div>
 
       <!-- Quote Section -->
     <section id="quote" class="quote-section">
@@ -1103,6 +1151,71 @@
         font-weight: 500;
       }
 
+        .overview-card.clickable {
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .overview-card.clickable:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    .detail-section {
+        display: none;
+        padding: 60px 0;
+        background: #f8f9fa;
+        animation: fadeIn 0.3s;
+    }
+
+    .detail-section.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .timeline {
+        position: relative;
+        padding: 20px 0;
+    }
+
+    .timeline-item {
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .timeline-year {
+        font-weight: bold;
+        color: #3498db;
+        margin-bottom: 10px;
+    }
+
+    .timeline-content h4 {
+        margin: 0 0 10px 0;
+        color: #333;
+    }
+
+    .language-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .language-item {
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        font-size: 18px;
+        text-align: center;
+    }
+
           /* Quote Section */
       .quote-section {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1315,6 +1428,20 @@ function toggleChatbot() {
     const chatWindow = document.getElementById('chatbot-window');
     chatWindow.classList.toggle('hidden');
 }
+
+        function toggleDetail(section) {
+        // Hide all detail sections
+        const allSections = document.querySelectorAll('.detail-section');
+        allSections.forEach(s => s.classList.remove('active'));
+
+        // Show the selected section
+        const targetSection = document.getElementById('detail-' + section);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            // Scroll to the section smoothly
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
 
 function handleKeyPress(event) {
     if (event.key === 'Enter') {
