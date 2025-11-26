@@ -413,9 +413,101 @@
         .highlight-purple { color: #9b59b6; font-weight: 600; }
         .highlight-orange { color: #e67e22; font-weight: 600; }
         .highlight-red { color: #e74c3c; font-weight: 600; }
+
+                /* LinkedIn Banner Styles */
+        .linkedin-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #0077b5 0%, #00a0dc 50%, #005582 100%);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .linkedin-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.5;
+        }
+        .linkedin-banner-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .linkedin-banner h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .linkedin-banner p {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .linkedin-banner .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .linkedin-banner .tech-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .linkedin-banner .tech-badge:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.3);
+        }
+        .linkedin-banner .connect-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: white;
+            color: #0077b5;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .linkedin-banner .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
+      <!-- LinkedIn Banner Section -->
+    <section class="linkedin-banner">
+        <div class="linkedin-banner-content">
+            <h2>Deepanraj A</h2>
+            <p>Aspiring Data Analyst | Karur, Tamil Nadu</p>
+            <div class="tech-badges">
+                <span class="tech-badge">📊 Excel</span>
+                <span class="tech-badge">🗄️ SQL</span>
+                <span class="tech-badge">📈 Power BI</span>
+                <span class="tech-badge">📉 Tableau</span>
+                <span class="tech-badge">🐍 Python</span>
+                <span class="tech-badge">🤖 Machine Learning</span>
+            </div>
+            <a href="https://www.linkedin.com/in/deepanraj-data-analyst/" target="_blank" rel="noopener" class="connect-btn">Connect on LinkedIn</a>
+        </div>
+    </section>
+
   <nav class="nav" role="navigation" aria-label="Main">
     <div class="brand">Deepanraj A</div>
     <div class="links">
