@@ -429,6 +429,142 @@
     </div>
   </header>
 
+      <!-- Overview Section -->
+    <section id="overview" class="overview-section">
+      <div class="container">
+        <h2>Overview</h2>
+        <div class="overview-grid">
+          <div class="overview-card">
+            <div class="overview-number">9</div>
+            <div class="overview-label">Years of Professional Experience</div>
+          </div>
+          <div class="overview-card">
+            <div class="overview-number">4</div>
+            <div class="overview-label">Years of Post-Secondary Education</div>
+          </div>
+          <div class="overview-card">
+            <div class="overview-number">2</div>
+            <div class="overview-label">Languages</div>
+          </div>
+          <div class="overview-card">
+            <div class="overview-number">6</div>
+            <div class="overview-label">Certificates</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <!-- Quote Section -->
+    <section id="quote" class="quote-section">
+      <div class="container">
+        <div class="quote-container">
+          <div class="quote-icon">"</div>
+          <p class="quote-text">Do well if you know well, learn well if you don't.</p>
+          <p class="quote-author">— Deepanraj A</p>
+        </div>
+      </div>
+    </section>
+
+      <!-- Accomplishments Section -->
+    <section id="accomplishments" class="accomplishments-section">
+      <div class="container">
+        <h2>Key Accomplishments</h2>
+        <div class="accomplishments-list">
+          <div class="accomplishment-item">
+            <span class="check-icon">✅</span>
+            <div>
+              <strong>Developed Interactive Dashboards:</strong> Created Excel and Tableau dashboards to analyze business performance, improving decision-making efficiency.
+            </div>
+          </div>
+          <div class="accomplishment-item">
+            <span class="check-icon">✅</span>
+            <div>
+              <strong>Automated Data Processes:</strong> Used SQL and Python to automate data extraction and reporting, reducing manual effort by 40%.
+            </div>
+          </div>
+          <div class="accomplishment-item">
+            <span class="check-icon">✅</span>
+            <div>
+              <strong>Improved Data Accuracy:</strong> Optimized data validation processes, increasing reporting accuracy by 30%.
+            </div>
+          </div>
+          <div class="accomplishment-item">
+            <span class="check-icon">✅</span>
+            <div>
+              <strong>Business Insights Generation:</strong> Analyzed sales and customer data to provide actionable insights, leading to a 15% revenue increase.
+            </div>
+          </div>
+          <div class="accomplishment-item">
+            <span class="check-icon">✅</span>
+            <div>
+              <strong>Participated in Data Challenges:</strong> Engaged in Kaggle competitions and real-world projects to enhance problem-solving skills.
+            </div>
+          </div>
+          <div class="accomplishment-item">
+            <span class="check-icon">✅</span>
+            <div>
+              <strong>Transitioned from Quality Control to Data Analytics:</strong> Successfully leveraged 8 years of experience in quality control to transition into a data analytics career.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <!-- Work Availability Section -->
+    <section id="availability" class="availability-section">
+      <div class="container">
+        <h2>Work Availability</h2>
+        <div class="availability-table-container">
+          <table class="availability-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-label">Morning</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="unavailable">✖</td>
+                <td class="unavailable">✖</td>
+              </tr>
+              <tr>
+                <td class="time-label">Afternoon</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="unavailable">✖</td>
+                <td class="unavailable">✖</td>
+              </tr>
+              <tr>
+                <td class="time-label">Evening</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="available">✔</td>
+                <td class="unavailable">✖</td>
+                <td class="unavailable">✖</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   <main class="container" role="main">
     <section id="skills" class="panel" aria-labelledby="skills-title">
       <h2 id="skills-title">Skills & Tools</h2>
@@ -896,6 +1032,175 @@
         height: 70vh;
     }
 }
+
+          /* ========== NEW SECTIONS STYLES ========== */
+
+      /* Overview Section */
+      .overview-section {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 60px 20px;
+      }
+
+      .overview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .overview-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .overview-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      }
+
+      .overview-number {
+        font-size: 48px;
+        font-weight: 700;
+        color: #3498db;
+        margin-bottom: 10px;
+      }
+
+      .overview-label {
+        font-size: 16px;
+        color: #555;
+        font-weight: 500;
+      }
+
+          /* Quote Section */
+      .quote-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 80px 20px;
+        color: white;
+      }
+
+      .quote-container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .quote-icon {
+        font-size: 80px;
+        opacity: 0.3;
+        margin-bottom: -20px;
+      }
+
+      .quote-text {
+        font-size: 28px;
+        font-weight: 300;
+        line-height: 1.6;
+        font-style: italic;
+        margin-bottom: 20px;
+      }
+
+      .quote-author {
+        font-size: 18px;
+        font-weight: 600;
+        opacity: 0.9;
+      }
+
+          /* Accomplishments Section */
+      .accomplishments-section {
+        padding: 60px 20px;
+        background: white;
+      }
+
+      .accomplishments-list {
+        max-width: 900px;
+        margin: 40px auto 0;
+      }
+
+      .accomplishment-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 25px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid #27ae60;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .accomplishment-item:hover {
+        transform: translateX(10px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .check-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+      }
+
+          /* Work Availability Section */
+      .availability-section {
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      }
+
+      .availability-table-container {
+        max-width: 1000px;
+        margin: 40px auto 0;
+        overflow-x: auto;
+      }
+
+      .availability-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      .availability-table th,
+      .availability-table td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+      }
+
+      .availability-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .availability-table th {
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      .time-label {
+        font-weight: 600;
+        background: #f8f9fa;
+        text-align: left !important;
+      }
+
+      .available {
+        color: #27ae60;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .unavailable {
+        color: #e74c3c;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .availability-table tr:hover {
+        background: #f8f9fa;
+      }
 </style>
 
   <script>
