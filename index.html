@@ -13,6 +13,48 @@
         }
         
         .hero { animation: fadeIn 1s ease-out; }
+
+                /* Animated Tech Icons Orbiting Profile Photo */
+        @keyframes rotateIcons {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .tech-icons-orbit {
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            width: 350px;
+            height: 350px;
+            transform: translateY(-50%);
+        }
+
+        .tech-icon {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .tech-icon:nth-child(1) { top: 0%; left: 50%; transform: translate(-50%, 0); animation-delay: 0s; }
+        .tech-icon:nth-child(2) { top: 15%; right: 15%; animation-delay: 0.4s; }
+        .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translate(0, -50%); animation-delay: 0.8s; }
+        .tech-icon:nth-child(4) { bottom: 15%; right: 15%; animation-delay: 1.2s; }
+        .tech-icon:nth-child(5) { bottom: 0%; left: 50%; transform: translate(-50%, 0); animation-delay: 1.6s; }
+        .tech-icon:nth-child(6) { bottom: 15%; left: 15%; animation-delay: 2s; }
+        .tech-icon:nth-child(7) { top: 50%; left: 0; transform: translate(0, -50%); animation-delay: 2.4s; }
         
         /* Slide-in animation for sections */
         @keyframes slideIn {
@@ -436,6 +478,15 @@
         <img src="Photo.jpeg" alt="Deepanraj Photo" class="photo">
                         <!-- Technology Icons Background -->
                 <div class="tech-icons-bg">
+                                      <div class="tech-icons-orbit">
+                        <div class="tech-icon">🔷</div>
+                        <div class="tech-icon">📊</div>
+                        <div class="tech-icon">🐍</div>
+                        <div class="tech-icon">💾</div>
+                        <div class="tech-icon">📈</div>
+                        <div class="tech-icon">📗</div>
+                        <div class="tech-icon">📐</div>
+                    </div>
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
                     <img src="https://img.icons8.com/color/96/power-bi.png" alt="Power BI">
                     <img src="https://img.icons8.com/color/96/microsoft-excel-2019--v1.png" alt="Excel">
