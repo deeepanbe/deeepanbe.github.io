@@ -1794,7 +1794,7 @@ function toggleChatbot() {
               
     // Smooth scroll to the expanded section
     setTimeout(() => {
-      document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('overview').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
           
 
@@ -1850,7 +1850,8 @@ function sendMessage() {
     showTypingIndicator();
     
     // Simulate AI thinking delay
-    setTimeout(() => {
+    1796
+  
         removeTypingIndicator();
         const response = getResponse(message);
         typeMessage(response);
