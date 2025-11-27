@@ -208,6 +208,8 @@
             border: 2px solid #e0e0e0;
             border-radius: 12px;
             padding: 25px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
+          border-left: 5px solid #0066cc;
             text-align: center;
             transition: all 0.4s ease;
             position: relative;
@@ -1537,16 +1539,17 @@ min-height:
 
     .cert-card {
         padding: 25px;
-        background: white;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-s0 8px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
         transition: transform 0.3s, box-shadow 0.3s;
-        border-left: 4px solid #2563eb;
+        border-left: 5px solid #0066cc;
     }
 
     .cert-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transform: translateY(-8px) scale(1.02);
+        box-sh0 15px 35px rgba(0, 0, 0, 0.15);
+          border-color: #3498db;
     }
 
     .cert-card h4 {
