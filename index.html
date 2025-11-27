@@ -1791,6 +1791,12 @@ function toggleChatbot() {
         function toggleDetail(section) {
         // Hide all detail sections
         const allSections = document.querySelectorAll('.detail-section');
+              
+    // Smooth scroll to the expanded section
+    setTimeout(() => {
+      document.getElementById(section).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+          
 
               function sendMessage() {
         const input = document.getElementById('user-input');
