@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Deepanraj A - Data Analyst Portfolio</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   background:#f5f5f5;
@@ -18,7 +19,7 @@ body{
 /* HERO */
 .hero{
   background:linear-gradient(135deg,#ffffff 0%,#f9f9f9 100%);
-  padding:60px 20px;
+  padding:60px 20px 40px;
   text-align:center;
   border-bottom:1px solid #e0e0e0;
   box-shadow:0 2px 8px rgba(0,0,0,.05);
@@ -29,7 +30,7 @@ body{
   justify-content:center;
   gap:40px;
   max-width:900px;
-  margin:0 auto;
+  margin:0 auto 30px;
 }
 .profile-photo{width:200px;height:200px;flex-shrink:0}
 .profile-photo img{
@@ -47,223 +48,158 @@ body{
   color:#1f2937;
 }
 
-/* Typing text */
+/* Typing effect */
 .typing{
   font-size:18px;
   font-weight:600;
   color:#2563eb;
   min-height:30px;
-  margin-bottom:20px;
-  white-space:nowrap;
+  margin-bottom:15px;
   border-right:2px solid #2563eb;
   padding-right:5px;
+  white-space:nowrap;
 }
 
-/* Subtitles & social */
+/* Subtitles, social & hero text */
 .profile-subtitle{
   display:flex;
-  align-items:center;
   gap:15px;
-  margin-bottom:20px;
-  font-size:16px;
+  margin-bottom:10px;
   color:#666;
+  font-size:15px;
+  flex-wrap:wrap;
 }
 .profile-social{
   display:flex;
   gap:15px;
-  margin-bottom:20px;
+  margin:10px 0 18px;
 }
 .social-icon{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  background:#e5e7eb;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  color:#2563eb;
-  font-size:20px;
-  transition:all .3s;
+  width:40px;height:40px;border-radius:50%;background:#e5e7eb;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:#2563eb;font-size:20px;transition:.3s;
 }
-.social-icon:hover{
-  background:#2563eb;
-  color:#fff;
-  transform:translateY(-2px);
-}
+.social-icon:hover{background:#2563eb;color:#fff;transform:translateY(-2px)}
 
 /* Buttons */
-.btn-contact,
-.btn-secondary{
-  display:inline-block;
-  padding:12px 32px;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:600;
-  transition:all .3s;
-  cursor:pointer;
-  border:none;
-  font-size:15px;
+.btn-contact,.btn-secondary{
+  display:inline-block;padding:12px 32px;border-radius:30px;
+  text-decoration:none;font-weight:600;cursor:pointer;border:none;
+  font-size:15px;transition:.3s;
 }
-.btn-contact{
-  background:#2563eb;
-  color:#fff;
-}
+.btn-contact{background:#2563eb;color:#fff;}
 .btn-contact:hover{
-  background:#1d4ed8;
-  transform:translateY(-2px);
+  background:#1d4ed8;transform:translateY(-2px);
   box-shadow:0 5px 15px rgba(37,99,235,.3);
 }
 .btn-secondary{
-  background:#ffffff;
-  color:#2563eb;
-  border:1px solid #2563eb;
-  margin-left:10px;
+  background:#fff;color:#2563eb;border:1px solid #2563eb;
 }
 .btn-secondary:hover{
-  background:#2563eb;
-  color:#fff;
-  transform:translateY(-2px);
+  background:#2563eb;color:#fff;transform:translateY(-2px);
   box-shadow:0 4px 12px rgba(37,99,235,.25);
 }
+.hero-actions{margin-top:10px;display:flex;flex-wrap:wrap;gap:10px}
 
-/* Hero actions group */
-.hero-actions{
-  margin-top:10px;
+/* Colorful skill & cert tiles */
+.hero-tiles{
+  margin-top:30px;
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+  gap:15px;
+  overflow-x:auto;
+  padding-bottom:5px;
 }
+.hero-tile{
+  min-width:150px;
+  padding:10px 14px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+  font-weight:600;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+  flex-shrink:0;
+}
+.hero-tile img{
+  width:28px;height:28px;object-fit:contain;
+}
+.tile-google{background:#fef3c7;}
+.tile-ms{background:#e0f2fe;}
+.tile-tableau{background:#e0f2fe;}
+.tile-python{background:#f3e8ff;}
+.tile-ml{background:#dcfce7;}
+
+/* Notes dropdown */
+.notes-container{position:relative;display:inline-block;}
+.notes-dropdown{
+  display:none;
+  position:absolute;
+  top:115%;left:0;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  min-width:260px;
+  box-shadow:0 8px 16px rgba(0,0,0,.12);
+  padding:10px 0;
+  z-index:20;
+}
+.notes-dropdown a{
+  display:block;padding:8px 16px;
+  font-size:14px;color:#1f2937;
+  text-decoration:none;
+}
+.notes-dropdown a:hover{background:#eff6ff;color:#2563eb}
 
 /* Nav tabs */
 .nav-tabs{
-  display:flex;
-  gap:40px;
-  border-bottom:2px solid #e5e7eb;
-  padding:0 20px;
-  margin-top:30px;
-  overflow-x:auto;
+  display:flex;gap:40px;border-bottom:2px solid #e5e7eb;
+  padding:0 20px;margin-top:20px;overflow-x:auto;
 }
 .nav-tabs a{
-  color:#999;
-  text-decoration:none;
-  padding:15px 0;
-  border-bottom:3px solid transparent;
-  transition:all .3s;
-  font-weight:500;
-  white-space:nowrap;
+  color:#999;text-decoration:none;padding:15px 0;
+  border-bottom:3px solid transparent;transition:.3s;
+  font-weight:500;white-space:nowrap;
 }
-.nav-tabs a:hover,
-.nav-tabs a.active{
-  color:#2563eb;
-  border-bottom-color:#2563eb;
+.nav-tabs a:hover,.nav-tabs a.active{
+  color:#2563eb;border-bottom-color:#2563eb;
 }
 
 /* Sections */
 .section{
   padding:60px 20px;
-  border-bottom:1px solid #e5e7eb;
   background:#fff;
   margin:20px 0;
   border-radius:8px;
+  border-bottom:1px solid #e5e7eb;
 }
 .section h2{
-  font-size:28px;
-  margin-bottom:40px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  color:#1f2937;
+  font-size:28px;margin-bottom:40px;
+  display:flex;gap:15px;align-items:center;color:#1f2937;
 }
 .section h2::before{
-  content:'';
-  width:4px;
-  height:28px;
-  background:#2563eb;
-  border-radius:2px;
+  content:'';width:4px;height:28px;background:#2563eb;border-radius:2px;
 }
 
-/* Overview */
+/* Overview cards */
 .overview-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:30px;
-  margin-bottom:40px;
 }
 .overview-card{
-  background:#f3f4f6;
-  padding:30px;
-  border-radius:8px;
-  border-left:4px solid #2563eb;
-  text-align:center;
-  transition:all .3s;
+  background:#f3f4f6;padding:30px;border-radius:8px;
+  border-left:4px solid #2563eb;text-align:center;transition:.3s;
 }
 .overview-card:hover{
   box-shadow:0 8px 16px rgba(0,0,0,.1);
   transform:translateY(-2px);
 }
 .overview-card .number{
-  font-size:48px;
-  font-weight:700;
-  color:#2563eb;
-  margin-bottom:10px;
+  font-size:48px;font-weight:700;color:#2563eb;margin-bottom:10px;
 }
 .overview-card .label{
-  color:#666;
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-/* Experience & education */
-.job-item{
-  margin-bottom:40px;
-  padding-bottom:30px;
-  border-bottom:1px solid #e5e7eb;
-}
-.job-item:last-child{border-bottom:none}
-.job-title{
-  font-size:20px;
-  font-weight:600;
-  margin-bottom:5px;
-  color:#1f2937;
-}
-.job-company{
-  color:#2563eb;
-  font-size:14px;
-  font-weight:600;
-  margin-bottom:8px;
-}
-.job-dates{
-  color:#999;
-  font-size:14px;
-  margin-bottom:15px;
-}
-.job-description{
-  color:#555;
-  font-size:15px;
-  line-height:1.8;
-}
-
-/* Skills */
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:15px;
-}
-.skill-item{
-  background:#f3f4f6;
-  padding:15px;
-  border-radius:6px;
-  text-align:center;
-  font-size:14px;
-  font-weight:500;
-  border-left:3px solid #2563eb;
-  transition:all .3s;
-}
-.skill-item:hover{
-  background:#2563eb;
-  color:#fff;
+  color:#666;font-size:13px;text-transform:uppercase;letter-spacing:1px;
 }
 
 /* Projects */
@@ -273,175 +209,141 @@ body{
   gap:25px;
 }
 .project-card{
-  background:#f3f4f6;
-  padding:25px;
-  border-radius:8px;
-  border-top:4px solid #2563eb;
-  transition:all .3s;
+  background:#f3f4f6;padding:25px;border-radius:8px;
+  border-top:4px solid #2563eb;transition:.3s;
 }
 .project-card:hover{
   box-shadow:0 8px 20px rgba(37,99,235,.15);
   transform:translateY(-4px);
 }
 .project-thumb{
-  width:100%;
-  height:160px;
-  border-radius:6px;
-  overflow:hidden;
-  margin-bottom:15px;
-  background:#e5e7eb;
+  width:100%;height:160px;border-radius:6px;
+  overflow:hidden;margin-bottom:15px;background:#e5e7eb;
 }
-.project-thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.project-title{
-  font-size:18px;
-  font-weight:600;
-  margin-bottom:10px;
-  color:#1f2937;
-}
-.project-description{
-  color:#555;
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:12px;
-}
-.project-tech{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
+.project-thumb img{width:100%;height:100%;object-fit:cover;}
+.project-title{font-size:18px;font-weight:600;margin-bottom:10px;color:#1f2937;}
+.project-description{color:#555;font-size:14px;margin-bottom:12px;}
+.project-tech{display:flex;flex-wrap:wrap;gap:8px;}
 .tech-tag{
-  background:#dbeafe;
-  color:#2563eb;
-  padding:4px 12px;
-  border-radius:4px;
-  font-size:12px;
-  font-weight:500;
+  background:#dbeafe;color:#2563eb;padding:4px 12px;border-radius:4px;
+  font-size:12px;font-weight:500;
 }
+.projects-footer{
+  margin-top:30px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+/* Experience & education */
+.job-item{
+  margin-bottom:40px;padding-bottom:30px;
+  border-bottom:1px solid #e5e7eb;
+}
+.job-item:last-child{border-bottom:none;}
+.job-title{font-size:20px;font-weight:600;margin-bottom:5px;color:#1f2937;}
+.job-company{color:#2563eb;font-size:14px;font-weight:600;margin-bottom:8px;}
+.job-dates{color:#999;font-size:14px;margin-bottom:15px;}
+.job-description{color:#555;font-size:15px;line-height:1.8;}
 
 /* Certifications */
+.cert-strip{
+  display:flex;gap:40px;align-items:center;justify-content:center;
+  margin-bottom:40px;flex-wrap:wrap;
+}
+.cert-strip img{height:45px;object-fit:contain;}
 .cert-item{
-  background:#f3f4f6;
-  padding:20px;
-  border-radius:8px;
-  margin-bottom:20px;
+  background:#f3f4f6;padding:20px;border-radius:8px;margin-bottom:20px;
   border-left:4px solid #2563eb;
 }
-.cert-name{
-  font-size:16px;
-  font-weight:600;
-  color:#1f2937;
-  margin-bottom:5px;
-}
-.cert-issuer{
-  color:#2563eb;
-  font-size:13px;
-  font-weight:500;
-}
-.cert-date{
-  color:#999;
-  font-size:13px;
-  margin-top:8px;
-}
+.cert-name{font-size:16px;font-weight:600;color:#1f2937;margin-bottom:5px;}
+.cert-issuer{color:#2563eb;font-size:13px;font-weight:500;}
 
-/* Certification logo strip */
-.cert-strip{
-  display:flex;
-  gap:40px;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:40px;
+/* Skills */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:15px;
 }
-.cert-strip img{
-  height:45px;
-  object-fit:contain;
+.skill-item{
+  background:#f3f4f6;padding:15px;border-radius:6px;text-align:center;
+  font-size:14px;font-weight:500;border-left:3px solid #2563eb;
+  transition:.3s;
 }
+.skill-item:hover{background:#2563eb;color:#fff;}
 
-/* Notes dropdown */
-.notes-container{
-  position:relative;
-  display:inline-block;
-}
-.notes-dropdown{
-  display:none;
-  position:absolute;
-  top:115%;
-  left:0;
-  background:#ffffff;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
-  min-width:260px;
-  box-shadow:0 8px 16px rgba(0,0,0,.12);
-  padding:10px 0;
-  z-index:20;
-}
-.notes-dropdown a{
-  display:block;
-  padding:8px 16px;
-  font-size:14px;
-  color:#1f2937;
-  text-decoration:none;
-  white-space:normal;
-}
-.notes-dropdown a:hover{
-  background:#eff6ff;
-  color:#2563eb;
-}
-
-/* Contact form */
-.contact-form{
-  max-width:700px;
-  margin:0 auto;
-}
+/* Contact */
+.contact-form{max-width:700px;margin:0 auto;}
 .form-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:20px;
 }
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  margin-bottom:16px;
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.form-group label{font-size:14px;font-weight:600;color:#374151;}
+.form-group input,.form-group textarea{
+  border:1px solid #d1d5db;border-radius:6px;padding:10px 12px;
+  font-size:14px;font-family:inherit;
 }
-.form-group label{
+.form-group input:focus,.form-group textarea:focus{
+  outline:none;border-color:#2563eb;
+  box-shadow:0 0 0 1px rgba(37,99,235,.35);
+}
+.form-group textarea{resize:vertical;min-height:120px;}
+.contact-actions{margin-top:10px;display:flex;flex-wrap:wrap;gap:10px;}
+
+/* Chatbot */
+.chatbot-button{
+  position:fixed;right:20px;bottom:20px;width:56px;height:56px;
+  border-radius:999px;border:none;cursor:pointer;
+  background:#2563eb;color:#fff;font-size:26px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 20px rgba(37,99,235,.45);
+  animation:pulse 2s infinite;
+  z-index:50;
+}
+.chatbot-panel{
+  position:fixed;right:20px;bottom:90px;width:320px;max-height:420px;
+  background:#ffffff;border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  display:none;flex-direction:column;overflow:hidden;z-index:49;
+}
+.chatbot-header{
+  padding:10px 16px;background:#2563eb;color:#fff;
+  display:flex;justify-content:space-between;align-items:center;
   font-size:14px;
-  font-weight:600;
-  color:#374151;
 }
-.form-group input,
-.form-group textarea{
-  border:1px solid #d1d5db;
-  border-radius:6px;
-  padding:10px 12px;
-  font-size:14px;
-  font-family:inherit;
+.chatbot-body{
+  padding:10px 12px;height:260px;overflow-y:auto;font-size:13px;
 }
-.form-group input:focus,
-.form-group textarea:focus{
-  outline:none;
-  border-color:#2563eb;
-  box-shadow:0 0 0 1px rgba(37,99,235,.4);
+.chatbot-input{
+  padding:8px 10px;border-top:1px solid #e5e7eb;
+  display:flex;gap:8px;background:#f9fafb;
 }
-.form-group textarea{
-  resize:vertical;
-  min-height:120px;
+.chatbot-input input{
+  flex:1;border:1px solid #d1d5db;border-radius:999px;
+  padding:8px 12px;font-size:13px;
 }
-.contact-actions{
-  margin-top:10px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+.chatbot-input button{
+  border:none;border-radius:999px;padding:8px 14px;
+  background:#2563eb;color:#fff;font-size:13px;cursor:pointer;
+}
+.chat-msg{margin-bottom:8px;}
+.chat-msg.me{text-align:right;}
+.chat-msg.me span{
+  background:#2563eb;color:#fff;border-radius:999px;
+  padding:6px 10px;display:inline-block;
+}
+.chat-msg.bot span{
+  background:#e5e7eb;border-radius:999px;
+  padding:6px 10px;display:inline-block;
 }
 
 /* Animations */
-@keyframes slideDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.hero{animation:slideDown .8s ease-out}
-.section{animation:fadeIn .6s ease-out}
+@keyframes pulse{
+  0%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,99,235,.5);}
+  70%{transform:scale(1.05);box-shadow:0 0 0 12px rgba(37,99,235,0);}
+  100%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,99,235,0);}
+}
 
 /* Responsive */
 @media (max-width:768px){
@@ -450,9 +352,6 @@ body{
   .profile-photo{width:150px;height:150px}
   .nav-tabs{gap:20px}
   .section h2{font-size:22px}
-  .cert-strip{flex-wrap:wrap}
-  .cert-strip img{height:38px}
-  .hero-actions{justify-content:flex-start}
 }
 </style>
 </head>
@@ -465,38 +364,34 @@ body{
 
     <div class="profile-wrapper">
       <div class="profile-photo">
-        <img src="https://media.licdn.com/dms/image/D5603AQFKKyVpK1S9_A/profile-displayphoto-shrink_400_400/0/1708091234622?e=2147483647&v=beta" alt="Deepanraj A">
+        <img src="images/Photo.jpeg" alt="Deepanraj A">
       </div>
 
       <div class="profile-info">
         <h1>DEEPANRAJ A</h1>
 
-        <!-- Typing Animation in HERO -->
         <div class="typing" id="typing-hero"></div>
         <script>
-        const heroLines = [
+        const heroLines=[
           "Hi there! I'm DEEPANRAJ A",
           "Aspiring Data Analyst",
           "Python • SQL • Power BI",
           "Machine Learning Enthusiast",
           "Turning Data into Insights"
         ];
-        let heroIndex = 0, heroChar = 0, heroDeleting = false;
+        let hi=0,hc=0,hd=false;
         function typeHero(){
-          const element = document.getElementById("typing-hero");
-          const text = heroLines[heroIndex];
-          if(!element){ return; }
-          if(!heroDeleting){
-            element.textContent = text.substring(0, heroChar++);
-            if(heroChar > text.length + 3){ heroDeleting = true; }
-          } else {
-            element.textContent = text.substring(0, heroChar--);
-            if(heroChar < 0){
-              heroDeleting = false;
-              heroIndex = (heroIndex + 1) % heroLines.length;
-            }
+          const el=document.getElementById("typing-hero");
+          if(!el) return;
+          const text=heroLines[hi];
+          if(!hd){
+            el.textContent=text.substring(0,hc++);
+            if(hc>text.length+3) hd=true;
+          }else{
+            el.textContent=text.substring(0,hc--);
+            if(hc<0){hd=false;hi=(hi+1)%heroLines.length;}
           }
-          setTimeout(typeHero, heroDeleting ? 60 : 100);
+          setTimeout(typeHero,hd?60:100);
         }
         typeHero();
         </script>
@@ -507,8 +402,8 @@ body{
         </div>
 
         <div class="profile-social">
-          <a onclick="alert('Demo coming soon!')" class="social-icon" title="LinkedIn">in</a>
-          <a onclick="alert('Demo coming soon!')" class="social-icon" title="GitHub">⚙</a>
+          <a onclick="alert('LinkedIn profile coming soon!')" class="social-icon">in</a>
+          <a onclick="alert('GitHub profile coming soon!')" class="social-icon">⚙</a>
         </div>
 
         <div class="hero-actions">
@@ -516,36 +411,65 @@ body{
             CONTACT ME
           </button>
 
-          <!-- Download Resume -->
           <a class="btn-secondary" href="resume/Deepanraj A Data Analyst.pdf" download>
             Download Resume
           </a>
 
-          <!-- Notes dropdown -->
           <div class="notes-container">
-            <button type="button" class="btn-secondary" onclick="toggleNotes('notes-list-hero')">
-              Download Notes &amp; Tips ▾
+            <button class="btn-secondary" type="button" onclick="toggleNotes('notes-hero')">
+              Download Notes ▾
             </button>
-            <div class="notes-dropdown" id="notes-list-hero">
-              <a href="notes/AMERICAN EXPRESS INTERVIEW QUESTIONS.pdf" download>AMERICAN EXPRESS INTERVIEW QUESTIONS (PDF)</a>
-              <a href="notes/DATA ANALYST.jpeg" download>DATA ANALYST (JPEG)</a>
-              <a href="notes/EXCEL, SQL, TABLEAU, POWERBI.pdf" download>EXCEL, SQL, TABLEAU, POWERBI (PDF)</a>
-              <a href="notes/POWERBI INTERVIEW QUESTION.pdf" download>POWERBI INTERVIEW QUESTION (PDF)</a>
+            <div class="notes-dropdown" id="notes-hero">
+              <a href="notes/AMERICAN EXPRESS INTERVIEW QUESTIONS.pdf" download>AMERICAN EXPRESS INTERVIEW QUESTIONS</a>
+              <a href="notes/DATA ANALYST.jpeg" download>DATA ANALYST (Image)</a>
+              <a href="notes/EXCEL, SQL, TABLEAU, POWERBI.pdf" download>EXCEL / SQL / TABLEAU / POWERBI</a>
+              <a href="notes/POWERBI INTERVIEW QUESTION.pdf" download>POWERBI INTERVIEW QUESTION</a>
             </div>
           </div>
         </div>
 
+        <p style="margin-top:10px;color:#374151;font-size:15px;">
+          📧 <b>deepanraj.a@outlook.com</b><br>
+          📧 <b>info@deepanraj.work.gd</b><br>
+          📱 <b>8940991095</b>
+        </p>
       </div>
     </div>
 
+    <!-- Colorful skill & certification tiles -->
+    <div class="hero-tiles">
+      <div class="hero-tile tile-google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+        <span>Google Analytics & Docs</span>
+      </div>
+      <div class="hero-tile tile-ms">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft">
+        <span>Excel • Power BI • SQL</span>
+      </div>
+      <div class="hero-tile tile-tableau">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Tableau_Software_Logo.png" alt="Tableau">
+        <span>Interactive Dashboards</span>
+      </div>
+      <div class="hero-tile tile-python">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python">
+        <span>Python, Pandas, NumPy</span>
+      </div>
+      <div class="hero-tile tile-ml">
+        <span>🤖</span>
+        <span>Machine Learning & AI</span>
+      </div>
+    </div>
+
+    <!-- Nav tabs -->
     <div class="nav-tabs">
-      <a onclick="alert('Demo coming soon!')" class="active">SUMMARY</a>
-      <a onclick="alert('Demo coming soon!')">OVERVIEW</a>
-      <a onclick="alert('Demo coming soon!')">PROJECTS</a>
-      <a onclick="alert('Demo coming soon!')">EXPERIENCE</a>
-      <a onclick="alert('Demo coming soon!')">EDUCATION</a>
-      <a onclick="alert('Demo coming soon!')">CERTIFICATIONS</a>
-      <a onclick="alert('Demo coming soon!')">SKILLS</a>
+      <a href="#summary" class="active">SUMMARY</a>
+      <a href="#overview">OVERVIEW</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#education">EDUCATION</a>
+      <a href="#certifications">CERTIFICATIONS</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#contact">CONTACT</a>
     </div>
 
   </div>
@@ -556,32 +480,26 @@ body{
   <div class="container">
     <h2>SUMMARY</h2>
 
-    <!-- Typing Animation in SUMMARY -->
     <div class="typing" id="typing-summary"></div>
     <script>
-    const summaryLines = [
-      "Hi there! I'm DEEPANRAJ A",
-      "Aspiring Data Analyst",
-      "Python • SQL • Power BI",
-      "Machine Learning Enthusiast",
-      "Turning Data into Insights"
+    const summaryLines=[
+      "Turning data into decisions",
+      "End-to-end analytics projects",
+      "Dashboards • Automation • ML"
     ];
-    let sIndex = 0, sChar = 0, sDeleting = false;
+    let si=0,sc=0,sd=false;
     function typeSummary(){
-      const element = document.getElementById("typing-summary");
-      const text = summaryLines[sIndex];
-      if(!element){ return; }
-      if(!sDeleting){
-        element.textContent = text.substring(0, sChar++);
-        if(sChar > text.length + 3){ sDeleting = true; }
-      } else {
-        element.textContent = text.substring(0, sChar--);
-        if(sChar < 0){
-          sDeleting = false;
-          sIndex = (sIndex + 1) % summaryLines.length;
-        }
+      const el=document.getElementById("typing-summary");
+      if(!el) return;
+      const text=summaryLines[si];
+      if(!sd){
+        el.textContent=text.substring(0,sc++);
+        if(sc>text.length+3) sd=true;
+      }else{
+        el.textContent=text.substring(0,sc--);
+        if(sc<0){sd=false;si=(si+1)%summaryLines.length;}
       }
-      setTimeout(typeSummary, sDeleting ? 60 : 100);
+      setTimeout(typeSummary,sd?60:100);
     }
     typeSummary();
     </script>
@@ -591,10 +509,8 @@ body{
       🔍 Skilled in Python, SQL, Excel, Power BI, and Machine Learning.<br>
       💼 Experienced in HR Analytics, Marketing Analytics, Crime Analysis &amp; Business Intelligence.<br>
       📍 Based in Karur, Tamil Nadu, India.<br>
-      💡 Enthusiastic about solving complex problems through data-driven decision making.<br>
       🌱 Currently exploring advanced Machine Learning &amp; AI techniques.
     </p>
-
   </div>
 </div>
 
@@ -602,7 +518,6 @@ body{
 <div class="section" id="overview">
   <div class="container">
     <h2>OVERVIEW</h2>
-
     <div class="overview-grid">
       <div class="overview-card">
         <div class="number">9</div>
@@ -621,7 +536,6 @@ body{
         <div class="label">Certificates</div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -631,14 +545,13 @@ body{
     <h2>PROJECTS</h2>
 
     <div class="projects-grid">
-
       <div class="project-card">
         <div class="project-thumb">
-          <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard Thumbnail">
+          <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard">
         </div>
-        <div class="project-title">Sales Dashboard</div>
+        <div class="project-title">Sales Performance Dashboard</div>
         <div class="project-description">
-          Interactive Power BI dashboard analyzing sales performance, revenue trends, and customer segments to support business decisions.
+          Interactive Power BI dashboard visualizing revenue, product performance, and customer segments for business leaders.
         </div>
         <div class="project-tech">
           <span class="tech-tag">Power BI</span>
@@ -649,26 +562,26 @@ body{
 
       <div class="project-card">
         <div class="project-thumb">
-          <img src="Thumbnail/churn_thumb.png" alt="Customer Churn Analysis Thumbnail">
+          <img src="Thumbnail/churn_thumb.png" alt="Customer Churn Analysis">
         </div>
         <div class="project-title">Customer Churn Analysis</div>
         <div class="project-description">
-          Predictive model using Python and Machine Learning to identify at-risk customers and reduce churn with targeted retention strategies.
+          Predictive model using Python and ML to identify at-risk customers and support retention strategies.
         </div>
         <div class="project-tech">
           <span class="tech-tag">Python</span>
-          <span class="tech-tag">Machine Learning</span>
+          <span class="tech-tag">Scikit-Learn</span>
           <span class="tech-tag">Pandas</span>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-thumb">
-          <img src="Thumbnail/hr_thumb.png" alt="HR Analytics Report Thumbnail">
+          <img src="Thumbnail/hr_thumb.png" alt="HR Analytics Report">
         </div>
         <div class="project-title">HR Analytics Report</div>
         <div class="project-description">
-          HR analytics dashboard providing insights into headcount, attrition, performance, and diversity to support workforce planning.
+          HR dashboard for headcount, attrition, and performance trends supporting workforce planning decisions.
         </div>
         <div class="project-tech">
           <span class="tech-tag">Tableau</span>
@@ -676,7 +589,12 @@ body{
           <span class="tech-tag">HR Analytics</span>
         </div>
       </div>
+    </div>
 
+    <div class="projects-footer">
+      <a class="btn-secondary" href="https://github.com/deeepanbe" target="_blank">
+        View More Projects on GitHub →
+      </a>
     </div>
   </div>
 </div>
@@ -689,9 +607,9 @@ body{
     <div class="job-item">
       <div class="job-title">Product Analyst</div>
       <div class="job-company">DAKSHIN HOME FASHIONS</div>
-      <div class="job-dates">June 2020 - Current</div>
+      <div class="job-dates">June 2020 - Present</div>
       <div class="job-description">
-        Leading data analysis initiatives to drive business growth and optimization across production, quality, and operations.
+        Leading data analysis initiatives across production and operations, automating reports, and building dashboards to improve efficiency and decision-making.
       </div>
     </div>
 
@@ -700,10 +618,9 @@ body{
       <div class="job-company">LAKSHMI LIFE SCIENCE LIMITED</div>
       <div class="job-dates">April 2017 - February 2019</div>
       <div class="job-description">
-        Developed technical skills in quality assurance, data management, and process improvement within a manufacturing environment.
+        Developed strong foundations in quality processes, root cause analysis, and process improvement using data within a manufacturing environment.
       </div>
     </div>
-
   </div>
 </div>
 
@@ -713,12 +630,13 @@ body{
     <h2>EDUCATION</h2>
 
     <div class="job-item">
-      <div class="job-title">Bachelor of Engineering</div>
+      <div class="job-title">Bachelor of Engineering - Mechanical</div>
       <div class="job-company">PAVAI COLLEGE OF TECHNOLOGY</div>
       <div class="job-dates">June 2012 - April 2016</div>
-      <div class="job-description">Mechanical Engineering</div>
+      <div class="job-description">
+        Built strong foundations in mathematics, statistics, and problem-solving that support analytical thinking and data work.
+      </div>
     </div>
-
   </div>
 </div>
 
@@ -727,7 +645,6 @@ body{
   <div class="container">
     <h2>CERTIFICATIONS</h2>
 
-    <!-- Full-color logo strip -->
     <div class="cert-strip">
       <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
       <img src="https://edureka.wfscorp.com/images/edureka-logo.svg" alt="Edureka">
@@ -738,32 +655,26 @@ body{
       <div class="cert-name">Business Analyst Masters Course</div>
       <div class="cert-issuer">Edureka — Completion Expected March 2025</div>
     </div>
-
     <div class="cert-item">
       <div class="cert-name">Microsoft SQL Server Certification</div>
       <div class="cert-issuer">Microsoft — March 2025</div>
     </div>
-
     <div class="cert-item">
       <div class="cert-name">Data Science with Python</div>
       <div class="cert-issuer">Edureka — February 2025</div>
     </div>
-
     <div class="cert-item">
       <div class="cert-name">Microsoft Power BI Certification</div>
       <div class="cert-issuer">Microsoft — January 2025</div>
     </div>
-
     <div class="cert-item">
       <div class="cert-name">Tableau Certification</div>
       <div class="cert-issuer">Tableau — December 2024</div>
     </div>
-
     <div class="cert-item">
       <div class="cert-name">Advanced MS Excel Certification</div>
       <div class="cert-issuer">Microsoft — August 2024</div>
     </div>
-
   </div>
 </div>
 
@@ -783,45 +694,51 @@ body{
       <div class="skill-item">NumPy</div>
       <div class="skill-item">Scikit-Learn</div>
       <div class="skill-item">Matplotlib</div>
-      <div class="skill-item">Jupyter</div>
+      <div class="skill-item">Data Cleaning</div>
+      <div class="skill-item">Data Visualization</div>
+      <div class="skill-item">Machine Learning</div>
       <div class="skill-item">Git</div>
       <div class="skill-item">GitHub</div>
     </div>
-
   </div>
 </div>
 
 <!-- CONTACT -->
 <div class="section" id="contact">
   <div class="container">
-    <h2>CONTACT ME</h2>
+    <h2>CONTACT</h2>
 
-    <p style="margin-bottom:25px;font-size:15px;color:#4b5563;">
-      If you’d like to discuss a role, project, or collaboration, feel free to reach out using the form below or download my resume and notes.
+    <p style="margin-bottom:20px;font-size:15px;color:#4b5563;">
+      If you’d like to discuss a role, project, or collaboration, use the form below or contact me directly.
     </p>
 
     <div class="contact-actions">
-      <!-- Resume button -->
       <a class="btn-secondary" href="resume/Deepanraj A Data Analyst.pdf" download>
         Download Resume
       </a>
 
-      <!-- Notes dropdown in contact section -->
       <div class="notes-container">
-        <button type="button" class="btn-secondary" onclick="toggleNotes('notes-list-contact')">
-          Download Notes &amp; Tips ▾
+        <button class="btn-secondary" type="button" onclick="toggleNotes('notes-contact')">
+          Download Notes ▾
         </button>
-        <div class="notes-dropdown" id="notes-list-contact">
-          <a href="notes/AMERICAN EXPRESS INTERVIEW QUESTIONS.pdf" download>AMERICAN EXPRESS INTERVIEW QUESTIONS (PDF)</a>
-          <a href="notes/DATA ANALYST.jpeg" download>DATA ANALYST (JPEG)</a>
-          <a href="notes/EXCEL, SQL, TABLEAU, POWERBI.pdf" download>EXCEL, SQL, TABLEAU, POWERBI (PDF)</a>
-          <a href="notes/POWERBI INTERVIEW QUESTION.pdf" download>POWERBI INTERVIEW QUESTION (PDF)</a>
+        <div class="notes-dropdown" id="notes-contact">
+          <a href="notes/AMERICAN EXPRESS INTERVIEW QUESTIONS.pdf" download>AMERICAN EXPRESS INTERVIEW QUESTIONS</a>
+          <a href="notes/DATA ANALYST.jpeg" download>DATA ANALYST (Image)</a>
+          <a href="notes/EXCEL, SQL, TABLEAU, POWERBI.pdf" download>EXCEL / SQL / TABLEAU / POWERBI</a>
+          <a href="notes/POWERBI INTERVIEW QUESTION.pdf" download>POWERBI INTERVIEW QUESTION</a>
         </div>
       </div>
     </div>
 
     <div class="contact-form" style="margin-top:30px;">
-      <form action="mailto:deepanraj.a@outlook.com?subject=Portfolio%20Contact" method="post" enctype="text/plain">
+      <form action="https://formsubmit.co/deepanraj.a@outlook.com" method="POST">
+        <!-- send copy to second email -->
+        <input type="hidden" name="_cc" value="info@deepanraj.work.gd">
+        <!-- disable captcha -->
+        <input type="hidden" name="_captcha" value="false">
+        <!-- redirect after submit -->
+        <input type="hidden" name="_next" value="https://deepanraj.work.gd/">
+
         <div class="form-grid">
           <div class="form-group">
             <label for="name">Name *</label>
@@ -840,19 +757,77 @@ body{
 
         <button type="submit" class="btn-contact">Send Message</button>
       </form>
-    </div>
 
+      <div style="margin-top:25px;font-size:15px;color:#374151;">
+        <p>📧 <b>deepanraj.a@outlook.com</b></p>
+        <p>📧 <b>info@deepanraj.work.gd</b></p>
+        <p>📱 <b>8940991095</b></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<button class="chatbot-button" type="button" onclick="toggleChatbot()">💬</button>
+
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <span>Portfolio Assistant</span>
+    <button type="button" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;" onclick="toggleChatbot()">×</button>
+  </div>
+  <div class="chatbot-body" id="chatbot-body">
+    <div class="chat-msg bot"><span>Hi, I'm your portfolio assistant. Ask me about Deepanraj’s skills, projects, or experience.</span></div>
+  </div>
+  <div class="chatbot-input">
+    <input id="chatbot-input" type="text" placeholder="Ask something about Deepanraj..." onkeydown="if(event.key==='Enter'){sendChat();}">
+    <button type="button" onclick="sendChat()">Send</button>
   </div>
 </div>
 
 <script>
-/* Toggle notes dropdown helper */
 function toggleNotes(id){
-  const el = document.getElementById(id);
+  const el=document.getElementById(id);
   if(!el) return;
-  el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+  el.style.display = (el.style.display==='block') ? 'none' : 'block';
+}
+
+function toggleChatbot(){
+  const panel=document.getElementById('chatbot-panel');
+  if(panel.style.display==='flex'){panel.style.display='none';}
+  else{panel.style.display='flex';}
+}
+
+function sendChat(){
+  const input=document.getElementById('chatbot-input');
+  const body=document.getElementById('chatbot-body');
+  const text=input.value.trim();
+  if(!text) return;
+  const me=document.createElement('div');
+  me.className='chat-msg me';
+  me.innerHTML='<span>'+text+'</span>';
+  body.appendChild(me);
+
+  const bot=document.createElement('div');
+  bot.className='chat-msg bot';
+  let reply="Thanks for your message! Deepanraj will review it soon.";
+  if(/project|dashboard|github/i.test(text)){
+    reply="You can see more of my projects on GitHub: github.com/deeepanbe";
+  }else if(/skill|tools|tech/i.test(text)){
+    reply="Key skills: Python, SQL, Excel, Power BI, Tableau, Machine Learning, Pandas, NumPy, Scikit-Learn.";
+  }else if(/contact|email|phone/i.test(text)){
+    reply="You can contact Deepanraj at deepanraj.a@outlook.com or 8940991095.";
+  }else if(/resume|cv/i.test(text)){
+    reply="You can download my latest resume using the 'Download Resume' button in the hero or contact section.";
+  }else{
+    reply="I’m a simple portfolio assistant. I can answer about skills, projects, GitHub, or contact details.";
+  }
+  bot.innerHTML='<span>'+reply+'</span>';
+  body.appendChild(bot);
+  body.scrollTop=body.scrollHeight;
+  input.value='';
 }
 </script>
 
 </body>
 </html>
+
