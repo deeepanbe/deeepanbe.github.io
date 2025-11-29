@@ -1,531 +1,444 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>AI Resume Generator - Deepanraj A</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deepanraj A - Data Analyst Portfolio</title>
 
 <style>
-/* === SAME CSS FROM YOUR INDEX.HTML (FULL THEME) === */
-/* ------------------------------------------------------ */
 /* GLOBAL */
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  background:#f5f5f5;
-  color:#333;
-  line-height:1.6;
+  background:#f5f5f5;color:#333;line-height:1.6;
 }
 .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
 /* HERO */
 .hero{
   background:linear-gradient(135deg,#ffffff 0%,#f9f9f9 100%);
-  padding:60px 20px 40px;
-  text-align:center;
+  padding:60px 20px;text-align:center;
   border-bottom:1px solid #e0e0e0;
   box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 .profile-wrapper{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:40px;
-  max-width:900px;
-  margin:0 auto 30px;
+  display:flex;align-items:center;justify-content:center;gap:40px;
+  max-width:900px;margin:0 auto;
 }
-.profile-photo{width:200px;height:200px;flex-shrink:0}
+.profile-photo{width:180px;height:180px;flex-shrink:0}
 .profile-photo img{
-  width:100%;height:100%;
-  border-radius:50%;
-  border:5px solid #2563eb;
-  object-fit:cover;
+  width:100%;height:100%;border-radius:50%;
+  border:5px solid #2563eb;object-fit:cover;
 }
 .profile-info{text-align:left;flex:1}
-.profile-info h1{font-size:48px;font-weight:700;margin-bottom:10px;color:#1f2937;}
-.typing{
-  font-size:18px;font-weight:600;color:#2563eb;
-  min-height:30px;margin-bottom:15px;border-right:2px solid #2563eb;
-  padding-right:5px;white-space:nowrap;
+.profile-info h1{
+  font-size:42px;font-weight:800;margin-bottom:5px;color:#1f2937;
 }
 .profile-subtitle{
-  display:flex;gap:15px;margin-bottom:10px;
-  color:#666;font-size:15px;flex-wrap:wrap;
+  display:flex;gap:15px;margin-bottom:20px;
+  font-size:15px;color:#666;flex-wrap:wrap;
 }
-.profile-social{display:flex;gap:15px;margin:10px 0 18px;}
+.profile-social{
+  display:flex;gap:15px;margin-bottom:18px;
+}
 .social-icon{
   width:40px;height:40px;border-radius:50%;background:#e5e7eb;
   display:flex;align-items:center;justify-content:center;
-  text-decoration:none;color:#2563eb;font-size:20px;transition:.3s;
+  color:#2563eb;font-size:18px;text-decoration:none;transition:.3s;
 }
-.social-icon:hover{background:#2563eb;color:#fff;transform:translateY(-2px)}
+.social-icon:hover{
+  background:#2563eb;color:#fff;transform:translateY(-2px);
+}
 
-/* Buttons */
-.btn-contact, .btn-secondary{
-  display:inline-block;padding:12px 32px;border-radius:30px;
-  text-decoration:none;font-weight:600;cursor:pointer;border:none;
-  font-size:15px;transition:.3s;
+/* BUTTONS */
+.btn-contact{
+  background:#2563eb;color:white;padding:12px 32px;
+  border-radius:30px;font-weight:600;border:none;cursor:pointer;
+  transition:.3s;margin-right:10px;
 }
-.btn-contact{background:#2563eb;color:#fff;}
 .btn-contact:hover{
   background:#1d4ed8;transform:translateY(-2px);
-  box-shadow:0 5px 15px rgba(37,99,235,.3);
-}
-.btn-secondary{
-  background:#fff;color:#2563eb;border:1px solid #2563eb;
-}
-.btn-secondary:hover{
-  background:#2563eb;color:#fff;
-  transform:translateY(-2px);
-  box-shadow:0 4px 12px rgba(37,99,235,.25);
+  box-shadow:0 5px 15px rgba(37,99,235,0.3);
 }
 
-/* Nav Tabs */
+.btn-secondary{
+  padding:12px 25px;border-radius:30px;
+  background:white;border:1px solid #2563eb;
+  color:#2563eb;font-weight:600;text-decoration:none;
+  cursor:pointer;transition:.3s;
+}
+.btn-secondary:hover{
+  background:#2563eb;color:white;
+  transform:translateY(-2px);
+}
+
+/* NAVBAR */
 .nav-tabs{
-  display:flex;gap:40px;border-bottom:2px solid #e5e7eb;
-  padding:0 20px;margin-top:20px;overflow-x:auto;
+  display:flex;gap:40px;overflow-x:auto;
+  border-bottom:2px solid #e5e7eb;
+  margin-top:30px;padding:0 20px;
 }
 .nav-tabs a{
-  color:#999;text-decoration:none;padding:15px 0;
-  border-bottom:3px solid transparent;transition:.3s;
-  font-weight:500;white-space:nowrap;
+  text-decoration:none;color:#777;font-weight:500;
+  padding:14px 0;border-bottom:3px solid transparent;
 }
-.nav-tabs a:hover, .nav-tabs a.active{
+.nav-tabs a:hover,.nav-tabs a.active{
   color:#2563eb;border-bottom-color:#2563eb;
 }
 
-/* Resume Generator Page Header */
-.section-header{
-  padding:40px 20px;
-  background:#fff;
-  margin:25px auto;
-  max-width:900px;
-  text-align:center;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 3px 10px rgba(0,0,0,.06);
+/* SECTION */
+.section{
+  background:white;margin:30px 0;padding:40px 20px;
+  border-radius:10px;border:1px solid #e5e7eb;
 }
-.section-header h2{
-  font-size:32px;color:#1f2937;margin-bottom:12px;font-weight:700;
+.section h2{
+  font-size:26px;margin-bottom:25px;
+  display:flex;align-items:center;gap:12px;color:#1f2937;
 }
-.section-header p{
-  color:#4b5563;font-size:16px;line-height:1.7;
+.section h2::before{
+  content:"";width:4px;height:26px;background:#2563eb;border-radius:2px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO SECTION (Same as Index.html) -->
+<!-- HERO SECTION -->
 <div class="hero">
   <div class="container">
 
     <div class="profile-wrapper">
+
       <div class="profile-photo">
-        <img src="images/Photo.jpeg" alt="Deepanraj A">
+        <img src="images/Photo.jpeg" />
       </div>
 
       <div class="profile-info">
         <h1>DEEPANRAJ A</h1>
 
-        <div class="typing" id="typing-hero"></div>
-        <script>
-        const heroLines=[
-          "AI-Powered Resume Generator",
-          "Create ATS-Optimized Resumes Instantly",
-          "Powered by ChatGPT + Automation",
-          "Smart Resume Engine for Any JD"
-        ];
-        let hi=0,hc=0,hd=false;
-        function typeHero(){
-          const el=document.getElementById("typing-hero");
-          if(!el) return;
-          const text=heroLines[hi];
-          if(!hd){
-            el.textContent=text.substring(0,hc++);
-            if(hc>text.length+3) hd=true;
-          }else{
-            el.textContent=text.substring(0,hc--);
-            if(hc<0){hd=false;hi=(hi+1)%heroLines.length;}
-          }
-          setTimeout(typeHero,hd?60:100);
-        }
-        typeHero();
-        </script>
-
         <div class="profile-subtitle">
-          <span>📊 DATA ANALYST</span>
-          <span>📍 KARUR</span>
-          <span>🤖 AI RESUME AUTOMATION</span>
+          📊 DATA ANALYST &nbsp; | &nbsp; 📍 KARUR
         </div>
 
         <div class="profile-social">
-          <a onclick="alert('LinkedIn profile coming soon!')" class="social-icon">in</a>
-          <a onclick="alert('GitHub profile coming soon!')" class="social-icon">⚙</a>
+          <a href="https://linkedin.com/in/deepanraj-data-analyst" class="social-icon">in</a>
+          <a href="https://github.com/deeepanbe" class="social-icon">⚙</a>
         </div>
+
+        <button class="btn-contact">CONTACT ME</button>
+        <a href="resume/Deepanraj_A_Data_Analyst.pdf" class="btn-secondary">Download Resume</a>
       </div>
+
     </div>
 
-    <!-- NAVBAR WITH NEW TAB -->
+    <!-- NAVIGATION BAR -->
     <div class="nav-tabs">
-      <a href="index.html">SUMMARY</a>
-      <a href="index.html#overview">OVERVIEW</a>
-      <a href="index.html#projects">PROJECTS</a>
-      <a href="index.html#experience">EXPERIENCE</a>
-      <a href="index.html#education">EDUCATION</a>
-      <a href="index.html#certifications">CERTIFICATIONS</a>
-      <a href="index.html#skills">SKILLS</a>
-      <a href="index.html#contact">CONTACT</a>
+      <a href="#summary" class="active">SUMMARY</a>
+      <a href="#overview">OVERVIEW</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#education">EDUCATION</a>
+      <a href="#certifications">CERTIFICATIONS</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#contact">CONTACT</a>
 
-      <!-- NEW TAB FOR THIS PAGE -->
-      <a href="resume-generator.html" class="active">RESUME GENERATOR</a>
+      <!-- NEW TAB -->
+      <a href="resume-generator.html">RESUME GENERATOR</a>
     </div>
 
   </div>
 </div>
 
-<!-- PAGE HEADER -->
-<div class="section-header">
-  <h2>AI Resume Generator</h2>
-  <p>
-    Paste any Job Description (JD), enter company name and job title, and instantly generate
-    a personalized ATS-ready resume in both PDF and DOCX formats.
-  </p>
+<!-- SUMMARY SECTION -->
+<div id="summary" class="section">
+  <div class="container">
+    <h2>SUMMARY</h2>
+
+    <p>📊 Aspiring Data Analyst with a passion for transforming raw data into actionable insights.</p>
+    <p>🔍 Skilled in Python, SQL, Excel, Power BI, and Machine Learning.</p>
+    <p>💼 Experienced in HR Analytics, Marketing Analytics, Crime Analysis & Business Intelligence.</p>
+    <p>📍 Based in Karur, Tamil Nadu, India.</p>
+    <p>🌱 Currently exploring advanced Machine Learning & AI techniques.</p>
+  </div>
+</div>
+<!-- ======================= -->
+<!-- OVERVIEW SECTION        -->
+<!-- ======================= -->
+<div id="overview" class="section">
+  <div class="container">
+
+    <h2>OVERVIEW</h2>
+
+    <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;">
+
+      <div style="width:200px;background:#f3f4f6;padding:30px;border-radius:10px;border-left:4px solid #2563eb;text-align:center;">
+        <div style="font-size:42px;font-weight:700;color:#2563eb;">9</div>
+        <div style="color:#555;font-size:14px;">Years Experience</div>
+      </div>
+
+      <div style="width:200px;background:#f3f4f6;padding:30px;border-radius:10px;border-left:4px solid #2563eb;text-align:center;">
+        <div style="font-size:42px;font-weight:700;color:#2563eb;">4</div>
+        <div style="color:#555;font-size:14px;">Years Education</div>
+      </div>
+
+      <div style="width:200px;background:#f3f4f6;padding:30px;border-radius:10px;border-left:4px solid #2563eb;text-align:center;">
+        <div style="font-size:42px;font-weight:700;color:#2563eb;">2</div>
+        <div style="color:#555;font-size:14px;">Languages</div>
+      </div>
+
+      <div style="width:200px;background:#f3f4f6;padding:30px;border-radius:10px;border-left:4px solid #2563eb;text-align:center;">
+        <div style="font-size:42px;font-weight:700;color:#2563eb;">6</div>
+        <div style="color:#555;font-size:14px;">Certificates</div>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
-<!-- PART 1 ENDS HERE -->
-<!-- WAIT FOR PART 2 (MAIN UI + PREVIEW + FORM) -->
-<!-- ============================= -->
-<!-- PREMIUM JD RESUME GENERATOR UI -->
-<!-- ============================= -->
 
-<style>
-/* GLASS CARD */
-.glass-card{
-  background:rgba(255,255,255,0.65);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border-radius:16px;
-  padding:30px;
-  max-width:900px;
-  margin:20px auto 50px;
-  border:1px solid rgba(255,255,255,0.45);
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-  animation:fadeInUp .7s ease;
-}
-@keyframes fadeInUp{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
 
-/* LABELS + INPUTS */
-.input-group{
-  margin-bottom:20px;
-}
-.input-group label{
-  font-weight:600;color:#1f2937;font-size:14px;margin-bottom:6px;display:block;
-}
-.input-group input, .input-group textarea{
-  width:100%;padding:12px 14px;border-radius:8px;
-  border:1px solid #d1d5db;font-size:15px;
-  transition:.25s ease;border-left:4px solid #2563eb;
-}
-.input-group textarea{min-height:160px;resize:vertical;}
-.input-group input:focus, .input-group textarea:focus{
-  outline:none;border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,0.2);
-}
+<!-- ======================= -->
+<!-- PROJECTS SECTION        -->
+<!-- ======================= -->
+<div id="projects" class="section">
+  <div class="container">
 
-/* KEYWORD HIGHLIGHTER */
-.keyword-box{
-  background:#eef2ff;border-left:4px solid #2563eb;
-  padding:14px;border-radius:10px;margin-top:12px;
-  font-size:14px;color:#1e3a8a;display:none;
-}
+    <h2>PROJECTS</h2>
 
-/* GENERATE BUTTON */
-#generateBtn{
-  margin-top:18px;
-  width:100%;
-  background:#2563eb;color:#fff;
-  padding:15px;border:none;font-size:18px;
-  border-radius:12px;font-weight:700;
-  cursor:pointer;transition:.3s;
-}
-#generateBtn:hover{
-  transform:translateY(-2px);
-  background:#1d4ed8;
-  box-shadow:0 6px 18px rgba(37,99,235,0.4);
-}
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;">
 
-/* LOADING ANIMATION */
-.loader{
-  margin:25px auto;
-  border:6px solid #f3f3f3;
-  border-top:6px solid #2563eb;
-  border-radius:50%;
-  width:45px;height:45px;
-  animation:spin 1s linear infinite;
-  display:none;
-}
-@keyframes spin{
-  0%{transform:rotate(0deg);}
-  100%{transform:rotate(360deg);}
-}
+      <!-- Sales Dashboard -->
+      <div style="background:#f3f4f6;border-radius:10px;border-top:4px solid #2563eb;padding:20px;">
+        <img src="Thumbnail/sales_thumb.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h3 style="font-size:20px;color:#1f2937;margin-bottom:8px;">Sales Performance Dashboard</h3>
+        <p style="font-size:14px;color:#555;margin-bottom:10px;">
+          Interactive Power BI dashboard visualizing revenue, product performance,
+          and customer segments for business leaders.
+        </p>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">Power BI</span>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">SQL</span>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">Excel</span>
+      </div>
 
-/* RESULT PANEL */
-.result-card{
-  background:#ffffff;
-  padding:25px;border-radius:14px;
-  max-width:900px;margin:40px auto;
-  box-shadow:0 6px 20px rgba(0,0,0,0.08);
-  display:none;
-}
-.result-card h3{font-size:22px;margin-bottom:15px;color:#1f2937;}
-.result-links a{
-  display:block;
-  margin-bottom:10px;
-  padding:12px;
-  background:#2563eb;color:white;
-  text-align:center;
-  border-radius:10px;
-  font-weight:600;
-  text-decoration:none;
-}
-.result-links a:hover{
-  background:#1d4ed8;
-}
+      <!-- Customer Churn Analysis -->
+      <div style="background:#f3f4f6;border-radius:10px;border-top:4px solid #2563eb;padding:20px;">
+        <img src="Thumbnail/churn_thumb.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h3 style="font-size:20px;color:#1f2937;margin-bottom:8px;">Customer Churn Analysis</h3>
+        <p style="font-size:14px;color:#555;margin-bottom:10px;">
+          Predictive model using Python and ML to identify at-risk customers and drive retention strategies.
+        </p>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">Python</span>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">Scikit-Learn</span>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">Pandas</span>
+      </div>
 
-/* CONFETTI CANVAS */
-#confettiCanvas{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  pointer-events:none;display:none;
-  z-index:9999;
-}
-</style>
+      <!-- HR Analytics -->
+      <div style="background:#f3f4f6;border-radius:10px;border-top:4px solid #2563eb;padding:20px;">
+        <img src="Thumbnail/hr_thumb.png" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h3 style="font-size:20px;color:#1f2937;margin-bottom:8px;">HR Analytics Dashboard</h3>
+        <p style="font-size:14px;color:#555;margin-bottom:10px;">
+          HR dashboard for headcount, attrition, and performance trends supporting workforce planning.
+        </p>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">Tableau</span>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">Excel</span>
+        <span style="background:#dbeafe;color:#2563eb;padding:5px 12px;border-radius:5px;font-size:12px;">HR Analytics</span>
+      </div>
 
-<canvas id="confettiCanvas"></canvas>
+    </div>
 
-<!-- MAIN GLASS CARD -->
-<div class="glass-card">
+    <div style="text-align:center;margin-top:20px;">
+      <a href="https://github.com/deeepanbe" style="color:#2563eb;font-weight:600;text-decoration:none;">
+        View More Projects on GitHub →
+      </a>
+    </div>
 
-  <h2 style="color:#1f2937;text-align:center;margin-bottom:20px;">
-    Paste Job Description to Generate Your Resume
-  </h2>
-
-  <!-- COMPANY NAME -->
-  <div class="input-group">
-    <label>Company Name</label>
-    <input id="companyName" type="text" placeholder="Example: Amazon, TCS, Accenture">
   </div>
-
-  <!-- JOB TITLE -->
-  <div class="input-group">
-    <label>Job Title</label>
-    <input id="jobTitle" type="text" placeholder="Example: Data Analyst, Data Scientist">
-  </div>
-
-  <!-- JOB DESCRIPTION -->
-  <div class="input-group">
-    <label>Paste Job Description (JD)</label>
-    <textarea id="jdInput" placeholder="Paste the full job description here..."></textarea>
-  </div>
-
-  <!-- KEYWORD DISPLAY -->
-  <div id="keywordBox" class="keyword-box"></div>
-
-  <!-- GENERATE BUTTON -->
-  <button id="generateBtn">Generate Resume (PDF + DOCX)</button>
-
-  <!-- LOADING SPINNER -->
-  <div id="loader" class="loader"></div>
-
 </div>
 
-<!-- RESULT AREA -->
-<div id="resultCard" class="result-card">
-  <h3>Resume Generated Successfully 🎉</h3>
-  <p>Your resume has been uploaded to your GitHub <b>/resume</b> folder.</p>
 
-  <div class="result-links" id="downloadLinks"></div>
+
+<!-- ======================= -->
+<!-- EXPERIENCE SECTION      -->
+<!-- ======================= -->
+<div id="experience" class="section">
+  <div class="container">
+
+    <h2>EXPERIENCE</h2>
+
+    <div style="margin-bottom:30px;">
+      <h3 style="font-size:20px;color:#1f2937;">Product Analyst</h3>
+      <div style="color:#2563eb;font-weight:600;">DAKSHIN HOME FASHIONS</div>
+      <div style="color:#888;font-size:14px;margin-bottom:10px;">June 2020 - Present</div>
+      <p style="color:#555;">
+        Leading data analysis initiatives across production and operations, automating reports,
+        and building dashboards to improve efficiency and decision-making.
+      </p>
+    </div>
+
+    <div>
+      <h3 style="font-size:20px;color:#1f2937;">Graduate Engineering Trainee</h3>
+      <div style="color:#2563eb;font-weight:600;">LAKSHMI LIFE SCIENCE LIMITED</div>
+      <div style="color:#888;font-size:14px;margin-bottom:10px;">April 2017 - February 2019</div>
+      <p style="color:#555;">
+        Developed strong foundations in quality processes, RCA, and process improvement using data.
+      </p>
+    </div>
+
+  </div>
 </div>
 
-<!-- PART 2 ENDS HERE -->
-<!-- WAIT FOR PART 3 (ALL JAVASCRIPT + CONFETTI ENGINE) -->
-<!-- =========================== -->
-<!--     JAVASCRIPT ENGINE       -->
-<!-- =========================== -->
 
+
+<!-- ======================= -->
+<!-- EDUCATION SECTION       -->
+<!-- ======================= -->
+<div id="education" class="section">
+  <div class="container">
+
+    <h2>EDUCATION</h2>
+
+    <h3 style="font-size:20px;color:#1f2937;">Bachelor of Engineering - Mechanical</h3>
+    <div style="color:#2563eb;font-weight:600;">Pavai College of Technology</div>
+    <div style="color:#888;font-size:14px;margin-bottom:10px;">June 2012 - April 2016</div>
+
+    <p style="color:#555;">
+      Built strong foundations in mathematics, statistics, and problem-solving that support analytical thinking.
+    </p>
+
+  </div>
+</div>
+<!-- ======================= -->
+<!-- CERTIFICATIONS SECTION  -->
+<!-- ======================= -->
+<div id="certifications" class="section">
+  <div class="container">
+
+    <h2>CERTIFICATIONS</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+
+      <div style="background:#f3f4f6;padding:20px;border-left:4px solid #2563eb;border-radius:10px;">
+        <img src="certificates/google.png" style="width:120px;">
+        <h3 style="font-size:18px;margin-top:10px;">Google Analytics & Docs</h3>
+        <p>Google — 2024</p>
+      </div>
+
+      <div style="background:#f3f4f6;padding:20px;border-left:4px solid #2563eb;border-radius:10px;">
+        <img src="certificates/edureka.png" style="width:120px;">
+        <h3 style="font-size:18px;margin-top:10px;">Business Analyst Masters</h3>
+        <p>Edureka — Completion Expected March 2025</p>
+      </div>
+
+      <div style="background:#f3f4f6;padding:20px;border-left:4px solid #2563eb;border-radius:10px;">
+        <img src="certificates/microsoft.png" style="width:120px;">
+        <h3 style="font-size:18px;margin-top:10px;">Microsoft SQL Server Certification</h3>
+        <p>Microsoft — March 2025</p>
+      </div>
+
+      <div style="background:#f3f4f6;padding:20px;border-left:4px solid #2563eb;border-radius:10px;">
+        <img src="certificates/tableau.png" style="width:120px;">
+        <h3 style="font-size:18px;margin-top:10px;">Tableau Certification</h3>
+        <p>Tableau — Dec 2024</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ======================= -->
+<!-- SKILLS SECTION          -->
+<!-- ======================= -->
+<div id="skills" class="section">
+  <div class="container">
+
+    <h2>SKILLS</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;">
+
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Python</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">SQL</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">R</div>
+
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Power BI</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Excel</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Tableau</div>
+
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Pandas</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">NumPy</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Scikit-Learn</div>
+
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Matplotlib</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Machine Learning</div>
+
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">Git</div>
+      <div style="background:#f3f4f6;padding:15px;border-left:4px solid #2563eb;border-radius:8px;text-align:center;">GitHub</div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ======================= -->
+<!-- CONTACT SECTION         -->
+<!-- ======================= -->
+<div id="contact" class="section">
+  <div class="container">
+
+    <h2>CONTACT</h2>
+
+    <p style="margin-bottom:20px;color:#444;">
+      If you’d like to discuss a role, project, or collaboration, use the form below or contact me directly.
+    </p>
+
+    <form action="https://formspree.io/f/mnnqanpn" method="POST" style="max-width:500px;margin:auto;">
+
+      <label style="font-weight:600;">Name *</label>
+      <input type="text" name="name" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;margin-bottom:15px;">
+
+      <label style="font-weight:600;">Email *</label>
+      <input type="email" name="email" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #ccc;margin-bottom:15px;">
+
+      <label style="font-weight:600;">Message *</label>
+      <textarea name="message" required style="width:100%;padding:12px;border-radius:8px;height:120px;border:1px solid #ccc;margin-bottom:15px;"></textarea>
+
+      <button type="submit" class="btn-contact" style="width:100%;">Send Message</button>
+
+    </form>
+
+    <div style="margin-top:25px;font-size:15px;line-height:1.7;">
+      <p>📧 <b>deepanraj.a@outlook.com</b></p>
+      <p>📧 <b>info@deepanraj.work.gd</b></p>
+      <p>📱 <b>8940991095</b></p>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ======================= -->
+<!-- FOOTER SECTION          -->
+<!-- ======================= -->
+<div style="text-align:center;padding:20px;color:#777;">
+  © 2025 Deepanraj A — Data Analyst Portfolio
+</div>
+
+
+<!-- ======================= -->
+<!-- JS — Notes Dropdown     -->
+<!-- ======================= -->
 <script>
-// =================================================
-// 1) JD KEYWORD EXTRACTOR
-// =================================================
-document.getElementById("jdInput").addEventListener("input", () => {
-    const jd = document.getElementById("jdInput").value;
-
-    if (jd.trim().length < 20) {
-        document.getElementById("keywordBox").style.display = "none";
-        return;
-    }
-
-    let keywords = [];
-    const keywordList = [
-        "SQL","Python","Power BI","Tableau","Excel","Machine Learning","ML","Deep Learning",
-        "Dashboards","ETL","Pandas","NumPy","Matplotlib","Data Cleaning","Business Intelligence"
-    ];
-
-    keywordList.forEach(k => {
-        if (jd.toLowerCase().includes(k.toLowerCase())) keywords.push(k);
-    });
-
-    if (keywords.length === 0) {
-        document.getElementById("keywordBox").style.display = "none";
-    } else {
-        document.getElementById("keywordBox").style.display = "block";
-        document.getElementById("keywordBox").innerHTML =
-            "<b>Keywords detected:</b> " + keywords.join(", ");
-    }
-});
-
-
-// =================================================
-// 2) ROLE DETECTING ENGINE (DA, DS, BI, TABLEAU)
-// =================================================
-function detectRole(jd) {
-    jd = jd.toLowerCase();
-
-    if (jd.includes("power bi")) return "Power BI Developer";
-    if (jd.includes("tableau")) return "Tableau Developer";
-    if (jd.includes("machine learning") || jd.includes("ml") || jd.includes("ai")) return "Data Scientist";
-    if (jd.includes("business analyst")) return "Business Analyst";
-
-    return "Data Analyst";
-}
-
-
-// =================================================
-// 3) API REQUEST TO GOOGLE APPS SCRIPT BACKEND
-// =================================================
-document.getElementById("generateBtn").addEventListener("click", async () => {
-
-    const company = document.getElementById("companyName").value.trim();
-    const job = document.getElementById("jobTitle").value.trim();
-    const jd = document.getElementById("jdInput").value.trim();
-
-    if (!company || !job || !jd) {
-        alert("Please fill Company Name, Job Title, and JD.");
-        return;
-    }
-
-    // Show loader
-    document.getElementById("loader").style.display = "block";
-    document.getElementById("generateBtn").disabled = true;
-
-    const detectedRole = detectRole(jd);
-
-    try {
-        const response = await fetch(
-            "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec",   // <-- Replace in Part 2
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    companyName: company,
-                    jobTitle: job,
-                    jobDescription: jd,
-                    detectedRole: detectedRole,
-                    output: "pdf-docx"
-                })
-            }
-        );
-
-        const result = await response.json();
-
-        // Hide loader
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("generateBtn").disabled = false;
-
-        if (result.status === "success") {
-
-            // Populate download links
-            let linksHTML = "";
-            if (result.pdf) {
-                linksHTML += `<a href="${result.pdf}" target="_blank">Download PDF</a>`;
-            }
-            if (result.docx) {
-                linksHTML += `<a href="${result.docx}" target="_blank">Download DOCX</a>`;
-            }
-
-            document.getElementById("downloadLinks").innerHTML = linksHTML;
-            document.getElementById("resultCard").style.display = "block";
-
-            startConfetti();
-
-        } else {
-            alert("Error generating resume: " + result.message);
-        }
-
-    } catch (err) {
-        console.error(err);
-        alert("Something went wrong. Check your backend API URL.");
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("generateBtn").disabled = false;
-    }
-});
-
-
-// =================================================
-// 4) CONFETTI ENGINE
-// =================================================
-const canvas = document.getElementById("confettiCanvas");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.onresize = resizeCanvas;
-
-let confetti = [];
-function startConfetti() {
-    canvas.style.display = "block";
-
-    confetti = [];
-    for (let i = 0; i < 200; i++) {
-        confetti.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height - canvas.height,
-            r: Math.random() * 6 + 2,
-            d: Math.random() * 1 + 1,
-            color: `hsl(${Math.random() * 360}, 80%, 60%)`
-        });
-    }
-
-    animateConfetti();
-
-    // stop after 5s
-    setTimeout(() => {
-        canvas.style.display = "none";
-    }, 5000);
-}
-
-function animateConfetti() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    confetti.forEach(c => {
-        c.y += c.d;
-        if (c.y > canvas.height) c.y = -10;
-
-        ctx.beginPath();
-        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-        ctx.fillStyle = c.color;
-        ctx.fill();
-    });
-
-    requestAnimationFrame(animateConfetti);
+function toggleNotes() {
+  const box = document.getElementById("notesDropdown");
+  box.style.display = (box.style.display === "block") ? "none" : "block";
 }
 </script>
-
 
 </body>
 </html>
