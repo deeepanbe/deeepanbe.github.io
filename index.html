@@ -420,6 +420,18 @@ th{background:var(--bg-soft);}
   .profile-wrapper{flex-direction:column;text-align:center;}
   .profile-info{text-align:center;}
 }
+  /* DATA LAB – internal tabs & layout */
+.datalab-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.dl-tab{padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--bg-soft);cursor:pointer;font-size:13px;color:var(--text-soft);transition:.2s;}
+.dl-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.dl-tab-content{display:none;margin-top:10px;}
+.dl-tab-content.active{display:block;}
+.dl-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12px;}
+.dl-pill{padding:4px 8px;border-radius:999px;background:var(--bg-soft);}
+.dl-stat-number{font-weight:700;color:var(--primary);margin-right:4px;}
+.dl-two-col{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;}
+@media(max-width:800px){.dl-two-col{grid-template-columns:1fr;}}
+
 </style>
 </head>
 
@@ -1166,4 +1178,571 @@ async function sendAssistantMessage(){
 </script>
 
 </body>
+</html
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Data Lab Ultra – Deepanraj</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- PapaParse -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse"></script>
+
+<!-- SQL.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+
+<style>
+:root{
+  --bg:#0f172a;
+  --bg-card:#1e293b;
+  --bg-soft:#162033;
+  --text:#e2e8f0;
+  --text-soft:#94a3b8;
+  --border:#334155;
+  --primary:#2563eb;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+}
+
+.section{
+  max-width:1000px;
+  margin:30px auto;
+  background:var(--bg-card);
+  padding:25px;
+  border-radius:14px;
+  border:1px solid var(--border);
+}
+
+.section h2{
+  font-size:24px;
+  margin-bottom:10px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.section h2::before{
+  content:"";
+  width:4px;
+  height:20px;
+  background:var(--primary);
+  border-radius:3px;
+}
+
+/* Tabs */
+.datalab-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+.dl-tab{
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--bg-soft);
+  color:var(--text-soft);
+  cursor:pointer;
+  font-size:13px;
+}
+.dl-tab.active{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
+
+.dl-tab-content{
+  display:none;
+  margin-top:18px;
+}
+.dl-tab-content.active{
+  display:block;
+}
+
+/* Panel */
+.panel{
+  background:var(--bg-soft);
+  padding:15px;
+  border-radius:10px;
+  border:1px solid var(--border);
+}
+
+textarea,select,input[type="file"]{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--bg-card);
+  color:var(--text);
+  margin-top:6px;
+  font-size:13px;
+}
+textarea{min-height:90px;}
+
+.label-small{
+  color:var(--text-soft);
+  font-size:12px;
+  margin-top:10px;
+}
+
+.btn{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn-outline{
+  background:transparent;
+  color:var(--primary);
+  border:1px solid var(--primary);
+}
+
+table{
+  border-collapse:collapse;
+  width:100%;
+  font-size:12px;
+}
+th,td{
+  padding:6px;
+  border:1px solid var(--border);
+}
+th{
+  background:var(--bg-card);
+}
+
+.dl-two-col{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:12px;
+}
+@media(max-width:800px){
+  .dl-two-col{grid-template-columns:1fr;}
+}
+
+.dl-meta{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.dl-pill{
+  padding:5px 10px;
+  background:var(--bg-card);
+  border-radius:20px;
+  font-size:12px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- ========================================================= -->
+<!--                ⭐ DATA LAB ULTRA SECTION ⭐                 -->
+<!-- ========================================================= -->
+
+<div class="section">
+  <h2>Data Lab — Ultra Analytics Workspace</h2>
+  <p style="font-size:13px;color:var(--text-soft);">
+    SQL Studio • AI SQL Assistant • Dataset Explorer • Chart Builder • DAX / Tableau AI • BRD Generator
+  </p>
+
+  <!-- TABS -->
+  <div class="datalab-tabs">
+    <button class="dl-tab active" data-dl-tab="dl-sql">SQL Studio</button>
+    <button class="dl-tab" data-dl-tab="dl-aisql">AI SQL Generator</button>
+    <button class="dl-tab" data-dl-tab="dl-dataset">Dataset & Stats</button>
+    <button class="dl-tab" data-dl-tab="dl-charts">Charts Studio</button>
+    <button class="dl-tab" data-dl-tab="dl-bi-ai">BI & DAX AI</button>
+  </div>
+
+
+  <!-- ===================== SQL STUDIO ===================== -->
+  <div id="dl-sql" class="dl-tab-content active">
+    <div class="panel">
+      <div class="label-small">SQL Query</div>
+      <textarea id="sqlInput">SELECT * FROM sales LIMIT 5;</textarea>
+
+      <div style="margin-top:10px;display:flex;gap:10px;">
+        <button class="btn" onclick="runSQL()">Run Query</button>
+        <button class="btn-outline" onclick="exportSQLResult()">Export</button>
+      </div>
+
+      <div id="sqlResult" style="margin-top:15px;max-height:260px;overflow:auto;"></div>
+    </div>
+  </div>
+
+
+  <!-- =================== AI SQL GENERATOR =================== -->
+  <div id="dl-aisql" class="dl-tab-content">
+    <div class="panel">
+
+      <div class="label-small">Describe your query</div>
+      <textarea id="aiSqlPrompt" placeholder="Example: Show total revenue by region for last 6 months."></textarea>
+
+      <button class="btn" style="margin-top:10px;" onclick="generateAISQL()">Generate SQL</button>
+
+      <div class="label-small" style="margin-top:12px;">Generated SQL</div>
+      <textarea id="aiSqlOutput" readonly></textarea>
+
+    </div>
+  </div>
+
+
+  <!-- ================= DATASET + STATS ===================== -->
+  <div id="dl-dataset" class="dl-tab-content">
+    <div class="panel">
+
+      <div class="label-small">Upload CSV file</div>
+      <input type="file" id="csvFile" accept=".csv">
+
+      <div class="dl-meta" id="dlMeta" style="margin-top:12px;"></div>
+
+      <div id="csvPreview"
+        style="margin-top:12px;max-height:260px;overflow:auto;
+        border:1px solid var(--border);padding:8px;border-radius:8px;">
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ====================== CHARTS ========================= -->
+  <div id="dl-charts" class="dl-tab-content">
+    <div class="panel">
+      <div class="dl-two-col">
+
+        <div>
+          <div class="label-small">Chart Type</div>
+          <select id="chartTypeSelect">
+            <option value="bar">Bar</option>
+            <option value="line">Line</option>
+            <option value="pie">Pie</option>
+            <option value="scatter">Scatter</option>
+          </select>
+
+          <div class="label-small">X-Axis</div>
+          <select id="chartXSelect"></select>
+
+          <div class="label-small">Y-Axis</div>
+          <select id="chartYSelect"></select>
+
+          <button class="btn" style="margin-top:10px;" onclick="renderCustomChart()">Build Chart</button>
+        </div>
+
+        <div>
+          <canvas id="csvChart" style="height:260px;"></canvas>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== DAX + TABLEAU + BRD AI ===================== -->
+  <div id="dl-bi-ai" class="dl-tab-content">
+    <div class="panel">
+
+      <!-- DAX -->
+      <div class="label-small">Power BI — Generate DAX</div>
+      <textarea id="daxPrompt" placeholder="Example: YOY growth using Sales[Revenue] and Sales[Date]"></textarea>
+      <button class="btn" style="margin-top:8px;" onclick="generateDAX()">Generate DAX</button>
+      <pre id="daxOutput" style="margin-top:10px;"></pre>
+
+      <!-- Tableau -->
+      <div class="label-small" style="margin-top:20px;">Tableau — Calculated Field</div>
+      <textarea id="tblPrompt" placeholder="Example: Churn flag if customer inactive for 90 days"></textarea>
+      <button class="btn" style="margin-top:8px;" onclick="generateTableauCalc()">Generate Formula</button>
+      <pre id="tblOutput" style="margin-top:10px;"></pre>
+
+      <!-- BRD -->
+      <div class="label-small" style="margin-top:20px;">AI — BRD Summary</div>
+      <textarea id="brdPrompt" placeholder="Paste your dataset problem or requirement"></textarea>
+      <button class="btn" style="margin-top:8px;" onclick="generateBRD()">Generate BRD</button>
+      <pre id="brdOutput" style="margin-top:10px;"></pre>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!--                     JAVASCRIPT ENGINE                     -->
+<!-- ========================================================= -->
+<script>
+// =======================
+// SQL DEMO (sqlite)
+// =======================
+let SQLDB=null;
+
+initSqlJs({ locateFile:file=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` })
+.then(SQL=>{
+  SQLDB=new SQL.Database();
+  SQLDB.run(`
+    CREATE TABLE sales(region TEXT, product TEXT, revenue INT);
+    INSERT INTO sales VALUES ('North','Product A',12000);
+    INSERT INTO sales VALUES ('South','Product B',8000);
+    INSERT INTO sales VALUES ('West','Product C',15000);
+    INSERT INTO sales VALUES ('East','Product A',9000);
+  `);
+});
+
+function runSQL(){
+  const out=document.getElementById("sqlResult");
+  const query=document.getElementById("sqlInput").value;
+  out.innerHTML="";
+
+  try{
+    const res=SQLDB.exec(query);
+    if(res.length===0){
+      out.innerHTML="✔ Query executed (no rows returned)";
+      return;
+    }
+    const table=document.createElement("table");
+    const header=document.createElement("tr");
+    res[0].columns.forEach(c=>{
+      const th=document.createElement("th");
+      th.textContent=c;
+      header.appendChild(th);
+    });
+    table.appendChild(header);
+
+    res[0].values.forEach(r=>{
+      const tr=document.createElement("tr");
+      r.forEach(v=>{
+        const td=document.createElement("td");
+        td.textContent=v;
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    });
+    out.appendChild(table);
+
+    window.lastSQLResult=res[0];
+
+  }catch(e){
+    out.innerHTML="❌ Error: " + e.message;
+  }
+}
+
+function exportSQLResult(){
+  if(!window.lastSQLResult){
+    alert("Run a query first");
+    return;
+  }
+  const cols=lastSQLResult.columns;
+  const rows=lastSQLResult.values;
+
+  let csv=cols.join(",")+"\n";
+  rows.forEach(r=>{
+    csv+=r.join(",")+"\n";
+  });
+
+  const blob=new Blob([csv],{type:"text/csv"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="sql_result.csv";
+  a.click();
+}
+
+
+// =====================
+// TAB SWITCHING
+// =====================
+document.querySelectorAll(".dl-tab").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll(".dl-tab").forEach(t=>t.classList.remove("active"));
+    btn.classList.add("active");
+
+    const target=btn.getAttribute("data-dl-tab");
+    document.querySelectorAll(".dl-tab-content").forEach(c=>{
+      c.classList.remove("active");
+      if(c.id===target) c.classList.add("active");
+    });
+  };
+});
+
+
+// =====================
+// CSV PARSER
+// =====================
+let csvDataRows=[],csvDataCols=[],csvChart=null;
+
+document.getElementById("csvFile").addEventListener("change", function(){
+  const file=this.files[0];
+  if(!file) return;
+
+  Papa.parse(file,{
+    header:true,dynamicTyping:true,
+    complete:function(res){
+      const rows=res.data.filter(r=>Object.keys(r).length>0);
+      if(!rows.length) return;
+
+      csvDataRows=rows;
+      csvDataCols=Object.keys(rows[0]);
+
+      renderPreview(rows,csvDataCols);
+      renderStats(rows,csvDataCols);
+      populateSelectors(csvDataCols,rows);
+    }
+  });
+});
+
+function renderPreview(rows,cols){
+  let html="<table><tr>";
+  cols.forEach(c=>html+=`<th>${c}</th>`);
+  html+="</tr>";
+
+  rows.slice(0,25).forEach(r=>{
+    html+="<tr>";
+    cols.forEach(c=>html+=`<td>${r[c]}</td>`);
+    html+="</tr>";
+  });
+
+  html+="</table>";
+  document.getElementById("csvPreview").innerHTML=html;
+}
+
+function renderStats(rows,cols){
+  let missing=0,numeric=0;
+  rows.forEach(r=>{
+    cols.forEach(c=>{
+      if(r[c]==="" || r[c]==null) missing++;
+      if(typeof r[c]==="number") numeric++;
+    });
+  });
+
+  document.getElementById("dlMeta").innerHTML=`
+    <div class="dl-pill">${rows.length} rows</div>
+    <div class="dl-pill">${cols.length} columns</div>
+    <div class="dl-pill">${numeric} numeric values</div>
+    <div class="dl-pill">${missing} missing cells</div>
+  `;
+}
+
+function populateSelectors(cols,rows){
+  const xs=document.getElementById("chartXSelect");
+  const ys=document.getElementById("chartYSelect");
+  xs.innerHTML=""; ys.innerHTML="";
+
+  cols.forEach(c=>{
+    xs.innerHTML+=`<option>${c}</option>`;
+  });
+
+  cols.forEach(c=>{
+    if(typeof rows[0][c]==="number"){
+      ys.innerHTML+=`<option>${c}</option>`;
+    }
+  });
+}
+
+
+// =====================
+// CHART BUILDER
+// =====================
+function renderCustomChart(){
+  if(!csvDataRows.length){
+    alert("Upload CSV first");
+    return;
+  }
+
+  const type=document.getElementById("chartTypeSelect").value;
+  const xcol=document.getElementById("chartXSelect").value;
+  const ycol=document.getElementById("chartYSelect").value;
+
+  const labels=csvDataRows.map(r=>r[xcol]);
+  const data=csvDataRows.map(r=>r[ycol]);
+
+  const ctx=document.getElementById("csvChart").getContext("2d");
+  if(csvChart) csvChart.destroy();
+
+  csvChart=new Chart(ctx,{
+    type:type==="pie" ? "pie" : type,
+    data:{
+      labels:type==="pie"?labels:undefined,
+      datasets:[{
+        label:ycol,
+        data:type==="pie"?data:undefined,
+        ...(
+          (type==="bar"||type==="line") 
+            ? { data:data }
+            : (type==="scatter")
+            ? { data:csvDataRows.map(r=>({x:r[xcol],y:r[ycol]})) }
+            : {}
+        ),
+        backgroundColor:"rgba(37,99,235,0.5)",
+        borderColor:"#2563eb"
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{labels:{color:var(--text)}}},
+      scales:(type!=="pie")?{
+        x:{ticks:{color:var(--text-soft)}},
+        y:{ticks:{color:var(--text-soft)}}
+      }:{}
+    }
+  });
+}
+
+
+// =====================
+// AI HELPERS (Use your own backend)
+// =====================
+async function generateAISQL(){
+  let p=document.getElementById("aiSqlPrompt").value.trim();
+  let out=document.getElementById("aiSqlOutput");
+  out.value="Thinking...";
+
+  // Replace with real endpoint
+  out.value="SELECT region, SUM(revenue) AS TotalRevenue FROM sales GROUP BY region;";
+}
+
+async function generateDAX(){
+  let p=document.getElementById("daxPrompt").value.trim();
+  let out=document.getElementById("daxOutput");
+  out.textContent="CALCULATE(SUM(Sales[Revenue]), DATEADD(Sales[Date], -1, YEAR))";
+}
+
+async function generateTableauCalc(){
+  let p=document.getElementById("tblPrompt").value.trim();
+  let out=document.getElementById("tblOutput");
+  out.textContent="IF DATEDIFF('day',[Last Active Date], TODAY()) > 90 THEN 1 ELSE 0 END";
+}
+
+async function generateBRD(){
+  let p=document.getElementById("brdPrompt").value.trim();
+  let out=document.getElementById("brdOutput");
+  out.textContent=
+`Business Objective:
+Analyze key KPIs to support data-driven decision-making.
+
+KPIs:
+- Revenue
+- Region performance
+- Product performance
+- Growth indicators
+
+Assumptions:
+- Data is complete
+- Date fields are accurate
+
+Risks:
+- Missing values
+- Biased dataset`;
+}
+</script>
+
+</body>
 </html>
+
