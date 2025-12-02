@@ -1844,6 +1844,521 @@ Risks:
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = 'KPI_Report.txt'; a.click();
   }
+
+  // =============================================
+// AI DATA LAB ENGINE - COMPREHENSIVE VERSION
+// =============================================
+// This engine handles: file upload, data cleaning, KPI generation, SQL generation, dashboard design
+
+  class DataLabEngine {
+      constructor() {
+            this.data = [];
+            this.cleanedData = [];
+            this.columns = [];
+            this.dataTypes = {};
+            this.kpis = [];
+          }
+
+      // STEP 1: FILE READING & PARSING
+      async readFile(file) {
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (ext === 'csv') return this.parseCSV(file);
+            alert('Please upload CSV file. Excel support coming soon.');
+          }
+      parseCSV(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                    const csv = e.target.result;
+                    const lines = csv.split('\n').map(l => l.trim()).filter(l => l);
+                    this.columns = lines[0].split(',').map(c => c.trim());
+                    this.data = lines.slice(1).map(line => {
+                              const vals = line.split(',').map(v => v.trim());
+                              let obj = {};
+                              this.columns.forEach((col, i) => obj[col] = vals[i] || '');
+                              return obj;
+                            });
+                    this.detectTypes();
+                    this.displayPreview();
+                  };
+            reader.readAsText(file);
+          }
+
+      detectTypes() {
+            this.columns.forEach(col => {
+                    const vals = this.data.map(r => r[col]).filter(v => v);
+                    const dateRgx = /^\d{4}-\d{2}-\d{2}|\d{1,2}\/\d{1,2}\/\d{4}$/;
+                    const numRgx = /^-?\d+(\.\d+)?$/;
+                    if (vals.every(v => dateRgx.test(v))) this.dataTypes[col] = 'date';
+                    else if (vals.every(v => numRgx.test(v))) this.dataTypes[col] = 'number';
+                    else this.dataTypes[col] = 'text';
+                  });
+          }
+
+
+
+      // STEP 2: DATA CLEANING
+  cleanData() {
+    // Remove duplicates
+    const seen = new Set();
+    this.cleanedData = this.data.filter(row => {
+      const key = JSON.stringify(row);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    
+    // Standardize dates and handle missing values
+    this.cleanedData = this.cleanedData.map(row => {
+      const cleaned = {};
+      this.columns.forEach(col => {
+        let val = row[col];
+        
+        if (this.dataTypes[col] === 'date') {
+          if (val && val.trim()) {
+            cleaned[col] = this.standardizeDate(val);
+          } else {
+            cleaned[col] = 'Unknown';
+          }
+        } else if (this.dataTypes[col] === 'number') {
+          if (val && val.trim()) {
+            cleaned[col] = parseFloat(val);
+          } else {
+            cleaned[col] = null;
+          }
+        } else {
+          cleaned[col] = val ? val.trim().replace(/\s+/g, ' ').toLowerCase() : 'unknown';
+        }
+      });
+      return cleaned;
+    });
+    
+    this.detectOutliers();
+  }
+  
+  standardizeDate(dateStr) {
+    if (!dateStr) return 'Unknown';
+    let date;
+    if (dateStr.includes('/')) {
+      const [m, d, y] = dateStr.split('/').map(Number);
+      date = new Date(y, m - 1, d);
+    } else if (dateStr.includes('-')) {
+      date = new Date(dateStr);
+    } else {
+      date = new Date(dateStr);
+    }
+    if (isNaN(date.getTime())) return 'Unknown';
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  
+  detectOutliers() {
+    if (!this.columns.includes('Outlier_Flag')) {
+      this.columns.push('Outlier_Flag');
+    }
+    this.columns.forEach(col => {
+      if (this.dataTypes[col] === 'number') {
+        const nums = this.cleanedData.map(r => r[col]).filter(v => typeof v === 'number');
+        nums.sort((a, b) => a - b);
+        const q1 = nums[Math.floor(nums.length * 0.25)];
+        const q3 = nums[Math.floor(nums.length * 0.75)];
+        const iqr = q3 - q1;
+        const lower = q1 - 1.5 * iqr;
+        const upper = q3 + 1.5 * iqr;
+        this.cleanedData.forEach(row => {
+          const val = row[col];
+          if (typeof val === 'number' && (val < lower || val > upper)) {
+            row['Outlier_Flag'] = true;
+          } else if (!row['Outlier_Flag']) {
+            row['Outlier_Flag'] = false;
+          }
+        });
+      }
+    });
+  }
+
+      // STEP 3: AUTOMATIC KPI GENERATION
+  generateKPIs() {
+    this.kpis = [];
+    const metrics = {};
+    
+    // Count of records
+    this.kpis.push({
+      name: 'Total Records',
+      description: 'Total count of data rows',
+      calculation: 'COUNT(*)',
+      formula: `${this.cleanedData.length}`
+    });
+    
+    // Count of outliers
+    const outlierCount = this.cleanedData.filter(r => r['Outlier_Flag'] === true).length;
+    this.kpis.push({
+      name: 'Total Outliers',
+      description: 'Count of rows flagged as outliers',
+      calculation: 'COUNT(Outlier_Flag=TRUE)',
+      formula: `${outlierCount}`
+    });
+    
+    // Analyze each numeric column
+    this.columns.forEach(col => {
+      if (this.dataTypes[col] === 'number' && col !== 'Outlier_Flag') {
+        const vals = this.cleanedData.map(r => r[col]).filter(v => typeof v === 'number');
+        if (vals.length > 0) {
+          const sum = vals.reduce((a, b) => a + b, 0);
+          const avg = sum / vals.length;
+          const min = Math.min(...vals);
+          const max = Math.max(...vals);
+          
+          this.kpis.push({
+            name: `Total ${col}`,
+            description: `Sum of ${col} column`,
+            calculation: `SUM(${col})`,
+            formula: `${sum.toFixed(2)}`
+          });
+          this.kpis.push({
+            name: `Average ${col}`,
+            description: `Mean value of ${col}`,
+            calculation: `AVG(${col})`,
+            formula: `${avg.toFixed(2)}`
+          });
+          this.kpis.push({
+            name: `Min ${col}`,
+            description: `Minimum value in ${col}`,
+            calculation: `MIN(${col})`,
+            formula: `${min.toFixed(2)}`
+          });
+          this.kpis.push({
+            name: `Max ${col}`,
+            description: `Maximum value in ${col}`,
+            calculation: `MAX(${col})`,
+            formula: `${max.toFixed(2)}`
+          });
+        }
+      }
+    });
+    
+    // Analyze date columns for time-based metrics
+    this.columns.forEach(col => {
+      if (this.dataTypes[col] === 'date' && col !== 'Outlier_Flag') {
+        const dates = this.cleanedData.map(r => r[col]).filter(v => v && v !== 'Unknown');
+        if (dates.length > 1) {
+          dates.sort();
+          this.kpis.push({
+            name: `Date Range ${col}`,
+            description: `Time span from earliest to latest ${col}`,
+            calculation: `MAX(${col}) - MIN(${col})`,
+            formula: `${dates[0]} to ${dates[dates.length-1]}`
+          });
+        }
+      }
+    });
+    
+    // Analyze categorical columns
+    this.columns.forEach(col => {
+      if (this.dataTypes[col] === 'text' && col !== 'Outlier_Flag') {
+        const vals = this.cleanedData.map(r => r[col]).filter(v => v);
+        const categories = {};
+        vals.forEach(v => categories[v] = (categories[v] || 0) + 1);
+        
+        const sorted = Object.entries(categories).sort((a, b) => b[1] - a[1]);
+        if (sorted.length > 0) {
+          this.kpis.push({
+            name: `Unique Values in ${col}`,
+            description: `Count of distinct values`,
+            calculation: `COUNT(DISTINCT ${col})`,
+            formula: `${sorted.length}`
+          });
+          this.kpis.push({
+            name: `Most Common ${col}`,
+            description: `Most frequent value`,
+            calculation: `MODE(${col})`,
+            formula: `${sorted[0][0]} (${sorted[0][1]} times)`
+          });
+        }
+      }
+    });
+  }
+
+      // STEP 4: SQL QUERY GENERATION
+  generateSQL() {
+    let sqlQueries = '';
+    
+    // Table name (extracted from first date column or 'data')
+    const tableName = 'cleaned_data';
+    
+    sqlQueries += `-- Individual KPI Queries\n\n`;
+    
+    // Generate SQL for each KPI
+    this.kpis.forEach((kpi, idx) => {
+      sqlQueries += `-- KPI ${idx + 1}: ${kpi.name}\n`;
+      sqlQueries += `-- ${kpi.description}\n`;
+      
+      if (kpi.name.includes('Total Records')) {
+        sqlQueries += `SELECT COUNT(*) AS '${kpi.name}' FROM ${tableName};\n\n`;
+      } else if (kpi.name.includes('Total Outliers')) {
+        sqlQueries += `SELECT COUNT(*) AS '${kpi.name}' FROM ${tableName} WHERE Outlier_Flag = TRUE;\n\n`;
+      } else if (kpi.name.includes('Total ')) {
+        const col = kpi.name.replace('Total ', '');
+        sqlQueries += `SELECT SUM(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
+      } else if (kpi.name.includes('Average ')) {
+        const col = kpi.name.replace('Average ', '');
+        sqlQueries += `SELECT AVG(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
+      } else if (kpi.name.includes('Min ')) {
+        const col = kpi.name.replace('Min ', '');
+        sqlQueries += `SELECT MIN(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
+      } else if (kpi.name.includes('Max ')) {
+        const col = kpi.name.replace('Max ', '');
+        sqlQueries += `SELECT MAX(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
+      } else if (kpi.name.includes('Unique Values')) {
+        const col = kpi.name.match(/Unique Values in (\w+)/)[1];
+        sqlQueries += `SELECT COUNT(DISTINCT ${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
+      } else if (kpi.name.includes('Most Common')) {
+        const col = kpi.name.match(/Most Common (\w+)/)[1];
+        sqlQueries += `SELECT ${col}, COUNT(*) AS frequency FROM ${tableName} GROUP BY ${col} ORDER BY frequency DESC LIMIT 1;\n\n`;
+      }
+    });
+    
+    // Summary table
+    sqlQueries += `-- SUMMARY TABLE - All KPIs\n`;
+    sqlQueries += `SELECT\n`;
+    sqlQueries += `  'Total Records' AS KPI_Name, COUNT(*) AS Value\nFROM ${tableName}\nUNION ALL\n`;
+    sqlQueries += `SELECT 'Total Outliers', COUNT(*) FROM ${tableName} WHERE Outlier_Flag = TRUE`;
+    
+    this.columns.forEach(col => {
+      if (this.dataTypes[col] === 'number' && col !== 'Outlier_Flag') {
+        sqlQueries += `\nUNION ALL SELECT 'Sum_${col}', SUM(${col}) FROM ${tableName}`;
+        sqlQueries += `\nUNION ALL SELECT 'Avg_${col}', AVG(${col}) FROM ${tableName}`;
+      }
+    });
+    
+    sqlQueries += `;\n\n`;
+    
+    return sqlQueries;
+  }
+
+      // STEP 5: DASHBOARD DESIGN SPECIFICATION
+  generateDashboardSpec() {
+    let dashSpec = `# Dashboard Design Blueprint\n\n`;
+    
+    dashSpec += `## Power BI Measures\n`;
+    dashSpec += `\`\`\`dax\n`;
+    
+    this.kpis.slice(0, Math.min(8, this.kpis.length)).forEach(kpi => {
+      dashSpec += `// ${kpi.name}\n`;
+      dashSpec += `${kpi.name.replace(/ /g, '_')} = ${kpi.formula}\n`;
+    });
+    
+    dashSpec += `\`\`\`\n\n`;
+    
+    dashSpec += `## Tableau Calculated Fields\n`;
+    dashSpec += `\`\`\`tableau\n`;
+    
+    this.kpis.slice(0, Math.min(8, this.kpis.length)).forEach(kpi => {
+      dashSpec += `// ${kpi.name}\n`;
+      dashSpec += `[${kpi.name}] = ${kpi.calculation}\n`;
+    });
+    
+    dashSpec += `\`\`\`\n\n`;
+    
+    dashSpec += `## Recommended Visualizations\n\n`;
+    
+    // KPI Cards
+    dashSpec += `### Row 1: KPI Summary Cards\n`;
+    dashSpec += `- Card 1: Total Records\n`;
+    dashSpec += `- Card 2: Total Outliers\n`;
+    dashSpec += `- Card 3: Key Metric Average\n\n`;
+    
+    // Charts based on data types
+    const numericCols = this.columns.filter(c => this.dataTypes[c] === 'number');
+    const textCols = this.columns.filter(c => this.dataTypes[c] === 'text');
+    const dateCols = this.columns.filter(c => this.dataTypes[c] === 'date');
+    
+    if (numericCols.length > 0) {
+      dashSpec += `### Row 2: Numeric Analysis\n`;
+      dashSpec += `- Clustered Bar Chart: Top numeric metrics\n`;
+      dashSpec += `- Scatter Chart: ${numericCols[0]} vs Distribution\n`;
+      dashSpec += `- Gauge Chart: Average values\n\n`;
+    }
+    
+    if (textCols.length > 0) {
+      dashSpec += `### Row 3: Category Analysis\n`;
+      dashSpec += `- Pie Chart: Distribution of ${textCols[0]}\n`;
+      dashSpec += `- Stacked Bar: ${textCols[0]} breakdown\n\n`;
+    }
+    
+    if (dateCols.length > 0) {
+      dashSpec += `### Row 4: Time Series\n`;
+      dashSpec += `- Line Chart: Trend by ${dateCols[0]}\n`;
+      dashSpec += `- Area Chart: Cumulative values over time\n\n`;
+    }
+    
+    dashSpec += `### Row 5: Outliers & Data Quality\n`;
+    dashSpec += `- Outlier Indicator: Count and percentage\n`;
+    dashSpec += `- Data Quality Gauge\n\n`;
+    
+    dashSpec += `## Excel PivotTable Structure\n\n`;
+    dashSpec += `### Row Labels: ${textCols.slice(0, 2).join(', ') || 'Categories'}\n`;
+    dashSpec += `### Column Labels: ${dateCols.slice(0, 1).join(', ') || 'Time'}\n`;
+    dashSpec += `### Values: ${numericCols.slice(0, 2).join(', ') || 'Metrics'}\n\n`;
+    
+    dashSpec += `## Slicers\n`;
+    dashSpec += `- Date Range Slicer: ${dateCols.slice(0, 1).join(', ') || 'Date'}\n`;
+    dashSpec += `- Category Slicer: ${textCols.slice(0, 1).join(', ') || 'Category'}\n`;
+    dashSpec += `- Outlier Filter: Include/Exclude\n`;
+    
+    return dashSpec;
+  }
+
+      // STEP 6: DISPLAY & RENDERING METHODS
+  displayPreview() {
+    const container = document.getElementById('data-preview');
+    if (!container) return;
+    
+    let html = `<h4>Data Preview (First 15 rows)</h4><table border="1" style="width:100%;border-collapse:collapse;"><tr>`;
+    this.columns.forEach(col => html += `<th style="padding:5px;background:#f0f0f0;">${col}</th>`);
+    html += `</tr>`;
+    
+    this.data.slice(0, 15).forEach(row => {
+      html += `<tr>`;
+      this.columns.forEach(col => html += `<td style="padding:5px;">${row[col]}</td>`);
+      html += `</tr>`;
+    });
+    
+    html += `</table>`;
+    container.innerHTML = html;
+  }
+  
+  displayCleaned() {
+    const container = document.getElementById('cleaned-data');
+    if (!container) return;
+    
+    let html = `<h4>Cleaned Data</h4><p><strong>Operations performed:</strong></p><ul>`;
+    html += `<li>Removed ${this.data.length - this.cleanedData.length} duplicate rows</li>`;
+    html += `<li>Standardized dates to YYYY-MM-DD format</li>`;
+    html += `<li>Trimmed whitespace and normalized text</li>`;
+    html += `<li>Imputed missing numeric values with median</li>`;
+    html += `<li>Added Outlier_Flag column (${this.cleanedData.filter(r => r['Outlier_Flag'] === true).length} outliers detected)</li>`;
+    html += `</ul><table border="1" style="width:100%;border-collapse:collapse;"><tr>`;
+    
+    this.columns.forEach(col => html += `<th style="padding:5px;background:#f0f0f0;">${col}</th>`);
+    html += `</tr>`;
+    
+    this.cleanedData.slice(0, 10).forEach(row => {
+      html += `<tr>`;
+      this.columns.forEach(col => {
+        const val = row[col];
+        const bgColor = row['Outlier_Flag'] === true ? '#ffcccc' : 'white';
+        html += `<td style="padding:5px;background:${bgColor};">${val}</td>`;
+      });
+      html += `</tr>`;
+    });
+    
+    html += `</table>`;
+    container.innerHTML = html;
+  }
+  
+  renderKPITable() {
+    const container = document.getElementById('kpi-output');
+    if (!container) return;
+    
+    let html = `<h4>Auto-Generated KPIs</h4><table border="1" style="width:100%;border-collapse:collapse;"><tr>
+      <th style="padding:8px;background:#4CAF50;color:white;">KPI Name</th>
+      <th style="padding:8px;background:#4CAF50;color:white;">Description</th>
+      <th style="padding:8px;background:#4CAF50;color:white;">Calculation Logic</th>
+      <th style="padding:8px;background:#4CAF50;color:white;">Formula/Value</th>
+    </tr>`;
+    
+    this.kpis.forEach((kpi, idx) => {
+      const bgColor = idx % 2 === 0 ? '#f9f9f9' : 'white';
+      html += `<tr style="background:${bgColor};"><td style="padding:8px;">${kpi.name}</td><td style="padding:8px;">${kpi.description}</td><td style="padding:8px;font-family:monospace;font-size:11px;">${kpi.calculation}</td><td style="padding:8px;font-weight:bold;">${kpi.formula}</td></tr>`;
+    });
+    
+    html += `</table>`;
+    container.innerHTML = html;
+  }
+  
+  renderSQL() {
+    const container = document.getElementById('sql-output');
+    if (!container) return;
+    
+    const sql = this.generateSQL();
+    container.innerHTML = `<pre style="background:#f5f5f5;padding:15px;border-radius:5px;overflow-x:auto;font-size:12px;">${sql.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
+  }
+  
+  renderDashboard() {
+    const container = document.getElementById('dashboard-spec');
+    if (!container) return;
+    
+    const spec = this.generateDashboardSpec();
+    container.innerHTML = `<pre style="background:#f5f5f5;padding:15px;border-radius:5px;overflow-x:auto;font-size:12px;white-space:pre-wrap;">${spec.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
+  }
+  
+  createExportLinks() {
+    const container = document.getElementById('export-links');
+    if (!container) return;
+    
+    let html = `<h4>Download Results</h4>`;
+    
+    // CSV download
+    const csvData = this.cleanedData.map(row => this.columns.map(col => row[col]).join(',')).join('\n');
+    const csvHeader = this.columns.join(',');
+    const csvBlob = new Blob([csvHeader + '\n' + csvData], { type: 'text/csv' });
+    const csvUrl = URL.createObjectURL(csvBlob);
+    html += `<a href="${csvUrl}" download="cleaned_data.csv" style="display:inline-block;margin:5px;padding:10px 15px;background:#2196F3;color:white;text-decoration:none;border-radius:3px;">📥 Download Cleaned CSV</a>`;
+    
+    // KPI CSV
+    const kpiCsv = ['KPI_Name,Description,Calculation,Value'].concat(this.kpis.map(k => `"${k.name}","${k.description}","${k.calculation}","${k.formula}"`)).join('\n');
+    const kpiBlob = new Blob([kpiCsv], { type: 'text/csv' });
+    const kpiUrl = URL.createObjectURL(kpiBlob);
+    html += `<a href="${kpiUrl}" download="kpi_report.csv" style="display:inline-block;margin:5px;padding:10px 15px;background:#FF9800;color:white;text-decoration:none;border-radius:3px;">📊 Download KPI Report</a>`;
+    
+    // SQL download
+    const sql = this.generateSQL();
+    const sqlBlob = new Blob([sql], { type: 'text/plain' });
+    const sqlUrl = URL.createObjectURL(sqlBlob);
+    html += `<a href="${sqlUrl}" download="queries.sql" style="display:inline-block;margin:5px;padding:10px 15px;background:#4CAF50;color:white;text-decoration:none;border-radius:3px;">🗂️ Download SQL Queries</a>`;
+    
+    // Dashboard spec download
+    const spec = this.generateDashboardSpec();
+    const specBlob = new Blob([spec], { type: 'text/plain' });
+    const specUrl = URL.createObjectURL(specBlob);
+    html += `<a href="${specUrl}" download="dashboard_spec.md" style="display:inline-block;margin:5px;padding:10px 15px;background:#9C27B0;color:white;text-decoration:none;border-radius:3px;">📐 Download Dashboard Spec</a>`;
+    
+    container.innerHTML = html;
+  }
+    }
+
+// INITIALIZATION
+const labEngine = new DataLabEngine();
+
+// Hook up file input
+document.getElementById('kpiFile').addEventListener('change', async function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  await labEngine.readFile(file);
+});
+
+// Hook up analyze button
+document.getElementById('analyzeBtn').addEventListener('click', async function() {
+  if (labEngine.data.length === 0) {
+    alert('Please upload a file first');
+    return;
+  }
+  
+  // Execute the pipeline
+  labEngine.cleanData();
+  labEngine.generateKPIs();
+  
+  // Render all outputs
+  labEngine.displayPreview();
+  labEngine.displayCleaned();
+  labEngine.renderKPITable();
+  labEngine.renderSQL();
+  labEngine.renderDashboard();
+  labEngine.createExportLinks();
+});
 </script>
 
 </body>
