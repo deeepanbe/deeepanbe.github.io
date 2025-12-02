@@ -715,7 +715,8 @@ th{background:var(--bg-soft);}
                             <div class="panel">
                                         <div class="label-small">Upload CSV/Excel File</div>
                                         <input type="file" id="kpiFile" accept=".csv,.xlsx,.xls" />
-                                        <button class="btn" style="margin-top:8px;width:100%;" onclick="analyzeKPIFile()">Analyze & Generate KPIs</button>
+                                        <button class="btn" style="margin-top:8px;width:100%;" onclick="760
+                                          ()">Analyze & Generate KPIs</button>
                                         <div id="kpiLoader" style="display:none;margin-top:12px;font-size:12px;color:var(--text-soft);">Analyzing data...</div>
                                       </div>
                             <div class="panel">
@@ -726,6 +727,14 @@ th{background:var(--bg-soft);}
 
                   <!-- KPI Results -->
                   <div id="kpiResults" style="display:none;margin-top:16px;">
+
+                    <!-- AI Data Lab Engine Output Containers -->
+                        <div id="data-preview" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
+                        <div id="cleaned-data" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
+                        <div id="kpi-output" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
+                        <div id="sql-output" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
+                        <div id="dashboard-spec" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
+                        <div id="export-links" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
                             <!-- Power BI Template -->
                             <div class="panel" style="margin-bottom:12px;">
                                         <div class="label-small">📊 Power BI Dashboard DAX</div>
