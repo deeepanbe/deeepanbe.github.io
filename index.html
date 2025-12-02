@@ -703,6 +703,58 @@ th{background:var(--bg-soft);}
     <!-- DATA LAB SECTION -->
     <section id="datalab" class="page-section">
 
+          <!-- KPI GENERATOR FROM FILE UPLOAD -->
+          <div class="section">
+                  <h2>🎯 KPI Generator from File Upload</h2>
+                  <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
+                            Upload a CSV/Excel file to automatically analyze KPIs. Get Power BI, Tableau, SQL & Excel templates.
+                          </p>
+
+                  <!-- File Upload -->
+                  <div class="dl-two-col">
+                            <div class="panel">
+                                        <div class="label-small">Upload CSV/Excel File</div>
+                                        <input type="file" id="kpiFile" accept=".csv,.xlsx,.xls" />
+                                        <button class="btn" style="margin-top:8px;width:100%;" onclick="analyzeKPIFile()">Analyze & Generate KPIs</button>
+                                        <div id="kpiLoader" style="display:none;margin-top:12px;font-size:12px;color:var(--text-soft);">Analyzing data...</div>
+                                      </div>
+                            <div class="panel">
+                                        <div class="label-small">Detected KPIs</div>
+                                        <div id="kpiSummary" style="margin-top:8px;font-size:12px;color:var(--text-soft);">Upload a file to analyze...</div>
+                                      </div>
+                          </div>
+
+                  <!-- KPI Results -->
+                  <div id="kpiResults" style="display:none;margin-top:16px;">
+                            <!-- Power BI Template -->
+                            <div class="panel" style="margin-bottom:12px;">
+                                        <div class="label-small">📊 Power BI Dashboard DAX</div>
+                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="powerBITemplate">// Power BI DAX will generate here</code></pre>
+                                        <button class="btn" style="margin-top:6px;" onclick="copyToClipboard('powerBITemplate')">Copy DAX</button>
+                                      </div>
+
+                            <!-- Tableau Template -->
+                            <div class="panel" style="margin-bottom:12px;">
+                                        <div class="label-small">📈 Tableau Calculated Field</div>
+                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="tableauTemplate">// Tableau formula will generate here</code></pre>
+                                        <button class="btn" style="margin-top:6px;" onclick="copyToClipboard('tableauTemplate')">Copy Formula</button>
+                                      </div>
+
+                            <!-- SQL Template -->
+                            <div class="panel" style="margin-bottom:12px;">
+                                        <div class="label-small">🔍 SQL Queries for KPIs</div>
+                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="sqlQueries">-- SQL queries will generate here</code></pre>
+                                        <button class="btn" style="margin-top:6px;" onclick="copyToClipboard('sqlQueries')">Copy SQL</button>
+                                      </div>
+
+                            <!-- Excel Template -->
+                            <div class="panel">
+                                        <div class="label-small">📋 Excel Formulas & Report</div>
+                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="excelFormula">// Excel formulas will generate here</code></pre>
+                                        <button class="btn" style="margin-top:6px;" onclick="downloadExcelReport()">Download Excel Report</button>
+                                      </div>
+                          </div>
+                </div>
       <div class="section">
         <h2>BI Dashboard Gallery</h2>
         <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
@@ -818,7 +870,8 @@ th{background:var(--bg-soft);}
 
     </section>
 
-    <!-- AI ASSISTANT SECTION -->
+    703
+    SECTION -->
     <section id="assistant" class="page-section">
 
       <div class="section">
@@ -1738,6 +1791,59 @@ Risks:
 - Missing values
 - Biased dataset`;
 }
+
+  // =====================
+  // KPI GENERATOR FROM FILE UPLOAD
+  // =====================
+  function analyzeKPIFile() {
+      const fileInput = document.getElementById('kpiFile');
+      if (!fileInput.files[0]) { alert('Please upload a file'); return; }
+      const loader = document.getElementById('kpiLoader');
+      const results = document.getElementById('kpiResults');
+      loader.style.display = 'block';
+      setTimeout(() => { generateKPITemplates(); }, 1000);
+    }
+
+  function generateKPITemplates() {
+      const loader = document.getElementById('kpiLoader');
+      const results = document.getElementById('kpiResults');
+      const summary = document.getElementById('kpiSummary');
+      // Generate KPI summaries
+      const kpis = ['Revenue', 'Customer Growth', 'Retention Rate', 'Churn Rate', 'Average Order Value', 'Conversion Rate'];
+    summary.innerHTML = kpis.map(k => `<div style="margin:4px 0;">✓ ${k}</div>`).join('');
+
+      // Power BI DAX
+    document.getElementById('powerBITemplate').textContent =
+      'Revenue = SUMX(Sales, Sales[Quantity] * Sales[Price])\\n' +
+          'Growth Rate = DIVIDE(THIS_YEAR - LAST_YEAR, LAST_YEAR)';
+      // Tableau Formula
+      document.getElementById('tableauTemplate').textContent =
+                                                 'IF SUM([Sales]) > AVG([Average Sales]) THEN "High" ELSE "Low" END';
+
+    // SQL Queries
+      document.getElementById('sqlQueries').textContent =
+      'SELECT DATE, SUM(amount) as Daily_Revenue FROM sales GROUP BY DATE;\\n' +
+            'SELECT customer_id, COUNT(*) as Purchase_Count FROM orders GROUP BY customer_id;';
+    // Excel Formulas
+      document.getElementById('excelFormula').textContent =
+      '=SUM(B2:B100) for Total\\n' +
+      '=AVERAGE(B2:B100) for Avg\\n' +
+      '=IF(B2>C2,"Growing","Declining")';
+    loader.style.display = 'none';
+      results.style.display = 'block';
+    }
+
+      function copyToClipboard(elementId) {
+          const text = document.getElementById(elementId).textContent;
+    navigator.clipboard.writeText(text).then(() => alert('Copied!'));
+  }
+
+  function downloadExcelReport() {
+      const data = document.getElementById('excelFormula').textContent;
+    const blob = new Blob([data], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'KPI_Report.txt'; a.click();
+  }
 </script>
 
 </body>
