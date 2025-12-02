@@ -2335,6 +2335,118 @@ Risks:
     html += `<a href="${specUrl}" download="dashboard_spec.md" style="display:inline-block;margin:5px;padding:10px 15px;background:#9C27B0;color:white;text-decoration:none;border-radius:3px;">📐 Download Dashboard Spec</a>`;
     
     container.innerHTML = html;
+
+      // ENHANCED FEATURES
+  // Generate statistical summary
+  generateStatistics() {
+    let stats = {};
+    this.columns.forEach(col => {
+      if (this.dataTypes[col] === 'number') {
+        const vals = this.cleanedData.map(r => r[col]).filter(v => typeof v === 'number');
+        vals.sort((a, b) => a - b);
+        const median = vals[Math.floor(vals.length / 2)];
+        const mode = this.getMode(vals);
+        const stdDev = this.calculateStdDev(vals);
+        const variance = stdDev * stdDev;
+        stats[col] = {
+          mean: vals.reduce((a,b) => a+b, 0) / vals.length,
+          median: median,
+          mode: mode,
+          stdDev: stdDev,
+          variance: variance,
+          q1: vals[Math.floor(vals.length * 0.25)],
+          q3: vals[Math.floor(vals.length * 0.75)]
+        };
+      }
+    });
+    return stats;
+  }
+  
+  getMode(arr) {
+    const freq = {};
+    arr.forEach(v => freq[v] = (freq[v] || 0) + 1);
+    return Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
+  }
+  
+  calculateStdDev(vals) {
+    const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+    const variance = vals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / vals.length;
+    return Math.sqrt(variance);
+  }
+  
+  // Data correlation analysis
+  generateCorrelationMatrix() {
+    const numCols = this.columns.filter(c => this.dataTypes[c] === 'number');
+    let correlation = {};
+    numCols.forEach(c1 => {
+      correlation[c1] = {};
+      numCols.forEach(c2 => {
+        const vals1 = this.cleanedData.map(r => r[c1]);
+        const vals2 = this.cleanedData.map(r => r[c2]);
+        const corr = this.pearsonCorrelation(vals1, vals2);
+        correlation[c1][c2] = corr.toFixed(3);
+      });
+    });
+    return correlation;
+  }
+  
+  pearsonCorrelation(x, y) {
+    const n = x.length;
+    const meanX = x.reduce((a,b) => a+b) / n;
+    const meanY = y.reduce((a,b) => a+b) / n;
+    const numerator = x.reduce((sum, xi, i) => sum + (xi - meanX) * (y[i] - meanY), 0);
+    const denomX = Math.sqrt(x.reduce((sum, xi) => sum + Math.pow(xi - meanX, 2), 0));
+    const denomY = Math.sqrt(y.reduce((sum, yi) => sum + Math.pow(yi - meanY, 2), 0));
+    return numerator / (denomX * denomY);
+  }
+  
+  // Generate trend analysis
+  generateTrendAnalysis() {
+    const dateCols = this.columns.filter(c => this.dataTypes[c] === 'date');
+    const numCols = this.columns.filter(c => this.dataTypes[c] === 'number');
+    let trends = {};
+    
+    if (dateCols.length > 0 && numCols.length > 0) {
+      const dateCol = dateCols[0];
+      numCols.forEach(numCol => {
+        const sortedData = [...this.cleanedData].sort((a, b) => {
+          return new Date(a[dateCol]) - new Date(b[dateCol]);
+        });
+        const values = sortedData.map(r => r[numCol]);
+        const firstHalf = values.slice(0, Math.floor(values.length / 2)).reduce((a,b) => a+b, 0) / Math.floor(values.length / 2);
+        const secondHalf = values.slice(Math.floor(values.length / 2)).reduce((a,b) => a+b, 0) / Math.ceil(values.length / 2);
+        const trend = ((secondHalf - firstHalf) / firstHalf * 100).toFixed(2);
+        trends[numCol] = { trend: trend + '%', direction: secondHalf > firstHalf ? 'UP' : 'DOWN' };
+      });
+    }
+    return trends;
+  }
+  
+  // Data quality scoring
+  generateDataQuality() {
+    let quality = {};
+    const totalCells = this.cleanedData.length * this.columns.length;
+    let validCells = 0;
+    let uniqueValues = {};
+    
+    this.cleanedData.forEach(row => {
+      this.columns.forEach(col => {
+        if (row[col] !== undefined && row[col] !== null && row[col] !== '') {
+          validCells++;
+        }
+        uniqueValues[col] = (uniqueValues[col] || new Set()).add(row[col]);
+      });
+    });
+    
+    quality.completeness = (validCells / totalCells * 100).toFixed(2) + '%';
+    quality.duplicateRate = ((this.data.length - this.cleanedData.length) / this.data.length * 100).toFixed(2) + '%';
+    quality.outlierRate = (this.cleanedData.filter(r => r['Outlier_Flag']).length / this.cleanedData.length * 100).toFixed(2) + '%';
+    quality.cardinality = {};
+    this.columns.forEach(col => {
+      quality.cardinality[col] = uniqueValues[col].size;
+    });
+    return quality;
+  }
   }
     }
 
