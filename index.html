@@ -1,458 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Deepanraj A — Data Analyst | BI Developer | ML</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepanraj A — Data Analyst | BI Developer | AI-Driven Insights</title>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7W7ZPK3K34"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-7W7ZPK3K34');
-</script>
+  <!-- SEO -->
+  <meta name="description" content="Portfolio of Deepanraj A — Data Analyst & BI Developer specializing in Power BI, Tableau, SQL, Python, Excel, and AI-powered automation including resume and dashboard generators.">
+  <meta name="keywords" content="Data Analyst, Power BI, Tableau, SQL, Python, Excel, Dashboard, KPI, AI, Resume Generator, Data Lab">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#f5f5f5;
-  --bg-card:#ffffff;
-  --bg-soft:#f3f4f6;
-  --border:#e5e7eb;
-  --text:#111827;
-  --text-soft:#4b5563;
-  --primary:#2563eb;
-  --primary-soft:#dbeafe;
-  --sidebar-bg:#0f172a;
-  --sidebar-text:#e5e7eb;
-}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
-  overflow-x:hidden;
-}
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7W7ZPK3K34"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7W7ZPK3K34');
+  </script>
 
-/* Dark mode */
-body.dark-mode{
-  --bg:#020617;
-  --bg-card:#020617;
-  --bg-soft:#0f172a;
-  --border:#1f2937;
-  --text:#e5e7eb;
-  --text-soft:#9ca3af;
-  --primary:#60a5fa;
-  --primary-soft:#1d4ed8;
-}body.dark-mode{
---bg:#f5f5f5;
---bg-card:#ffffff;
---bg-soft:#f0f0f0;
---border:#e5e7eb;
---text:#111827;
---text-soft:#4b5563;
---primary:#2563eb;
---primary-soft:#dbeafe;
-}
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <!-- SQL.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
 
-/* Layout */
-.app{
-  display:flex;
-  min-height:100vh;
-}
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#f5f5f5;
+      --bg-card:#ffffff;
+      --bg-soft:#f3f4f6;
+      --border:#e5e7eb;
+      --text:#111827;
+      --text-soft:#4b5563;
+      --primary:#2563eb;
+      --primary-soft:#dbeafe;
+      --sidebar-bg:#0f172a;
+      --sidebar-text:#e5e7eb;
+    }
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
 
-/* Sidebar */
-.sidebar{
-  width:260px;
-  background:var(--sidebar-bg);
-  color:var(--sidebar-text);
-  padding:20px 18px;
-  display:flex;
-  flex-direction:column;
-  position:fixed;
-  top:0;bottom:0;left:0;
-}
-.sidebar-header{
-  display:flex;align-items:center;gap:12px;margin-bottom:24px;
-}
-.sidebar-photo{
-  width:56px;height:56px;border-radius:50%;
-  border:3px solid var(--primary);
-  box-shadow:0 0 18px rgba(37,99,235,0.7);
-  overflow:hidden;flex-shrink:0;
-}
-.sidebar-photo img{
-  width:100%;height:100%;object-fit:cover;
-}
-.sidebar-name{
-  font-size:16px;font-weight:700;
-}
-.sidebar-role{
-  font-size:12px;color:#9ca3af;
-}
-.sidebar-nav{
-  margin-top:10px;
-}
-.sidebar-nav button{
-  width:100%;text-align:left;border:none;outline:none;
-  background:transparent;color:#cbd5f5;
-  padding:10px 10px;border-radius:8px;margin-bottom:5px;
-  font-size:14px;display:flex;align-items:center;gap:10px;
-  cursor:pointer;transition:.2s;
-}
-.sidebar-nav button span.icon{
-  width:22px;text-align:center;
-}
-.sidebar-nav button.active,
-.sidebar-nav button:hover{
-  background:rgba(37,99,235,0.18);
-  color:#fff;
-}
-.sidebar-footer{
-  margin-top:auto;
-  font-size:12px;
-  color:#6b7280;
-}
+    /* Dark mode */
+    body.dark-mode{
+      --bg:#020617;
+      --bg-card:#020617;
+      --bg-soft:#0f172a;
+      --border:#1f2937;
+      --text:#e5e7eb;
+      --text-soft:#9ca3af;
+      --primary:#60a5fa;
+      --primary-soft:#1d4ed8;
+    }
 
-/* Dark toggle */
-#darkToggle{
-  position:fixed;bottom:20px;right:20px;
-  padding:12px 14px;border-radius:50%;
-  background:var(--primary);color:#fff;font-weight:700;
-  cursor:pointer;z-index:9999;font-size:18px;
-  box-shadow:0 4px 12px rgba(0,0,0,.25);
-}
+    /* Layout */
+    .app{
+      display:flex;
+      min-height:100vh;
+    }
 
-/* Main */
-.main{
-  margin-left:260px;
-  width:calc(100% - 260px);
-  padding:20px;
-}
+    /* Sidebar */
+    .sidebar{
+      width:260px;
+      background:var(--sidebar-bg);
+      color:var(--sidebar-text);
+      padding:20px 18px;
+      display:flex;
+      flex-direction:column;
+      position:fixed;
+      top:0;bottom:0;left:0;
+    }
+    .sidebar-header{
+      display:flex;align-items:center;gap:12px;margin-bottom:24px;
+    }
+    .sidebar-photo{
+      width:56px;height:56px;border-radius:50%;
+      border:3px solid var(--primary);
+      box-shadow:0 0 18px rgba(37,99,235,0.7);
+      overflow:hidden;flex-shrink:0;
+    }
+    .sidebar-photo img{
+      width:100%;height:100%;object-fit:cover;
+    }
+    .sidebar-name{
+      font-size:16px;font-weight:700;
+    }
+    .sidebar-role{
+      font-size:12px;color:#9ca3af;
+    }
+    .sidebar-nav{
+      margin-top:10px;
+    }
+    .sidebar-nav button{
+      width:100%;text-align:left;border:none;outline:none;
+      background:transparent;color:#cbd5f5;
+      padding:10px 10px;border-radius:8px;margin-bottom:5px;
+      font-size:14px;display:flex;align-items:center;gap:10px;
+      cursor:pointer;transition:.2s;
+    }
+    .sidebar-nav button span.icon{
+      width:22px;text-align:center;
+    }
+    .sidebar-nav button.active,
+    .sidebar-nav button:hover{
+      background:rgba(37,99,235,0.18);
+      color:#fff;
+    }
+    .sidebar-footer{
+      margin-top:auto;
+      font-size:12px;
+      color:#6b7280;
+    }
 
-/* Loader */
-#loaderOverlay{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:#ffffff;display:flex;align-items:center;
-  justify-content:center;z-index:999999;
-}
-.loader-ring{
-  border:6px solid #e5e7eb;border-top:6px solid #2563eb;
-  width:60px;height:60px;border-radius:50%;animation:spin 1s linear infinite;
-}
-@keyframes spin{100%{transform:rotate(360deg)}}
+    /* Dark toggle */
+    #darkToggle{
+      position:fixed;bottom:20px;right:20px;
+      padding:12px 14px;border-radius:50%;
+      background:var(--primary);color:#fff;font-weight:700;
+      cursor:pointer;z-index:9999;font-size:18px;
+      box-shadow:0 4px 12px rgba(0,0,0,.25);
+    }
 
-/* Sections */
-.page-section{
-  display:none;
-  animation:fadeIn .4s ease;
-}
-.page-section.active{
-  display:block;
-}
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(10px);}
-  to{opacity:1;transform:translateY(0);}
-}
+    /* Main */
+    .main{
+      margin-left:260px;
+      width:calc(100% - 260px);
+      padding:20px;
+    }
 
-/* HERO (home) */
-.hero{
-  background:#ffffff;
-  padding:30px 24px;
-  border-radius:16px;
-  border:1px solid var(--border);
-  box-shadow:0 2px 8px rgba(0,0,0,.05);
-  margin-bottom:20px;
-}
-.profile-wrapper{
-  display:flex;align-items:center;gap:30px;
-}
-.profile-photo-main{
-  width:140px;height:140px;border-radius:50%;
-  border:4px solid var(--primary);
-  box-shadow:0 0 24px rgba(37,99,235,0.6);
-  overflow:hidden;flex-shrink:0;
-}
-.profile-photo-main img{
-  width:100%;height:100%;object-fit:cover;
-}
-.profile-info h1{
-  font-size:32px;font-weight:800;margin-bottom:6px;color:var(--text);
-}
-.profile-subtitle{
-  font-size:14px;color:var(--text-soft);margin-bottom:8px;
-}
-.profile-tags span{
-  display:inline-block;font-size:11px;
-  background:var(--primary-soft);color:var(--primary);
-  padding:4px 9px;border-radius:999px;margin-right:6px;margin-bottom:4px;
-}
-.profile-social{
-  display:flex;gap:10px;margin:10px 0 16px;
-}
-.social-icon{
-  width:34px;height:34px;border-radius:50%;background:#e5e7eb;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--primary);font-size:18px;text-decoration:none;transition:.2s;
-}
-.social-icon:hover{
-  background:var(--primary);color:#fff;transform:translateY(-2px);
-}
-.btn{
-  display:inline-block;padding:10px 22px;border-radius:999px;
-  font-size:14px;font-weight:600;border:none;cursor:pointer;
-  transition:.2s;text-decoration:none;
-}
-.btn-primary{
-  background:var(--primary);color:#fff;margin-right:8px;
-}
-.btn-primary:hover{
-  box-shadow:0 4px 12px rgba(37,99,235,0.4);
-  transform:translateY(-1px);
-}
-.btn-outline{
-  background:transparent;border:1px solid var(--primary);
-  color:var(--primary);
-}
-.btn-outline:hover{
-  background:var(--primary);color:#fff;
-}
+    /* Loader */
+    #loaderOverlay{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:#ffffff;display:flex;align-items:center;
+      justify-content:center;z-index:999999;
+    }
+    .loader-ring{
+      border:6px solid #e5e7eb;border-top:6px solid #2563eb;
+      width:60px;height:60px;border-radius:50%;animation:spin 1s linear infinite;
+    }
+    @keyframes spin{100%{transform:rotate(360deg)}}
 
-/* Generic section card */
-.section{
-  background:var(--bg-card);
-  margin-bottom:20px;padding:24px 20px;
-  border-radius:14px;border:1px solid var(--border);
-}
-.section h2{
-  font-size:20px;margin-bottom:16px;
-  display:flex;align-items:center;gap:10px;color:var(--text);
-}
-.section h2::before{
-  content:"";width:4px;height:22px;background:var(--primary);border-radius:2px;
-}
+    /* Sections */
+    .page-section{
+      display:none;
+      animation:fadeIn .4s ease;
+    }
+    .page-section.active{
+      display:block;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(10px);}
+      to{opacity:1;transform:translateY(0);}
+    }
 
-/* Overview cards */
-.overview-grid{
-  display:flex;flex-wrap:wrap;gap:16px;justify-content:flex-start;
-}
-.overview-card{
-  width:180px;background:var(--bg-soft);padding:22px;border-radius:10px;
-  border-left:4px solid var(--primary);text-align:center;
-}
-.overview-card .num{
-  font-size:32px;font-weight:700;color:var(--primary);margin-bottom:4px;
-}
-.overview-card .label{
-  font-size:13px;color:var(--text-soft);
-}
+    /* HERO */
+    .hero{
+      background:var(--bg-card);
+      padding:32px 26px;
+      border-radius:20px;
+      border:1px solid var(--border);
+      box-shadow:0 12px 30px rgba(15,23,42,.12);
+      margin-bottom:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-80px;top:-80px;
+      width:220px;height:220px;
+      background:radial-gradient(circle at center,rgba(37,99,235,0.16),transparent 60%);
+      pointer-events:none;
+    }
+    .profile-wrapper{
+      display:flex;align-items:center;gap:30px;
+    }
+    .profile-photo-main{
+      width:150px;height:150px;border-radius:50%;
+      border:4px solid var(--primary);
+      box-shadow:0 0 30px rgba(37,99,235,0.8);
+      overflow:hidden;flex-shrink:0;
+    }
+    .profile-photo-main img{
+      width:100%;height:100%;object-fit:cover;
+    }
+    .profile-info h1{
+      font-size:32px;font-weight:800;margin-bottom:4px;color:var(--text);
+    }
+    .profile-title{
+      font-size:16px;font-weight:600;color:var(--primary);margin-bottom:8px;
+    }
+    .profile-subtitle{
+      font-size:14px;color:var(--text-soft);margin-bottom:10px;
+    }
+    .value-statement{
+      font-size:14px;font-weight:500;color:var(--text);
+      margin-bottom:12px;
+    }
+    .profile-tags span{
+      display:inline-block;font-size:11px;
+      background:var(--primary-soft);color:var(--primary);
+      padding:4px 9px;border-radius:999px;margin-right:6px;margin-bottom:4px;
+    }
+    .profile-social{
+      display:flex;gap:10px;margin:12px 0 16px;
+    }
+    .social-icon{
+      width:34px;height:34px;border-radius:50%;background:#e5e7eb;
+      display:flex;align-items:center;justify-content:center;
+      color:var(--primary);font-size:18px;text-decoration:none;transition:.2s;
+    }
+    .social-icon:hover{
+      background:var(--primary);color:#fff;transform:translateY(-2px);
+    }
+    .hero-actions{
+      display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;
+    }
+    .btn{
+      display:inline-block;padding:10px 22px;border-radius:999px;
+      font-size:14px;font-weight:600;border:none;cursor:pointer;
+      transition:.2s;text-decoration:none;
+    }
+    .btn-primary{
+      background:var(--primary);color:#fff;
+    }
+    .btn-primary:hover{
+      box-shadow:0 4px 12px rgba(37,99,235,0.4);
+      transform:translateY(-1px);
+    }
+    .btn-outline{
+      background:transparent;border:1px solid var(--primary);
+      color:var(--primary);
+    }
+    .btn-outline:hover{
+      background:var(--primary);color:#fff;
+    }
+    .btn-secondary{
+      background:var(--bg-soft);
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+    .btn-secondary:hover{
+      background:var(--primary-soft);color:var(--primary);
+    }
+    .btn-sm{
+      font-size:12px;
+      padding:6px 14px;
+      border-radius:999px;
+      border:1px solid var(--primary);
+      color:var(--primary);
+      background:transparent;
+      text-decoration:none;
+      cursor:pointer;
+      display:inline-block;
+    }
+    .btn-sm:hover{
+      background:var(--primary);color:#fff;
+    }
 
-/* Projects grid */
-.projects-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-}
-.project-card{
-  background:var(--bg-soft);padding:16px;border-radius:10px;
-  border-top:4px solid var(--primary);
-}
-.project-card img{
-  width:100%;border-radius:10px;margin-bottom:8px;
-}
-.project-card h3{
-  font-size:16px;color:var(--text);margin-bottom:4px;
-}
-.project-card p{
-  font-size:13px;color:var(--text-soft);margin-bottom:8px;
-}
-.tag-pill{
-  display:inline-block;background:var(--primary-soft);
-  color:var(--primary);padding:4px 10px;
-  border-radius:999px;font-size:11px;margin-right:4px;margin-bottom:4px;
-}
+    /* Generic section card */
+    .section{
+      background:var(--bg-card);
+      margin-bottom:20px;padding:24px 20px;
+      border-radius:14px;border:1px solid var(--border);
+    }
+    .section h2{
+      font-size:20px;margin-bottom:16px;
+      display:flex;align-items:center;gap:10px;color:var(--text);
+    }
+    .section h2::before{
+      content:"";width:4px;height:22px;background:var(--primary);border-radius:2px;
+    }
 
-/* Experience / Education */
-.job{
-  margin-bottom:20px;
-}
-.job h3{
-  font-size:16px;color:var(--text);
-}
-.job .company{
-  color:var(--primary);font-weight:600;font-size:13px;
-}
-.job .dates{
-  color:var(--text-soft);font-size:12px;margin-bottom:6px;
-}
-.job p{
-  font-size:13px;color:var(--text-soft);
-}
+    /* Overview cards */
+    .overview-grid{
+      display:flex;flex-wrap:wrap;gap:16px;justify-content:flex-start;
+    }
+    .overview-card{
+      width:180px;background:#ffffff;
+      padding:22px;border-radius:10px;
+      border:2px solid var(--primary);
+      text-align:center;
+      box-shadow:0 4px 12px rgba(37,99,235,0.2);
+    }
+    .overview-card .num{
+      font-size:32px;font-weight:700;color:var(--primary);margin-bottom:4px;
+    }
+    .overview-card .label{
+      font-size:13px;color:var(--text-soft);
+    }
 
-/* Certifications */
-.cert-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:16px;
-}
-.cert-card{
-  background:var(--bg-soft);padding:16px;border-radius:10px;
-  border-left:4px solid var(--primary);
-}
-.cert-card img{
-  width:110px;margin-bottom:8px;
-}
+    /* About */
+    .about-grid{
+      display:grid;
+      grid-template-columns:2fr 1.2fr;
+      gap:20px;
+    }
+    @media(max-width:900px){
+      .about-grid{grid-template-columns:1fr;}
+    }
+    .about-highlights li{
+      margin-left:18px;
+      font-size:14px;
+      color:var(--text-soft);
+      margin-bottom:4px;
+    }
 
-/* Skills */
-.skills-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:12px;
-}
-.skill-pill{
-  text-align:center;background:var(--bg-soft);
-  padding:10px;border-radius:8px;
-  border-left:4px solid var(--primary);font-size:13px;
-}
+    /* Skills */
+    .skills-layout{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+    .skill-block{
+      background:var(--bg-soft);
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:14px;
+    }
+    .skill-block h3{
+      font-size:15px;margin-bottom:8px;color:var(--text);
+    }
+    .skill-tags{
+      display:flex;flex-wrap:wrap;gap:6px;
+    }
+    .skill-tag{
+      font-size:11px;padding:4px 9px;border-radius:999px;
+      background:var(--primary-soft);color:var(--primary);
+    }
 
-/* Contact */
-.contact-form{
-  max-width:480px;
-}
-.contact-form input,.contact-form textarea{
-  width:100%;padding:10px;border-radius:8px;
-  border:1px solid var(--border);font-size:14px;
-  margin-bottom:10px;background:var(--bg-card);color:var(--text);
-}
-.contact-form textarea{min-height:120px;resize:vertical;}
-.contact-info p{
-  font-size:14px;
-}
+    /* Projects */
+    .projects-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+    }
+    .project-card{
+      background:var(--bg-soft);padding:16px;border-radius:10px;
+      border-top:4px solid var(--primary);
+    }
+    .project-card img{
+      width:100%;border-radius:10px;margin-bottom:8px;
+      cursor:zoom-in;
+    }
+    .project-card h3{
+      font-size:17px;color:#dc2626;font-weight:700;margin-bottom:4px;
+    }
+    .project-card p{
+      font-size:13px;color:var(--text-soft);margin-bottom:8px;
+    }
+    .tag-pill{
+      display:inline-block;background:var(--primary-soft);
+      color:var(--primary);padding:4px 10px;
+      border-radius:999px;font-size:11px;margin-right:4px;margin-bottom:4px;
+    }
+    .project-actions{
+      margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;
+    }
 
-/* Data Lab */
-.grid-2{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:16px;
-}
-.panel{
-  background:var(--bg-soft);border-radius:10px;
-  border:1px solid var(--border);padding:14px;
-}
-.panel-header{
-  font-size:13px;color:var(--text-soft);
-  margin-bottom:6px;
-}
-.label-small{
-  font-size:12px;font-weight:600;margin-bottom:4px;color:var(--text-soft);
-}
-.panel textarea,.panel input{
-  width:100%;padding:8px;border-radius:8px;
-  border:1px solid var(--border);font-size:12px;
-  background:var(--bg-card);color:var(--text);
-}
-.panel textarea{min-height:80px;resize:vertical;}
-.panel button{
-  margin-top:6px;
-}
+    /* Experience / Education */
+    .job{
+      margin-bottom:20px;
+    }
+    .job h3{
+      font-size:16px;color:#dc2626;font-weight:700;
+    }
+    .job .company{
+      color:#2563eb;font-weight:600;font-size:14px;
+    }
+    .job .dates{
+      color:#666;font-size:13px;margin-bottom:6px;
+    }
+    .job p{
+      font-size:14px;color:#111827;
+    }
 
-/* SQL table */
-table{
-  width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;
-}
-th,td{
-  border:1px solid var(--border);padding:4px 6px;text-align:left;
-}
-th{background:var(--bg-soft);}
+    /* Certifications */
+    .cert-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:16px;
+    }
+    .cert-card{
+      background:#ffffff;padding:20px;border-radius:10px;
+      border:2px solid #2563eb;
+      box-shadow:0 4px 12px rgba(37,99,235,0.15);
+    }
+    .cert-card img{
+      width:80px;height:80px;object-fit:contain;margin-bottom:12px;
+    }
+    .cert-card h3{
+      font-size:15px;margin-bottom:6px;color:#111827;
+    }
+    .cert-card p{
+      font-size:12px;color:#2563eb;font-weight:600;
+    }
 
-/* Chat / AI assistant */
-.chat-box{
-  max-height:260px;overflow-y:auto;
-  background:var(--bg-soft);border-radius:10px;
-  border:1px solid var(--border);padding:8px;font-size:12px;
-}
-.chat-msg{margin-bottom:6px;}
-.chat-me{text-align:right;}
-.chat-me span{
-  display:inline-block;background:var(--primary);color:#fff;
-  padding:5px 9px;border-radius:999px;
-}
-.chat-bot span{
-  display:inline-block;background:var(--bg-card);color:var(--text);
-  padding:5px 9px;border-radius:999px;
-}
+    /* Contact */
+    .contact-form{
+      max-width:480px;
+    }
+    .contact-form input,.contact-form textarea{
+      width:100%;padding:10px;border-radius:8px;
+      border:1px solid var(--border);font-size:14px;
+      margin-bottom:10px;background:var(--bg-card);color:var(--text);
+    }
+    .contact-form textarea{min-height:120px;resize:vertical;}
+    .contact-info p{
+      font-size:14px;
+    }
 
-/* Gallery modal */
-#galleryModal{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,.8);display:none;
-  align-items:center;justify-content:center;z-index:9998;
-}
-#galleryModal img{
-  width:80%;max-width:1000px;border-radius:12px;
-  box-shadow:0 0 20px rgba(255,255,255,.3);
-}
+    /* Data Lab */
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:16px;
+    }
+    .panel{
+      background:var(--bg-soft);border-radius:10px;
+      border:1px solid var(--border);padding:14px;
+    }
+    .panel-header{
+      font-size:13px;color:var(--text-soft);
+      margin-bottom:6px;
+    }
+    .label-small{
+      font-size:12px;font-weight:600;margin-bottom:4px;color:var(--text-soft);
+    }
+    .panel textarea,.panel input,.panel select{
+      width:100%;padding:8px;border-radius:8px;
+      border:1px solid var(--border);font-size:12px;
+      background:var(--bg-card);color:var(--text);
+    }
+    .panel textarea{min-height:80px;resize:vertical;}
+    .panel button{
+      margin-top:6px;
+    }
 
-/* Floating chat button (global) */
-#chatBtn{
-  position:fixed;right:20px;bottom:80px;background:var(--primary);
-  color:#fff;border-radius:50%;width:48px;height:48px;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:22px;z-index:9999;
-  box-shadow:0 4px 14px rgba(0,0,0,.3);
-}
-#chatWindow{
-  position:fixed;right:20px;bottom:140px;width:330px;height:420px;
-  background:var(--bg-card);border-radius:15px;
-  box-shadow:0 0 20px rgba(0,0,0,.4);
-  overflow:hidden;display:none;flex-direction:column;z-index:9999;
-}
+    table{
+      width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;
+    }
+    th,td{
+      border:1px solid var(--border);padding:4px 6px;text-align:left;
+    }
+    th{background:var(--bg-soft);}
 
-/* Responsive */
-@media(max-width:900px){
-  .sidebar{
-    position:fixed;left:0;top:0;bottom:auto;
-    width:100%;height:auto;flex-direction:row;
-    align-items:center;gap:10px;
-  }
-  .sidebar-nav{
-    display:flex;flex-wrap:wrap;
-  }
-  .sidebar-footer{display:none;}
-  .main{
-    margin-left:0;margin-top:120px;width:100%;
-  }
-}
-@media(max-width:600px){
-  .profile-wrapper{flex-direction:column;text-align:center;}
-  .profile-info{text-align:center;}
-}
-  /* DATA LAB – internal tabs & layout */
-.datalab-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
-.dl-tab{padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--bg-soft);cursor:pointer;font-size:13px;color:var(--text-soft);transition:.2s;}
-.dl-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);}
-.dl-tab-content{display:none;margin-top:10px;}
-.dl-tab-content.active{display:block;}
-.dl-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12px;}
-.dl-pill{padding:4px 8px;border-radius:999px;background:var(--bg-soft);}
-.dl-stat-number{font-weight:700;color:var(--primary);margin-right:4px;}
-.dl-two-col{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;}
-@media(max-width:800px){.dl-two-col{grid-template-columns:1fr;}}
+    /* Chat / AI assistant */
+    .chat-box{
+      max-height:260px;overflow-y:auto;
+      background:var(--bg-soft);border-radius:10px;
+      border:1px solid var(--border);padding:8px;font-size:12px;
+    }
+    .chat-msg{margin-bottom:6px;}
+    .chat-me{text-align:right;}
+    .chat-me span{
+      display:inline-block;background:var(--primary);color:#fff;
+      padding:5px 9px;border-radius:999px;
+    }
+    .chat-bot span{
+      display:inline-block;background:var(--bg-card);color:var(--text);
+      padding:5px 9px;border-radius:999px;
+    }
 
-  /* Color utility classes */
-.text-blue{color:#2563eb;font-weight:600;}
-.text-red{color:#dc2626;font-weight:600;}
-.text-black{color:#1f2937;font-weight:700;}
-.text-primary-blue{color:#0055cc;}
-.text-accent-red{color:#ef4444;}
-.text-dark-black{color:#000000;}
-.logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:12px;align-items:center;justify-items:center;margin:16px 0;}
-.logo-item{width:60px;height:60px;display:flex;align-items:center;justify-content:center;background:#f0f0f0;border-radius:8px;padding:8px;}
-.logo-item img{width:100%;height:auto;object-fit:contain;}
-  /* FORCE LIGHT MODE - WHITE BACKGROUNDS */ .section,.panel,.hero,.dl-tab-content,.project-card,.cert-card,.skill-pill,.contact-form,.grid-2,.page-section,.main { background: #ffffff !important; color: #111827 !important; } .section h2, .panel, .hero h1, .hero .profile-subtitle { color: #111827 !important; } .btn-primary { background: #2563eb !important; } .text-blue { color: #2563eb !important; } .text-red { color: #dc2626 !important; } .text-black { color: #1f2937 !important; }
+    /* Gallery modal */
+    #galleryModal{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,.8);display:none;
+      align-items:center;justify-content:center;z-index:9998;
+    }
+    #galleryModal img{
+      width:80%;max-width:1000px;border-radius:12px;
+      box-shadow:0 0 20px rgba(255,255,255,.3);
+    }
 
-</style>
+    /* Floating chat button (global) */
+    #chatBtn{
+      position:fixed;right:20px;bottom:80px;background:var(--primary);
+      color:#fff;border-radius:50%;width:48px;height:48px;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;font-size:22px;z-index:9999;
+      box-shadow:0 4px 14px rgba(0,0,0,.3);
+    }
+    #chatWindow{
+      position:fixed;right:20px;bottom:140px;width:330px;height:420px;
+      background:var(--bg-card);border-radius:15px;
+      box-shadow:0 0 20px rgba(0,0,0,.4);
+      overflow:hidden;display:none;flex-direction:column;z-index:9999;
+    }
+
+    /* Data Lab internal layout */
+    .dl-two-col{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;}
+    @media(max-width:800px){.dl-two-col{grid-template-columns:1fr;}}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .sidebar{
+        position:fixed;left:0;top:0;bottom:auto;
+        width:100%;height:auto;flex-direction:row;
+        align-items:center;gap:10px;
+      }
+      .sidebar-nav{
+        display:flex;flex-wrap:wrap;
+      }
+      .sidebar-footer{display:none;}
+      .main{
+        margin-left:0;margin-top:120px;width:100%;
+      }
+      .profile-wrapper{flex-direction:column;text-align:left;}
+    }
+    @media(max-width:600px){
+      .profile-wrapper{flex-direction:column;text-align:center;}
+      .profile-info{text-align:center;}
+      .hero-actions{justify-content:center;}
+    }
+  </style>
 </head>
-  <body>
+<body>
 
 <!-- LOADING OVERLAY -->
 <div id="loaderOverlay">
@@ -479,7 +546,7 @@ th{background:var(--bg-soft);}
         </div>
         <div>
           <div class="sidebar-name">Deepanraj A</div>
-          <div class="sidebar-role">Data Analyst • BI • ML</div>
+          <div class="sidebar-role">Data Analyst • BI • AI</div>
         </div>
       </div>
 
@@ -510,6 +577,7 @@ th{background:var(--bg-soft);}
     <!-- HOME / PORTFOLIO SECTION -->
     <section id="home" class="page-section active">
 
+      <!-- HERO -->
       <div class="hero">
         <div class="profile-wrapper">
           <div class="profile-photo-main">
@@ -517,31 +585,57 @@ th{background:var(--bg-soft);}
           </div>
           <div class="profile-info">
             <h1>Deepanraj A</h1>
+            <div class="profile-title">Data Analyst | BI Developer | AI-Driven Insights</div>
             <div class="profile-subtitle">
-              📊 Data Analyst • BI Developer • ML Enthusiast — based in Karur, Tamil Nadu, India.
+              Based in Karur, Tamil Nadu, India.
+            </div>
+            <div class="value-statement">
+              “Transforming raw data into meaningful insights with analytics, automation, and AI.”
             </div>
             <div class="profile-tags">
               <span>Python</span><span>SQL</span><span>Power BI</span>
-              <span>Tableau</span><span>Machine Learning</span>
+              <span>Tableau</span><span>Machine Learning</span><span>AI Automation</span>
             </div>
             <div class="profile-social">
               <a href="https://linkedin.com/in/deepanraj-data-analyst" class="social-icon" target="_blank">in</a>
               <a href="https://github.com/deeepanbe?tab=repositories" class="social-icon" target="_blank">⚙</a>
             </div>
-            <button class="btn btn-primary" onclick="scrollToContact()">CONTACT ME</button>
-            <a href="resume/Deepanraj_A_Data_Analyst.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
+            <div class="hero-actions">
+              <a href="resume/Deepanraj_A_Data_Analyst.pdf" class="btn btn-primary" target="_blank">Download Resume</a>
+              <button class="btn btn-secondary" onclick="scrollToProjects()">View Projects</button>
+              <button class="btn btn-outline" onclick="openDataLab()">Open Data Lab (AI Tools)</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- SUMMARY -->
+      <!-- ABOUT ME -->
       <div class="section">
-        <h2>SUMMARY</h2>
-        <p>📊 Aspiring Data Analyst with a passion for transforming raw data into actionable insights.</p>
-        <p>🔍 Skilled in Python, SQL, Excel, Power BI, and Machine Learning.</p>
-        <p>💼 Experienced in HR Analytics, Marketing Analytics, Crime Analysis & Business Intelligence.</p>
-        <p>📍 Based in Karur, Tamil Nadu, India.</p>
-        <p>🌱 Currently exploring advanced Machine Learning & AI techniques.</p>
+        <h2>ABOUT ME</h2>
+        <div class="about-grid">
+          <div>
+            <p style="font-size:14px;margin-bottom:8px;">
+              I am a Data Analyst and BI Developer with a strong foundation in Mechanical/Quality Engineering and 9+ years of total experience.
+              Over the last few years, I have transitioned into data analytics, focusing on building automated reporting, KPI frameworks, and AI-assisted analytics tools.
+            </p>
+            <p style="font-size:14px;margin-bottom:8px;">
+              I work with <b>Power BI, Tableau, SQL, Python, and Excel</b> to design dashboards, data pipelines, and decision-support systems. I also build
+              AI-powered automation such as <b>ATS-optimized resume generators</b> and a <b>Data Lab engine</b> that can auto-suggest KPIs, SQL, and BI layouts.
+            </p>
+            <p style="font-size:14px;margin-bottom:8px;">
+              My strengths include <b>data cleaning</b>, <b>dashboarding</b>, <b>KPI generation</b>, and <b>process automation</b>.  
+              I build reliable analytics systems that help businesses make confident decisions.
+            </p>
+          </div>
+          <div>
+            <ul class="about-highlights">
+              <li>Transitioned from Mechanical / Quality Engineering into Data Analytics.</li>
+              <li>Hands-on with Power BI, Tableau, SQL, Python (Pandas, NumPy, Matplotlib), and Excel.</li>
+              <li>Created AI-based Resume Generator and AI Data Lab for KPI & dashboard automation.</li>
+              <li>Experienced in HR, Sales, Operations, Manufacturing and Business Intelligence reporting.</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- OVERVIEW -->
@@ -567,40 +661,123 @@ th{background:var(--bg-soft);}
         </div>
       </div>
 
-      <!-- PROJECTS -->
+      <!-- SKILLS -->
       <div class="section">
+        <h2>SKILLS</h2>
+        <div class="skills-layout">
+          <div class="skill-block">
+            <h3>🟧 Technical Skills</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Python (Pandas, NumPy, Matplotlib)</span>
+              <span class="skill-tag">SQL (Joins, CTE, Window Functions)</span>
+              <span class="skill-tag">Power BI (DAX, Power Query)</span>
+              <span class="skill-tag">Tableau (LOD, Storyboards)</span>
+              <span class="skill-tag">Excel (PivotTable, INDEX-MATCH, Power Query)</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <h3>🟦 Analytics Skills</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Data Cleaning</span>
+              <span class="skill-tag">Exploratory Data Analysis</span>
+              <span class="skill-tag">KPI Framework Development</span>
+              <span class="skill-tag">Statistical Analysis</span>
+              <span class="skill-tag">Forecasting</span>
+              <span class="skill-tag">Business Insights</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <h3>🟩 Tools & Platforms</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Power BI</span>
+              <span class="skill-tag">Tableau</span>
+              <span class="skill-tag">Excel</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">MySQL / PostgreSQL</span>
+              <span class="skill-tag">Git / GitHub</span>
+              <span class="skill-tag">ChatGPT & AI Tools</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="section" id="projects-section">
         <h2>PROJECTS</h2>
         <div class="projects-grid">
           <div class="project-card">
             <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard">
-            <h3>Sales Performance Dashboard</h3>
+            <h3>Sales Performance Dashboard – Power BI</h3>
             <p>
-              Interactive Power BI dashboard visualizing revenue, product performance,
-              and customer segments for business leaders.
+              Interactive Power BI dashboard visualizing revenue, product performance, regional trends, and customer segments.
+              Includes drill-down, YoY comparison, and dynamic filters.
             </p>
             <span class="tag-pill">Power BI</span>
             <span class="tag-pill">SQL</span>
             <span class="tag-pill">Excel</span>
+            <div class="project-actions">
+              <a href="#" class="btn-sm">View Dashboard</a>
+              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Code</a>
+            </div>
           </div>
+
           <div class="project-card">
             <img src="Thumbnail/churn_thumb.png" alt="Customer Churn Analysis">
-            <h3>Customer Churn Analysis</h3>
+            <h3>Customer Churn Analysis – ML</h3>
             <p>
-              Predictive model using Python and ML to identify at-risk customers and drive retention strategies.
+              Predictive model using Python and Machine Learning to identify at-risk customers, with feature importance and retention recommendations.
             </p>
             <span class="tag-pill">Python</span>
             <span class="tag-pill">Scikit-Learn</span>
             <span class="tag-pill">Pandas</span>
+            <div class="project-actions">
+              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Notebook</a>
+            </div>
           </div>
+
           <div class="project-card">
             <img src="Thumbnail/hr_thumb.png" alt="HR Analytics">
-            <h3>HR Analytics Dashboard</h3>
+            <h3>HR Analytics Dashboard – Tableau</h3>
             <p>
-              HR dashboard for headcount, attrition, and performance trends supporting workforce planning.
+              HR dashboard for headcount, attrition, performance, and diversity metrics to support workforce planning and HR strategy.
             </p>
             <span class="tag-pill">Tableau</span>
             <span class="tag-pill">Excel</span>
             <span class="tag-pill">HR Analytics</span>
+            <div class="project-actions">
+              <a href="#" class="btn-sm">View Dashboard</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <img src="Thumbnail/resume_ai.png" alt="AI Resume Generator">
+            <h3>AI Resume Auto-Generator</h3>
+            <p>
+              Google Apps Script + AI pipeline that converts a Job Description into an ATS-friendly resume PDF/DOCX tailored to the role and keywords.
+            </p>
+            <span class="tag-pill">Apps Script</span>
+            <span class="tag-pill">AI</span>
+            <span class="tag-pill">Automation</span>
+            <div class="project-actions">
+              <a href="#resume" class="btn-sm" onclick="openResumeSection()">Use Tool</a>
+              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Code</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <img src="Thumbnail/datalab_ai.png" alt="AI Data Lab">
+            <h3>AI Data Lab Engine</h3>
+            <p>
+              Web-based workspace that accepts CSV/Excel files and supports SQL playground, quick insights, KPI generation templates and BI dashboard blueprints.
+              Designed to work with Comet/AI assistant.
+            </p>
+            <span class="tag-pill">JavaScript</span>
+            <span class="tag-pill">SQL.js</span>
+            <span class="tag-pill">Chart.js</span>
+            <div class="project-actions">
+              <button class="btn-sm" onclick="openDataLab()">Open Data Lab</button>
+              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Implementation</a>
+            </div>
           </div>
         </div>
         <div style="margin-top:14px;">
@@ -618,8 +795,8 @@ th{background:var(--bg-soft);}
           <div class="company">DAKSHIN HOME FASHIONS</div>
           <div class="dates">Mar 2021 - Present</div>
           <p>
-            Leading data analysis initiatives across production and operations, automating reports,
-            and building dashboards to improve efficiency and decision-making.
+            Leading data analysis initiatives across production and operations, automating reports, and building dashboards in Excel and BI tools
+            to improve efficiency, reduce defects, and support management decisions.
           </p>
         </div>
         <div class="job">
@@ -627,7 +804,8 @@ th{background:var(--bg-soft);}
           <div class="company">PILOT INDUSTRIES</div>
           <div class="dates">Feb 2018 - Feb 2021</div>
           <p>
-            Developed strong foundations in quality processes, RCA, and process improvement using data.
+            Developed strong foundations in quality processes, RCA, process improvement and KPI tracking using data, which now support
+            my analytics approach in BI and reporting.
           </p>
         </div>
       </div>
@@ -640,7 +818,7 @@ th{background:var(--bg-soft);}
           <div class="company">Pavai College of Technology</div>
           <div class="dates">June 2012 - April 2016</div>
           <p>
-            Built strong foundations in mathematics, statistics, and problem-solving that support analytical thinking.
+            Built strong foundations in mathematics, statistics, and problem-solving that support analytical thinking and data-driven decision-making.
           </p>
         </div>
       </div>
@@ -651,18 +829,18 @@ th{background:var(--bg-soft);}
         <div class="cert-grid">
           <div class="cert-card">
             <img src="images/logo/GOOGLE.jfif" alt="Google">
-            <h3>Google Analytics & Docs</h3>
+            <h3>Google Data Analytics / Docs</h3>
             <p>Google — 2024</p>
           </div>
           <div class="cert-card">
             <img src="images/logo/EDURAKA.png" alt="Edureka">
             <h3>Business Analyst Masters</h3>
-            <p>Edureka — Completion Expected March 2025</p>
+            <p>Edureka — Completion Expected Mar 2025</p>
           </div>
           <div class="cert-card">
             <img src="images/logo/POWERBI.jfif" alt="Microsoft">
-            <h3>Microsoft SQL Server Certification</h3>
-            <p>Microsoft — March 2025</p>
+            <h3>Microsoft SQL / Power BI</h3>
+            <p>Microsoft — 2025</p>
           </div>
           <div class="cert-card">
             <img src="images/logo/TABLEAU.png" alt="Tableau">
@@ -672,27 +850,7 @@ th{background:var(--bg-soft);}
         </div>
       </div>
 
-      <!-- SKILLS -->
-      <div class="section">
-        <h2>SKILLS</h2>
-        <div class="skills-grid">
-          <div class="skill-pill">Python</div>
-          <div class="skill-pill">SQL</div>
-          <div class="skill-pill">R</div>
-          <div class="skill-pill">Power BI</div>
-          <div class="skill-pill">Excel</div>
-          <div class="skill-pill">Tableau</div>
-          <div class="skill-pill">Pandas</div>
-          <div class="skill-pill">NumPy</div>
-          <div class="skill-pill">Scikit-Learn</div>
-          <div class="skill-pill">Matplotlib</div>
-          <div class="skill-pill">Machine Learning</div>
-          <div class="skill-pill">Git</div>
-          <div class="skill-pill">GitHub</div>
-        </div>
-      </div>
-
-      <!-- CONTACT (also accessible via assistant nav button) -->
+      <!-- CONTACT (inside Home) -->
       <div id="contact-section" class="section">
         <h2>CONTACT</h2>
         <p style="margin-bottom:10px;color:var(--text-soft);">
@@ -720,69 +878,85 @@ th{background:var(--bg-soft);}
     <!-- DATA LAB SECTION -->
     <section id="datalab" class="page-section">
 
-          <!-- KPI GENERATOR FROM FILE UPLOAD -->
-          <div class="section">
-                  <h2>🎯 KPI Generator from File Upload</h2>
-                  <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
-                            Upload a CSV/Excel file to automatically analyze KPIs. Get Power BI, Tableau, SQL & Excel templates.
-                          </p>
-
-                  <!-- File Upload -->
-                  <div class="dl-two-col">
-                            <div class="panel">
-                                        <div class="label-small">Upload CSV/Excel File</div>
-                                        <input type="file" id="kpiFile" accept=".csv,.xlsx,.xls" />
-                                        <button class="btn" style="margin-top:8px;width:100%;" onclick="760
-                                          ()">Analyze & Generate KPIs</button>
-                                        <div id="kpiLoader" style="display:none;margin-top:12px;font-size:12px;color:var(--text-soft);">Analyzing data...</div>
-                                      </div>
-                            <div class="panel">
-                                        <div class="label-small">Detected KPIs</div>
-                                        <div id="kpiSummary" style="margin-top:8px;font-size:12px;color:var(--text-soft);">Upload a file to analyze...</div>
-                                      </div>
-                          </div>
-
-                  <!-- KPI Results -->
-                  <div id="kpiResults" style="display:none;margin-top:16px;">
-
-                    <!-- AI Data Lab Engine Output Containers -->
-                        <div id="data-preview" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
-                        <div id="cleaned-data" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
-                        <div id="kpi-output" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
-                        <div id="sql-output" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
-                        <div id="dashboard-spec" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
-                        <div id="export-links" style="margin-top:20px;border:1px solid #ddd;padding:15px;border-radius:5px;"></div>
-                            <!-- Power BI Template -->
-                            <div class="panel" style="margin-bottom:12px;">
-                                        <div class="label-small">📊 Power BI Dashboard DAX</div>
-                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="powerBITemplate">// Power BI DAX will generate here</code></pre>
-                                        <button class="btn" style="margin-top:6px;" onclick="copyToClipboard('powerBITemplate')">Copy DAX</button>
-                                      </div>
-
-                            <!-- Tableau Template -->
-                            <div class="panel" style="margin-bottom:12px;">
-                                        <div class="label-small">📈 Tableau Calculated Field</div>
-                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="tableauTemplate">// Tableau formula will generate here</code></pre>
-                                        <button class="btn" style="margin-top:6px;" onclick="copyToClipboard('tableauTemplate')">Copy Formula</button>
-                                      </div>
-
-                            <!-- SQL Template -->
-                            <div class="panel" style="margin-bottom:12px;">
-                                        <div class="label-small">🔍 SQL Queries for KPIs</div>
-                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="sqlQueries">-- SQL queries will generate here</code></pre>
-                                        <button class="btn" style="margin-top:6px;" onclick="copyToClipboard('sqlQueries')">Copy SQL</button>
-                                      </div>
-
-                            <!-- Excel Template -->
-                            <div class="panel">
-                                        <div class="label-small">📋 Excel Formulas & Report</div>
-                                        <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="excelFormula">// Excel formulas will generate here</code></pre>
-                                        <button class="btn" style="margin-top:6px;" onclick="downloadExcelReport()">Download Excel Report</button>
-                                      </div>
-                          </div>
-                </div>
       <div class="section">
-        <h2>BI Dashboard Gallery</h2>
+        <h2>DATA LAB — AI-POWERED WORKSPACE</h2>
+        <p style="font-size:13px;color:var(--text-soft);margin-bottom:8px;">
+          AI-powered data analysis engine built by me for automated insights.  
+          Use this space to upload CSV/Excel, explore data, run SQL, generate quick insights and connect with AI tools like Comet.
+        </p>
+
+        <!-- KPI GENERATOR FROM FILE UPLOAD (Placeholders for Comet / AI) -->
+        <h3 style="font-size:15px;margin-bottom:8px;">🎯 Upload File & KPI Engine</h3>
+        <p style="font-size:12px;color:var(--text-soft);margin-bottom:8px;">
+          Upload a CSV/Excel file. My Comet/AI commands can automatically clean data, generate KPIs, SQL, and dashboard specs and write back into the containers below.
+        </p>
+
+        <div class="dl-two-col">
+          <div class="panel">
+            <div class="label-small">Upload CSV/Excel File</div>
+            <input type="file" id="kpiFile" accept=".csv,.xlsx,.xls" />
+            <button class="btn btn-secondary" style="margin-top:8px;width:100%;" onclick="simpleKPIStub()">Analyze & Generate KPIs (Demo)</button>
+            <div id="kpiLoader" style="display:none;margin-top:12px;font-size:12px;color:var(--text-soft);">Analyzing data...</div>
+          </div>
+          <div class="panel">
+            <div class="label-small">Detected KPIs (Summary)</div>
+            <div id="kpiSummary" style="margin-top:8px;font-size:12px;color:var(--text-soft);">Upload a file & use Comet/AI to populate full KPI summary here.</div>
+          </div>
+        </div>
+
+        <!-- AI Data Lab Engine Output Containers -->
+        <div style="margin-top:16px;">
+          <div id="data-preview" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+            <b>Data Preview</b><br>AI / Comet will render first rows of cleaned data here.
+          </div>
+          <div id="cleaned-data" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+            <b>Cleaned Data & Summary</b><br>Data cleaning operations and preview table will appear here.
+          </div>
+          <div id="kpi-output" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+            <b>KPI Catalog</b><br>Auto-generated KPI list and definitions will appear here.
+          </div>
+          <div id="sql-output" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+            <b>SQL Queries for KPIs</b><br>SQL scripts based on KPIs will appear here.
+          </div>
+          <div id="dashboard-spec" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+            <b>Dashboard Design Blueprint</b><br>Power BI / Tableau / Excel dashboard layout suggestions will appear here.
+          </div>
+          <div id="export-links" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+            <b>Exports</b><br>Download links for cleaned CSV, KPI report, SQL script, and dashboard spec will appear here.
+          </div>
+        </div>
+
+        <!-- BI & FORMULA TEMPLATES (local demo) -->
+        <div style="margin-top:18px;">
+          <div class="panel" style="margin-bottom:12px;">
+            <div class="label-small">📊 Power BI Dashboard DAX (Demo)</div>
+            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="powerBITemplate">// Power BI DAX will be generated here</code></pre>
+            <button class="btn btn-secondary" style="margin-top:6px;" onclick="copyToClipboard('powerBITemplate')">Copy DAX</button>
+          </div>
+
+          <div class="panel" style="margin-bottom:12px;">
+            <div class="label-small">📈 Tableau Calculated Field (Demo)</div>
+            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="tableauTemplate">// Tableau formula will be generated here</code></pre>
+            <button class="btn btn-secondary" style="margin-top:6px;" onclick="copyToClipboard('tableauTemplate')">Copy Formula</button>
+          </div>
+
+          <div class="panel" style="margin-bottom:12px;">
+            <div class="label-small">🔍 SQL Queries for KPIs (Demo)</div>
+            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="sqlQueries">-- SQL queries will be generated here</code></pre>
+            <button class="btn btn-secondary" style="margin-top:6px;" onclick="copyToClipboard('sqlQueries')">Copy SQL</button>
+          </div>
+
+          <div class="panel">
+            <div class="label-small">📋 Excel Formulas & Report (Demo)</div>
+            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="excelFormula">// Excel formulas will be generated here</code></pre>
+            <button class="btn btn-secondary" style="margin-top:6px;" onclick="downloadExcelReport()">Download Excel Report</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BI Dashboard Gallery -->
+      <div class="section">
+        <h2>BI DASHBOARD GALLERY</h2>
         <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
           Replace the <code>src</code> URLs with your real Power BI and Tableau embed links.
         </p>
@@ -804,29 +978,32 @@ th{background:var(--bg-soft);}
         </div>
       </div>
 
+      <!-- SQL Playground -->
       <div class="section">
-        <h2>SQL Playground (In-Browser)</h2>
+        <h2>SQL PLAYGROUND (IN-BROWSER)</h2>
         <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
           Run SQL queries on a demo sales table directly in the browser.
         </p>
         <div class="panel">
-<div style="margin-bottom:15px;">
-      <label class="label-small">Import CSV/Excel File:</label>
-      <input type="file" id="sqlImportFile" accept=".csv,.xlsx,.xls" style="margin-top:5px;margin-bottom:5px;" />
-      <button class="btn btn-primary" onclick="importFileAsTable()" style="width:100%;">Import File for Query</button>
-    </div>
+          <div style="margin-bottom:15px;">
+            <label class="label-small">Import CSV/Excel File (future enhancement):</label>
+            <input type="file" id="sqlImportFile" accept=".csv,.xlsx,.xls" style="margin-top:5px;margin-bottom:5px;" />
+            <button class="btn btn-secondary" onclick="importFileAsTable()" style="width:100%;">Import File for Query (Demo)</button>
+          </div>
 
-          
           <div class="label-small">Write SQL query</div>
           <textarea id="sqlInput">SELECT * FROM sales LIMIT 5;</textarea>
-          <button class="btn btn-primary" onclick="runSQL()">Run Query</button> <button class="btn btn-primary" onclick="exportSQLResult()" style="margin-left:10px;">Export Results</button> <button class="btn btn-primary" onclick="openFormulaAI()" style="margin-left:10px;">AI Formula Writer</button>
-          
+          <button class="btn btn-primary" onclick="runSQL()">Run Query</button>
+          <button class="btn btn-secondary" onclick="exportSQLResult()" style="margin-left:10px;">Export Results</button>
+          <button class="btn btn-secondary" onclick="openFormulaAI()" style="margin-left:10px;">AI Formula Writer</button>
+
           <div id="sqlResult" style="margin-top:10px;font-size:12px;"></div>
         </div>
       </div>
 
+      <!-- CSV Quick Insights -->
       <div class="section">
-        <h2>CSV → Quick Insights Lab</h2>
+        <h2>CSV → QUICK INSIGHTS LAB</h2>
         <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
           Upload a CSV file to preview data and auto-generate a simple chart from the first numeric column.
         </p>
@@ -839,13 +1016,14 @@ th{background:var(--bg-soft);}
         </div>
       </div>
 
+      <!-- Small project gallery repeat for Data Lab section -->
       <div class="section">
-        <h2>Project Gallery</h2>
+        <h2>PROJECT GALLERY</h2>
         <div class="projects-grid">
           <div class="project-card">
             <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard">
             <h3>Sales Performance Dashboard</h3>
-            <p>Power BI report analyzing revenue, product mix, region performance and trends.</p>
+            <p>Power BI report analyzing revenue, product mix, regional performance and trends.</p>
             <span class="tag-pill">Power BI</span>
             <span class="tag-pill">SQL</span>
           </div>
@@ -872,9 +1050,9 @@ th{background:var(--bg-soft);}
     <section id="resume" class="page-section">
 
       <div class="section">
-        <h2>AI Resume Generator (JD → Resume)</h2>
+        <h2>AI RESUME GENERATOR (JD → RESUME)</h2>
         <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
-          Paste a Job Description and generate an ATS-optimized resume using your Google Apps Script or Vercel backend.
+          Paste a Job Description and generate an ATS-optimized resume using your Google Apps Script backend.
         </p>
 
         <div class="panel">
@@ -882,7 +1060,7 @@ th{background:var(--bg-soft);}
           <input id="rgCompany" type="text" placeholder="Example: Amazon, TCS, Accenture">
 
           <div class="label-small" style="margin-top:6px;">Job Title</div>
-          <input id="rgJobTitle" type="text" placeholder="Example: Data Analyst, Data Scientist">
+          <input id="rgJobTitle" type="text" placeholder="Example: Data Analyst, BI Developer">
 
           <div class="label-small" style="margin-top:6px;">Job Description</div>
           <textarea id="rgJD" placeholder="Paste the full JD here..."></textarea>
@@ -904,12 +1082,11 @@ th{background:var(--bg-soft);}
 
     </section>
 
-    703
-    SECTION -->
+    <!-- AI ASSISTANT SECTION -->
     <section id="assistant" class="page-section">
 
       <div class="section">
-        <h2>AI Portfolio Assistant</h2>
+        <h2>AI PORTFOLIO ASSISTANT</h2>
         <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
           Ask about my projects, dashboards, resume fit for a JD, or my skills.  
           This uses your Vercel backend at <code>/api/chat</code> (replace the URL in the script).
@@ -919,7 +1096,7 @@ th{background:var(--bg-soft);}
           <div class="chat-box" id="assistantChatBox">
             <div class="chat-msg chat-bot">
               <span>
-                Hi! I’m your AI assistant for Deepanraj’s portfolio.  
+                Hi! I’m the AI assistant for Deepanraj’s portfolio.  
                 Ask about Sales Dashboard, Churn Analysis, HR Analytics, skills, or paste a JD to see how he fits.
               </span>
             </div>
@@ -937,7 +1114,6 @@ th{background:var(--bg-soft);}
 
     <!-- CONTACT SECTION (shortcut) -->
     <section id="contact" class="page-section">
-      <!-- Reuse contact section from home -->
       <div class="section">
         <h2>CONTACT</h2>
         <p style="margin-bottom:10px;color:var(--text-soft);">
@@ -967,1647 +1143,10 @@ th{background:var(--bg-soft);}
 <!-- FLOATING CHAT BUTTON / WINDOW -->
 <div id="chatBtn">🤖</div>
 <div id="chatWindow">
-  <!-- Reuse assistant UI via iframe is possible, but here we keep it simple and say "Use AI Assistant tab" -->
   <div style="padding:10px;font-size:13px;color:var(--text-soft);">
     <b>Tip:</b> Open the <b>AI Assistant</b> tab in the sidebar for full-screen chat.
   </div>
 </div>
-
-<!-- External libs for Data Lab -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
-
-<script>
-// Loader
-window.addEventListener("load", function(){
-  setTimeout(()=>{ document.getElementById("loaderOverlay").style.display="none"; }, 800);
-});
-  // Ensure light mode by default - remove dark-mode class on load
-  document.body.classList.remove("dark-mode");
-
-// Dark mode
-document.getElementById("darkToggle").onclick = ()=>{
-  document.body.classList.toggle("dark-mode");
-};
-
-// Navigation between sections
-const navButtons = document.querySelectorAll(".nav-btn");
-const sections = document.querySelectorAll(".page-section");
-
-navButtons.forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    const target = btn.getAttribute("data-section");
-    navButtons.forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    sections.forEach(sec=>{
-      sec.id === target ? sec.classList.add("active") : sec.classList.remove("active");
-    });
-    if(target === "contact"){
-      // scroll inside contact section if needed
-    }
-    window.scrollTo({top:0,behavior:"smooth"});
-  });
-});
-
-function scrollToContact(){
-  // Switch to home or contact inside home
-  navButtons.forEach(b=>{
-    if(b.getAttribute("data-section")==="home") b.classList.add("active");
-    else b.classList.remove("active");
-  });
-  sections.forEach(sec=>{
-    sec.id === "home" ? sec.classList.add("active") : sec.classList.remove("active");
-  });
-  setTimeout(()=>{
-    const c = document.getElementById("contact-section");
-    if(c) c.scrollIntoView({behavior:"smooth"});
-  },200);
-}
-
-// Gallery zoom: any img click
-document.querySelectorAll("img").forEach(img=>{
-  img.style.cursor="zoom-in";
-  img.addEventListener("click", ()=>{
-    const modal = document.getElementById("galleryModal");
-    const gimg = document.getElementById("galleryImage");
-    gimg.src = img.src;
-    modal.style.display="flex";
-  });
-});
-
-// Chat floating window
-const chatBtn = document.getElementById("chatBtn");
-const chatWindow = document.getElementById("chatWindow");
-chatBtn.onclick = ()=>{
-  chatWindow.style.display = (chatWindow.style.display === "flex" ? "none" : "flex");
-};
-
-// SQL.JS - demo DB
-let SQLDB = null;
-initSqlJs({ locateFile:file=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` })
-  .then(SQL =>{
-    SQLDB = new SQL.Database();
-    SQLDB.run(`
-      CREATE TABLE sales(region TEXT, product TEXT, revenue INT);
-      INSERT INTO sales VALUES ('North','Product A',12000);
-      INSERT INTO sales VALUES ('South','Product B',8000);
-      INSERT INTO sales VALUES ('West','Product C',15000);
-      INSERT INTO sales VALUES ('East','Product A',9000);
-    `);
-  });
-
-function runSQL(){
-  const out = document.getElementById("sqlResult");
-  out.innerHTML = "";
-  if(!SQLDB){ out.textContent = "Database not ready yet."; return; }
-
-  const query = document.getElementById("sqlInput").value;
-  try{
-    const res = SQLDB.exec(query);
-    if(res.length === 0){
-      out.textContent = "Query executed successfully (no rows returned).";
-      return;
-    }
-    const table = document.createElement("table");
-    const header = document.createElement("tr");
-    res[0].columns.forEach(col=>{
-      const th = document.createElement("th");
-      th.textContent = col;
-      header.appendChild(th);
-    });
-    table.appendChild(header);
-    res[0].values.forEach(row=>{
-      const tr = document.createElement("tr");
-      row.forEach(val=>{
-        const td = document.createElement("td");
-        td.textContent = val;
-        tr.appendChild(td);
-      });
-      table.appendChild(tr);
-    });
-    out.appendChild(table);
-  }catch(e){
-    out.textContent = "Error: " + e.message;
-  }
-}
-
-// CSV → Chart
-let csvChart = null;
-document.getElementById("csvFile").addEventListener("change", function(){
-  const file = this.files[0];
-  if(!file) return;
-
-  Papa.parse(file,{
-    header:true,
-    dynamicTyping:true,
-    complete:function(result){
-      const rows = result.data.filter(r=>Object.keys(r).length>0);
-      if(rows.length === 0) return;
-      const preview = document.getElementById("csvPreview");
-
-      let html = "<b>Preview (first 5 rows):</b><br><table><tr>";
-      const cols = Object.keys(rows[0]);
-      cols.forEach(c=> html += `<th>${c}</th>`);
-      html += "</tr>";
-      rows.slice(0,5).forEach(r=>{
-        html += "<tr>";
-        cols.forEach(c=> html += `<td>${r[c]}</td>`);
-        html += "</tr>";
-      });
-      html += "</table>";
-      preview.innerHTML = html;
-
-      const labels = rows.map(r=> r[cols[0]]);
-      let numCol = null;
-      for(let i=1;i<cols.length;i++){
-        if(typeof rows[0][cols[i]] === "number"){
-          numCol = cols[i];break;
-        }
-      }
-      if(!numCol){ return; }
-      const data = rows.map(r=> r[numCol]);
-
-      const ctx = document.getElementById("csvChart").getContext("2d");
-      if(csvChart) csvChart.destroy();
-      csvChart = new Chart(ctx, {
-        type:"bar",
-        data:{
-          labels:labels,
-          datasets:[{
-            label:numCol,
-            data:data,
-            backgroundColor:"rgba(37,99,235,0.6)"
-          }]
-        },
-        options:{
-          responsive:true,
-          plugins:{legend:{labels:{color: getComputedStyle(document.body).getPropertyValue('--text')}}},
-          scales:{
-            x:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-soft')}},
-            y:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-soft')}}
-          }
-        }
-      });
-    }
-  });
-});
-
-// Resume Generator JD keyword detection + API call
-document.getElementById("rgJD").addEventListener("input", ()=>{
-  const jd = document.getElementById("rgJD").value;
-  const box = document.getElementById("rgKeywords");
-  if(jd.trim().length < 30){
-    box.style.display = "none";
-    return;
-  }
-  const keys = ["SQL","Python","Power BI","Tableau","Excel","Machine Learning","ML","Pandas","NumPy","Scikit-Learn","Dashboard","ETL"];
-  const found = keys.filter(k=> jd.toLowerCase().includes(k.toLowerCase()));
-  if(found.length){
-    box.style.display="block";
-    box.innerHTML = "<b>Keywords detected:</b> " + found.join(", ");
-  }else{
-    box.style.display="none";
-  }
-});
-
-function detectRole(jd){
-  jd = jd.toLowerCase();
-  if(jd.includes("power bi")) return "Power BI Developer";
-  if(jd.includes("tableau")) return "Tableau Developer";
-  if(jd.includes("machine learning") || jd.includes("ml") || jd.includes("ai")) return "Data Scientist";
-  if(jd.includes("business analyst")) return "Business Analyst";
-  return "Data Analyst";
-}
-
-async function generateResume(){
-  const company = document.getElementById("rgCompany").value.trim();
-  const job = document.getElementById("rgJobTitle").value.trim();
-  const jd = document.getElementById("rgJD").value.trim();
-  const loader = document.getElementById("rgLoader");
-  const result = document.getElementById("rgResult");
-  const links = document.getElementById("rgLinks");
-
-  if(!company || !job || !jd){
-    alert("Please fill Company, Job Title, and JD.");
-    return;
-  }
-  loader.style.display="block";
-  result.style.display="none";
-  links.innerHTML="";
-
-  const detectedRole = detectRole(jd);
-
-  try{
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxKtgjRe_vZsFbgv3G7Q4KVWAkJUCEn8rTQpreXv-6mw41GmKeQrVmMd649-KDfN9G4xec",{
-      method:"POST",
-      body:JSON.stringify({
-        companyName:company,
-        jobTitle:job,
-        jobDescription:jd,
-        detectedRole:detectedRole,
-        output:"pdf-docx"
-      })
-    });
-    const data = await res.json();
-    loader.style.display="none";
-
-    if(data.status === "success"){
-      result.style.display="block";
-      let html="";
-      if(data.pdf) html += `<a href="${data.pdf}" target="_blank">Download PDF</a><br>`;
-      if(data.docx) html += `<a href="${data.docx}" target="_blank">Download DOCX</a>`;
-      links.innerHTML = html || "No download links returned from backend.";
-    }else{
-      alert("Error generating resume: " + data.message);
-    }
-  }catch(e){
-    loader.style.display="none";
-    alert("Error calling backend. Please check your Apps Script URL.");
-  }
-}
-
-// AI Assistant using Vercel backend
-async function sendAssistantMessage(){
-  const input = document.getElementById("assistantInput");
-  const box = document.getElementById("assistantChatBox");
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  const me = document.createElement("div");
-  me.className="chat-msg chat-me";
-  me.innerHTML = `<span>${msg}</span>`;
-  box.appendChild(me);
-  box.scrollTop = box.scrollHeight;
-  input.value="";
-
-  try{
-    const res = await fetch("https://YOUR-VERCEL-APP.vercel.app/api/chat",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({message:msg})
-    });
-    const data = await res.json();
-    const bot = document.createElement("div");
-    bot.className="chat-msg chat-bot";
-    bot.innerHTML = `<span>${data.reply || "No reply from AI."}</span>`;
-    box.appendChild(bot);
-    box.scrollTop = box.scrollHeight;
-  }catch(e){
-    const err = document.createElement("div");
-    err.className="chat-msg chat-bot";
-    err.innerHTML = `<span>There was a problem connecting to the AI server.</span>`;
-    box.appendChild(err);
-    box.scrollTop = box.scrollHeight;
-  }
-}
-</script>
-
-</body>
-</html
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Data Lab Ultra – Deepanraj</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- PapaParse -->
-<script src="https://cdn.jsdelivr.net/npm/papaparse"></script>
-
-<!-- SQL.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
-
-<style>
-:root{
-  --bg:#0f172a;
-  --bg-card:#1e293b;
-  --bg-soft:#162033;
-  --text:#e2e8f0;
-  --text-soft:#94a3b8;
-  --border:#334155;
-  --primary:#2563eb;
-}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,Segoe UI,Roboto,sans-serif;
-}
-
-.section{
-  max-width:1000px;
-  margin:30px auto;
-  background:var(--bg-card);
-  padding:25px;
-  border-radius:14px;
-  border:1px solid var(--border);
-}
-
-.section h2{
-  font-size:24px;
-  margin-bottom:10px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.section h2::before{
-  content:"";
-  width:4px;
-  height:20px;
-  background:var(--primary);
-  border-radius:3px;
-}
-
-/* Tabs */
-.datalab-tabs{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:15px;
-}
-.dl-tab{
-  padding:8px 14px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:var(--bg-soft);
-  color:var(--text-soft);
-  cursor:pointer;
-  font-size:13px;
-}
-.dl-tab.active{
-  background:var(--primary);
-  color:#fff;
-  border-color:var(--primary);
-}
-
-.dl-tab-content{
-  display:none;
-  margin-top:18px;
-}
-.dl-tab-content.active{
-  display:block;
-}
-
-/* Panel */
-.panel{
-  background:var(--bg-soft);
-  padding:15px;
-  border-radius:10px;
-  border:1px solid var(--border);
-}
-
-textarea,select,input[type="file"]{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid var(--border);
-  background:var(--bg-card);
-  color:var(--text);
-  margin-top:6px;
-  font-size:13px;
-}
-textarea{min-height:90px;}
-
-.label-small{
-  color:var(--text-soft);
-  font-size:12px;
-  margin-top:10px;
-}
-
-.btn{
-  background:var(--primary);
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  padding:8px 14px;
-  cursor:pointer;
-  font-weight:600;
-}
-.btn-outline{
-  background:transparent;
-  color:var(--primary);
-  border:1px solid var(--primary);
-}
-
-table{
-  border-collapse:collapse;
-  width:100%;
-  font-size:12px;
-}
-th,td{
-  padding:6px;
-  border:1px solid var(--border);
-}
-th{
-  background:var(--bg-card);
-}
-
-.dl-two-col{
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  gap:12px;
-}
-@media(max-width:800px){
-  .dl-two-col{grid-template-columns:1fr;}
-}
-
-.dl-meta{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-.dl-pill{
-  padding:5px 10px;
-  background:var(--bg-card);
-  border-radius:20px;
-  font-size:12px;
-}
-</style>
-
-</head>
-<body>
-
-<!-- ========================================================= -->
-<!--                ⭐ DATA LAB ULTRA SECTION ⭐                 -->
-<!-- ========================================================= -->
-
-<div class="section">
-  <h2>Data Lab — Ultra Analytics Workspace</h2>
-  <p style="font-size:13px;color:var(--text-soft);">
-    SQL Studio • AI SQL Assistant • Dataset Explorer • Chart Builder • DAX / Tableau AI • BRD Generator
-  </p>
-
-  <!-- TABS -->
-  <div class="datalab-tabs">
-    <button class="dl-tab active" data-dl-tab="dl-sql">SQL Studio</button>
-    <button class="dl-tab" data-dl-tab="dl-aisql">AI SQL Generator</button>
-    <button class="dl-tab" data-dl-tab="dl-dataset">Dataset & Stats</button>
-    <button class="dl-tab" data-dl-tab="dl-charts">Charts Studio</button>
-    <button class="dl-tab" data-dl-tab="dl-bi-ai">BI & DAX AI</button>
-  </div>
-
-
-  <!-- ===================== SQL STUDIO ===================== -->
-  <div id="dl-sql" class="dl-tab-content active">
-    <div class="panel">
-      <div class="label-small">SQL Query</div>
-      <textarea id="sqlInput">SELECT * FROM sales LIMIT 5;</textarea>
-
-      <div style="margin-top:10px;display:flex;gap:10px;">
-        <button class="btn" onclick="runSQL()">Run Query</button>
-        <button class="btn-outline" onclick="exportSQLResult()">Export</button>
-      </div>
-
-      <div id="sqlResult" style="margin-top:15px;max-height:260px;overflow:auto;"></div>
-    </div>
-  </div>
-
-
-  <!-- =================== AI SQL GENERATOR =================== -->
-  <div id="dl-aisql" class="dl-tab-content">
-    <div class="panel">
-
-      <div class="label-small">Describe your query</div>
-      <textarea id="aiSqlPrompt" placeholder="Example: Show total revenue by region for last 6 months."></textarea>
-
-      <button class="btn" style="margin-top:10px;" onclick="generateAISQL()">Generate SQL</button>
-
-      <div class="label-small" style="margin-top:12px;">Generated SQL</div>
-      <textarea id="aiSqlOutput" readonly></textarea>
-
-    </div>
-  </div>
-
-
-  <!-- ================= DATASET + STATS ===================== -->
-  <div id="dl-dataset" class="dl-tab-content">
-    <div class="panel">
-
-      <div class="label-small">Upload CSV file</div>
-      <input type="file" id="csvFile" accept=".csv">
-
-      <div class="dl-meta" id="dlMeta" style="margin-top:12px;"></div>
-
-      <div id="csvPreview"
-        style="margin-top:12px;max-height:260px;overflow:auto;
-        border:1px solid var(--border);padding:8px;border-radius:8px;">
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ====================== CHARTS ========================= -->
-  <div id="dl-charts" class="dl-tab-content">
-    <div class="panel">
-      <div class="dl-two-col">
-
-        <div>
-          <div class="label-small">Chart Type</div>
-          <select id="chartTypeSelect">
-            <option value="bar">Bar</option>
-            <option value="line">Line</option>
-            <option value="pie">Pie</option>
-            <option value="scatter">Scatter</option>
-          </select>
-
-          <div class="label-small">X-Axis</div>
-          <select id="chartXSelect"></select>
-
-          <div class="label-small">Y-Axis</div>
-          <select id="chartYSelect"></select>
-
-          <button class="btn" style="margin-top:10px;" onclick="renderCustomChart()">Build Chart</button>
-        </div>
-
-        <div>
-          <canvas id="csvChart" style="height:260px;"></canvas>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ==================== DAX + TABLEAU + BRD AI ===================== -->
-  <div id="dl-bi-ai" class="dl-tab-content">
-    <div class="panel">
-
-      <!-- DAX -->
-      <div class="label-small">Power BI — Generate DAX</div>
-      <textarea id="daxPrompt" placeholder="Example: YOY growth using Sales[Revenue] and Sales[Date]"></textarea>
-      <button class="btn" style="margin-top:8px;" onclick="generateDAX()">Generate DAX</button>
-      <pre id="daxOutput" style="margin-top:10px;"></pre>
-
-      <!-- Tableau -->
-      <div class="label-small" style="margin-top:20px;">Tableau — Calculated Field</div>
-      <textarea id="tblPrompt" placeholder="Example: Churn flag if customer inactive for 90 days"></textarea>
-      <button class="btn" style="margin-top:8px;" onclick="generateTableauCalc()">Generate Formula</button>
-      <pre id="tblOutput" style="margin-top:10px;"></pre>
-
-      <!-- BRD -->
-      <div class="label-small" style="margin-top:20px;">AI — BRD Summary</div>
-      <textarea id="brdPrompt" placeholder="Paste your dataset problem or requirement"></textarea>
-      <button class="btn" style="margin-top:8px;" onclick="generateBRD()">Generate BRD</button>
-      <pre id="brdOutput" style="margin-top:10px;"></pre>
-
-    </div>
-  </div>
-
-</div>
-
-
-<!-- ========================================================= -->
-<!--                     JAVASCRIPT ENGINE                     -->
-<!-- ========================================================= -->
-<script>
-// =======================
-// SQL DEMO (sqlite)
-// =======================
-let SQLDB=null;
-
-initSqlJs({ locateFile:file=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` })
-.then(SQL=>{
-  SQLDB=new SQL.Database();
-  SQLDB.run(`
-    CREATE TABLE sales(region TEXT, product TEXT, revenue INT);
-    INSERT INTO sales VALUES ('North','Product A',12000);
-    INSERT INTO sales VALUES ('South','Product B',8000);
-    INSERT INTO sales VALUES ('West','Product C',15000);
-    INSERT INTO sales VALUES ('East','Product A',9000);
-  `);
-});
-
-function runSQL(){
-  const out=document.getElementById("sqlResult");
-  const query=document.getElementById("sqlInput").value;
-  out.innerHTML="";
-
-  try{
-    const res=SQLDB.exec(query);
-    if(res.length===0){
-      out.innerHTML="✔ Query executed (no rows returned)";
-      return;
-    }
-    const table=document.createElement("table");
-    const header=document.createElement("tr");
-    res[0].columns.forEach(c=>{
-      const th=document.createElement("th");
-      th.textContent=c;
-      header.appendChild(th);
-    });
-    table.appendChild(header);
-
-    res[0].values.forEach(r=>{
-      const tr=document.createElement("tr");
-      r.forEach(v=>{
-        const td=document.createElement("td");
-        td.textContent=v;
-        tr.appendChild(td);
-      });
-      table.appendChild(tr);
-    });
-    out.appendChild(table);
-
-    window.lastSQLResult=res[0];
-
-  }catch(e){
-    out.innerHTML="❌ Error: " + e.message;
-  }
-}
-
-function exportSQLResult(){
-  if(!window.lastSQLResult){
-    alert("Run a query first");
-    return;
-  }
-  const cols=lastSQLResult.columns;
-  const rows=lastSQLResult.values;
-
-  let csv=cols.join(",")+"\n";
-  rows.forEach(r=>{
-    csv+=r.join(",")+"\n";
-  });
-
-  const blob=new Blob([csv],{type:"text/csv"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="sql_result.csv";
-  a.click();
-}
-
-
-// =====================
-// TAB SWITCHING
-// =====================
-document.querySelectorAll(".dl-tab").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll(".dl-tab").forEach(t=>t.classList.remove("active"));
-    btn.classList.add("active");
-
-    const target=btn.getAttribute("data-dl-tab");
-    document.querySelectorAll(".dl-tab-content").forEach(c=>{
-      c.classList.remove("active");
-      if(c.id===target) c.classList.add("active");
-    });
-  };
-});
-
-
-// =====================
-// CSV PARSER
-// =====================
-let csvDataRows=[],csvDataCols=[],csvChart=null;
-
-document.getElementById("csvFile").addEventListener("change", function(){
-  const file=this.files[0];
-  if(!file) return;
-
-  Papa.parse(file,{
-    header:true,dynamicTyping:true,
-    complete:function(res){
-      const rows=res.data.filter(r=>Object.keys(r).length>0);
-      if(!rows.length) return;
-
-      csvDataRows=rows;
-      csvDataCols=Object.keys(rows[0]);
-
-      renderPreview(rows,csvDataCols);
-      renderStats(rows,csvDataCols);
-      populateSelectors(csvDataCols,rows);
-    }
-  });
-});
-
-function renderPreview(rows,cols){
-  let html="<table><tr>";
-  cols.forEach(c=>html+=`<th>${c}</th>`);
-  html+="</tr>";
-
-  rows.slice(0,25).forEach(r=>{
-    html+="<tr>";
-    cols.forEach(c=>html+=`<td>${r[c]}</td>`);
-    html+="</tr>";
-  });
-
-  html+="</table>";
-  document.getElementById("csvPreview").innerHTML=html;
-}
-
-function renderStats(rows,cols){
-  let missing=0,numeric=0;
-  rows.forEach(r=>{
-    cols.forEach(c=>{
-      if(r[c]==="" || r[c]==null) missing++;
-      if(typeof r[c]==="number") numeric++;
-    });
-  });
-
-  document.getElementById("dlMeta").innerHTML=`
-    <div class="dl-pill">${rows.length} rows</div>
-    <div class="dl-pill">${cols.length} columns</div>
-    <div class="dl-pill">${numeric} numeric values</div>
-    <div class="dl-pill">${missing} missing cells</div>
-  `;
-}
-
-function populateSelectors(cols,rows){
-  const xs=document.getElementById("chartXSelect");
-  const ys=document.getElementById("chartYSelect");
-  xs.innerHTML=""; ys.innerHTML="";
-
-  cols.forEach(c=>{
-    xs.innerHTML+=`<option>${c}</option>`;
-  });
-
-  cols.forEach(c=>{
-    if(typeof rows[0][c]==="number"){
-      ys.innerHTML+=`<option>${c}</option>`;
-    }
-  });
-}
-
-
-// =====================
-// CHART BUILDER
-// =====================
-function renderCustomChart(){
-  if(!csvDataRows.length){
-    alert("Upload CSV first");
-    return;
-  }
-
-  const type=document.getElementById("chartTypeSelect").value;
-  const xcol=document.getElementById("chartXSelect").value;
-  const ycol=document.getElementById("chartYSelect").value;
-
-  const labels=csvDataRows.map(r=>r[xcol]);
-  const data=csvDataRows.map(r=>r[ycol]);
-
-  const ctx=document.getElementById("csvChart").getContext("2d");
-  if(csvChart) csvChart.destroy();
-
-  csvChart=new Chart(ctx,{
-    type:type==="pie" ? "pie" : type,
-    data:{
-      labels:type==="pie"?labels:undefined,
-      datasets:[{
-        label:ycol,
-        data:type==="pie"?data:undefined,
-        ...(
-          (type==="bar"||type==="line") 
-            ? { data:data }
-            : (type==="scatter")
-            ? { data:csvDataRows.map(r=>({x:r[xcol],y:r[ycol]})) }
-            : {}
-        ),
-        backgroundColor:"rgba(37,99,235,0.5)",
-        borderColor:"#2563eb"
-      }]
-    },
-    options:{
-      responsive:true,
-      plugins:{legend:{labels:{color:var(--text)}}},
-      scales:(type!=="pie")?{
-        x:{ticks:{color:var(--text-soft)}},
-        y:{ticks:{color:var(--text-soft)}}
-      }:{}
-    }
-  });
-}
-
-
-// =====================
-// AI HELPERS (Use your own backend)
-// =====================
-async function generateAISQL(){
-  let p=document.getElementById("aiSqlPrompt").value.trim();
-  let out=document.getElementById("aiSqlOutput");
-  out.value="Thinking...";
-
-  // Replace with real endpoint
-  out.value="SELECT region, SUM(revenue) AS TotalRevenue FROM sales GROUP BY region;";
-}
-
-async function generateDAX(){
-  let p=document.getElementById("daxPrompt").value.trim();
-  let out=document.getElementById("daxOutput");
-  out.textContent="CALCULATE(SUM(Sales[Revenue]), DATEADD(Sales[Date], -1, YEAR))";
-}
-
-async function generateTableauCalc(){
-  let p=document.getElementById("tblPrompt").value.trim();
-  let out=document.getElementById("tblOutput");
-  out.textContent="IF DATEDIFF('day',[Last Active Date], TODAY()) > 90 THEN 1 ELSE 0 END";
-}
-
-async function generateBRD(){
-  let p=document.getElementById("brdPrompt").value.trim();
-  let out=document.getElementById("brdOutput");
-  out.textContent=
-`Business Objective:
-Analyze key KPIs to support data-driven decision-making.
-
-KPIs:
-- Revenue
-- Region performance
-- Product performance
-- Growth indicators
-
-Assumptions:
-- Data is complete
-- Date fields are accurate
-
-Risks:
-- Missing values
-- Biased dataset`;
-}
-
-  // =====================
-  // KPI GENERATOR FROM FILE UPLOAD
-  // =====================
-  function analyzeKPIFile() {
-      const fileInput = document.getElementById('kpiFile');
-      if (!fileInput.files[0]) { alert('Please upload a file'); return; }
-      const loader = document.getElementById('kpiLoader');
-      const results = document.getElementById('kpiResults');
-      loader.style.display = 'block';
-      setTimeout(() => { generateKPITemplates(); }, 1000);
-    }
-
-  function generateKPITemplates() {
-      const loader = document.getElementById('kpiLoader');
-      const results = document.getElementById('kpiResults');
-      const summary = document.getElementById('kpiSummary');
-      // Generate KPI summaries
-      const kpis = ['Revenue', 'Customer Growth', 'Retention Rate', 'Churn Rate', 'Average Order Value', 'Conversion Rate'];
-    summary.innerHTML = kpis.map(k => `<div style="margin:4px 0;">✓ ${k}</div>`).join('');
-
-      // Power BI DAX
-    document.getElementById('powerBITemplate').textContent =
-      'Revenue = SUMX(Sales, Sales[Quantity] * Sales[Price])\\n' +
-          'Growth Rate = DIVIDE(THIS_YEAR - LAST_YEAR, LAST_YEAR)';
-      // Tableau Formula
-      document.getElementById('tableauTemplate').textContent =
-                                                 'IF SUM([Sales]) > AVG([Average Sales]) THEN "High" ELSE "Low" END';
-
-    // SQL Queries
-      document.getElementById('sqlQueries').textContent =
-      'SELECT DATE, SUM(amount) as Daily_Revenue FROM sales GROUP BY DATE;\\n' +
-            'SELECT customer_id, COUNT(*) as Purchase_Count FROM orders GROUP BY customer_id;';
-    // Excel Formulas
-      document.getElementById('excelFormula').textContent =
-      '=SUM(B2:B100) for Total\\n' +
-      '=AVERAGE(B2:B100) for Avg\\n' +
-      '=IF(B2>C2,"Growing","Declining")';
-    loader.style.display = 'none';
-      results.style.display = 'block';
-    }
-
-      function copyToClipboard(elementId) {
-          const text = document.getElementById(elementId).textContent;
-    navigator.clipboard.writeText(text).then(() => alert('Copied!'));
-  }
-
-  function downloadExcelReport() {
-      const data = document.getElementById('excelFormula').textContent;
-    const blob = new Blob([data], { type: 'text/plain' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'KPI_Report.txt'; a.click();
-  }
-
-  // =============================================
-// AI DATA LAB ENGINE - COMPREHENSIVE VERSION
-// =============================================
-// This engine handles: file upload, data cleaning, KPI generation, SQL generation, dashboard design
-
-  class DataLabEngine {
-      constructor() {
-            this.data = [];
-            this.cleanedData = [];
-            this.columns = [];
-            this.dataTypes = {};
-            this.kpis = [];
-          }
-
-      // STEP 1: FILE READING & PARSING
-      async readFile(file) {
-            const ext = file.name.split('.').pop().toLowerCase();
-            if (ext === 'csv') return this.parseCSV(file);
-            alert('Please upload CSV file. Excel support coming soon.');
-          }
-      parseCSV(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                    const csv = e.target.result;
-                    const lines = csv.split('\n').map(l => l.trim()).filter(l => l);
-                    this.columns = lines[0].split(',').map(c => c.trim());
-                    this.data = lines.slice(1).map(line => {
-                              const vals = line.split(',').map(v => v.trim());
-                              let obj = {};
-                              this.columns.forEach((col, i) => obj[col] = vals[i] || '');
-                              return obj;
-                            });
-                    this.detectTypes();
-                    this.displayPreview();
-                  };
-            reader.readAsText(file);
-          }
-
-      detectTypes() {
-            this.columns.forEach(col => {
-                    const vals = this.data.map(r => r[col]).filter(v => v);
-                    const dateRgx = /^\d{4}-\d{2}-\d{2}|\d{1,2}\/\d{1,2}\/\d{4}$/;
-                    const numRgx = /^-?\d+(\.\d+)?$/;
-                    if (vals.every(v => dateRgx.test(v))) this.dataTypes[col] = 'date';
-                    else if (vals.every(v => numRgx.test(v))) this.dataTypes[col] = 'number';
-                    else this.dataTypes[col] = 'text';
-                  });
-          }
-
-
-
-      // STEP 2: DATA CLEANING
-  cleanData() {
-    // Remove duplicates
-    const seen = new Set();
-    this.cleanedData = this.data.filter(row => {
-      const key = JSON.stringify(row);
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-    
-    // Standardize dates and handle missing values
-    this.cleanedData = this.cleanedData.map(row => {
-      const cleaned = {};
-      this.columns.forEach(col => {
-        let val = row[col];
-        
-        if (this.dataTypes[col] === 'date') {
-          if (val && val.trim()) {
-            cleaned[col] = this.standardizeDate(val);
-          } else {
-            cleaned[col] = 'Unknown';
-          }
-        } else if (this.dataTypes[col] === 'number') {
-          if (val && val.trim()) {
-            cleaned[col] = parseFloat(val);
-          } else {
-            cleaned[col] = null;
-          }
-        } else {
-          cleaned[col] = val ? val.trim().replace(/\s+/g, ' ').toLowerCase() : 'unknown';
-        }
-      });
-      return cleaned;
-    });
-    
-    this.detectOutliers();
-  }
-  
-  standardizeDate(dateStr) {
-    if (!dateStr) return 'Unknown';
-    let date;
-    if (dateStr.includes('/')) {
-      const [m, d, y] = dateStr.split('/').map(Number);
-      date = new Date(y, m - 1, d);
-    } else if (dateStr.includes('-')) {
-      date = new Date(dateStr);
-    } else {
-      date = new Date(dateStr);
-    }
-    if (isNaN(date.getTime())) return 'Unknown';
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const dd = String(date.getDate()).padStart(2, '0');
-    return `${yyyy}-${mm}-${dd}`;
-  }
-  
-  detectOutliers() {
-    if (!this.columns.includes('Outlier_Flag')) {
-      this.columns.push('Outlier_Flag');
-    }
-    this.columns.forEach(col => {
-      if (this.dataTypes[col] === 'number') {
-        const nums = this.cleanedData.map(r => r[col]).filter(v => typeof v === 'number');
-        nums.sort((a, b) => a - b);
-        const q1 = nums[Math.floor(nums.length * 0.25)];
-        const q3 = nums[Math.floor(nums.length * 0.75)];
-        const iqr = q3 - q1;
-        const lower = q1 - 1.5 * iqr;
-        const upper = q3 + 1.5 * iqr;
-        this.cleanedData.forEach(row => {
-          const val = row[col];
-          if (typeof val === 'number' && (val < lower || val > upper)) {
-            row['Outlier_Flag'] = true;
-          } else if (!row['Outlier_Flag']) {
-            row['Outlier_Flag'] = false;
-          }
-        });
-      }
-    });
-  }
-
-      // STEP 3: AUTOMATIC KPI GENERATION
-  generateKPIs() {
-    this.kpis = [];
-    const metrics = {};
-    
-    // Count of records
-    this.kpis.push({
-      name: 'Total Records',
-      description: 'Total count of data rows',
-      calculation: 'COUNT(*)',
-      formula: `${this.cleanedData.length}`
-    });
-    
-    // Count of outliers
-    const outlierCount = this.cleanedData.filter(r => r['Outlier_Flag'] === true).length;
-    this.kpis.push({
-      name: 'Total Outliers',
-      description: 'Count of rows flagged as outliers',
-      calculation: 'COUNT(Outlier_Flag=TRUE)',
-      formula: `${outlierCount}`
-    });
-    
-    // Analyze each numeric column
-    this.columns.forEach(col => {
-      if (this.dataTypes[col] === 'number' && col !== 'Outlier_Flag') {
-        const vals = this.cleanedData.map(r => r[col]).filter(v => typeof v === 'number');
-        if (vals.length > 0) {
-          const sum = vals.reduce((a, b) => a + b, 0);
-          const avg = sum / vals.length;
-          const min = Math.min(...vals);
-          const max = Math.max(...vals);
-          
-          this.kpis.push({
-            name: `Total ${col}`,
-            description: `Sum of ${col} column`,
-            calculation: `SUM(${col})`,
-            formula: `${sum.toFixed(2)}`
-          });
-          this.kpis.push({
-            name: `Average ${col}`,
-            description: `Mean value of ${col}`,
-            calculation: `AVG(${col})`,
-            formula: `${avg.toFixed(2)}`
-          });
-          this.kpis.push({
-            name: `Min ${col}`,
-            description: `Minimum value in ${col}`,
-            calculation: `MIN(${col})`,
-            formula: `${min.toFixed(2)}`
-          });
-          this.kpis.push({
-            name: `Max ${col}`,
-            description: `Maximum value in ${col}`,
-            calculation: `MAX(${col})`,
-            formula: `${max.toFixed(2)}`
-          });
-        }
-      }
-    });
-    
-    // Analyze date columns for time-based metrics
-    this.columns.forEach(col => {
-      if (this.dataTypes[col] === 'date' && col !== 'Outlier_Flag') {
-        const dates = this.cleanedData.map(r => r[col]).filter(v => v && v !== 'Unknown');
-        if (dates.length > 1) {
-          dates.sort();
-          this.kpis.push({
-            name: `Date Range ${col}`,
-            description: `Time span from earliest to latest ${col}`,
-            calculation: `MAX(${col}) - MIN(${col})`,
-            formula: `${dates[0]} to ${dates[dates.length-1]}`
-          });
-        }
-      }
-    });
-    
-    // Analyze categorical columns
-    this.columns.forEach(col => {
-      if (this.dataTypes[col] === 'text' && col !== 'Outlier_Flag') {
-        const vals = this.cleanedData.map(r => r[col]).filter(v => v);
-        const categories = {};
-        vals.forEach(v => categories[v] = (categories[v] || 0) + 1);
-        
-        const sorted = Object.entries(categories).sort((a, b) => b[1] - a[1]);
-        if (sorted.length > 0) {
-          this.kpis.push({
-            name: `Unique Values in ${col}`,
-            description: `Count of distinct values`,
-            calculation: `COUNT(DISTINCT ${col})`,
-            formula: `${sorted.length}`
-          });
-          this.kpis.push({
-            name: `Most Common ${col}`,
-            description: `Most frequent value`,
-            calculation: `MODE(${col})`,
-            formula: `${sorted[0][0]} (${sorted[0][1]} times)`
-          });
-        }
-      }
-    });
-  }
-
-      // STEP 4: SQL QUERY GENERATION
-  generateSQL() {
-    let sqlQueries = '';
-    
-    // Table name (extracted from first date column or 'data')
-    const tableName = 'cleaned_data';
-    
-    sqlQueries += `-- Individual KPI Queries\n\n`;
-    
-    // Generate SQL for each KPI
-    this.kpis.forEach((kpi, idx) => {
-      sqlQueries += `-- KPI ${idx + 1}: ${kpi.name}\n`;
-      sqlQueries += `-- ${kpi.description}\n`;
-      
-      if (kpi.name.includes('Total Records')) {
-        sqlQueries += `SELECT COUNT(*) AS '${kpi.name}' FROM ${tableName};\n\n`;
-      } else if (kpi.name.includes('Total Outliers')) {
-        sqlQueries += `SELECT COUNT(*) AS '${kpi.name}' FROM ${tableName} WHERE Outlier_Flag = TRUE;\n\n`;
-      } else if (kpi.name.includes('Total ')) {
-        const col = kpi.name.replace('Total ', '');
-        sqlQueries += `SELECT SUM(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
-      } else if (kpi.name.includes('Average ')) {
-        const col = kpi.name.replace('Average ', '');
-        sqlQueries += `SELECT AVG(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
-      } else if (kpi.name.includes('Min ')) {
-        const col = kpi.name.replace('Min ', '');
-        sqlQueries += `SELECT MIN(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
-      } else if (kpi.name.includes('Max ')) {
-        const col = kpi.name.replace('Max ', '');
-        sqlQueries += `SELECT MAX(${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
-      } else if (kpi.name.includes('Unique Values')) {
-        const col = kpi.name.match(/Unique Values in (\w+)/)[1];
-        sqlQueries += `SELECT COUNT(DISTINCT ${col}) AS '${kpi.name}' FROM ${tableName};\n\n`;
-      } else if (kpi.name.includes('Most Common')) {
-        const col = kpi.name.match(/Most Common (\w+)/)[1];
-        sqlQueries += `SELECT ${col}, COUNT(*) AS frequency FROM ${tableName} GROUP BY ${col} ORDER BY frequency DESC LIMIT 1;\n\n`;
-      }
-    });
-    
-    // Summary table
-    sqlQueries += `-- SUMMARY TABLE - All KPIs\n`;
-    sqlQueries += `SELECT\n`;
-    sqlQueries += `  'Total Records' AS KPI_Name, COUNT(*) AS Value\nFROM ${tableName}\nUNION ALL\n`;
-    sqlQueries += `SELECT 'Total Outliers', COUNT(*) FROM ${tableName} WHERE Outlier_Flag = TRUE`;
-    
-    this.columns.forEach(col => {
-      if (this.dataTypes[col] === 'number' && col !== 'Outlier_Flag') {
-        sqlQueries += `\nUNION ALL SELECT 'Sum_${col}', SUM(${col}) FROM ${tableName}`;
-        sqlQueries += `\nUNION ALL SELECT 'Avg_${col}', AVG(${col}) FROM ${tableName}`;
-      }
-    });
-    
-    sqlQueries += `;\n\n`;
-    
-    return sqlQueries;
-  }
-
-      // STEP 5: DASHBOARD DESIGN SPECIFICATION
-  generateDashboardSpec() {
-    let dashSpec = `# Dashboard Design Blueprint\n\n`;
-    
-    dashSpec += `## Power BI Measures\n`;
-    dashSpec += `\`\`\`dax\n`;
-    
-    this.kpis.slice(0, Math.min(8, this.kpis.length)).forEach(kpi => {
-      dashSpec += `// ${kpi.name}\n`;
-      dashSpec += `${kpi.name.replace(/ /g, '_')} = ${kpi.formula}\n`;
-    });
-    
-    dashSpec += `\`\`\`\n\n`;
-    
-    dashSpec += `## Tableau Calculated Fields\n`;
-    dashSpec += `\`\`\`tableau\n`;
-    
-    this.kpis.slice(0, Math.min(8, this.kpis.length)).forEach(kpi => {
-      dashSpec += `// ${kpi.name}\n`;
-      dashSpec += `[${kpi.name}] = ${kpi.calculation}\n`;
-    });
-    
-    dashSpec += `\`\`\`\n\n`;
-    
-    dashSpec += `## Recommended Visualizations\n\n`;
-    
-    // KPI Cards
-    dashSpec += `### Row 1: KPI Summary Cards\n`;
-    dashSpec += `- Card 1: Total Records\n`;
-    dashSpec += `- Card 2: Total Outliers\n`;
-    dashSpec += `- Card 3: Key Metric Average\n\n`;
-    
-    // Charts based on data types
-    const numericCols = this.columns.filter(c => this.dataTypes[c] === 'number');
-    const textCols = this.columns.filter(c => this.dataTypes[c] === 'text');
-    const dateCols = this.columns.filter(c => this.dataTypes[c] === 'date');
-    
-    if (numericCols.length > 0) {
-      dashSpec += `### Row 2: Numeric Analysis\n`;
-      dashSpec += `- Clustered Bar Chart: Top numeric metrics\n`;
-      dashSpec += `- Scatter Chart: ${numericCols[0]} vs Distribution\n`;
-      dashSpec += `- Gauge Chart: Average values\n\n`;
-    }
-    
-    if (textCols.length > 0) {
-      dashSpec += `### Row 3: Category Analysis\n`;
-      dashSpec += `- Pie Chart: Distribution of ${textCols[0]}\n`;
-      dashSpec += `- Stacked Bar: ${textCols[0]} breakdown\n\n`;
-    }
-    
-    if (dateCols.length > 0) {
-      dashSpec += `### Row 4: Time Series\n`;
-      dashSpec += `- Line Chart: Trend by ${dateCols[0]}\n`;
-      dashSpec += `- Area Chart: Cumulative values over time\n\n`;
-    }
-    
-    dashSpec += `### Row 5: Outliers & Data Quality\n`;
-    dashSpec += `- Outlier Indicator: Count and percentage\n`;
-    dashSpec += `- Data Quality Gauge\n\n`;
-    
-    dashSpec += `## Excel PivotTable Structure\n\n`;
-    dashSpec += `### Row Labels: ${textCols.slice(0, 2).join(', ') || 'Categories'}\n`;
-    dashSpec += `### Column Labels: ${dateCols.slice(0, 1).join(', ') || 'Time'}\n`;
-    dashSpec += `### Values: ${numericCols.slice(0, 2).join(', ') || 'Metrics'}\n\n`;
-    
-    dashSpec += `## Slicers\n`;
-    dashSpec += `- Date Range Slicer: ${dateCols.slice(0, 1).join(', ') || 'Date'}\n`;
-    dashSpec += `- Category Slicer: ${textCols.slice(0, 1).join(', ') || 'Category'}\n`;
-    dashSpec += `- Outlier Filter: Include/Exclude\n`;
-    
-    return dashSpec;
-  }
-
-      // STEP 6: DISPLAY & RENDERING METHODS
-  displayPreview() {
-    const container = document.getElementById('data-preview');
-    if (!container) return;
-    
-    let html = `<h4>Data Preview (First 15 rows)</h4><table border="1" style="width:100%;border-collapse:collapse;"><tr>`;
-    this.columns.forEach(col => html += `<th style="padding:5px;background:#f0f0f0;">${col}</th>`);
-    html += `</tr>`;
-    
-    this.data.slice(0, 15).forEach(row => {
-      html += `<tr>`;
-      this.columns.forEach(col => html += `<td style="padding:5px;">${row[col]}</td>`);
-      html += `</tr>`;
-    });
-    
-    html += `</table>`;
-    container.innerHTML = html;
-  }
-  
-  displayCleaned() {
-    const container = document.getElementById('cleaned-data');
-    if (!container) return;
-    
-    let html = `<h4>Cleaned Data</h4><p><strong>Operations performed:</strong></p><ul>`;
-    html += `<li>Removed ${this.data.length - this.cleanedData.length} duplicate rows</li>`;
-    html += `<li>Standardized dates to YYYY-MM-DD format</li>`;
-    html += `<li>Trimmed whitespace and normalized text</li>`;
-    html += `<li>Imputed missing numeric values with median</li>`;
-    html += `<li>Added Outlier_Flag column (${this.cleanedData.filter(r => r['Outlier_Flag'] === true).length} outliers detected)</li>`;
-    html += `</ul><table border="1" style="width:100%;border-collapse:collapse;"><tr>`;
-    
-    this.columns.forEach(col => html += `<th style="padding:5px;background:#f0f0f0;">${col}</th>`);
-    html += `</tr>`;
-    
-    this.cleanedData.slice(0, 10).forEach(row => {
-      html += `<tr>`;
-      this.columns.forEach(col => {
-        const val = row[col];
-        const bgColor = row['Outlier_Flag'] === true ? '#ffcccc' : 'white';
-        html += `<td style="padding:5px;background:${bgColor};">${val}</td>`;
-      });
-      html += `</tr>`;
-    });
-    
-    html += `</table>`;
-    container.innerHTML = html;
-  }
-  
-  renderKPITable() {
-    const container = document.getElementById('kpi-output');
-    if (!container) return;
-    
-    let html = `<h4>Auto-Generated KPIs</h4><table border="1" style="width:100%;border-collapse:collapse;"><tr>
-      <th style="padding:8px;background:#4CAF50;color:white;">KPI Name</th>
-      <th style="padding:8px;background:#4CAF50;color:white;">Description</th>
-      <th style="padding:8px;background:#4CAF50;color:white;">Calculation Logic</th>
-      <th style="padding:8px;background:#4CAF50;color:white;">Formula/Value</th>
-    </tr>`;
-    
-    this.kpis.forEach((kpi, idx) => {
-      const bgColor = idx % 2 === 0 ? '#f9f9f9' : 'white';
-      html += `<tr style="background:${bgColor};"><td style="padding:8px;">${kpi.name}</td><td style="padding:8px;">${kpi.description}</td><td style="padding:8px;font-family:monospace;font-size:11px;">${kpi.calculation}</td><td style="padding:8px;font-weight:bold;">${kpi.formula}</td></tr>`;
-    });
-    
-    html += `</table>`;
-    container.innerHTML = html;
-  }
-  
-  renderSQL() {
-    const container = document.getElementById('sql-output');
-    if (!container) return;
-    
-    const sql = this.generateSQL();
-    container.innerHTML = `<pre style="background:#f5f5f5;padding:15px;border-radius:5px;overflow-x:auto;font-size:12px;">${sql.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
-  }
-  
-  renderDashboard() {
-    const container = document.getElementById('dashboard-spec');
-    if (!container) return;
-    
-    const spec = this.generateDashboardSpec();
-    container.innerHTML = `<pre style="background:#f5f5f5;padding:15px;border-radius:5px;overflow-x:auto;font-size:12px;white-space:pre-wrap;">${spec.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
-  }
-  
-  createExportLinks() {
-    const container = document.getElementById('export-links');
-    if (!container) return;
-    
-    let html = `<h4>Download Results</h4>`;
-    
-    // CSV download
-    const csvData = this.cleanedData.map(row => this.columns.map(col => row[col]).join(',')).join('\n');
-    const csvHeader = this.columns.join(',');
-    const csvBlob = new Blob([csvHeader + '\n' + csvData], { type: 'text/csv' });
-    const csvUrl = URL.createObjectURL(csvBlob);
-    html += `<a href="${csvUrl}" download="cleaned_data.csv" style="display:inline-block;margin:5px;padding:10px 15px;background:#2196F3;color:white;text-decoration:none;border-radius:3px;">📥 Download Cleaned CSV</a>`;
-    
-    // KPI CSV
-    const kpiCsv = ['KPI_Name,Description,Calculation,Value'].concat(this.kpis.map(k => `"${k.name}","${k.description}","${k.calculation}","${k.formula}"`)).join('\n');
-    const kpiBlob = new Blob([kpiCsv], { type: 'text/csv' });
-    const kpiUrl = URL.createObjectURL(kpiBlob);
-    html += `<a href="${kpiUrl}" download="kpi_report.csv" style="display:inline-block;margin:5px;padding:10px 15px;background:#FF9800;color:white;text-decoration:none;border-radius:3px;">📊 Download KPI Report</a>`;
-    
-    // SQL download
-    const sql = this.generateSQL();
-    const sqlBlob = new Blob([sql], { type: 'text/plain' });
-    const sqlUrl = URL.createObjectURL(sqlBlob);
-    html += `<a href="${sqlUrl}" download="queries.sql" style="display:inline-block;margin:5px;padding:10px 15px;background:#4CAF50;color:white;text-decoration:none;border-radius:3px;">🗂️ Download SQL Queries</a>`;
-    
-    // Dashboard spec download
-    const spec = this.generateDashboardSpec();
-    const specBlob = new Blob([spec], { type: 'text/plain' });
-    const specUrl = URL.createObjectURL(specBlob);
-    html += `<a href="${specUrl}" download="dashboard_spec.md" style="display:inline-block;margin:5px;padding:10px 15px;background:#9C27B0;color:white;text-decoration:none;border-radius:3px;">📐 Download Dashboard Spec</a>`;
-    
-    container.innerHTML = html;
-
-      // ENHANCED FEATURES
-  // Generate statistical summary
-  generateStatistics() {
-    let stats = {};
-    this.columns.forEach(col => {
-      if (this.dataTypes[col] === 'number') {
-        const vals = this.cleanedData.map(r => r[col]).filter(v => typeof v === 'number');
-        vals.sort((a, b) => a - b);
-        const median = vals[Math.floor(vals.length / 2)];
-        const mode = this.getMode(vals);
-        const stdDev = this.calculateStdDev(vals);
-        const variance = stdDev * stdDev;
-        stats[col] = {
-          mean: vals.reduce((a,b) => a+b, 0) / vals.length,
-          median: median,
-          mode: mode,
-          stdDev: stdDev,
-          variance: variance,
-          q1: vals[Math.floor(vals.length * 0.25)],
-          q3: vals[Math.floor(vals.length * 0.75)]
-        };
-      }
-    });
-    return stats;
-  }
-  
-  getMode(arr) {
-    const freq = {};
-    arr.forEach(v => freq[v] = (freq[v] || 0) + 1);
-    return Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
-  }
-  
-  calculateStdDev(vals) {
-    const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
-    const variance = vals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / vals.length;
-    return Math.sqrt(variance);
-  }
-  
-  // Data correlation analysis
-  generateCorrelationMatrix() {
-    const numCols = this.columns.filter(c => this.dataTypes[c] === 'number');
-    let correlation = {};
-    numCols.forEach(c1 => {
-      correlation[c1] = {};
-      numCols.forEach(c2 => {
-        const vals1 = this.cleanedData.map(r => r[c1]);
-        const vals2 = this.cleanedData.map(r => r[c2]);
-        const corr = this.pearsonCorrelation(vals1, vals2);
-        correlation[c1][c2] = corr.toFixed(3);
-      });
-    });
-    return correlation;
-  }
-  
-  pearsonCorrelation(x, y) {
-    const n = x.length;
-    const meanX = x.reduce((a,b) => a+b) / n;
-    const meanY = y.reduce((a,b) => a+b) / n;
-    const numerator = x.reduce((sum, xi, i) => sum + (xi - meanX) * (y[i] - meanY), 0);
-    const denomX = Math.sqrt(x.reduce((sum, xi) => sum + Math.pow(xi - meanX, 2), 0));
-    const denomY = Math.sqrt(y.reduce((sum, yi) => sum + Math.pow(yi - meanY, 2), 0));
-    return numerator / (denomX * denomY);
-  }
-  
-  // Generate trend analysis
-  generateTrendAnalysis() {
-    const dateCols = this.columns.filter(c => this.dataTypes[c] === 'date');
-    const numCols = this.columns.filter(c => this.dataTypes[c] === 'number');
-    let trends = {};
-    
-    if (dateCols.length > 0 && numCols.length > 0) {
-      const dateCol = dateCols[0];
-      numCols.forEach(numCol => {
-        const sortedData = [...this.cleanedData].sort((a, b) => {
-          return new Date(a[dateCol]) - new Date(b[dateCol]);
-        });
-        const values = sortedData.map(r => r[numCol]);
-        const firstHalf = values.slice(0, Math.floor(values.length / 2)).reduce((a,b) => a+b, 0) / Math.floor(values.length / 2);
-        const secondHalf = values.slice(Math.floor(values.length / 2)).reduce((a,b) => a+b, 0) / Math.ceil(values.length / 2);
-        const trend = ((secondHalf - firstHalf) / firstHalf * 100).toFixed(2);
-        trends[numCol] = { trend: trend + '%', direction: secondHalf > firstHalf ? 'UP' : 'DOWN' };
-      });
-    }
-    return trends;
-  }
-  
-  // Data quality scoring
-  generateDataQuality() {
-    let quality = {};
-    const totalCells = this.cleanedData.length * this.columns.length;
-    let validCells = 0;
-    let uniqueValues = {};
-    
-    this.cleanedData.forEach(row => {
-      this.columns.forEach(col => {
-        if (row[col] !== undefined && row[col] !== null && row[col] !== '') {
-          validCells++;
-        }
-        uniqueValues[col] = (uniqueValues[col] || new Set()).add(row[col]);
-      });
-    });
-    
-    quality.completeness = (validCells / totalCells * 100).toFixed(2) + '%';
-    quality.duplicateRate = ((this.data.length - this.cleanedData.length) / this.data.length * 100).toFixed(2) + '%';
-    quality.outlierRate = (this.cleanedData.filter(r => r['Outlier_Flag']).length / this.cleanedData.length * 100).toFixed(2) + '%';
-    quality.cardinality = {};
-    this.columns.forEach(col => {
-      quality.cardinality[col] = uniqueValues[col].size;
-    });
-    return quality;
-  }
-  }
-    }
-
-// INITIALIZATION
-const labEngine = new DataLabEngine();
-
-// Hook up file input
-document.getElementById('kpiFile').addEventListener('change', async function(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  
-  await labEngine.readFile(file);
-});
-
-// Hook up analyze button
-document.getElementById('analyzeBtn').addEventListener('click', async function() {
-  if (labEngine.data.length === 0) {
-    alert('Please upload a file first');
-    return;
-  }
-  
-  // Execute the pipeline
-  labEngine.cleanData();
-  labEngine.generateKPIs();
-  
-  // Render all outputs
-  labEngine.displayPreview();
-  labEngine.displayCleaned();
-  labEngine.renderKPITable();
-  labEngine.renderSQL();
-  labEngine.renderDashboard();
-  labEngine.createExportLinks();
-});
-  
-
-// SQL Playground Enhanced Functions
-function importFileAsTable() {
-  const fileInput = document.getElementById('sqlImportFile');
-  if (!fileInput.files[0]) {
-    alert('Please select a file');
-    return;
-  }
-  const file = fileInput.files[0];
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const data = e.target.result;
-    alert('File imported! You can now query the data.\nFile name: ' + file.name);
-  };
-  reader.readAsText(file);
-}
-
-function exportSQLResult() {
-  const out = document.getElementById('sqlResult');
-  if (!out || out.textContent.trim() === '') {
-    alert('No results to export. Run a query first.');
-    return;
-  }
-  const table = out.querySelector('table');
-  if (!table) {
-    alert('No table data found to export.');
-    return;
-  }
-  let csv = '';
-  const rows = table.querySelectorAll('tr');
-  rows.forEach(row => {
-    const cols = row.querySelectorAll('th, td');
-    const rowData = Array.from(cols).map(col => '"' + col.textContent.trim() + '"').join(',');
-    csv += rowData + '\n';
-  });
-  const blob = new Blob([csv], {type: 'text/csv'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'sql_results.csv';
-  a.click();
-}
-
-function openFormulaAI() {
-  document.getElementById('formulaModal').style.display = 'flex';
-}
-
-function closeFormulaModal() {
-  document.getElementById('formulaModal').style.display = 'none';
-}
-
-function generateFormula() {
-  const formulaType = document.getElementById('formulaType').value;
-  const description = document.getElementById('formulaDesc').value;
-  let formula = '';
-  
-  if (!description.trim()) {
-    alert('Please describe what you need');
-    return;
-  }
-  
-  if (formulaType === 'sql') {
-    formula = 'SELECT * FROM table WHERE condition = value;';
-  } else if (formulaType === 'dax') {
-    formula = 'MEASURE Sales Amount = SUMX(Sales, Sales[Quantity] * Sales[Price])';
-  } else if (formulaType === 'tableau') {
-    formula = 'IF SUM([Measure]) > AVG([Average Measure]) THEN "High" ELSE "Low" END';
-  } else if (formulaType === 'excel') {
-    formula = '=SUM(A2:A100)';
-  }
-  
-  document.getElementById('generatedFormula').textContent = formula;
-}
-
-function copyFormula() {
-  const formula = document.getElementById('generatedFormula').textContent;
-  if (!formula || formula === '') {
-    alert('Generate a formula first');
-    return;
-  }
-  navigator.clipboard.writeText(formula).then(() => {
-    alert('Formula copied to clipboard!');
-  }).catch(() => {
-    alert('Failed to copy. Please try again.');
-  });
-}
-
-// Close modal when clicking outside
-document.addEventListener('DOMContentLoaded', function() {
-  const modal = document.getElementById('formulaModal');
-  if (modal) {
-    window.addEventListener('click', function(event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  }
-});
-</script>
-
 
 <!-- Formula Writer AI Modal -->
 <div id="formulaModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:10000;">
@@ -2616,7 +1155,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <h3 style="margin:0;color:#111827;font-size:22px;">AI Formula Writer</h3>
       <button onclick="closeFormulaModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#666;">&times;</button>
     </div>
-    
+
     <div style="margin-bottom:20px;">
       <label style="display:block;margin-bottom:8px;color:#111827;font-weight:600;">Formula Type:</label>
       <select id="formulaType" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;">
@@ -2626,46 +1165,468 @@ document.addEventListener('DOMContentLoaded', function() {
         <option value="excel">Excel</option>
       </select>
     </div>
-    
+
     <div style="margin-bottom:20px;">
       <label style="display:block;margin-bottom:8px;color:#111827;font-weight:600;">Describe what you need:</label>
       <textarea id="formulaDesc" placeholder="E.g., Sum of sales by region" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;min-height:100px;resize:vertical;font-family:sans-serif;"></textarea>
     </div>
-    
+
     <div style="margin-bottom:20px;">
       <button onclick="generateFormula()" style="background:#2563eb;color:white;border:none;padding:12px 24px;border-radius:8px;font-weight:600;cursor:pointer;width:100%;font-size:14px;">Generate Formula</button>
     </div>
-    
+
     <div style="margin-bottom:20px;">
       <label style="display:block;margin-bottom:8px;color:#111827;font-weight:600;">Generated Formula:</label>
       <div id="generatedFormula" style="background:#f5f5f5;border:1px solid #e5e7eb;border-radius:8px;padding:15px;font-family:monospace;font-size:13px;color:#111827;min-height:50px;word-break:break-all;">Click Generate to create formula</div>
     </div>
-    
+
     <div style="display:flex;gap:10px;">
       <button onclick="copyFormula()" style="background:#10b981;color:white;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;flex:1;font-size:14px;">Copy Formula</button>
       <button onclick="closeFormulaModal()" style="background:#e5e7eb;color:#111827;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;flex:1;font-size:14px;">Close</button>
     </div>
   </div>
 </div>
-  <!-- ENHANCED FEATURES: Overview white background, Experience with red job roles, Fixed certifications, Enhanced profile -->
-  <style>
-    /* OVERVIEW CARDS: White background */
-    .overview-card { background: #ffffff !important; border: 2px solid #2563eb !important; box-shadow: 0 4px 12px rgba(37,99,235,0.2) !important; }
-    /* EXPERIENCE SECTION: Job roles in red */
-    .job h3 { color: #dc2626 !important; font-weight: 700 !important; font-size: 16px !important; }
-    .job .company { color: #2563eb !important; font-size: 14px !important; font-weight: 600 !important; }
-    .job .dates { color: #666 !important; font-size: 13px !important; }
-    .job p { color: #111827 !important; font-size: 14px !important; line-height: 1.6 !important; }
-    /* CERTIFICATION CARDS: Better styling */
-    .cert-card { background: #ffffff !important; border: 2px solid #2563eb !important; padding: 20px !important; box-shadow: 0 4px 12px rgba(37,99,235,0.15) !important; }
-    .cert-card img { width: 80px !important; height: 80px !important; object-fit: contain !important; margin-bottom: 12px !important; }
-    .cert-card h3 { color: #111827 !important; font-size: 15px !important; margin-bottom: 8px !important; }
-    .cert-card p { color: #2563eb !important; font-size: 12px !important; font-weight: 600 !important; }
-    /* PROFILE PHOTO: Enhanced styling */
-    .profile-photo-main { box-shadow: 0 0 30px rgba(37,99,235,0.8) !important; border: 4px solid #2563eb !important; }
-    .sidebar-photo { box-shadow: 0 0 25px rgba(37,99,235,0.8) !important; border: 3px solid #2563eb !important; }
-    /\* PROJECT GALLERY: Red project titles \*/ .project-card h3 { color: #dc2626 !important; font-weight: 700 !important; font-size: 17px !important; margin-bottom: 8px !important; }
-    </style>
+
+<script>
+  // Loader
+  window.addEventListener("load", function(){
+    setTimeout(()=>{ document.getElementById("loaderOverlay").style.display="none"; }, 800);
+  });
+
+  // Default light mode
+  document.body.classList.remove("dark-mode");
+
+  // Dark mode toggle
+  document.getElementById("darkToggle").onclick = ()=>{
+    document.body.classList.toggle("dark-mode");
+  };
+
+  // Navigation between sections
+  const navButtons = document.querySelectorAll(".nav-btn");
+  const sections = document.querySelectorAll(".page-section");
+
+  navButtons.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const target = btn.getAttribute("data-section");
+      navButtons.forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      sections.forEach(sec=>{
+        sec.id === target ? sec.classList.add("active") : sec.classList.remove("active");
+      });
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  function scrollToContact(){
+    navButtons.forEach(b=>{
+      if(b.getAttribute("data-section")==="home") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    sections.forEach(sec=>{
+      sec.id === "home" ? sec.classList.add("active") : sec.classList.remove("active");
+    });
+    setTimeout(()=>{
+      const c = document.getElementById("contact-section");
+      if(c) c.scrollIntoView({behavior:"smooth"});
+    },200);
+  }
+
+  function scrollToProjects(){
+    navButtons.forEach(b=>{
+      if(b.getAttribute("data-section")==="home") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    sections.forEach(sec=>{
+      sec.id === "home" ? sec.classList.add("active") : sec.classList.remove("active");
+    });
+    setTimeout(()=>{
+      const p = document.getElementById("projects-section");
+      if(p) p.scrollIntoView({behavior:"smooth"});
+    },200);
+  }
+
+  function openDataLab(){
+    navButtons.forEach(b=>{
+      if(b.getAttribute("data-section")==="datalab") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    sections.forEach(sec=>{
+      sec.id === "datalab" ? sec.classList.add("active") : sec.classList.remove("active");
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function openResumeSection(){
+    navButtons.forEach(b=>{
+      if(b.getAttribute("data-section")==="resume") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    sections.forEach(sec=>{
+      sec.id === "resume" ? sec.classList.add("active") : sec.classList.remove("active");
+    });
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  // Gallery zoom: only on thumbnails
+  document.querySelectorAll(".project-card img, .profile-photo-main img").forEach(img=>{
+    img.addEventListener("click", ()=>{
+      const modal = document.getElementById("galleryModal");
+      const gimg = document.getElementById("galleryImage");
+      gimg.src = img.src;
+      modal.style.display="flex";
+    });
+  });
+
+  // Floating chat window
+  const chatBtn = document.getElementById("chatBtn");
+  const chatWindow = document.getElementById("chatWindow");
+  chatBtn.onclick = ()=>{
+    chatWindow.style.display = (chatWindow.style.display === "flex" ? "none" : "flex");
+  };
+
+  // SQL.JS demo DB
+  let SQLDB = null;
+  initSqlJs({ locateFile:file=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` })
+    .then(SQL =>{
+      SQLDB = new SQL.Database();
+      SQLDB.run(`
+        CREATE TABLE sales(region TEXT, product TEXT, revenue INT);
+        INSERT INTO sales VALUES ('North','Product A',12000);
+        INSERT INTO sales VALUES ('South','Product B',8000);
+        INSERT INTO sales VALUES ('West','Product C',15000);
+        INSERT INTO sales VALUES ('East','Product A',9000);
+      `);
+    });
+
+  function runSQL(){
+    const out = document.getElementById("sqlResult");
+    out.innerHTML = "";
+    if(!SQLDB){ out.textContent = "Database not ready yet."; return; }
+
+    const query = document.getElementById("sqlInput").value;
+    try{
+      const res = SQLDB.exec(query);
+      if(res.length === 0){
+        out.textContent = "Query executed successfully (no rows returned).";
+        return;
+      }
+      const table = document.createElement("table");
+      const header = document.createElement("tr");
+      res[0].columns.forEach(col=>{
+        const th = document.createElement("th");
+        th.textContent = col;
+        header.appendChild(th);
+      });
+      table.appendChild(header);
+      res[0].values.forEach(row=>{
+        const tr = document.createElement("tr");
+        row.forEach(val=>{
+          const td = document.createElement("td");
+          td.textContent = val;
+          tr.appendChild(td);
+        });
+        table.appendChild(tr);
+      });
+      out.appendChild(table);
+    }catch(e){
+      out.textContent = "Error: " + e.message;
+    }
+  }
+
+  function importFileAsTable() {
+    const fileInput = document.getElementById('sqlImportFile');
+    if (!fileInput.files[0]) {
+      alert('Please select a file');
+      return;
+    }
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const data = e.target.result;
+      alert('File imported! (Demo only). You can extend logic to load into SQL.js.\nFile: ' + file.name);
+    };
+    reader.readAsText(file);
+  }
+
+  function exportSQLResult() {
+    const out = document.getElementById('sqlResult');
+    if (!out || out.textContent.trim() === '') {
+      alert('No results to export. Run a query first.');
+      return;
+    }
+    const table = out.querySelector('table');
+    if (!table) {
+      alert('No table data found to export.');
+      return;
+    }
+    let csv = '';
+    const rows = table.querySelectorAll('tr');
+    rows.forEach(row => {
+      const cols = row.querySelectorAll('th, td');
+      const rowData = Array.from(cols).map(col => '"' + col.textContent.trim() + '"').join(',');
+      csv += rowData + '\n';
+    });
+    const blob = new Blob([csv], {type: 'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'sql_results.csv';
+    a.click();
+  }
+
+  // CSV → Chart
+  let csvChart = null;
+  document.getElementById("csvFile").addEventListener("change", function(){
+    const file = this.files[0];
+    if(!file) return;
+
+    Papa.parse(file,{
+      header:true,
+      dynamicTyping:true,
+      complete:function(result){
+        const rows = result.data.filter(r=>Object.keys(r).length>0);
+        if(rows.length === 0) return;
+        const preview = document.getElementById("csvPreview");
+
+        let html = "<b>Preview (first 5 rows):</b><br><table><tr>";
+        const cols = Object.keys(rows[0]);
+        cols.forEach(c=> html += `<th>${c}</th>`);
+        html += "</tr>";
+        rows.slice(0,5).forEach(r=>{
+          html += "<tr>";
+          cols.forEach(c=> html += `<td>${r[c]}</td>`);
+          html += "</tr>";
+        });
+        html += "</table>";
+        preview.innerHTML = html;
+
+        const labels = rows.map(r=> r[cols[0]]);
+        let numCol = null;
+        for(let i=1;i<cols.length;i++){
+          if(typeof rows[0][cols[i]] === "number"){
+            numCol = cols[i];break;
+          }
+        }
+        if(!numCol){ return; }
+        const data = rows.map(r=> r[numCol]);
+
+        const ctx = document.getElementById("csvChart").getContext("2d");
+        if(csvChart) csvChart.destroy();
+        csvChart = new Chart(ctx, {
+          type:"bar",
+          data:{
+            labels:labels,
+            datasets:[{
+              label:numCol,
+              data:data,
+              backgroundColor:"rgba(37,99,235,0.6)"
+            }]
+          },
+          options:{
+            responsive:true,
+            plugins:{legend:{labels:{color: getComputedStyle(document.body).getPropertyValue('--text')}}},
+            scales:{
+              x:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-soft')}},
+              y:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-soft')}}
+            }
+          }
+        });
+      }
+    });
+  });
+
+  // Simple KPI stub (local-only demo)
+  function simpleKPIStub(){
+    const loader = document.getElementById('kpiLoader');
+    const summary = document.getElementById('kpiSummary');
+    loader.style.display = 'block';
+    setTimeout(()=>{
+      const kpis = ['Total Records','Revenue','Customer Growth','Retention Rate','Churn Rate','Average Order Value','Conversion Rate'];
+      summary.innerHTML = kpis.map(k => `<div style="margin:4px 0;">✓ ${k}</div>`).join('') +
+        '<div style="margin-top:6px;font-size:11px;color:#6b7280;">(Full auto-KPI, SQL & dashboard spec can be generated via Comet/AI on these containers.)</div>';
+      document.getElementById('powerBITemplate').textContent =
+        'Revenue = SUMX(Sales, Sales[Quantity] * Sales[Price])\n' +
+        'Growth Rate = DIVIDE(THIS_YEAR - LAST_YEAR, LAST_YEAR)';
+      document.getElementById('tableauTemplate').textContent =
+        'IF SUM([Sales]) > AVG([Average Sales]) THEN "High" ELSE "Low" END';
+      document.getElementById('sqlQueries').textContent =
+        'SELECT Date, SUM(Amount) AS Daily_Revenue FROM Sales GROUP BY Date;\n' +
+        'SELECT CustomerID, COUNT(*) AS Purchase_Count FROM Orders GROUP BY CustomerID;';
+      document.getElementById('excelFormula').textContent =
+        '=SUM(B2:B100)   // Total\n' +
+        '=AVERAGE(B2:B100)   // Average\n' +
+        '=IF(B2>C2,"Growing","Declining")   // Trend';
+      loader.style.display = 'none';
+    },800);
+  }
+
+  function copyToClipboard(elementId) {
+    const text = document.getElementById(elementId).textContent;
+    navigator.clipboard.writeText(text).then(() => alert('Copied!'));
+  }
+
+  function downloadExcelReport() {
+    const data = document.getElementById('excelFormula').textContent;
+    const blob = new Blob([data], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'KPI_Report.txt'; a.click();
+  }
+
+  // Resume Generator helpers
+  document.getElementById("rgJD").addEventListener("input", ()=>{
+    const jd = document.getElementById("rgJD").value;
+    const box = document.getElementById("rgKeywords");
+    if(jd.trim().length < 30){
+      box.style.display = "none";
+      return;
+    }
+    const keys = ["SQL","Python","Power BI","Tableau","Excel","Machine Learning","ML","Pandas","NumPy","Scikit-Learn","Dashboard","ETL"];
+    const found = keys.filter(k=> jd.toLowerCase().includes(k.toLowerCase()));
+    if(found.length){
+      box.style.display="block";
+      box.innerHTML = "<b>Keywords detected:</b> " + found.join(", ");
+    }else{
+      box.style.display="none";
+    }
+  });
+
+  function detectRole(jd){
+    jd = jd.toLowerCase();
+    if(jd.includes("power bi")) return "Power BI Developer";
+    if(jd.includes("tableau")) return "Tableau Developer";
+    if(jd.includes("machine learning") || jd.includes("ml") || jd.includes("ai")) return "Data Scientist";
+    if(jd.includes("business analyst")) return "Business Analyst";
+    return "Data Analyst";
+  }
+
+  async function generateResume(){
+    const company = document.getElementById("rgCompany").value.trim();
+    const job = document.getElementById("rgJobTitle").value.trim();
+    const jd = document.getElementById("rgJD").value.trim();
+    const loader = document.getElementById("rgLoader");
+    const result = document.getElementById("rgResult");
+    const links = document.getElementById("rgLinks");
+
+    if(!company || !job || !jd){
+      alert("Please fill Company, Job Title, and JD.");
+      return;
+    }
+    loader.style.display="block";
+    result.style.display="none";
+    links.innerHTML="";
+
+    const detectedRole = detectRole(jd);
+
+    try{
+      const res = await fetch("https://script.google.com/macros/s/AKfycbxKtgjRe_vZsFbgv3G7Q4KVWAkJUCEn8rTQpreXv-6mw41GmKeQrVmMd649-KDfN9G4xec",{
+        method:"POST",
+        body:JSON.stringify({
+          companyName:company,
+          jobTitle:job,
+          jobDescription:jd,
+          detectedRole:detectedRole,
+          output:"pdf-docx"
+        })
+      });
+      const data = await res.json();
+      loader.style.display="none";
+
+      if(data.status === "success"){
+        result.style.display="block";
+        let html="";
+        if(data.pdf) html += `<a href="${data.pdf}" target="_blank">Download PDF</a><br>`;
+        if(data.docx) html += `<a href="${data.docx}" target="_blank">Download DOCX</a>`;
+        links.innerHTML = html || "No download links returned from backend.";
+      }else{
+        alert("Error generating resume: " + data.message);
+      }
+    }catch(e){
+      loader.style.display="none";
+      alert("Error calling backend. Please check your Apps Script URL.");
+    }
+  }
+
+  // AI Assistant using Vercel backend
+  async function sendAssistantMessage(){
+    const input = document.getElementById("assistantInput");
+    const box = document.getElementById("assistantChatBox");
+    const msg = input.value.trim();
+    if(!msg) return;
+
+    const me = document.createElement("div");
+    me.className="chat-msg chat-me";
+    me.innerHTML = `<span>${msg}</span>`;
+    box.appendChild(me);
+    box.scrollTop = box.scrollHeight;
+    input.value="";
+
+    try{
+      const res = await fetch("https://YOUR-VERCEL-APP.vercel.app/api/chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({message:msg})
+      });
+      const data = await res.json();
+      const bot = document.createElement("div");
+      bot.className="chat-msg chat-bot";
+      bot.innerHTML = `<span>${data.reply || "No reply from AI."}</span>`;
+      box.appendChild(bot);
+      box.scrollTop = box.scrollHeight;
+    }catch(e){
+      const err = document.createElement("div");
+      err.className="chat-msg chat-bot";
+      err.innerHTML = `<span>There was a problem connecting to the AI server.</span>`;
+      box.appendChild(err);
+      box.scrollTop = box.scrollHeight;
+    }
+  }
+
+  // Formula modal logic
+  function openFormulaAI() {
+    document.getElementById('formulaModal').style.display = 'flex';
+  }
+  function closeFormulaModal() {
+    document.getElementById('formulaModal').style.display = 'none';
+  }
+  function generateFormula() {
+    const formulaType = document.getElementById('formulaType').value;
+    const description = document.getElementById('formulaDesc').value;
+    let formula = '';
+    if (!description.trim()) {
+      alert('Please describe what you need');
+      return;
+    }
+    if (formulaType === 'sql') {
+      formula = 'SELECT Region, SUM(Sales) AS TotalSales FROM YourTable GROUP BY Region;';
+    } else if (formulaType === 'dax') {
+      formula = 'Sales Amount = SUMX(Sales, Sales[Quantity] * Sales[Price])';
+    } else if (formulaType === 'tableau') {
+      formula = 'IF SUM([Sales]) > AVG([Sales]) THEN "High" ELSE "Low" END';
+    } else if (formulaType === 'excel') {
+      formula = '=SUMIFS(Sales_Amount,Region,"South")';
+    }
+    document.getElementById('generatedFormula').textContent = formula;
+  }
+  function copyFormula() {
+    const formula = document.getElementById('generatedFormula').textContent;
+    if (!formula || formula === '') {
+      alert('Generate a formula first');
+      return;
+    }
+    navigator.clipboard.writeText(formula).then(() => {
+      alert('Formula copied to clipboard!');
+    }).catch(() => {
+      alert('Failed to copy. Please try again.');
+    });
+  }
+
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('formulaModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+
 </body>
 </html>
-
