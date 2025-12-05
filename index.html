@@ -1121,6 +1121,7 @@ function sendDataLabMessage(mode) {
 }
 
           Analyze & Generate KPIs (Demo)
+                <button onclick="downloadCleanedData()" style="margin-left:10px;padding:8px 16px;background:#10b981;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px;">💾 Download Cleaned CSV</button>
         </button>
         <div id="kpiLoader" style="display:none;margin-top:12px;font-size:12px;color:var(--text-soft);">
           Analyzing data...
@@ -1911,6 +1912,82 @@ CALCULATE([Total Sales], DATEADD('Date'[Date], -1, YEAR))
       modal.style.display = 'none';
     }
   });
+
+      // ENHANCEMENT 1: AUTO-KPI GENERATION
+  let uploadedData = {};
+  function generateKPIs() {
+    if (!uploadedData.rows || uploadedData.rows.length === 0) return;
+    const rows = uploadedData.rows;
+    const kpis = [];
+    kpis.push({ name: 'Total Records', value: rows.length, desc: 'Total number of data rows' });
+    uploadedData.columns.forEach(col => {
+      const vals = rows.map(r => r[col]).filter(v => !isNaN(v) && v !== '');
+      if (vals.length > 0) {
+        const numVals = vals.map(Number);
+        kpis.push({ name: 'Sum_' + col, value: numVals.reduce((a,b) => a+b, 0).toFixed(2), desc: 'Total of ' + col });
+        kpis.push({ name: 'Avg_' + col, value: (numVals.reduce((a,b) => a+b, 0)/numVals.length).toFixed(2), desc: 'Average of ' + col });
+      }
+    });
+    let html = '<b>Generated KPIs:</b><table style="width:100%;border:1px solid #ddd;font-size:12px;"><tr><th>KPI</th><th>Value</th><th>Description</th></tr>';
+    kpis.forEach(k => html += '<tr><td>' + k.name + '</td><td>' + k.value + '</td><td>' + k.desc + '</td></tr>');
+    html += '</table>';
+    const kpiDiv = document.getElementById('kpi-output');
+    if (kpiDiv) kpiDiv.innerHTML = html;
+  }
+  
+  // ENHANCEMENT 2: SQL QUERY BUILDER
+  function buildSQL() {
+    if (!uploadedData.columns) return;
+    let sql = 'SELECT ';
+    sql += uploadedData.columns.slice(0, 3).join(', ');
+    sql += ' FROM your_table LIMIT 10;';
+    const sqlDiv = document.getElementById('sql-output');
+    if (sqlDiv) sqlDiv.innerHTML = '<pre style="background:#f5f5f5;padding:10px;border-radius:5px;">' + sql + '</pre>';
+  }
+  
+  // ENHANCEMENT 3: CHART PREVIEW
+  function previewChart() {
+    if (!uploadedData.rows) return;
+    const numericCols = uploadedData.columns.filter(col => !isNaN(uploadedData.rows[0][col]));
+    if (numericCols.length > 0) {
+      const labels = uploadedData.rows.slice(0, 10).map((r, i) => 'Row ' + i);
+      const data = uploadedData.rows.slice(0, 10).map(r => r[numericCols[0]] || 0);
+      if (document.getElementById('dataChart') && typeof Chart !== 'undefined') {
+        new Chart(document.getElementById('dataChart'), {
+          type: 'bar',
+          data: { labels: labels, datasets: [{ label: numericCols[0], data: data, backgroundColor: '#2563eb' }] },
+          options: { responsive: true }
+        });
+      }
+    }
+  }
+  
+  // ENHANCEMENT 4: DOWNLOAD CLEANED DATA
+  function downloadCleanedData() {
+    if (!uploadedData.rows) return;
+    let csv = uploadedData.columns.join(',') + '\n';
+    uploadedData.rows.forEach(row => {
+      csv += uploadedData.columns.map(col => row[col] || '').join(',') + '\n';
+    });
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'cleaned_data.csv';
+    link.click();
+  }
+  
+  // Store data globally and trigger enhancements
+  const originalDisplayPreview = displayPreview;
+  function displayPreviewEnhanced(headers, rows) {
+    uploadedData = { columns: headers, rows: rows };
+    originalDisplayPreview(headers, rows);
+    generateKPIs();
+    buildSQL();
+    previewChart();
+  }
+  displayPreview = displayPreviewEnhanced;
+
 </script>
 
 </body>
