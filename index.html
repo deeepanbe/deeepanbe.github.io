@@ -876,175 +876,404 @@
     </section>
 
     <!-- DATA LAB SECTION -->
-    <section id="datalab" class="page-section">
+   <section id="datalab" class="page-section">
 
-      <div class="section">
-        <h2>DATA LAB — AI-POWERED WORKSPACE</h2>
-        <p style="font-size:13px;color:var(--text-soft);margin-bottom:8px;">
-          AI-powered data analysis engine built by me for automated insights.  
-          Use this space to upload CSV/Excel, explore data, run SQL, generate quick insights and connect with AI tools like Comet.
-        </p>
+  <!-- HEADER -->
+  <div class="section">
+    <h2>DATA LAB — AI-ENHANCED ANALYTICS WORKSPACE</h2>
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:8px;">
+      AI-powered data analysis engine built by me for automated insights.  
+      Upload CSV/Excel, explore data, generate KPIs, get formula ideas, and ask data analytics questions — all in one place.
+    </p>
+  </div>
 
-        <!-- KPI GENERATOR FROM FILE UPLOAD (Placeholders for Comet / AI) -->
-        <h3 style="font-size:15px;margin-bottom:8px;">🎯 Upload File & KPI Engine</h3>
-        <p style="font-size:12px;color:var(--text-soft);margin-bottom:8px;">
-          Upload a CSV/Excel file. My Comet/AI commands can automatically clean data, generate KPIs, SQL, and dashboard specs and write back into the containers below.
-        </p>
+  <!-- 1. FILE & KPI ENGINE -->
+  <div class="section">
+    <h3 style="font-size:15px;margin-bottom:8px;">🎯 Upload File & KPI Engine</h3>
+    <p style="font-size:12px;color:var(--text-soft);margin-bottom:8px;">
+      Upload a CSV/Excel file. In Comet/AI, you can run a command to clean data, generate KPIs, SQL, and BI dashboard blueprints that write directly into the containers below.
+    </p>
 
-        <div class="dl-two-col">
-          <div class="panel">
-            <div class="label-small">Upload CSV/Excel File</div>
-            <input type="file" id="kpiFile" accept=".csv,.xlsx,.xls" />
-            <button class="btn btn-secondary" style="margin-top:8px;width:100%;" onclick="simpleKPIStub()">Analyze & Generate KPIs (Demo)</button>
-            <div id="kpiLoader" style="display:none;margin-top:12px;font-size:12px;color:var(--text-soft);">Analyzing data...</div>
-          </div>
-          <div class="panel">
-            <div class="label-small">Detected KPIs (Summary)</div>
-            <div id="kpiSummary" style="margin-top:8px;font-size:12px;color:var(--text-soft);">Upload a file & use Comet/AI to populate full KPI summary here.</div>
+    <div class="dl-two-col">
+      <div class="panel">
+        <div class="label-small">Upload CSV/Excel File</div>
+        <input type="file" id="kpiFile" accept=".csv,.xlsx,.xls" />
+        <button class="btn btn-secondary" style="margin-top:8px;width:100%;" onclick="simpleKPIStub()">
+          // =======================
+// AI DATA LAB COPILOT (LOCAL LOGIC)
+// =======================
+function appendDataLabMessage(role, text) {
+  const box = document.getElementById("datalabAiChat");
+  if (!box) return;
+  const div = document.createElement("div");
+  div.className = "chat-msg " + (role === "me" ? "chat-me" : "chat-bot");
+  div.innerHTML = `<span>${text}</span>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function detectDataLabMode(text) {
+  const t = text.toLowerCase();
+  if (t.includes("missing") || t.includes("clean") || t.includes("outlier")) return "cleaning";
+  if (t.includes("kpi") || t.includes("metric") || t.includes("measure")) return "kpi";
+  if (t.includes("sql") || t.includes("query") || t.includes("join")) return "sql";
+  if (t.includes("excel") || t.includes("vlookup") || t.includes("dax") || t.includes("measure") || t.includes("formula")) return "formula";
+  if (t.includes("chart") || t.includes("dashboard") || t.includes("visual")) return "chart";
+  if (t.includes("interview") || t.includes("career") || t.includes("role")) return "career";
+  return "general";
+}
+
+function buildDataLabReply(mode, text) {
+  switch (mode) {
+    case "cleaning":
+      return [
+        "🧹 **Data cleaning checklist:**",
+        "1) Remove exact duplicates using all key columns (e.g., CustomerID + Date).",
+        "2) Standardize dates → YYYY-MM-DD. In Excel: `=TEXT(A2,\"yyyy-mm-dd\")`.",
+        "3) Trim spaces & fix text case. Excel: `=TRIM()`, `=UPPER()`, `=PROPER()`.",
+        "4) Handle missing values:",
+        "   - Numeric → median or business rule (0 only if meaningful).",
+        "   - Categorical → mode or 'Unknown'.",
+        "5) Create an `Is_Outlier` flag instead of deleting rows; then filter in visuals.",
+        "",
+        "In Power Query, always keep a staged query: Raw → Cleaned → Model."
+      ].join("<br>");
+    case "kpi":
+      return [
+        "📊 **KPI ideas based on a typical business dataset:**",
+        "- Volume KPIs: Total Sales, Total Orders, Total Customers, Active Customers.",
+        "- Efficiency KPIs: On-Time Delivery %, SLA Met %, AHT / TAT, Utilization.",
+        "- Quality KPIs: Defect %, Return %, Error Rate, Churn Rate.",
+        "- Growth KPIs: MoM / YoY Sales Growth %, New vs Returning Customers.",
+        "- Profitability: Gross Margin %, Avg Order Value, Revenue per Customer.",
+        "",
+        "Tip: always group KPIs as `Volume, Efficiency, Quality, Growth` in your dashboard."
+      ].join("<br>");
+    case "sql":
+      return [
+        "🧾 **SQL patterns you can adapt:**",
+        "1) Total revenue by month:",
+        "```sql",
+        "SELECT DATE_TRUNC('month', order_date) AS month,",
+        "       SUM(amount) AS total_revenue",
+        "FROM   sales",
+        "GROUP BY 1",
+        "ORDER BY 1;",
+        "```",
+        "2) Top 10 customers by revenue:",
+        "```sql",
+        "SELECT customer_id, SUM(amount) AS total_revenue",
+        "FROM   sales",
+        "GROUP BY customer_id",
+        "ORDER BY total_revenue DESC",
+        "LIMIT 10;",
+        "```",
+        "3) Churned customers (no orders in last 90 days):",
+        "```sql",
+        "SELECT DISTINCT customer_id",
+        "FROM   sales",
+        "WHERE  customer_id NOT IN (",
+        "  SELECT DISTINCT customer_id",
+        "  FROM   sales",
+        "  WHERE  order_date >= CURRENT_DATE - INTERVAL '90 days'",
+        ");",
+        "```"
+      ].join("<br>");
+    case "formula":
+      return [
+        "📐 **Excel & DAX Formula Helper:**",
+        "<b>Excel</b>",
+        "- VLOOKUP by ID: `<code>=VLOOKUP(A2,Sheet2!A:B,2,FALSE)</code>`",
+        "- INDEX-MATCH (safer than VLOOKUP):",
+        "  `<code>=INDEX(Sheet2!B:B, MATCH(A2, Sheet2!A:A, 0))</code>`",
+        "- IF with conditions:",
+        "  `<code>=IF(AND(B2>1000,C2=\"South\"),\"High\",\"Normal\")</code>`",
+        "",
+        "<b>Power BI DAX</b>",
+        "- Total Sales:",
+        "  `<code>Total Sales = SUMX(Sales, Sales[Quantity] * Sales[Price])</code>`",
+        "- YOY Sales:",
+        "  `<code>YOY Sales = CALCULATE([Total Sales], DATEADD('Date'[Date], -1, YEAR))</code>`",
+        "- Churn Flag (Boolean):",
+        "  `<code>Is Churned = IF([Last Purchase Days] > 90, 1, 0)</code>`"
+      ].join("<br>");
+    case "chart":
+      return [
+        "📊 **Chart & dashboard layout suggestions:**",
+        "Row 1 – KPI Cards:",
+        "- Total Sales, Total Customers, Orders, Conversion Rate.",
+        "",
+        "Row 2 – Time series:",
+        "- Line chart: Sales over time (by month).",
+        "- Area chart: Cumulative Sales.",
+        "",
+        "Row 3 – Category performance:",
+        "- Bar chart: Sales by Region, Sales by Product Category.",
+        "- TreeMap: Sales by Sub-Category.",
+        "",
+        "Row 4 – Quality & risk:",
+        "- Column chart: Defect % / Return % by Product.",
+        "- Scatter: Revenue vs Defect %.",
+        "",
+        "Always keep filters for: Date, Region, Product, Customer Segment."
+      ].join("<br>");
+    case "career":
+      return [
+        "💼 **Data Analyst growth tips:**",
+        "- Always show end-to-end thinking: data source → cleaning → modelling → insight.",
+        "- Build 3–5 strong case-study projects (Sales, HR, Operations, Marketing).",
+        "- Practice explaining dashboards in business language, not just technical terms.",
+        "- For interviews: prepare 2 stories on mistakes/learning and 2 on impact.",
+        "- Keep a personal library of SQL, DAX, and Excel snippets (like this Data Lab)."
+      ].join("<br>");
+    default:
+      return [
+        "Here’s how you can use me as your Data Lab Copilot:",
+        "• Ask: “Suggest KPIs for an e-commerce sales dataset.”",
+        "• Ask: “Give SQL to find top 10 products by profit.”",
+        "• Ask: “Excel formula to calculate YOY growth.”",
+        "• Ask: “How to treat missing values in numeric columns?”",
+        "",
+        "Use the quick buttons below to get instant templates for cleaning, KPIs, SQL, formulas, and dashboards."
+      ].join("<br>");
+  }
+}
+
+function sendDataLabMessage(mode) {
+  const inputEl = document.getElementById("datalabAiInput");
+  if (!inputEl) return;
+  let text = inputEl.value.trim();
+
+  // If user clicks quick button with no text, we still answer
+  if (!mode && !text) return;
+  if (!mode) mode = detectDataLabMode(text);
+
+  const userText = text || {
+    cleaning: "Give me a practical data cleaning checklist.",
+    kpi: "Suggest important KPIs for a business dataset.",
+    sql: "Give some useful SQL templates for analysis.",
+    formula: "Give Excel/DAX formula patterns for analysts.",
+    chart: "Suggest a dashboard layout and charts.",
+    career: "Share tips to grow as a data analyst.",
+    general: "How can I use this Data Lab effectively?"
+  }[mode];
+
+  appendDataLabMessage("me", userText);
+  const reply = buildDataLabReply(mode, userText);
+  appendDataLabMessage("bot", reply);
+  inputEl.value = "";
+}
+
+          Analyze & Generate KPIs (Demo)
+        </button>
+        <div id="kpiLoader" style="display:none;margin-top:12px;font-size:12px;color:var(--text-soft);">
+          Analyzing data...
+        </div>
+      </div>
+      <div class="panel">
+        <div class="label-small">Detected KPIs (Summary)</div>
+        <div id="kpiSummary" style="margin-top:8px;font-size:12px;color:var(--text-soft);">
+          Upload a file & use Comet/AI to populate full KPI summary here.
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Data Lab Engine Output Containers (for Comet / AI to write into) -->
+    <div style="margin-top:16px;">
+      <div id="data-preview" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+        <b>Data Preview</b><br>AI / Comet will render first rows of cleaned data here.
+      </div>
+      <div id="cleaned-data" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+        <b>Cleaned Data & Summary</b><br>Data cleaning operations and preview table will appear here.
+      </div>
+      <div id="kpi-output" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+        <b>KPI Catalog</b><br>Auto-generated KPI list and definitions will appear here.
+      </div>
+      <div id="sql-output" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+        <b>SQL Queries for KPIs</b><br>SQL scripts based on KPIs will appear here.
+      </div>
+      <div id="dashboard-spec" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+        <b>Dashboard Design Blueprint</b><br>Power BI / Tableau / Excel dashboard layout suggestions will appear here.
+      </div>
+      <div id="export-links" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
+        <b>Exports</b><br>Download links for cleaned CSV, KPI report, SQL script, and dashboard spec will appear here.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. AI DATA LAB COPILOT (LOCAL, “LIKE CHATGPT” FOR DATA WORK) -->
+  <div class="section">
+    <h2>AI DATA LAB COPILOT</h2>
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
+      Ask for Excel/DAX formulas, SQL queries, KPI ideas, data cleaning tips, or dashboard suggestions.  
+      This runs locally in JavaScript (no paid API), with smart templates for Data Analysts.
+    </p>
+
+    <div class="grid-2">
+      <!-- LEFT: CHAT-LIKE ASSISTANT -->
+      <div class="panel">
+        <div class="label-small">Ask anything about your data or analytics</div>
+        <div class="chat-box" id="datalabAiChat">
+          <div class="chat-msg chat-bot">
+            <span>
+              Hi, I’m your Data Lab Copilot 👋  
+              I can suggest KPIs, write example SQL/Excel formulas, and give data cleaning & dashboard tips.
+            </span>
           </div>
         </div>
 
-        <!-- AI Data Lab Engine Output Containers -->
-        <div style="margin-top:16px;">
-          <div id="data-preview" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
-            <b>Data Preview</b><br>AI / Comet will render first rows of cleaned data here.
-          </div>
-          <div id="cleaned-data" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
-            <b>Cleaned Data & Summary</b><br>Data cleaning operations and preview table will appear here.
-          </div>
-          <div id="kpi-output" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
-            <b>KPI Catalog</b><br>Auto-generated KPI list and definitions will appear here.
-          </div>
-          <div id="sql-output" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
-            <b>SQL Queries for KPIs</b><br>SQL scripts based on KPIs will appear here.
-          </div>
-          <div id="dashboard-spec" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
-            <b>Dashboard Design Blueprint</b><br>Power BI / Tableau / Excel dashboard layout suggestions will appear here.
-          </div>
-          <div id="export-links" style="margin-top:10px;border:1px solid #ddd;padding:15px;border-radius:5px;font-size:12px;">
-            <b>Exports</b><br>Download links for cleaned CSV, KPI report, SQL script, and dashboard spec will appear here.
-          </div>
+        <div style="display:flex;gap:6px;margin-top:8px;">
+          <input
+            type="text"
+            id="datalabAiInput"
+            placeholder="Example: Create DAX for YOY Sales, or How to treat missing values?"
+            style="flex:1;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:12px;">
+          <button class="btn btn-primary" style="font-size:12px;padding:8px 14px;" onclick="sendDataLabMessage()">Ask</button>
         </div>
 
-        <!-- BI & FORMULA TEMPLATES (local demo) -->
-        <div style="margin-top:18px;">
-          <div class="panel" style="margin-bottom:12px;">
-            <div class="label-small">📊 Power BI Dashboard DAX (Demo)</div>
-            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="powerBITemplate">// Power BI DAX will be generated here</code></pre>
-            <button class="btn btn-secondary" style="margin-top:6px;" onclick="copyToClipboard('powerBITemplate')">Copy DAX</button>
-          </div>
-
-          <div class="panel" style="margin-bottom:12px;">
-            <div class="label-small">📈 Tableau Calculated Field (Demo)</div>
-            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="tableauTemplate">// Tableau formula will be generated here</code></pre>
-            <button class="btn btn-secondary" style="margin-top:6px;" onclick="copyToClipboard('tableauTemplate')">Copy Formula</button>
-          </div>
-
-          <div class="panel" style="margin-bottom:12px;">
-            <div class="label-small">🔍 SQL Queries for KPIs (Demo)</div>
-            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="sqlQueries">-- SQL queries will be generated here</code></pre>
-            <button class="btn btn-secondary" style="margin-top:6px;" onclick="copyToClipboard('sqlQueries')">Copy SQL</button>
-          </div>
-
-          <div class="panel">
-            <div class="label-small">📋 Excel Formulas & Report (Demo)</div>
-            <pre style="background:var(--bg-card);padding:8px;border-radius:4px;font-size:11px;overflow:auto;margin-top:6px;max-height:100px;"><code id="excelFormula">// Excel formulas will be generated here</code></pre>
-            <button class="btn btn-secondary" style="margin-top:6px;" onclick="downloadExcelReport()">Download Excel Report</button>
-          </div>
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;">
+          <button class="btn-sm" onclick="sendDataLabMessage('cleaning')">Data cleaning tips</button>
+          <button class="btn-sm" onclick="sendDataLabMessage('kpi')">Suggest KPIs</button>
+          <button class="btn-sm" onclick="sendDataLabMessage('sql')">SQL from question</button>
+          <button class="btn-sm" onclick="sendDataLabMessage('formula')">Excel / DAX formula help</button>
+          <button class="btn-sm" onclick="sendDataLabMessage('chart')">Chart & dashboard ideas</button>
+          <button class="btn-sm" onclick="sendDataLabMessage('career')">Data analyst tips</button>
         </div>
       </div>
 
-      <!-- BI Dashboard Gallery -->
-      <div class="section">
-        <h2>BI DASHBOARD GALLERY</h2>
-        <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
-          Replace the <code>src</code> URLs with your real Power BI and Tableau embed links.
-        </p>
-        <div class="grid-2">
-          <div class="panel">
-            <div class="panel-header">Power BI Dashboard</div>
-            <iframe
-              src="https://app.powerbi.com/view?r=YOUR_POWERBI_EMBED_ID"
-              style="width:100%;height:260px;border-radius:8px;border:none;background:var(--bg-soft);"
-              allowfullscreen></iframe>
-          </div>
-          <div class="panel">
-            <div class="panel-header">Tableau Dashboard</div>
-            <iframe
-              src="https://public.tableau.com/views/YOUR_TABLEAU_VIZ?:embed=y&:showVizHome=no"
-              style="width:100%;height:260px;border-radius:8px;border:none;background:var(--bg-soft);"
-              allowfullscreen></iframe>
-          </div>
+      <!-- RIGHT: QUICK TIPS + FORMULA CHEATSHEET -->
+      <div class="panel">
+        <div class="label-small">Smart Tips for Data Analysts</div>
+        <div id="datalabTips" style="font-size:12px;color:var(--text-soft);line-height:1.6;">
+          <b>Data Cleaning Checklist:</b>
+          <ul style="margin-left:16px;margin-top:4px;">
+            <li>Remove exact duplicates (by all key columns).</li>
+            <li>Standardize dates → <code>YYYY-MM-DD</code>.</li>
+            <li>Trim spaces, fix case (e.g., UPPER() for codes, PROPER() for names).</li>
+            <li>Impute missing numeric values with median where reasonable.</li>
+            <li>Create a separate <code>Is_Outlier</code> flag instead of deleting rows.</li>
+          </ul>
+
+          <b style="display:block;margin-top:8px;">Common Excel Formulas:</b>
+          <pre style="background:var(--bg-card);padding:6px;border-radius:6px;white-space:pre-wrap;">
+VLOOKUP: =VLOOKUP(A2,Sheet2!A:B,2,FALSE)
+INDEX-MATCH: =INDEX(B:B, MATCH(A2, A:A, 0))
+IF + AND: =IF(AND(B2>1000,C2="South"),"High","Normal")
+          </pre>
+
+          <b style="display:block;margin-top:8px;">Common DAX Patterns:</b>
+          <pre style="background:var(--bg-card);padding:6px;border-radius:6px;white-space:pre-wrap;">
+Total Sales =
+SUMX(Sales, Sales[Quantity] * Sales[Price])
+
+YOY Sales =
+CALCULATE([Total Sales], DATEADD('Date'[Date], -1, YEAR))
+          </pre>
+
+          <b style="display:block;margin-top:8px;">KPI Thinking:</b>
+          <ul style="margin-left:16px;margin-top:4px;">
+            <li><b>Volume:</b> Total Sales, Orders, Calls, Tickets.</li>
+            <li><b>Efficiency:</b> AHT, TAT, On-time %, Utilization.</li>
+            <li><b>Quality:</b> Defect %, Error %, Churn %.</li>
+            <li><b>Growth:</b> MoM / YoY %, New vs Returning.</li>
+          </ul>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- SQL Playground -->
-      <div class="section">
-        <h2>SQL PLAYGROUND (IN-BROWSER)</h2>
-        <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
-          Run SQL queries on a demo sales table directly in the browser.
-        </p>
-        <div class="panel">
-          <div style="margin-bottom:15px;">
-            <label class="label-small">Import CSV/Excel File (future enhancement):</label>
-            <input type="file" id="sqlImportFile" accept=".csv,.xlsx,.xls" style="margin-top:5px;margin-bottom:5px;" />
-            <button class="btn btn-secondary" onclick="importFileAsTable()" style="width:100%;">Import File for Query (Demo)</button>
-          </div>
+  <!-- 3. BI DASHBOARD GALLERY -->
+  <div class="section">
+    <h2>BI DASHBOARD GALLERY</h2>
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
+      Replace the <code>src</code> URLs with your real Power BI and Tableau embed links.
+    </p>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-header">Power BI Dashboard</div>
+        <iframe
+          src="https://app.powerbi.com/view?r=YOUR_POWERBI_EMBED_ID"
+          style="width:100%;height:260px;border-radius:8px;border:none;background:var(--bg-soft);"
+          allowfullscreen></iframe>
+      </div>
+      <div class="panel">
+        <div class="panel-header">Tableau Dashboard</div>
+        <iframe
+          src="https://public.tableau.com/views/YOUR_TABLEAU_VIZ?:embed=y&:showVizHome=no"
+          style="width:100%;height:260px;border-radius:8px;border:none;background:var(--bg-soft);"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 
-          <div class="label-small">Write SQL query</div>
-          <textarea id="sqlInput">SELECT * FROM sales LIMIT 5;</textarea>
-          <button class="btn btn-primary" onclick="runSQL()">Run Query</button>
-          <button class="btn btn-secondary" onclick="exportSQLResult()" style="margin-left:10px;">Export Results</button>
-          <button class="btn btn-secondary" onclick="openFormulaAI()" style="margin-left:10px;">AI Formula Writer</button>
-
-          <div id="sqlResult" style="margin-top:10px;font-size:12px;"></div>
-        </div>
+  <!-- 4. SQL PLAYGROUND -->
+  <div class="section">
+    <h2>SQL PLAYGROUND (IN-BROWSER)</h2>
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
+      Run SQL queries on a demo sales table directly in the browser.
+    </p>
+    <div class="panel">
+      <div style="margin-bottom:15px;">
+        <label class="label-small">Import CSV/Excel File (future enhancement):</label>
+        <input type="file" id="sqlImportFile" accept=".csv,.xlsx,.xls" style="margin-top:5px;margin-bottom:5px;" />
+        <button class="btn btn-secondary" onclick="importFileAsTable()" style="width:100%;">Import File for Query (Demo)</button>
       </div>
 
-      <!-- CSV Quick Insights -->
-      <div class="section">
-        <h2>CSV → QUICK INSIGHTS LAB</h2>
-        <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
-          Upload a CSV file to preview data and auto-generate a simple chart from the first numeric column.
-        </p>
-        <div class="panel">
-          <input type="file" id="csvFile" accept=".csv" />
-          <div id="csvPreview" style="margin-top:10px;font-size:12px;"></div>
-          <div style="height:260px;margin-top:10px;">
-            <canvas id="csvChart"></canvas>
-          </div>
-        </div>
-      </div>
+      <div class="label-small">Write SQL query</div>
+      <textarea id="sqlInput">SELECT * FROM sales LIMIT 5;</textarea>
+      <button class="btn btn-primary" onclick="runSQL()">Run Query</button>
+      <button class="btn btn-secondary" onclick="exportSQLResult()" style="margin-left:10px;">Export Results</button>
+      <button class="btn btn-secondary" onclick="openFormulaAI()" style="margin-left:10px;">AI Formula Writer</button>
 
-      <!-- Small project gallery repeat for Data Lab section -->
-      <div class="section">
-        <h2>PROJECT GALLERY</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard">
-            <h3>Sales Performance Dashboard</h3>
-            <p>Power BI report analyzing revenue, product mix, regional performance and trends.</p>
-            <span class="tag-pill">Power BI</span>
-            <span class="tag-pill">SQL</span>
-          </div>
-          <div class="project-card">
-            <img src="Thumbnail/churn_thumb.png" alt="Churn Analysis">
-            <h3>Customer Churn Analysis</h3>
-            <p>Python ML pipeline to identify high-risk customers and explain key drivers.</p>
-            <span class="tag-pill">Python</span>
-            <span class="tag-pill">ML</span>
-          </div>
-          <div class="project-card">
-            <img src="Thumbnail/hr_thumb.png" alt="HR Analytics">
-            <h3>HR Analytics Dashboard</h3>
-            <p>Tableau visuals for headcount, attrition, performance, and diversity metrics.</p>
-            <span class="tag-pill">Tableau</span>
-            <span class="tag-pill">HR Analytics</span>
-          </div>
-        </div>
-      </div>
+      <div id="sqlResult" style="margin-top:10px;font-size:12px;"></div>
+    </div>
+  </div>
 
-    </section>
+  <!-- 5. CSV QUICK INSIGHTS -->
+  <div class="section">
+    <h2>CSV → QUICK INSIGHTS LAB</h2>
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
+      Upload a CSV file to preview data and auto-generate a simple chart from the first numeric column.
+    </p>
+    <div class="panel">
+      <input type="file" id="csvFile" accept=".csv" />
+      <div id="csvPreview" style="margin-top:10px;font-size:12px;"></div>
+      <div style="height:260px;margin-top:10px;">
+        <canvas id="csvChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. SMALL PROJECT GALLERY -->
+  <div class="section">
+    <h2>PROJECT GALLERY</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard">
+        <h3>Sales Performance Dashboard</h3>
+        <p>Power BI report analyzing revenue, product mix, regional performance and trends.</p>
+        <span class="tag-pill">Power BI</span>
+        <span class="tag-pill">SQL</span>
+      </div>
+      <div class="project-card">
+        <img src="Thumbnail/churn_thumb.png" alt="Churn Analysis">
+        <h3>Customer Churn Analysis</h3>
+        <p>Python ML pipeline to identify high-risk customers and explain key drivers.</p>
+        <span class="tag-pill">Python</span>
+        <span class="tag-pill">ML</span>
+      </div>
+      <div class="project-card">
+        <img src="Thumbnail/hr_thumb.png" alt="HR Analytics">
+        <h3>HR Analytics Dashboard</h3>
+        <p>Tableau visuals for headcount, attrition, performance, and diversity metrics.</p>
+        <span class="tag-pill">Tableau</span>
+        <span class="tag-pill">HR Analytics</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
 
     <!-- RESUME GENERATOR SECTION -->
     <section id="resume" class="page-section">
