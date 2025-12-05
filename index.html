@@ -897,7 +897,8 @@
     <div class="dl-two-col">
       <div class="panel">
         <div class="label-small">Upload CSV/Excel File</div>
-        <input type="file" id="kpiFile" accept=".csv,.xlsx,.xls" />
+        <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" onchange="universalLoadFile()" style="margin-top:10px;width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;" />
+              <div id="fileStatus" style="margin-top:10px;font-size:13px;color:#666;">Waiting for file…</div>
         <button class="btn btn-secondary" style="margin-top:8px;width:100%;" onclick="simpleKPIStub()">
           // =======================
 // AI DATA LAB COPILOT (LOCAL LOGIC)
@@ -1038,6 +1039,61 @@ function buildDataLabReply(mode, text) {
       ].join("<br>");
   }
 }
+
+            // UNIVERSAL FILE LOADING FUNCTIONS
+  function universalLoadFile() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const fileName = file.name.toLowerCase();
+        if (fileName.endsWith('.csv')) parseCSV(e.target.result);
+        else if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) parseExcel(e.target.result);
+      } catch (error) {
+        document.getElementById('fileStatus').innerText = 'Error: ' + error.message;
+      }
+    };
+    if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) reader.readAsArrayBuffer(file);
+    else reader.readAsText(file);
+  }
+  
+  function parseCSV(text) {
+    const lines = text.split('\n').filter(l => l.trim());
+    const headers = lines[0].split(',').map(h => h.trim());
+    const rows = lines.slice(1).map(line => {
+      let obj = {}; headers.forEach((h, i) => { obj[h] = line.split(',')[i] || ''; });
+      return obj;
+    });
+    displayPreview(headers, rows);
+    document.getElementById('fileStatus').innerText = 'OK: ' + rows.length + ' rows';
+  }
+  
+  function parseExcel(arrayBuffer) {
+    if (typeof XLSX === 'undefined') {
+      document.getElementById('fileStatus').innerText = 'Use CSV format';
+      return;
+    }
+    const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+    displayPreview(Object.keys(rows[0]), rows);
+    document.getElementById('fileStatus').innerText = 'OK: ' + rows.length + ' rows';
+  }
+  
+  function displayPreview(headers, rows) {
+    let html = '<table style="border-collapse:collapse;width:100%;"><tr>';
+    headers.forEach(h => html += '<th style="border:1px #ddd solid;padding:5px;">' + h + '</th>');
+    html += '</tr>';
+    rows.slice(0, 10).forEach(r => {
+      html += '<tr>';
+      headers.forEach(h => html += '<td style="border:1px #ddd solid;padding:5px;">' + (r[h] || '') + '</td>');
+      html += '</tr>';
+    });
+    html += '</table>';
+    document.getElementById('data-preview').innerHTML = html;
+  }
+
 
 function sendDataLabMessage(mode) {
   const inputEl = document.getElementById("datalabAiInput");
