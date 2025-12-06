@@ -2033,7 +2033,7 @@ CALCULATE([Total Sales], DATEADD('Date'[Date], -1, YEAR))
 		}
 
 		function detectKPIs(data) {
-			const box = document.getElementById("kpi-summary");
+			const box = document.getElementById("kpi-output");
 			if (!data || data.length === 0) return;
 			const sample = data[0];
 			const numCols = {};
