@@ -1985,6 +1985,86 @@ CALCULATE([Total Sales], DATEADD('Date'[Date], -1, YEAR))
   }
   displayPreview = displayPreviewEnhanced;
 
+      		// DATA LAB ENHANCEMENT: Proper file upload and KPI detection
+		document.getElementById("fileInput").addEventListener("change", handleFileUpload);
+
+		function handleFileUpload(e) {
+			const file = e.target.files[0];
+			if (!file) return;
+			document.getElementById("fileStatus").innerText = "Processing…";
+			const ext = file.name.split(".").pop().toLowerCase();
+			if (ext === "csv") {
+				Papa.parse(file, {
+					header: true,
+					dynamicTyping: true,
+					complete: function(res) {
+						window.__parsedData = res.data;
+						previewData(res.data);
+						renderActionButtons();
+						detectKPIs(res.data);
+						document.getElementById("fileStatus").innerText = "File uploaded successfully";
+					}
+				});
+			} else {
+				document.getElementById("fileStatus").innerText = "Unsupported file type";
+			}
+		}
+
+		function renderActionButtons() {
+			const div = document.getElementById("data-actions");
+			div.innerHTML = `<button id="btnAnalyze">Analyze & Generate KPIs</button> <button id="btnDownload">Download Cleaned CSV</button>`;
+			document.getElementById("btnAnalyze").onclick = () => detectKPIs(window.__parsedData);
+			document.getElementById("btnDownload").onclick = () => downloadCleanedCSV(window.__parsedData);
+		}
+
+		function previewData(data) {
+			const box = document.getElementById("data-preview");
+			if (!data || data.length === 0) return;
+			let html = "<table><thead><tr>";
+			Object.keys(data[0]).forEach(c => html += `<th>${c}</th>`);
+			html += "</tr></thead><tbody>";
+			data.slice(0, 50).forEach(r => {
+				html += "<tr>";
+				Object.values(r).forEach(v => html += `<td>${v}</td>`);
+				html += "</tr>";
+			});
+			html += "</tbody></table>";
+			box.innerHTML = html;
+		}
+
+		function detectKPIs(data) {
+			const box = document.getElementById("kpi-summary");
+			if (!data || data.length === 0) return;
+			const sample = data[0];
+			const numCols = {};
+			Object.keys(sample).forEach(col => {
+				if (typeof sample[col] === "number") {
+					numCols[col] = data.map(r => r[col]);
+				}
+			});
+			let html = "";
+			Object.keys(numCols).forEach(col => {
+				const vals = numCols[col].filter(v => typeof v === "number");
+				if (vals.length === 0) return;
+				const tot = vals.reduce((a, b) => a + b, 0);
+				const avg = tot / vals.length;
+				const min = Math.min(...vals);
+				const max = Math.max(...vals);
+				html += `<div class="kpi-card"><h4>${col}</h4><p>Total: ${tot}</p><p>Average: ${avg.toFixed(2)}</p><p>Min: ${min}</p><p>Max: ${max}</p></div>`;
+			});
+			box.innerHTML = html || "<p>No numeric KPIs detected</p>";
+		}
+
+		function downloadCleanedCSV(data) {
+			const csv = Papa.unparse(data);
+			const blob = new Blob([csv], {type: "text/csv"});
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement("a");
+			a.href = url;
+			a.download = "cleaned_data.csv";
+			a.click();
+		}
+
 </script>
 
 </body>
