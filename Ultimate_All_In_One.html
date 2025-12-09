@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ultimate Data Analyst AI System</title>
+    <style>
+body {background:#0b0f19;color:white;font-family:Arial;padding:0;margin:0;}
+header {background:#3a0ca3;padding:20px;text-align:center;font-size:28px;font-weight:700;}
+.container {padding:20px;max-width:1200px;margin:auto;}
+.box {background:#141a2a;padding:20px;border-radius:12px;margin:20px 0;}
+textarea,input[type=file]{width:100%;padding:10px;border-radius:10px;background:#1e263b;color:white;border:none;}
+.skill {padding:6px 12px;background:#4cc9f0;border-radius:8px;margin:4px;display:inline-block;}
+    </style>
+</head>
+<body>
+<header>📊 Ultimate Data Analyst AI System</header>
+<div class="container">
+<div class="box"><h2>📄 Job Description</h2><textarea id="jd"></textarea></div>
+<div class="box"><h2>🧑‍💼 Resume</h2><textarea id="cv"></textarea></div>
+<div class="box"><button onclick="analyze()">🚀 Run AI Analysis</button></div>
+<div class="box"><h2>🔍 Extracted Skills</h2><div id="skills"></div></div>
+<div class="box"><h2>🧠 AI Summary</h2><pre id="summary"></pre></div>
+</div>
+<script>
+const SK = ['SQL','Python','Power BI','Tableau','Excel','Statistics'];
+function extract(t){let l=t.toLowerCase();return SK.filter(s=>l.includes(s.toLowerCase()));}
+function analyze(){let jd=document.getElementById('jd').value;let cv=document.getElementById('cv').value;let skills=[...new Set([...extract(jd),...extract(cv)])];document.getElementById('skills').innerHTML = skills.map(s=>`<span class='skill'>${s}</span>`).join('');document.getElementById('summary').innerText = "JD Summary:\n" + jd.slice(0,200) + "...\n\nResume Summary:\n" + cv.slice(0,200) + "...";}
+</script>
+</body>
+</html>
