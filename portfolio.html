@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Deepanraj A</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f5f5f5;
+      --bg-card: #ffffff;
+      --primary: #3a0ca3;
+      --accent: #4cc9f0;
+      --text: #111827;
+      --border: #e5e7eb;
+    }
+    body { background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); }
+    header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .nav { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
+    .nav a { text-decoration: none; color: var(--text); opacity: 0.8; transition: 0.3s; padding: 8px 12px; border-radius: 6px; }
+    .nav a:hover { color: var(--accent); opacity: 1; }
+    h1 { font-size: 36px; margin: 30px 0 10px; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin: 40px 0; }
+    .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: all 0.3s; }
+    .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .project-card h3 { color: var(--primary); margin-bottom: 10px; }
+    .project-card .tech { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .tech-badge { background: var(--accent); color: #000; font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+    footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 20px; text-align: center; margin-top: 60px; color: #666; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="portfolio.html">📁 Portfolio</a>
+        <a href="ai-assistant.html">🤖 AI Assistant</a>
+        <a href="Ultimate_All_In_One.html">🧠 AI Analyst Lab</a>
+        <a href="power-bi-dashboard.html">📊 BI Dashboard</a>
+        <a href="contact.html">📬 Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>📁 My Projects & Portfolio</h1>
+    <p style="opacity: 0.8; margin-bottom: 30px;">Showcase of my data analytics, BI development, and AI automation projects</p>
+
+    <div class="portfolio-grid">
+      <div class="project-card">
+        <h3>🚀 Ultimate AI Analyst Lab</h3>
+        <p>AI-powered resume-to-job-description matching system with skill extraction and gap analysis.</p>
+        <div class="tech">
+          <span class="tech-badge">JavaScript</span>
+          <span class="tech-badge">AI</span>
+          <span class="tech-badge">NLP</span>
+        </div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 14px;">Analyzes skills from job descriptions and resumes, providing actionable insights for career development.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>📊 Power BI Dashboard</h3>
+        <p>Enterprise-grade data visualization dashboard with real-time metrics and analytics.</p>
+        <div class="tech">
+          <span class="tech-badge">Chart.js</span>
+          <span class="tech-badge">HTML5</span>
+          <span class="tech-badge">Analytics</span>
+        </div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 14px;">Features revenue trends, regional sales, customer analytics, and performance KPIs.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>🔧 Data Lab Suite</h3>
+        <p>Collection of data analysis tools including SQL engines and visualization frameworks.</p>
+        <div class="tech">
+          <span class="tech-badge">SQL.js</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Data Processing</span>
+        </div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 14px;">Advanced data manipulation, querying, and transformation capabilities in the browser.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>🤖 Resume Generator</h3>
+        <p>AI-assisted resume generation and optimization system for career advancement.</p>
+        <div class="tech">
+          <span class="tech-badge">AI/ML</span>
+          <span class="tech-badge">Text Processing</span>
+          <span class="tech-badge">Career Tools</span>
+        </div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 14px;">Generates optimized resumes based on job requirements and industry best practices.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>📈 Dashboard Designer</h3>
+        <p>Custom dashboard builder for KPI tracking and business intelligence.</p>
+        <div class="tech">
+          <span class="tech-badge">Dashboard</span>
+          <span class="tech-badge">BI</span>
+          <span class="tech-badge">Design</span>
+        </div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 14px;">Drag-and-drop interface for creating professional business dashboards.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>💼 Professional Portfolio</h3>
+        <p>Responsive portfolio website showcasing skills, projects, and professional background.</p>
+        <div class="tech">
+          <span class="tech-badge">HTML5</span>
+          <span class="tech-badge">CSS3</span>
+          <span class="tech-badge">Responsive</span>
+        </div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 14px;">Fully responsive, SEO-optimized portfolio with GitHub Pages deployment.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 • Deepanraj A — Data Analyst • BI Developer</p>
+  </footer>
+</body>
+</html>
