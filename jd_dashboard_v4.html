@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JD Skill Match Dashboard – Version 4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+body {background:#050b16;color:white;font-family:'Segoe UI',sans-serif;margin:0;padding:0;}
+header {background:linear-gradient(135deg,#3a0ca3,#4361ee);padding:25px;text-align:center;color:white;font-size:28px;font-weight:700;}
+.container{max-width:1300px;margin:auto;padding:20px;}
+.box{background:#0d1b2a;padding:22px;border-radius:16px;margin:20px 0;box-shadow:0 5px 20px rgba(0,0,0,0.4);}
+textarea,input[type="file"]{width:100%;padding:10px;border-radius:10px;border:none;background:#112240;color:white;margin-top:10px;}
+button{background:#4895ef;color:white;border:none;border-radius:10px;padding:10px 16px;font-size:15px;cursor:pointer;margin-top:10px;}
+button:hover{background:#4cc9f0;}
+.skill{display:inline-block;background:#3a0ca3;padding:6px 12px;border-radius:8px;margin:4px;font-size:13px;}
+.score{font-size:45px;font-weight:700;}
+.good{color:#70e000;}
+.medium{color:#f7b801;}
+.low{color:#ff595e;}
+pre{white-space:pre-wrap;background:#112240;padding:10px;border-radius:10px;}
+.flex{display:flex;flex-wrap:wrap;gap:20px;}
+.col50{flex:1 1 48%;}
+.col33{flex:1 1 32%;}
+.col100{flex:1 1 100%;}
+.report-btn{background:#06d6a0;}
+.report-btn:hover{background:#03b083;}
+</style>
+</head>
+<body>
+<header>📈 JD–Resume Skill Match Dashboard – Version 4</header>
+<div class="container">
+<div class="box flex">
+<div class="col50">
+<h2>📄 Job Description (Text / PDF)</h2>
+<textarea id="jdText" placeholder="Paste Job Description here..."></textarea>
+<input type="file" id="jdFile" accept=".pdf">
+<button onclick="readPDF('jdFile','jdText')">📥 Extract JD from PDF</button>
+</div>
+<div class="col50">
+<h2>👫‍💼 Resume (Text / PDF)</h2>
+<textarea id="cvText" placeholder="Paste Resume here..."></textarea>
+<input type="file" id="cvFile" accept=".pdf">
+<button onclick="readPDF('cvFile','cvText')">📥 Extract Resume from PDF</button>
+</div>
+</div>
+<button onclick="analyzeAll()" style="width:100%;font-size:18px;margin-bottom:20px;background:#06d6a0;">🚀 RUN AI ANALYSIS & MATCH</button>
+<div class="box">
+<h2>📈 Experience Level (Years)</h2>
+<input type="range" min="0" max="15" value="2" id="expSlider" oninput="updateExp()" style="width:100%;">
+<span id="expLabel">2 yrs</span>
+<p style="opacity:0.7;margin-top:10px;">Experience changes recommended skills & tools automatically.</p>
+</div>
+<div class="box flex">
+<div class="col50">
+<h2>🖧 JD Skills Extracted</h2>
+<div id="jdSkills"></div>
+<h3>Tools Required</h3>
+<div id="jdTools"></div>
+</div>
+<div class="col50">
+<h2>🗣 Resume Skills Extracted</h2>
+<div id="cvSkills"></div>
+<h3>Tools Known</h3>
+<div id="cvTools"></div>
+</div>
+</div>
+<div class="box flex">
+<div class="col33">
+<h2>📘 JD Summary</h2>
+<pre id="jdSummary">Run analysis to see summary...</pre>
+</div>
+<div class="col33">
+<h2>📙 Resume Summary</h2>
+<pre id="cvSummary">Run analysis to see summary...</pre>
+</div>
+<div class="col33">
+<h2>🤝 AI Fit Commentary</h2>
+<pre id="fitSummary">Run analysis to see match commentary...</pre>
+</div>
+</div>
+<div class="box flex">
+<div class="col33">
+<h2>🎯 Match Score</h2>
+<div id="matchScore" class="score">--%</div>
+</div>
+<div class="col66" style="flex:2;">
+<h2>📚 Skill Radar Chart</h2>
+<canvas id="radarChart" height="230"></canvas>
+</div>
+</div>
+<div class="box">
+<h2>📋 Learning Path (AI Suggested)</h2>
+<pre id="learningPath">Run analysis to generate learning recommendations...</pre>
+</div>
+<div class="box">
+<h2>📄 Download AI Match Report</h2>
+<button class="report-btn" onclick="downloadReport()">⬇ Download PDF Report</button>
+</div>
+</div>
+<script>
+const SKILLS=['SQL','Python','Excel','PowerBI','Tableau','Statistics','MachineLearning','ETL','Cloud','DataModeling','Storytelling','Dashboard','Communication','Regression','TimeSeries','BigData','Azure','AWS','GoogleCloud'];
+const TOOLS=['PowerBI','Tableau','Excel','MySQL','PostgreSQL','Python','Pandas','NumPy','Scikit-Learn','Azure','AWS','Snowflake','Hive','Spark'];
+
+function vectorize(skills){return SKILLS.map(s=>skills.some(sk=>sk.toLowerCase().includes(s.toLowerCase()))?1:0);}
+function cosineSimilarity(v1,v2){let dot=0,a=0,b=0;for(let i=0;i<v1.length;i++){dot+=v1[i]*v2[i];a+=v1[i]*v1[i];b+=v2[i]*v2[i];}return dot/(Math.sqrt(a)*Math.sqrt(b)||1);}
+
+async function readPDF(inputId,targetId){let file=document.getElementById(inputId).files[0];if(!file){alert('Choose PDF first');return;}let reader=new FileReader();reader.onload=async e=>{let pdf=await pdfjsLib.getDocument({data:new Uint8Array(e.target.result)}).promise;let text='';for(let p=1;p<=Math.min(4,pdf.numPages);p++){let page=await pdf.getPage(p);let txt=await page.getTextContent();text+=txt.items.map(t=>t.str).join(' ')+' ';}document.getElementById(targetId).value=text;};reader.readAsArrayBuffer(file);}
+
+function extractSkills(text){let found=[];SKILLS.forEach(s=>{if(text.toLowerCase().includes(s.toLowerCase()))found.push(s);});return found;}
+function extractTools(text){let found=[];TOOLS.forEach(t=>{if(text.toLowerCase().includes(t.toLowerCase()))found.push(t);});return found;}
+
+function displaySkills(skillList,elementId){document.getElementById(elementId).innerHTML=skillList.map(s=>'<span class="skill">'+s+'</span>').join('');}
+
+function generateSummary(text){let sentences=text.split('.').slice(0,2).join('.').trim();return sentences.length>0?sentences+'...':'[No content found]';}
+
+function updateExp(){let v=document.getElementById('expSlider').value;document.getElementById('expLabel').textContent=v+' yrs';}
+
+function analyzeAll(){let jdText=document.getElementById('jdText').value;let cvText=document.getElementById('cvText').value;if(!jdText||!cvText){alert('Please enter both JD and Resume');return;}
+let jdSkills=extractSkills(jdText);let cvSkills=extractSkills(cvText);let jdTools=extractTools(jdText);let cvTools=extractTools(cvText);
+displaySkills(jdSkills,'jdSkills');displaySkills(cvSkills,'cvSkills');displaySkills(jdTools,'jdTools');displaySkills(cvTools,'cvTools');
+document.getElementById('jdSummary').textContent=generateSummary(jdText);document.getElementById('cvSummary').textContent=generateSummary(cvText);
+let v1=vectorize(jdSkills);let v2=vectorize(cvSkills);let score=Math.round(cosineSimilarity(v1,v2)*100);document.getElementById('matchScore').textContent=score+'%';
+if(score>=80)document.getElementById('matchScore').className='score good';else if(score>=60)document.getElementById('matchScore').className='score medium';else document.getElementById('matchScore').className='score low';
+document.getElementById('fitSummary').textContent='Match Score: '+score+'%\nJD Skills: '+jdSkills.join(', ')+'\nYour Skills: '+cvSkills.join(', ')+'\nMissing: '+jdSkills.filter(s=>!cvSkills.includes(s)).join(', ')+'\nOverqualified: '+cvSkills.filter(s=>!jdSkills.includes(s)).join(', ');
+let learning=jdSkills.filter(s=>!cvSkills.includes(s)).slice(0,5).join(', ');document.getElementById('learningPath').textContent='Recommended learning path based on JD requirements:\n1. Priority Skills: '+learning+'\n2. Tools: '+jdTools.filter(t=>!cvTools.includes(t)).join(', ')+'\n3. Duration: 2-4 months for proficiency';
+if(document.getElementById('radarChart')){let ctx=document.getElementById('radarChart').getContext('2d');let topSkills=SKILLS.slice(0,8);let data1=topSkills.map(s=>jdSkills.includes(s)?1:0);let data2=topSkills.map(s=>cvSkills.includes(s)?1:0);new Chart(ctx,{type:'radar',data:{labels:topSkills,datasets:[{label:'JD Required',data:data1,borderColor:'#4361ee',backgroundColor:'rgba(67,97,238,0.2)'},{label:'Your Skills',data:data2,borderColor:'#06d6a0',backgroundColor:'rgba(6,214,160,0.2)'}]},options:{responsive:true,maintainAspectRatio:true}});}}
+
+function downloadReport(){let content='JD-RESUME SKILL MATCH REPORT\n';content+='Match Score: '+document.getElementById('matchScore').textContent+'\n\n';content+='JD Summary:\n'+document.getElementById('jdSummary').textContent+'\n\n';content+='Resume Summary:\n'+document.getElementById('cvSummary').textContent+'\n\n';content+='Fit Analysis:\n'+document.getElementById('fitSummary').textContent+'\n\n';content+='Learning Path:\n'+document.getElementById('learningPath').textContent;let blob=new Blob([content],{type:'text/plain'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='JD_Match_Report.txt';a.click();}
+</script>
+</body>
+</html>
