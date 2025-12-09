@@ -847,105 +847,128 @@
         </div>
       </div>
 
-				<!-- AI ASSISTANT SECTION -->
-		<section id="assistant" class="page-section">
-			<div class="section">
-				<h2 style="display:flex;align-items:center;gap:10px;border-left:4px solid var(--primary);padding-left:15px;"><span style="font-size:24px;">🤖</span>AI ASSISTANT — SMART DATA INSIGHTS</h2>
-				<p>Your personal AI assistant for data analysis, queries, and insights. Ask questions about business metrics, data trends, or analytical concepts.</p>
-			</div>
-
-			<!-- AI Assistant Panel -->
-			<div class="section">
-				<h3 style="display:flex;align-items:center;gap:8px;"><span>💬</span>Interactive AI Chatbot</h3>
-				<div class="panel" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px;">
-					<div class="chat-box" id="assistantChatBox" style="background: rgba(255,255,255,0.1); min-height: 300px; padding: 15px; border-radius: 8px; overflow-y: auto; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2);">
-						<div style="text-align: center; padding-top: 50px;">
-							<p>👋 Hi! I'm your AI Assistant. Ask me about data analysis, SQL, Power BI, Python, or any data-related questions!</p>
-						</div>
-					</div>
-					<div style="display: flex; gap: 10px;">
-						<input type="text" id="userQuery" placeholder="Ask me anything..." style="flex: 1; padding: 10px; border: none; border-radius: 5px; font-size: 14px;" />
-						<button onclick="sendQuery()" style="padding: 10px 20px; background: rgba(255,255,255,0.3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s;">Send</button>
-					</div>
-				</div>
-			</div>
-
-			<!-- Featured Topics -->
-			<div class="section">
-				<h3 style="display:flex;align-items:center;gap:8px;"><span>⭐</span>Quick Topics</h3>
-				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-					<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('SQL Query Examples')">
-						<h4>📊 SQL Queries</h4>
-						<p>Learn common SQL patterns for data analysis</p>
-					</div>
-					<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Python Data Analysis')">
-						<h4>🐍 Python Tips</h4>
-						<p>Data analysis with pandas, numpy & matplotlib</p>
-					</div>
-					<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Power BI Best Practices')">
-						<h4>📈 Power BI</h4>
-						<p>Create stunning dashboards and reports</p>
-					</div>
-					<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('KPI Definition and Metrics')">
-						<h4>📌 KPI Insights</h4>
-						<p>Understanding business metrics and KPIs</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- Capabilities -->
-			<div class="section">
-				<h3 style="display:flex;align-items:center;gap:8px;"><span>✨</span>AI Capabilities</h3>
-				<ul style="line-height: 1.8;">
-					<li><strong>Data Questions:</strong> Ask about data structures, analysis techniques, and best practices</li>
-					<li><strong>Code Help:</strong> Get SQL, Python, and DAX code examples for your analysis needs</li>
-					<li><strong>Visualization Tips:</strong> Learn how to create effective dashboards and visual analytics</li>
-					<li><strong>Concept Explanation:</strong> Understand complex data analytics concepts in simple terms</li>
-					<li><strong>Business Insights:</strong> Guidance on extracting actionable insights from data</li>
-					<li><strong>Career Advice:</strong> Tips for growing your data analytics and BI skills</li>
-				</ul>
-			</div>
-
-			<!-- Pro Tips -->
-			<div class="section" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary);">
-				<h3 style="display:flex;align-items:center;gap:8px;"><span>💡</span>Pro Tips</h3>
-				<ul style="line-height: 1.8;">
-					<li>Be specific in your questions for better responses</li>
-					<li>Include context like your data source or tool being used</li>
-					<li>Ask follow-up questions to dive deeper into topics</li>
-					<li>Request code examples in your preferred language</li>
-					<li>Combine multiple AI responses to build comprehensive solutions</li>
-				</ul>
-			</div>
-		</section>
-
-		<script>
-		function sendQuery() {
-			const query = document.getElementById('userQuery').value;
-			if (query.trim()) {
-				const chatBox = document.getElementById('assistantChatBox');
-				chatBox.innerHTML += '<p style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.15); border-radius: 5px;"><strong>You:</strong> ' + query + '</p>';
-				chatBox.innerHTML += '<p style="margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 5px;"><strong>AI:</strong> Processing your query... Please ask a more specific question for detailed assistance.</p>';
-				document.getElementById('userQuery').value = '';
-				chatBox.scrollTop = chatBox.scrollHeight;
-			}
-		}
-		
-		function quickQuery(topic) {
-			document.getElementById('userQuery').value = 'Tell me about: ' + topic;
-			sendQuery();
-		}
-		
-		// Allow Enter key to send query
-		document.addEventListener('DOMContentLoaded', function() {
-			const userQuery = document.getElementById('userQuery');
-			if (userQuery) {
-				userQuery.addEventListener('keypress', function(e) {
-					if (e.key === 'Enter') sendQuery();
-				});
-			}
-		});
 		</script>
+		
+	<!-- AI ASSISTANT SECTION (ULTIMATE UPGRADE) -->
+	<section id="assistant" class="page-section">
+		<div class="section">
+			<h2 style="display:flex;align-items:center;gap:10px;border-left:4px solid var(--primary);padding-left:15px;">
+				<span style="font-size:28px;">🚀</span>
+				AI ASSISTANT — ULTIMATE UPGRADE
+			</h2>
+			<p>Your intelligent data analysis companion. Ask anything about SQL, Power BI, Python, statistics, business analytics, and more!</p>
+		</div>
+
+		<!-- Interactive AI Chatbot Panel -->
+		<div class="section">
+			<h3 style="display:flex;align-items:center;gap:8px;">
+				<span style="font-size:20px;">💬</span>
+				AI Chatbot
+			</h3>
+			<div class="panel" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px;">
+				<div class="chat-box" id="assistantChatBox" style="background: rgba(255,255,255,0.1); min-height: 300px; padding: 15px; border-radius: 8px; overflow-y: auto; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2);">
+					<div style="text-align: center; padding-top: 100px;">
+						<p>👋 Hi! I'm your AI Assistant. Ask me about data analysis, SQL, Power BI, Python, or analytics!</p>
+					</div>
+				</div>
+				<div style="display: flex; gap: 10px;">
+					<input type="text" id="userQuery" placeholder="Ask me anything..." style="flex: 1; padding: 10px; border: none; border-radius: 5px; font-size: 14px;" />
+					<button onclick="sendQuery()" style="padding: 10px 20px; background: rgba(255,255,255,0.3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s;" onhover="this.style.background='rgba(255,255,255,0.5)';">Send</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Quick Topics Grid -->
+		<div class="section">
+			<h3 style="display:flex;align-items:center;gap:8px;">
+				<span style="font-size:20px;">⭐</span>
+				Popular Topics
+			</h3>
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('SQL Query Examples')">
+					<h4>📊 SQL Queries</h4>
+					<p>Learn common SQL patterns for data analysis</p>
+				</div>
+				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Python Data Analysis')">
+					<h4>🐍 Python Tips</h4>
+					<p>Data analysis with pandas, numpy & matplotlib</p>
+				</div>
+				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Power BI Best Practices')">
+					<h4>📈 Power BI</h4>
+					<p>Create stunning dashboards and reports</p>
+				</div>
+				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('KPI Definition and Metrics')">
+					<h4>📌 KPI Insights</h4>
+					<p>Understanding business metrics and KPIs</p>
+				</div>
+				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Data Visualization Best Practices')">
+					<h4>🎨 Visualization</h4>
+					<p>Create effective and impactful dashboards</p>
+				</div>
+				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Business Strategy and Analytics')">
+					<h4>💼 Strategy</h4>
+					<p>Use data insights for strategic decisions</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Featured Resources -->
+		<div class="section">
+			<h3 style="display:flex;align-items:center;gap:8px;">
+				<span style="font-size:20px;">📚</span>
+				Learning Resources
+			</h3>
+			<ul style="line-height:2;">
+				<li><strong>📊 Data Structures:</strong> Arrays, linked lists, hash maps - fundamental building blocks</li>
+				<li><strong>🔍 Query Optimization:</strong> Indexing strategies and execution plans</li>
+				<li><strong>📈 Dashboard Design:</strong> Best practices for clear and impactful visualizations</li>
+				<li><strong>🐍 Python Libraries:</strong> Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</li>
+				<li><strong>💡 Advanced Analytics:</strong> Predictive modeling, statistical analysis, ML basics</li>
+				<li><strong>⚡ Performance Tuning:</strong> Optimize queries, reduce latency, scale databases</li>
+			</ul>
+		</div>
+	</section>
+
+	<script>
+	function sendQuery() {
+		const userQuery = document.getElementById('userQuery').value;
+		if (userQuery.trim()) {
+			const chatBox = document.getElementById('assistantChatBox');
+			const userMsg = document.createElement('div');
+			userMsg.style.cssText = 'margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.15); border-radius: 5px; color: white;';
+			userMsg.innerHTML = '<strong>You:</strong> ' + userQuery;
+			chatBox.appendChild(userMsg);
+			
+			setTimeout(() => {
+				const aiMsg = document.createElement('div');
+				aiMsg.style.cssText = 'margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.25); border-radius: 5px; color: white;';
+				aiMsg.innerHTML = '<strong>🤖 AI:</strong> I would help you with that! In a real setup, I\'d analyze your question and provide insights.';
+				chatBox.appendChild(aiMsg);
+				chatBox.scrollTop = chatBox.scrollHeight;
+			}, 500);
+			
+			document.getElementById('userQuery').value = '';
+		}
+	}
+	
+	function quickQuery(topic) {
+		document.getElementById('userQuery').value = 'Tell me about ' + topic;
+		sendQuery();
+	}
+	
+	// Allow Enter key to send query
+	document.addEventListener('DOMContentLoaded', function() {
+		const userQuery = document.getElementById('userQuery');
+		if (userQuery) {
+			userQuery.addEventListener('keypress', function(e) {
+				if (e.key === 'Enter') {
+					sendQuery();
+				}
+			});
+		}
+	});
+	</script>
+
 
       <!-- CONTACT (inside Home) -->
       <div id="contact-section" class="section">
