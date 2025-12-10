@@ -365,3 +365,47 @@ body {
     color: var(--text-soft);
     margin-top: 20px;
 }
+/* ===========================
+   CERTIFICATIONS
+=========================== */
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 20px;
+}
+
+.cert-card {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.cert-logo img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 12px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cert-card h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.cert-card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 12px;
+}
+
