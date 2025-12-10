@@ -47,7 +47,6 @@
       overflow-x:hidden;
     }
 
-    /* Dark mode */
     body.dark-mode{
       --bg:#020617;
       --bg-card:#020617;
@@ -59,491 +58,84 @@
       --primary-soft:#1d4ed8;
     }
 
-    /* Layout */
-    .app{
-      display:flex;
-      min-height:100vh;
-    }
+    .app{display:flex;min-height:100vh;}
 
-    /* Sidebar */
+    /* SIDEBAR */
     .sidebar{
-      width:260px;
-      background:var(--sidebar-bg);
-      color:var(--sidebar-text);
-      padding:20px 18px;
-      display:flex;
-      flex-direction:column;
-      position:fixed;
-      top:0;bottom:0;left:0;
+      width:260px;background:var(--sidebar-bg);color:var(--sidebar-text);
+      padding:20px 18px;display:flex;flex-direction:column;
+      position:fixed;top:0;bottom:0;left:0;
     }
-    .sidebar-header{
-      display:flex;align-items:center;gap:12px;margin-bottom:24px;
-    }
+    .sidebar-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
     .sidebar-photo{
       width:56px;height:56px;border-radius:50%;
-      border:3px solid var(--primary);
-      box-shadow:0 0 18px rgba(37,99,235,0.7);
+      border:3px solid var(--primary);box-shadow:0 0 18px rgba(37,99,235,0.7);
       overflow:hidden;flex-shrink:0;
     }
-    .sidebar-photo img{
-      width:100%;height:100%;object-fit:cover;
-    }
-    .sidebar-name{
-      font-size:16px;font-weight:700;
-    }
-    .sidebar-role{
-      font-size:12px;color:#9ca3af;
-    }
-    .sidebar-nav{
-      margin-top:10px;
-    }
+    .sidebar-photo img{width:100%;height:100%;object-fit:cover;}
+    .sidebar-name{font-size:16px;font-weight:700;}
+    .sidebar-role{font-size:12px;color:#9ca3af;}
+
+    .sidebar-nav{margin-top:10px;}
     .sidebar-nav button{
-      width:100%;text-align:left;border:none;outline:none;
-      background:transparent;color:#cbd5f5;
-      padding:10px 10px;border-radius:8px;margin-bottom:5px;
+      width:100%;text-align:left;border:none;background:transparent;
+      color:#cbd5f5;padding:10px;border-radius:8px;margin-bottom:5px;
       font-size:14px;display:flex;align-items:center;gap:10px;
       cursor:pointer;transition:.2s;
     }
-    .sidebar-nav button span.icon{
-      width:22px;text-align:center;
-    }
-    .sidebar-nav button.active,
-    .sidebar-nav button:hover{
-      background:rgba(37,99,235,0.18);
-      color:#fff;
-    }
-    .sidebar-footer{
-      margin-top:auto;
-      font-size:12px;
-      color:#6b7280;
+    .sidebar-nav button:hover,
+    .sidebar-nav button.active{
+      background:rgba(37,99,235,0.18);color:#fff;
     }
 
-    /* Dark toggle */
-    #darkToggle{
-      position:fixed;bottom:20px;right:20px;
-      padding:12px 14px;border-radius:50%;
-      background:var(--primary);color:#fff;font-weight:700;
-      cursor:pointer;z-index:9999;font-size:18px;
-      box-shadow:0 4px 12px rgba(0,0,0,.25);
-    }
+    .sidebar-footer{margin-top:auto;font-size:12px;color:#6b7280;}
 
-    /* Main */
-    .main{
-      margin-left:260px;
-      width:calc(100% - 260px);
-      padding:20px;
-    }
+    /* MAIN */
+    .main{margin-left:260px;width:calc(100% - 260px);padding:20px;}
 
-    /* Loader */
-    #loaderOverlay{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:#ffffff;display:flex;align-items:center;
-      justify-content:center;z-index:999999;
-    }
-    .loader-ring{
-      border:6px solid #e5e7eb;border-top:6px solid #2563eb;
-      width:60px;height:60px;border-radius:50%;animation:spin 1s linear infinite;
-    }
-    @keyframes spin{100%{transform:rotate(360deg)}}
-
-    /* Sections */
-    .page-section{
-      display:none;
-      animation:fadeIn .4s ease;
-    }
-    .page-section.active{
-      display:block;
-    }
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(10px);}
-      to{opacity:1;transform:translateY(0);}
-    }
+    /* SECTIONS */
+    .page-section{display:none;animation:fadeIn .4s ease;}
+    .page-section.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
     /* HERO */
     .hero{
-      background:var(--bg-card);
-      padding:32px 26px;
-      border-radius:20px;
-      border:1px solid var(--border);
-      box-shadow:0 12px 30px rgba(15,23,42,.12);
-      margin-bottom:24px;
-      position:relative;
-      overflow:hidden;
+      background:var(--bg-card);padding:32px;border-radius:20px;border:1px solid var(--border);
+      box-shadow:0 12px 30px rgba(15,23,42,.12);margin-bottom:24px;
+      position:relative;overflow:hidden;
     }
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-80px;top:-80px;
-      width:220px;height:220px;
-      background:radial-gradient(circle at center,rgba(37,99,235,0.16),transparent 60%);
-      pointer-events:none;
-    }
-    .profile-wrapper{
-      display:flex;align-items:center;gap:30px;
-    }
+    .profile-wrapper{display:flex;align-items:center;gap:30px;}
     .profile-photo-main{
-      width:150px;height:150px;border-radius:50%;
-      border:4px solid var(--primary);
-      box-shadow:0 0 30px rgba(37,99,235,0.8);
-      overflow:hidden;flex-shrink:0;
+      width:150px;height:150px;border-radius:50%;border:4px solid var(--primary);
+      overflow:hidden;box-shadow:0 0 30px rgba(37,99,235,0.8);
     }
-    .profile-photo-main img{
-      width:100%;height:100%;object-fit:cover;
-    }
-    .profile-info h1{
-      font-size:32px;font-weight:800;margin-bottom:4px;color:var(--text);
-    }
-    .profile-title{
-      font-size:16px;font-weight:600;color:var(--primary);margin-bottom:8px;
-    }
-    .profile-subtitle{
-      font-size:14px;color:var(--text-soft);margin-bottom:10px;
-    }
-    .value-statement{
-      font-size:14px;font-weight:500;color:var(--text);
-      margin-bottom:12px;
-    }
-    .profile-tags span{
-      display:inline-block;font-size:11px;
-      background:var(--primary-soft);color:var(--primary);
-      padding:4px 9px;border-radius:999px;margin-right:6px;margin-bottom:4px;
-    }
-    .profile-social{
-      display:flex;gap:10px;margin:12px 0 16px;
-    }
-    .social-icon{
-      width:34px;height:34px;border-radius:50%;background:#e5e7eb;
-      display:flex;align-items:center;justify-content:center;
-      color:var(--primary);font-size:18px;text-decoration:none;transition:.2s;
-    }
-    .social-icon:hover{
-      background:var(--primary);color:#fff;transform:translateY(-2px);
-    }
-    .hero-actions{
-      display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;
-    }
-    .btn{
-      display:inline-block;padding:10px 22px;border-radius:999px;
-      font-size:14px;font-weight:600;border:none;cursor:pointer;
-      transition:.2s;text-decoration:none;
-    }
-    .btn-primary{
-      background:var(--primary);color:#fff;
-    }
-    .btn-primary:hover{
-      box-shadow:0 4px 12px rgba(37,99,235,0.4);
-      transform:translateY(-1px);
-    }
-    .btn-outline{
-      background:transparent;border:1px solid var(--primary);
-      color:var(--primary);
-    }
-    .btn-outline:hover{
-      background:var(--primary);color:#fff;
-    }
-    .btn-secondary{
-      background:var(--bg-soft);
-      color:var(--text);
-      border:1px solid var(--border);
-    }
-    .btn-secondary:hover{
-      background:var(--primary-soft);color:var(--primary);
-    }
-    .btn-sm{
-      font-size:12px;
-      padding:6px 14px;
-      border-radius:999px;
-      border:1px solid var(--primary);
-      color:var(--primary);
-      background:transparent;
-      text-decoration:none;
-      cursor:pointer;
-      display:inline-block;
-    }
-    .btn-sm:hover{
-      background:var(--primary);color:#fff;
-    }
+    .profile-info h1{font-size:32px;font-weight:800;margin-bottom:4px;}
+    .profile-title{font-size:16px;font-weight:600;color:var(--primary);}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
 
-    /* Generic section card */
-    .section{
-      background:var(--bg-card);
-      margin-bottom:20px;padding:24px 20px;
-      border-radius:14px;border:1px solid var(--border);
-    }
-    .section h2{
-      font-size:20px;margin-bottom:16px;
-      display:flex;align-items:center;gap:10px;color:var(--text);
-    }
-    .section h2::before{
-      content:"";width:4px;height:22px;background:var(--primary);border-radius:2px;
-    }
+    .btn{padding:10px 22px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;}
+    .btn-primary{background:var(--primary);color:#fff;}
+    .btn-outline{border:1px solid var(--primary);color:var(--primary);}
+    .btn-secondary{background:var(--bg-soft);border:1px solid var(--border);}
 
-    /* Overview cards */
-    .overview-grid{
-      display:flex;flex-wrap:wrap;gap:16px;justify-content:flex-start;
-    }
-    .overview-card{
-      width:180px;background:#ffffff;
-      padding:22px;border-radius:10px;
-      border:2px solid var(--primary);
-      text-align:center;
-      box-shadow:0 4px 12px rgba(37,99,235,0.2);
-    }
-    .overview-card .num{
-      font-size:32px;font-weight:700;color:var(--primary);margin-bottom:4px;
-    }
-    .overview-card .label{
-      font-size:13px;color:var(--text-soft);
-    }
-
-    /* About */
-    .about-grid{
-      display:grid;
-      grid-template-columns:2fr 1.2fr;
-      gap:20px;
-    }
-    @media(max-width:900px){
-      .about-grid{grid-template-columns:1fr;}
-    }
-    .about-highlights li{
-      margin-left:18px;
-      font-size:14px;
-      color:var(--text-soft);
-      margin-bottom:4px;
-    }
-
-    /* Skills */
-    .skills-layout{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-    }
-    .skill-block{
-      background:var(--bg-soft);
-      border-radius:10px;
-      border:1px solid var(--border);
-      padding:14px;
-    }
-    .skill-block h3{
-      font-size:15px;margin-bottom:8px;color:var(--text);
-    }
-    .skill-tags{
-      display:flex;flex-wrap:wrap;gap:6px;
-    }
-    .skill-tag{
-      font-size:11px;padding:4px 9px;border-radius:999px;
-      background:var(--primary-soft);color:var(--primary);
-    }
-
-    /* Projects */
-    .projects-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:18px;
-    }
-    .project-card{
-      background:var(--bg-soft);padding:16px;border-radius:10px;
-      border-top:4px solid var(--primary);
-    }
-    .project-card img{
-      width:100%;border-radius:10px;margin-bottom:8px;
-      cursor:zoom-in;
-    }
-    .project-card h3{
-      font-size:17px;color:#dc2626;font-weight:700;margin-bottom:4px;
-    }
-    .project-card p{
-      font-size:13px;color:var(--text-soft);margin-bottom:8px;
-    }
-    .tag-pill{
-      display:inline-block;background:var(--primary-soft);
-      color:var(--primary);padding:4px 10px;
-      border-radius:999px;font-size:11px;margin-right:4px;margin-bottom:4px;
-    }
-    .project-actions{
-      margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;
-    }
-
-    /* Experience / Education */
-    .job{
-      margin-bottom:20px;
-    }
-    .job h3{
-      font-size:16px;color:#dc2626;font-weight:700;
-    }
-    .job .company{
-      color:#2563eb;font-weight:600;font-size:14px;
-    }
-    .job .dates{
-      color:#666;font-size:13px;margin-bottom:6px;
-    }
-    .job p{
-      font-size:14px;color:#111827;
-    }
-
-    /* Certifications */
-    .cert-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:16px;
-    }
-    .cert-card{
-      background:#ffffff;padding:20px;border-radius:10px;
-      border:2px solid #2563eb;
-      box-shadow:0 4px 12px rgba(37,99,235,0.15);
-    }
-    .cert-card img{
-      width:80px;height:80px;object-fit:contain;margin-bottom:12px;
-    }
-    .cert-card h3{
-      font-size:15px;margin-bottom:6px;color:#111827;
-    }
-    .cert-card p{
-      font-size:12px;color:#2563eb;font-weight:600;
-    }
-
-    /* Contact */
-    .contact-form{
-      max-width:480px;
-    }
-    .contact-form input,.contact-form textarea{
-      width:100%;padding:10px;border-radius:8px;
-      border:1px solid var(--border);font-size:14px;
-      margin-bottom:10px;background:var(--bg-card);color:var(--text);
-    }
-    .contact-form textarea{min-height:120px;resize:vertical;}
-    .contact-info p{
-      font-size:14px;
-    }
-
-    /* Data Lab */
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:16px;
-    }
-    .panel{
-      background:var(--bg-soft);border-radius:10px;
-      border:1px solid var(--border);padding:14px;
-    }
-    .panel-header{
-      font-size:13px;color:var(--text-soft);
-      margin-bottom:6px;
-    }
-    .label-small{
-      font-size:12px;font-weight:600;margin-bottom:4px;color:var(--text-soft);
-    }
-    .panel textarea,.panel input,.panel select{
-      width:100%;padding:8px;border-radius:8px;
-      border:1px solid var(--border);font-size:12px;
-      background:var(--bg-card);color:var(--text);
-    }
-    .panel textarea{min-height:80px;resize:vertical;}
-    .panel button{
-      margin-top:6px;
-    }
-
-    table{
-      width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;
-    }
-    th,td{
-      border:1px solid var(--border);padding:4px 6px;text-align:left;
-    }
-    th{background:var(--bg-soft);}
-
-    /* Chat / AI assistant */
-    .chat-box{
-      max-height:260px;overflow-y:auto;
-      background:var(--bg-soft);border-radius:10px;
-      border:1px solid var(--border);padding:8px;font-size:12px;
-    }
-    .chat-msg{margin-bottom:6px;}
-    .chat-me{text-align:right;}
-    .chat-me span{
-      display:inline-block;background:var(--primary);color:#fff;
-      padding:5px 9px;border-radius:999px;
-    }
-    .chat-bot span{
-      display:inline-block;background:var(--bg-card);color:var(--text);
-      padding:5px 9px;border-radius:999px;
-    }
-
-    /* Gallery modal */
-    #galleryModal{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,.8);display:none;
-      align-items:center;justify-content:center;z-index:9998;
-    }
-    #galleryModal img{
-      width:80%;max-width:1000px;border-radius:12px;
-      box-shadow:0 0 20px rgba(255,255,255,.3);
-    }
-
-    /* Floating chat button (global) */
-    #chatBtn{
-      position:fixed;right:20px;bottom:80px;background:var(--primary);
-      color:#fff;border-radius:50%;width:48px;height:48px;
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;font-size:22px;z-index:9999;
-      box-shadow:0 4px 14px rgba(0,0,0,.3);
-    }
-    #chatWindow{
-      position:fixed;right:20px;bottom:140px;width:330px;height:420px;
-      background:var(--bg-card);border-radius:15px;
-      box-shadow:0 0 20px rgba(0,0,0,.4);
-      overflow:hidden;display:none;flex-direction:column;z-index:9999;
-    }
-
-    /* Data Lab internal layout */
-    .dl-two-col{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;}
-    @media(max-width:800px){.dl-two-col{grid-template-columns:1fr;}}
-
-    /* Responsive */
-    @media(max-width:900px){
-      .sidebar{
-        position:fixed;left:0;top:0;bottom:auto;
-        width:100%;height:auto;flex-direction:row;
-        align-items:center;gap:10px;
-      }
-      .sidebar-nav{
-        display:flex;flex-wrap:wrap;
-      }
-      .sidebar-footer{display:none;}
-      .main{
-        margin-left:0;margin-top:120px;width:100%;
-      }
-      .profile-wrapper{flex-direction:column;text-align:left;}
-    }
-    @media(max-width:600px){
-      .profile-wrapper{flex-direction:column;text-align:center;}
-      .profile-info{text-align:center;}
-      .hero-actions{justify-content:center;}
-    }
   </style>
 </head>
 <body>
 
 <!-- LOADING OVERLAY -->
-<div id="loaderOverlay">
-  <div class="loader-ring"></div>
-</div>
+<div id="loaderOverlay"><div class="loader-ring"></div></div>
 
-<!-- DARK MODE TOGGLE -->
+<!-- DARK MODE -->
 <div id="darkToggle">🌙</div>
 
-<!-- GALLERY MODAL -->
-<div id="galleryModal" onclick="this.style.display='none'">
-  <img id="galleryImage" alt="Preview">
-</div>
-
-<!-- APP LAYOUT -->
+<!-- APP -->
 <div class="app">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div>
       <div class="sidebar-header">
-        <div class="sidebar-photo">
-          <img src="images/Photo.jpeg" alt="Deepanraj A">
-        </div>
+        <div class="sidebar-photo"><img src="images/Photo.jpeg" alt="Deepanraj A"></div>
         <div>
           <div class="sidebar-name">Deepanraj A</div>
           <div class="sidebar-role">Data Analyst • BI • AI</div>
@@ -551,91 +143,64 @@
       </div>
 
       <div class="sidebar-nav">
-        <button class="nav-btn active" data-section="home">
-          <span class="icon">🏠</span> <span>Home / Portfolio</span>
-        </button>
-        <button class="nav-btn" data-section="assistant">
-          <span class="icon">🤖</span> <span>AI Assistant</span>
-        </button>
-        <button class="nav-btn" data-section="contact">
-          <span class="icon">📬</span> <span>Contact</span>
-        </button>
+        <button class="nav-btn active" data-section="home"><span class="icon">🏠</span> Home / Portfolio</button>
+        <button class="nav-btn" data-section="resume"><span class="icon">📝</span> Resume Generator</button>
+        <button class="nav-btn" data-section="datalab"><span class="icon">🧠</span> AI Data Lab</button>
+        <button class="nav-btn" data-section="powerbi"><span class="icon">📊</span> Power BI Dashboard</button>
+        <button class="nav-btn" data-section="contact"><span class="icon">📬</span> Contact</button>
       </div>
     </div>
 
-    <div class="sidebar-footer">
-      © 2025 • Deepanraj A
-    </div>
+    <div class="sidebar-footer">© 2025 • Deepanraj A</div>
   </aside>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main class="main">
 
-    <!-- HOME / PORTFOLIO SECTION -->
+    <!-- HOME -->
     <section id="home" class="page-section active">
 
       <!-- HERO -->
       <div class="hero">
         <div class="profile-wrapper">
           <div class="profile-photo-main">
-            <img src="images/Photo.jpeg" alt="Deepanraj A">
+            <img src="images/Photo.jpeg">
           </div>
+
           <div class="profile-info">
             <h1>Deepanraj A</h1>
             <div class="profile-title">Data Analyst | BI Developer | AI-Driven Insights</div>
-            <div class="profile-subtitle">
-              Based in Karur, Tamil Nadu, India.
-            </div>
-            <div class="value-statement">
-              “Transforming raw data into meaningful insights with analytics, automation, and AI.”
-            </div>
-            <div class="profile-tags">
-              <span>Python</span><span>SQL</span><span>Power BI</span>
-              <span>Tableau</span><span>Machine Learning</span><span>AI Automation</span>
-            </div>
-            <div class="profile-social">
-              <a href="https://linkedin.com/in/deepanraj-data-analyst" class="social-icon" target="_blank">in</a>
-              <a href="https://github.com/deeepanbe?tab=repositories" class="social-icon" target="_blank">⚙</a>
-								<a href="mailto:deepanraj.a@outlook.com" class="social-icon" title="Email">✉</a>
-				<a href="tel:+918940991095" class="social-icon" title="Call Me">☎</a>
-							<div class="profile-contact" style="margin-top: 12px; font-size: 14px; color: var(--text-soft);">
-				<div style="margin-bottom: 4px;">📧 <a href="mailto:deepanraj.a@outlook.com" style="color: var(--primary); text-decoration: none;">deepanraj.a@outlook.com</a></div>
-				<div>📱 <a href="tel:+918940991095" style="color: var(--primary); text-decoration: none;">+91 8940991095</a></div>
-			</div>
-            </div>
+
             <div class="hero-actions">
               <a href="resume/Deepanraj_A_Data_Analyst.pdf" class="btn btn-primary" target="_blank">Download Resume</a>
-              <button class="btn btn-secondary" onclick="scrollToProjects()">View Projects</button>
-              <button class="btn btn-outline" onclick="openDataLab()">Open Data Lab (AI Tools)</button>
+              <button class="btn btn-secondary" onclick="openDataLab()">🧠 AI Analyst Lab</button>
+              <button class="btn btn-secondary" onclick="openPowerBI()">📊 Power BI Dashboard</button>
+              <button class="btn btn-secondary" onclick="scrollToProjects()">📁 View Projects</button>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- ABOUT ME -->
+      <!-- ABOUT -->
       <div class="section">
         <h2>ABOUT ME</h2>
         <div class="about-grid">
           <div>
             <p style="font-size:14px;margin-bottom:8px;">
-              I am a Data Analyst and BI Developer with a strong foundation in Mechanical/Quality Engineering and 9+ years of total experience.
-              Over the last few years, I have transitioned into data analytics, focusing on building automated reporting, KPI frameworks, and AI-assisted analytics tools.
+              I am a Data Analyst and BI Developer with 9+ years of blended experience in Engineering, Operations, and Data Analytics.
+              I specialize in Power BI, Tableau, SQL, Python, Excel, Automation, and AI-driven business insights.
             </p>
             <p style="font-size:14px;margin-bottom:8px;">
-              I work with <b>Power BI, Tableau, SQL, Python, and Excel</b> to design dashboards, data pipelines, and decision-support systems. I also build
-              AI-powered automation such as <b>ATS-optimized resume generators</b> and a <b>Data Lab engine</b> that can auto-suggest KPIs, SQL, and BI layouts.
-            </p>
-            <p style="font-size:14px;margin-bottom:8px;">
-              My strengths include <b>data cleaning</b>, <b>dashboarding</b>, <b>KPI generation</b>, and <b>process automation</b>.  
-              I build reliable analytics systems that help businesses make confident decisions.
+              I build automated reporting systems, KPI frameworks, and dashboard solutions that help businesses make fast, confident decisions.
+              My projects include an AI-powered Data Lab, automated resume generator, and multiple BI dashboards.
             </p>
           </div>
+
           <div>
             <ul class="about-highlights">
               <li>Transitioned from Mechanical / Quality Engineering into Data Analytics.</li>
-              <li>Hands-on with Power BI, Tableau, SQL, Python (Pandas, NumPy, Matplotlib), and Excel.</li>
-              <li>Created AI-based Resume Generator and AI Data Lab for KPI & dashboard automation.</li>
-              <li>Experienced in HR, Sales, Operations, Manufacturing and Business Intelligence reporting.</li>
+              <li>Expert in Power BI, SQL, Tableau, Python, Excel, and Automation.</li>
+              <li>Builds AI-based business tools and analytics systems.</li>
+              <li>Experience in sales, production, HR, operations, and MIS reporting.</li>
             </ul>
           </div>
         </div>
@@ -646,20 +211,20 @@
         <h2>OVERVIEW</h2>
         <div class="overview-grid">
           <div class="overview-card">
-            <div class="num">9</div>
+            <div class="num">9+</div>
             <div class="label">Years Experience</div>
           </div>
           <div class="overview-card">
-            <div class="num">4</div>
-            <div class="label">Years Education</div>
+            <div class="num">25+</div>
+            <div class="label">Projects Completed</div>
           </div>
           <div class="overview-card">
-            <div class="num">2</div>
-            <div class="label">Languages</div>
+            <div class="num">10+</div>
+            <div class="label">Tools & Skills</div>
           </div>
           <div class="overview-card">
             <div class="num">6</div>
-            <div class="label">Certificates</div>
+            <div class="label">Certifications</div>
           </div>
         </div>
       </div>
@@ -668,27 +233,29 @@
       <div class="section">
         <h2>SKILLS</h2>
         <div class="skills-layout">
+
           <div class="skill-block">
             <h3>🟧 Technical Skills</h3>
             <div class="skill-tags">
-              <span class="skill-tag">Python (Pandas, NumPy, Matplotlib)</span>
-              <span class="skill-tag">SQL (Joins, CTE, Window Functions)</span>
-              <span class="skill-tag">Power BI (DAX, Power Query)</span>
-              <span class="skill-tag">Tableau (LOD, Storyboards)</span>
-              <span class="skill-tag">Excel (PivotTable, INDEX-MATCH, Power Query)</span>
+              <span class="skill-tag">Python (Pandas, NumPy)</span>
+              <span class="skill-tag">Power BI | DAX</span>
+              <span class="skill-tag">SQL: Joins, CTEs, Window Functions</span>
+              <span class="skill-tag">Tableau</span>
+              <span class="skill-tag">Excel (Advanced)</span>
             </div>
           </div>
+
           <div class="skill-block">
             <h3>🟦 Analytics Skills</h3>
             <div class="skill-tags">
               <span class="skill-tag">Data Cleaning</span>
-              <span class="skill-tag">Exploratory Data Analysis</span>
-              <span class="skill-tag">KPI Framework Development</span>
-              <span class="skill-tag">Statistical Analysis</span>
+              <span class="skill-tag">EDA</span>
+              <span class="skill-tag">KPI Development</span>
               <span class="skill-tag">Forecasting</span>
-              <span class="skill-tag">Business Insights</span>
+              <span class="skill-tag">Reporting & Insights</span>
             </div>
           </div>
+
           <div class="skill-block">
             <h3>🟩 Tools & Platforms</h3>
             <div class="skill-tags">
@@ -697,10 +264,11 @@
               <span class="skill-tag">Excel</span>
               <span class="skill-tag">Python</span>
               <span class="skill-tag">MySQL / PostgreSQL</span>
-              <span class="skill-tag">Git / GitHub</span>
-              <span class="skill-tag">ChatGPT & AI Tools</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">AI Tools</span>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -708,12 +276,13 @@
       <div class="section" id="projects-section">
         <h2>PROJECTS</h2>
         <div class="projects-grid">
+
+          <!-- Project 1 -->
           <div class="project-card">
             <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard">
             <h3>Sales Performance Dashboard – Power BI</h3>
             <p>
-              Interactive Power BI dashboard visualizing revenue, product performance, regional trends, and customer segments.
-              Includes drill-down, YoY comparison, and dynamic filters.
+              Revenue trends, customer insights, region-wise comparisons, dynamic DAX KPIs & drilldown.
             </p>
             <span class="tag-pill">Power BI</span>
             <span class="tag-pill">SQL</span>
@@ -724,68 +293,67 @@
             </div>
           </div>
 
+          <!-- Project 2 -->
           <div class="project-card">
-            <img src="Thumbnail/churn_thumb.png" alt="Customer Churn Analysis">
-            <h3>Customer Churn Analysis – ML</h3>
+            <img src="Thumbnail/churn_thumb.png" alt="Churn Analysis">
+            <h3>Customer Churn Prediction – Machine Learning</h3>
             <p>
-              Predictive model using Python and Machine Learning to identify at-risk customers, with feature importance and retention recommendations.
+              Built predictive model & retention strategy using Python, Logistic Regression, and Feature Engineering.
             </p>
             <span class="tag-pill">Python</span>
-            <span class="tag-pill">Scikit-Learn</span>
-            <span class="tag-pill">Pandas</span>
+            <span class="tag-pill">ML</span>
             <div class="project-actions">
               <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Notebook</a>
             </div>
           </div>
 
+          <!-- Project 3 -->
           <div class="project-card">
             <img src="Thumbnail/hr_thumb.png" alt="HR Analytics">
             <h3>HR Analytics Dashboard – Tableau</h3>
             <p>
-              HR dashboard for headcount, attrition, performance, and diversity metrics to support workforce planning and HR strategy.
+              Attrition tracking, hiring funnel, employee segmentation, and performance insights.
             </p>
             <span class="tag-pill">Tableau</span>
             <span class="tag-pill">Excel</span>
-            <span class="tag-pill">HR Analytics</span>
-            <div class="project-actions">
-              <a href="#" class="btn-sm">View Dashboard</a>
-            </div>
           </div>
 
+          <!-- Project 4 -->
           <div class="project-card">
             <img src="Thumbnail/resume_ai.png" alt="AI Resume Generator">
             <h3>AI Resume Auto-Generator</h3>
             <p>
-              Google Apps Script + AI pipeline that converts a Job Description into an ATS-friendly resume PDF/DOCX tailored to the role and keywords.
+              JD → ATS resume automation using Apps Script + AI workflow. Exports PDF/DOCX.
             </p>
             <span class="tag-pill">Apps Script</span>
-            <span class="tag-pill">AI</span>
             <span class="tag-pill">Automation</span>
+            <span class="tag-pill">AI</span>
             <div class="project-actions">
-              <a href="#resume" class="btn-sm" onclick="openResumeSection()">Use Tool</a>
+              <button class="btn-sm" onclick="openResumeSection()">Use Tool</button>
               <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Code</a>
             </div>
           </div>
 
+          <!-- Project 5 -->
           <div class="project-card">
             <img src="Thumbnail/datalab_ai.png" alt="AI Data Lab">
             <h3>AI Data Lab Engine</h3>
             <p>
-              Web-based workspace that accepts CSV/Excel files and supports SQL playground, quick insights, KPI generation templates and BI dashboard blueprints.
-              Designed to work with Comet/AI assistant.
+              AI-powered workspace for CSV/Excel analysis, SQL playground, KPI generator, and BI templates.
             </p>
             <span class="tag-pill">JavaScript</span>
             <span class="tag-pill">SQL.js</span>
-            <span class="tag-pill">Chart.js</span>
+            <span class="tag-pill">AI</span>
             <div class="project-actions">
               <button class="btn-sm" onclick="openDataLab()">Open Data Lab</button>
-              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Implementation</a>
             </div>
           </div>
+
         </div>
+
         <div style="margin-top:14px;">
           <a href="https://github.com/deeepanbe?tab=repositories" target="_blank" style="color:var(--primary);font-weight:600;text-decoration:none;">
-            View More Projects on GitHub →
+            View More Projects →
           </a>
         </div>
       </div>
@@ -793,22 +361,23 @@
       <!-- EXPERIENCE -->
       <div class="section">
         <h2>EXPERIENCE</h2>
+
         <div class="job">
           <h3>Junior Data Analyst</h3>
-          <div class="company">DAKSHIN HOME FASHIONS</div>
-          <div class="dates">Mar 2021 - Present</div>
+          <div class="company">Dakshin Home Fashions</div>
+          <div class="dates">2021 – Present</div>
           <p>
-            Leading data analysis initiatives across production and operations, automating reports, and building dashboards in Excel and BI tools
-            to improve efficiency, reduce defects, and support management decisions.
+            Creating dashboards, automating MIS reports, production analytics, quality trend analysis,
+            BI reporting, KPI creation, and process optimization.
           </p>
         </div>
+
         <div class="job">
           <h3>Quality Engineer</h3>
-          <div class="company">PILOT INDUSTRIES</div>
-          <div class="dates">Feb 2018 - Feb 2021</div>
+          <div class="company">Pilot Industries</div>
+          <div class="dates">2018 – 2021</div>
           <p>
-            Developed strong foundations in quality processes, RCA, process improvement and KPI tracking using data, which now support
-            my analytics approach in BI and reporting.
+            Root cause analysis, line QC, NCR handling, defect reduction, and KPI-based quality monitoring.
           </p>
         </div>
       </div>
@@ -817,867 +386,339 @@
       <div class="section">
         <h2>EDUCATION</h2>
         <div class="job">
-          <h3>Bachelor of Engineering - Mechanical</h3>
+          <h3>Bachelor of Engineering (Mechanical)</h3>
           <div class="company">Pavai College of Technology</div>
-          <div class="dates">June 2012 - April 2016</div>
-          <p>
-            Built strong foundations in mathematics, statistics, and problem-solving that support analytical thinking and data-driven decision-making.
-          </p>
+          <div class="dates">2012 – 2016</div>
+          <p>Strong foundation in mathematics, statistics, and applied engineering principles.</p>
         </div>
       </div>
 
       <!-- CERTIFICATIONS -->
       <div class="section">
         <h2>CERTIFICATIONS</h2>
+
         <div class="cert-grid">
           <div class="cert-card">
-            <img src="images/logo/GOOGLE.jfif" alt="Google">
-            <h3>Google Data Analytics / Docs</h3>
+            <img src="images/logo/GOOGLE.jfif">
+            <h3>Google Data Analytics</h3>
             <p>Google — 2024</p>
           </div>
+
           <div class="cert-card">
-            <img src="images/logo/EDURAKA.png" alt="Edureka">
+            <img src="images/logo/EDURAKA.png">
             <h3>Business Analyst Masters</h3>
-            <p>Edureka — Completion Expected Mar 2025</p>
+            <p>Edureka — 2025</p>
           </div>
+
           <div class="cert-card">
-            <img src="images/logo/POWERBI.jfif" alt="Microsoft">
-            <h3>Microsoft SQL / Power BI</h3>
+            <img src="images/logo/POWERBI.jfif">
+            <h3>Microsoft SQL & Power BI</h3>
             <p>Microsoft — 2025</p>
           </div>
+
           <div class="cert-card">
-            <img src="images/logo/TABLEAU.png" alt="Tableau">
-            <h3>Tableau Certification</h3>
-            <p>Tableau — Dec 2024</p>
+            <img src="images/logo/TABLEAU.png">
+            <h3>Tableau Specialist</h3>
+            <p>Tableau — 2024</p>
           </div>
         </div>
       </div>
+      <!-- ========================== -->
+      <!-- POWER BI DASHBOARD SECTION -->
+      <!-- ========================== -->
+      <section id="powerbi" class="page-section">
+        <div class="section">
+          <h2>POWER BI DASHBOARD</h2>
+          <p style="font-size:13px;color:var(--text-soft);margin-bottom:14px;">
+            Interactive Power BI dashboard. Embedded directly from your published report.
+          </p>
 
-		</script>
-		
-	<!-- AI ASSISTANT SECTION (ULTIMATE UPGRADE) -->
-	<section id="assistant" class="page-section">
-		<div class="section">
-			<h2 style="display:flex;align-items:center;gap:10px;border-left:4px solid var(--primary);padding-left:15px;">
-				<span style="font-size:28px;">🚀</span>
-				AI ASSISTANT — ULTIMATE UPGRADE
-			</h2>
-			<p>Your intelligent data analysis companion. Ask anything about SQL, Power BI, Python, statistics, business analytics, and more!</p>
-		</div>
+          <iframe 
+            id="powerbiFrame"
+            src="https://deepanraj.work.gd/power-bi-dashboard.html"
+            style="width:100%;height:700px;border-radius:12px;border:1px solid var(--border);"
+            allowfullscreen>
+          </iframe>
 
-		<!-- Interactive AI Chatbot Panel -->
-		<div class="section">
-			<h3 style="display:flex;align-items:center;gap:8px;">
-				<span style="font-size:20px;">💬</span>
-				AI Chatbot
-			</h3>
-			<div class="panel" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white; margin-bottom: 20px;">
-				<div class="chat-box" id="assistantChatBox" style="background: rgba(255,255,255,0.1); min-height: 300px; padding: 15px; border-radius: 8px; overflow-y: auto; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2);">
-					<div style="text-align: center; padding-top: 100px;">
-						<p>👋 Hi! I'm your AI Assistant. Ask me about data analysis, SQL, Power BI, Python, or analytics!</p>
-					</div>
-				</div>
-				<div style="display: flex; gap: 10px;">
-					<input type="text" id="userQuery" placeholder="Ask me anything..." style="flex: 1; padding: 10px; border: none; border-radius: 5px; font-size: 14px;" />
-					<button onclick="sendQuery()" style="padding: 10px 20px; background: rgba(255,255,255,0.3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s;" onhover="this.style.background='rgba(255,255,255,0.5)';">Send</button>
-				</div>
-			</div>
-		</div>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://deepanraj.work.gd/power-bi-dashboard.html" 
+               target="_blank" class="btn btn-outline">Open in New Tab</a>
 
-		<!-- Quick Topics Grid -->
-		<div class="section">
-			<h3 style="display:flex;align-items:center;gap:8px;">
-				<span style="font-size:20px;">⭐</span>
-				Popular Topics
-			</h3>
-			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
-				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('SQL Query Examples')">
-					<h4>📊 SQL Queries</h4>
-					<p>Learn common SQL patterns for data analysis</p>
-				</div>
-				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Python Data Analysis')">
-					<h4>🐍 Python Tips</h4>
-					<p>Data analysis with pandas, numpy & matplotlib</p>
-				</div>
-				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Power BI Best Practices')">
-					<h4>📈 Power BI</h4>
-					<p>Create stunning dashboards and reports</p>
-				</div>
-				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('KPI Definition and Metrics')">
-					<h4>📌 KPI Insights</h4>
-					<p>Understanding business metrics and KPIs</p>
-				</div>
-				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Data Visualization Best Practices')">
-					<h4>🎨 Visualization</h4>
-					<p>Create effective and impactful dashboards</p>
-				</div>
-				<div style="padding: 15px; background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: 5px; cursor: pointer;" onclick="quickQuery('Business Strategy and Analytics')">
-					<h4>💼 Strategy</h4>
-					<p>Use data insights for strategic decisions</p>
-				</div>
-			</div>
-		</div>
-
-		<!-- Featured Resources -->
-		<div class="section">
-			<h3 style="display:flex;align-items:center;gap:8px;">
-				<span style="font-size:20px;">📚</span>
-				Learning Resources
-			</h3>
-			<ul style="line-height:2;">
-				<li><strong>📊 Data Structures:</strong> Arrays, linked lists, hash maps - fundamental building blocks</li>
-				<li><strong>🔍 Query Optimization:</strong> Indexing strategies and execution plans</li>
-				<li><strong>📈 Dashboard Design:</strong> Best practices for clear and impactful visualizations</li>
-				<li><strong>🐍 Python Libraries:</strong> Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</li>
-				<li><strong>💡 Advanced Analytics:</strong> Predictive modeling, statistical analysis, ML basics</li>
-				<li><strong>⚡ Performance Tuning:</strong> Optimize queries, reduce latency, scale databases</li>
-			</ul>
-		</div>
-	</section>
-
-	<script>
-	function sendQuery() {
-		const userQuery = document.getElementById('userQuery').value;
-		if (userQuery.trim()) {
-			const chatBox = document.getElementById('assistantChatBox');
-			const userMsg = document.createElement('div');
-			userMsg.style.cssText = 'margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.15); border-radius: 5px; color: white;';
-			userMsg.innerHTML = '<strong>You:</strong> ' + userQuery;
-			chatBox.appendChild(userMsg);
-			
-			setTimeout(() => {
-				const aiMsg = document.createElement('div');
-				aiMsg.style.cssText = 'margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.25); border-radius: 5px; color: white;';
-				aiMsg.innerHTML = '<strong>🤖 AI:</strong> I would help you with that! In a real setup, I\'d analyze your question and provide insights.';
-				chatBox.appendChild(aiMsg);
-				chatBox.scrollTop = chatBox.scrollHeight;
-			}, 500);
-			
-			document.getElementById('userQuery').value = '';
-		}
-	}
-	
-	function quickQuery(topic) {
-		document.getElementById('userQuery').value = 'Tell me about ' + topic;
-		sendQuery();
-	}
-	
-	// Allow Enter key to send query
-	document.addEventListener('DOMContentLoaded', function() {
-		const userQuery = document.getElementById('userQuery');
-		if (userQuery) {
-			userQuery.addEventListener('keypress', function(e) {
-				if (e.key === 'Enter') {
-					sendQuery();
-				}
-			});
-		}
-	});
-	</script>
-
-
-      <!-- CONTACT (inside Home) -->
-      <div id="contact-section" class="section">
-        <h2>CONTACT</h2>
-        <p style="margin-bottom:10px;color:var(--text-soft);">
-          If you’d like to discuss a role, project, or collaboration, use the form below or contact me directly.
-        </p>
-
-        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:20px;flex-wrap:wrap;">
-          <form class="contact-form" action="https://formspree.io/f/mnnqanpn" method="POST">
-            <input type="text" name="name" placeholder="Name *" required>
-            <input type="email" name="email" placeholder="Email *" required>
-            <textarea name="message" placeholder="Message *" required></textarea>
-            <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
-          </form>
-
-          <div class="contact-info">
-            <p>📧 <b>deepanraj.a@outlook.com</b></p>
-            <p>📧 <b>info@deepanraj.work.gd</b></p>
-            <p>📱 <b>8940991095</b></p>
+            <button class="btn btn-secondary" onclick="refreshPowerBI()">
+              Refresh Dashboard
+            </button>
           </div>
         </div>
-      </div>
+      </section>
 
-    </section>
+      <!-- =================== -->
+      <!-- AI DATA LAB SECTION -->
+      <!-- =================== -->
+      <section id="datalab" class="page-section">
 
-          If you’d like to discuss a role, project, or collaboration, use the form below or contact me directly.
-        </p>
+        <div class="section">
+          <h2>AI DATA LAB</h2>
+          <p style="font-size:13px;color:var(--text-soft);margin-bottom:8px;">
+            Upload CSV/Excel to generate KPIs, explore data, view stats, and receive AI-powered analysis suggestions.
+          </p>
+        </div>
 
-        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:20px;flex-wrap:wrap;">
-          <form class="contact-form" action="https://formspree.io/f/mnnqanpn" method="POST">
-            <input type="text" name="name" placeholder="Name *" required>
-            <input type="email" name="email" placeholder="Email *" required>
-            <textarea name="message" placeholder="Message *" required></textarea>
-            <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
-          </form>
+        <!-- FILE UPLOAD -->
+        <div class="section">
+          <h3 style="font-size:15px;margin-bottom:8px;">Upload File</h3>
 
-          <div class="contact-info">
-            <p>📧 <b>deepanraj.a@outlook.com</b></p>
-            <p>📧 <b>info@deepanraj.work.gd</b></p>
-            <p>📱 <b>8940991095</b></p>
+          <input type="file" id="fileInput" accept=".csv,.xlsx" />
+
+          <div id="fileStatus" style="margin-top:10px;font-size:13px;">Waiting for file…</div>
+
+          <button class="btn btn-secondary" onclick="simpleKPIStub()" style="margin-top:10px;">Analyze</button>
+
+          <div id="data-preview" style="margin-top:15px;border:1px solid #ddd;padding:10px;border-radius:8px;font-size:13px;">
+            <b>Data Preview</b>
+          </div>
+
+          <div id="kpi-output" style="margin-top:15px;border:1px solid #ddd;padding:10px;border-radius:8px;font-size:13px;">
+            <b>KPI Output</b>
           </div>
         </div>
-      </div>
-    </section>
 
-  </main>
-</div>
+        <!-- AI CHAT COPILOT -->
+        <div class="section">
+          <h2>AI ANALYTICS COPILOT</h2>
 
-<!-- FLOATING CHAT BUTTON / WINDOW -->
-<div id="chatBtn">🤖</div>
-<div id="chatWindow">
-  <div style="padding:10px;font-size:13px;color:var(--text-soft);">
-    <b>Tip:</b> Open the <b>AI Assistant</b> tab in the sidebar for full-screen chat.
+          <div class="panel">
+            <div class="label-small">Ask your analytics questions</div>
+
+            <div class="chat-box" id="datalabAiChat">
+              <div class="chat-msg chat-bot">
+                <span>Hello! I can suggest KPIs, SQL templates, insights, and cleaning steps.</span>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:6px;margin-top:10px;">
+              <input type="text" id="datalabAiInput" placeholder="Example: KPI for sales data" 
+                     style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd;">
+              <button class="btn btn-primary" onclick="sendDataLabMessage()">Ask</button>
+            </div>
+
+            <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="btn-sm" onclick="sendDataLabMessage('cleaning')">Cleaning Tips</button>
+              <button class="btn-sm" onclick="sendDataLabMessage('kpi')">Suggest KPIs</button>
+              <button class="btn-sm" onclick="sendDataLabMessage('sql')">SQL Templates</button>
+              <button class="btn-sm" onclick="sendDataLabMessage('formula')">Formulas / DAX</button>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================= -->
+      <!-- RESUME GENERATOR (AI - ATS) -->
+      <!-- ============================= -->
+      <section id="resume" class="page-section">
+
+        <div class="section">
+          <h2>AI RESUME GENERATOR (JD → ATS Resume)</h2>
+          <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
+            Paste a Job Description and get an automatically generated ATS-optimized resume (PDF & DOCX).
+          </p>
+
+          <div class="panel">
+
+            <label class="label-small">Company:</label>
+            <input id="rgCompany" type="text" placeholder="Example: TCS, Infosys, Amazon">
+
+            <label class="label-small" style="margin-top:10px;">Job Title:</label>
+            <input id="rgJobTitle" type="text" placeholder="Example: Data Analyst">
+
+            <label class="label-small" style="margin-top:10px;">Job Description:</label>
+            <textarea id="rgJD" placeholder="Paste JD here..."></textarea>
+
+            <button class="btn btn-primary" style="margin-top:10px;" onclick="generateResume()">Generate Resume</button>
+
+            <div id="rgLoader" style="display:none;margin-top:10px;">Generating resume...</div>
+
+            <div id="rgResult" style="display:none;margin-top:10px;font-size:13px;">
+              <b>Resume Generated:</b>
+              <div id="rgLinks" style="margin-top:6px;"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================ -->
+      <!-- CONTACT SECTION -->
+      <!-- ================ -->
+      <section id="contact" class="page-section">
+        <div class="section">
+          <h2>CONTACT</h2>
+          <p style="margin-bottom:10px;color:var(--text-soft);">
+            Feel free to reach out for roles, freelance projects, or collaborations.
+          </p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <form class="contact-form" action="https://formspree.io/f/mnnqanpn" method="POST">
+              <input type="text" name="name" placeholder="Name *" required>
+              <input type="email" name="email" placeholder="Email *" required>
+              <textarea name="message" placeholder="Message *" required></textarea>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+
+            <div>
+              <p>📧 <b>deepanraj.a@outlook.com</b></p>
+              <p>📧 <b>info@deepanraj.work.gd</b></p>
+              <p>📱 <b>+91 89409 91095</b></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
   </div>
-</div>
 
-<!-- Formula Writer AI Modal -->
-<div id="formulaModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:10000;">
-  <div style="background:white;border-radius:12px;padding:30px;width:90%;max-width:600px;box-shadow:0 10px 40px rgba(0,0,0,0.3);">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <h3 style="margin:0;color:#111827;font-size:22px;">AI Formula Writer</h3>
-      <button onclick="closeFormulaModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#666;">&times;</button>
-    </div>
+  <!-- FLOATING AI CHAT BUTTON -->
+  <div id="chatBtn">🤖</div>
 
-    <div style="margin-bottom:20px;">
-      <label style="display:block;margin-bottom:8px;color:#111827;font-weight:600;">Formula Type:</label>
-      <select id="formulaType" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;">
-        <option value="sql">SQL</option>
-        <option value="dax">Power BI DAX</option>
-        <option value="tableau">Tableau</option>
-        <option value="excel">Excel</option>
-      </select>
-    </div>
-
-    <div style="margin-bottom:20px;">
-      <label style="display:block;margin-bottom:8px;color:#111827;font-weight:600;">Describe what you need:</label>
-      <textarea id="formulaDesc" placeholder="E.g., Sum of sales by region" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;min-height:100px;resize:vertical;font-family:sans-serif;"></textarea>
-    </div>
-
-    <div style="margin-bottom:20px;">
-      <button onclick="generateFormula()" style="background:#2563eb;color:white;border:none;padding:12px 24px;border-radius:8px;font-weight:600;cursor:pointer;width:100%;font-size:14px;">Generate Formula</button>
-    </div>
-
-    <div style="margin-bottom:20px;">
-      <label style="display:block;margin-bottom:8px;color:#111827;font-weight:600;">Generated Formula:</label>
-      <div id="generatedFormula" style="background:#f5f5f5;border:1px solid #e5e7eb;border-radius:8px;padding:15px;font-family:monospace;font-size:13px;color:#111827;min-height:50px;word-break:break-all;">Click Generate to create formula</div>
-    </div>
-
-    <div style="display:flex;gap:10px;">
-      <button onclick="copyFormula()" style="background:#10b981;color:white;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;flex:1;font-size:14px;">Copy Formula</button>
-      <button onclick="closeFormulaModal()" style="background:#e5e7eb;color:#111827;border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer;flex:1;font-size:14px;">Close</button>
+  <!-- FLOATING CHAT WINDOW -->
+  <div id="chatWindow">
+    <div style="padding:10px;font-size:13px;color:var(--text-soft);">
+      <b>Tip:</b> Open the <b>AI Assistant</b> tab in sidebar for full chat.
     </div>
   </div>
-</div>
 
+</body>
+
+<!-- ====================== -->
+<!-- JAVASCRIPT CONTROLLERS -->
+<!-- ====================== -->
 <script>
-  // Loader
-  window.addEventListener("load", function(){
-    setTimeout(()=>{ document.getElementById("loaderOverlay").style.display="none"; }, 800);
-  });
 
-  // Default light mode
-  document.body.classList.remove("dark-mode");
-
-  // Dark mode toggle
-  document.getElementById("darkToggle").onclick = ()=>{
-    document.body.classList.toggle("dark-mode");
-  };
-
-  // Navigation between sections
+  /* -----------------------------
+      SIDEBAR NAVIGATION SWITCHER
+  ------------------------------ */
   const navButtons = document.querySelectorAll(".nav-btn");
   const sections = document.querySelectorAll(".page-section");
 
   navButtons.forEach(btn=>{
     btn.addEventListener("click", ()=>{
       const target = btn.getAttribute("data-section");
+
       navButtons.forEach(b=>b.classList.remove("active"));
       btn.classList.add("active");
+
       sections.forEach(sec=>{
         sec.id === target ? sec.classList.add("active") : sec.classList.remove("active");
       });
+
       window.scrollTo({top:0,behavior:"smooth"});
     });
   });
 
-  function scrollToContact(){
-    navButtons.forEach(b=>{
-      if(b.getAttribute("data-section")==="home") b.classList.add("active");
-      else b.classList.remove("active");
-    });
-    sections.forEach(sec=>{
-      sec.id === "home" ? sec.classList.add("active") : sec.classList.remove("active");
-    });
-    setTimeout(()=>{
-      const c = document.getElementById("contact-section");
-      if(c) c.scrollIntoView({behavior:"smooth"});
-    },200);
+  /* -------------------------
+     POWER BI - REFRESH
+  ------------------------- */
+  function refreshPowerBI(){
+    const frame = document.getElementById("powerbiFrame");
+    frame.src = frame.src;
   }
 
-  function scrollToProjects(){
-    navButtons.forEach(b=>{
-      if(b.getAttribute("data-section")==="home") b.classList.add("active");
-      else b.classList.remove("active");
-    });
-    sections.forEach(sec=>{
-      sec.id === "home" ? sec.classList.add("active") : sec.classList.remove("active");
-    });
-    setTimeout(()=>{
-      const p = document.getElementById("projects-section");
-      if(p) p.scrollIntoView({behavior:"smooth"});
-    },200);
-  }
-
-  function openDataLab(){
-    navButtons.forEach(b=>{
-      if(b.getAttribute("data-section")==="datalab") b.classList.add("active");
-      else b.classList.remove("active");
-    });
-    sections.forEach(sec=>{
-      sec.id === "datalab" ? sec.classList.add("active") : sec.classList.remove("active");
-    });
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  function openResumeSection(){
-    navButtons.forEach(b=>{
-      if(b.getAttribute("data-section")==="resume") b.classList.add("active");
-      else b.classList.remove("active");
-    });
-    sections.forEach(sec=>{
-      sec.id === "resume" ? sec.classList.add("active") : sec.classList.remove("active");
-    });
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  // Gallery zoom: only on thumbnails
-  document.querySelectorAll(".project-card img, .profile-photo-main img").forEach(img=>{
-    img.addEventListener("click", ()=>{
-      const modal = document.getElementById("galleryModal");
-      const gimg = document.getElementById("galleryImage");
-      gimg.src = img.src;
-      modal.style.display="flex";
-    });
-  });
-
-  // Floating chat window
+  /* ------------------------------------
+     FLOATING CHAT BUTTON – MINIMIZED AI
+  ------------------------------------ */
   const chatBtn = document.getElementById("chatBtn");
   const chatWindow = document.getElementById("chatWindow");
+
   chatBtn.onclick = ()=>{
-    chatWindow.style.display = (chatWindow.style.display === "flex" ? "none" : "flex");
+    chatWindow.style.display =
+      chatWindow.style.display === "flex" ? "none" : "flex";
   };
 
-  // SQL.JS demo DB
-  let SQLDB = null;
-  initSqlJs({ locateFile:file=>`https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` })
-    .then(SQL =>{
-      SQLDB = new SQL.Database();
-      SQLDB.run(`
-        CREATE TABLE sales(region TEXT, product TEXT, revenue INT);
-        INSERT INTO sales VALUES ('North','Product A',12000);
-        INSERT INTO sales VALUES ('South','Product B',8000);
-        INSERT INTO sales VALUES ('West','Product C',15000);
-        INSERT INTO sales VALUES ('East','Product A',9000);
-      `);
-    });
+  /* ----------------------------------------
+     DATA LAB AI MINI CHAT RESPONSE HANDLER
+  ---------------------------------------- */
+  function sendDataLabMessage(msgOverride=null){
+    const input = document.getElementById("datalabAiInput");
+    const message = msgOverride || input.value.trim();
+    if(!message) return;
 
-  function runSQL(){
-    const out = document.getElementById("sqlResult");
-    out.innerHTML = "";
-    if(!SQLDB){ out.textContent = "Database not ready yet."; return; }
+    const box = document.getElementById("datalabAiChat");
 
-    const query = document.getElementById("sqlInput").value;
-    try{
-      const res = SQLDB.exec(query);
-      if(res.length === 0){
-        out.textContent = "Query executed successfully (no rows returned).";
-        return;
-      }
-      const table = document.createElement("table");
-      const header = document.createElement("tr");
-      res[0].columns.forEach(col=>{
-        const th = document.createElement("th");
-        th.textContent = col;
-        header.appendChild(th);
-      });
-      table.appendChild(header);
-      res[0].values.forEach(row=>{
-        const tr = document.createElement("tr");
-        row.forEach(val=>{
-          const td = document.createElement("td");
-          td.textContent = val;
-          tr.appendChild(td);
-        });
-        table.appendChild(tr);
-      });
-      out.appendChild(table);
-    }catch(e){
-      out.textContent = "Error: " + e.message;
-    }
-  }
+    // User message
+    const me = document.createElement("div");
+    me.className = "chat-msg chat-me";
+    me.innerHTML = `<span>${message}</span>`;
+    box.appendChild(me);
 
-  function importFileAsTable() {
-    const fileInput = document.getElementById('sqlImportFile');
-    if (!fileInput.files[0]) {
-      alert('Please select a file');
-      return;
-    }
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const data = e.target.result;
-      alert('File imported! (Demo only). You can extend logic to load into SQL.js.\nFile: ' + file.name);
-    };
-    reader.readAsText(file);
-  }
-
-  function exportSQLResult() {
-    const out = document.getElementById('sqlResult');
-    if (!out || out.textContent.trim() === '') {
-      alert('No results to export. Run a query first.');
-      return;
-    }
-    const table = out.querySelector('table');
-    if (!table) {
-      alert('No table data found to export.');
-      return;
-    }
-    let csv = '';
-    const rows = table.querySelectorAll('tr');
-    rows.forEach(row => {
-      const cols = row.querySelectorAll('th, td');
-      const rowData = Array.from(cols).map(col => '"' + col.textContent.trim() + '"').join(',');
-      csv += rowData + '\n';
-    });
-    const blob = new Blob([csv], {type: 'text/csv'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'sql_results.csv';
-    a.click();
-  }
-
-  // CSV → Chart
-  let csvChart = null;
-  document.getElementById("csvFile").addEventListener("change", function(){
-    const file = this.files[0];
-    if(!file) return;
-
-    Papa.parse(file,{
-      header:true,
-      dynamicTyping:true,
-      complete:function(result){
-        const rows = result.data.filter(r=>Object.keys(r).length>0);
-        if(rows.length === 0) return;
-        const preview = document.getElementById("csvPreview");
-
-        let html = "<b>Preview (first 5 rows):</b><br><table><tr>";
-        const cols = Object.keys(rows[0]);
-        cols.forEach(c=> html += `<th>${c}</th>`);
-        html += "</tr>";
-        rows.slice(0,5).forEach(r=>{
-          html += "<tr>";
-          cols.forEach(c=> html += `<td>${r[c]}</td>`);
-          html += "</tr>";
-        });
-        html += "</table>";
-        preview.innerHTML = html;
-
-        const labels = rows.map(r=> r[cols[0]]);
-        let numCol = null;
-        for(let i=1;i<cols.length;i++){
-          if(typeof rows[0][cols[i]] === "number"){
-            numCol = cols[i];break;
-          }
-        }
-        if(!numCol){ return; }
-        const data = rows.map(r=> r[numCol]);
-
-        const ctx = document.getElementById("csvChart").getContext("2d");
-        if(csvChart) csvChart.destroy();
-        csvChart = new Chart(ctx, {
-          type:"bar",
-          data:{
-            labels:labels,
-            datasets:[{
-              label:numCol,
-              data:data,
-              backgroundColor:"rgba(37,99,235,0.6)"
-            }]
-          },
-          options:{
-            responsive:true,
-            plugins:{legend:{labels:{color: getComputedStyle(document.body).getPropertyValue('--text')}}},
-            scales:{
-              x:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-soft')}},
-              y:{ticks:{color:getComputedStyle(document.body).getPropertyValue('--text-soft')}}
-            }
-          }
-        });
-      }
-    });
-  });
-
-  // Simple KPI stub (local-only demo)
-  function simpleKPIStub(){
-    const loader = document.getElementById('kpiLoader');
-    const summary = document.getElementById('kpiSummary');
-    loader.style.display = 'block';
+    // AI bot dummy reply
     setTimeout(()=>{
-      const kpis = ['Total Records','Revenue','Customer Growth','Retention Rate','Churn Rate','Average Order Value','Conversion Rate'];
-      summary.innerHTML = kpis.map(k => `<div style="margin:4px 0;">✓ ${k}</div>`).join('') +
-        '<div style="margin-top:6px;font-size:11px;color:#6b7280;">(Full auto-KPI, SQL & dashboard spec can be generated via Comet/AI on these containers.)</div>';
-      document.getElementById('powerBITemplate').textContent =
-        'Revenue = SUMX(Sales, Sales[Quantity] * Sales[Price])\n' +
-        'Growth Rate = DIVIDE(THIS_YEAR - LAST_YEAR, LAST_YEAR)';
-      document.getElementById('tableauTemplate').textContent =
-        'IF SUM([Sales]) > AVG([Average Sales]) THEN "High" ELSE "Low" END';
-      document.getElementById('sqlQueries').textContent =
-        'SELECT Date, SUM(Amount) AS Daily_Revenue FROM Sales GROUP BY Date;\n' +
-        'SELECT CustomerID, COUNT(*) AS Purchase_Count FROM Orders GROUP BY CustomerID;';
-      document.getElementById('excelFormula').textContent =
-        '=SUM(B2:B100)   // Total\n' +
-        '=AVERAGE(B2:B100)   // Average\n' +
-        '=IF(B2>C2,"Growing","Declining")   // Trend';
-      loader.style.display = 'none';
-    },800);
+      const bot = document.createElement("div");
+      bot.className = "chat-msg chat-bot";
+
+      let reply = "I can assist with analytics, KPIs, SQL, cleaning steps, and dashboard planning.";
+
+      if(message.toLowerCase().includes("kpi"))
+        reply = "Here are suggested KPIs: Total Sales, Avg Order Value, YoY Growth, Conversion Rate, Retention Rate.";
+      if(message.toLowerCase().includes("sql"))
+        reply = "Sample SQL:\nSELECT Region, SUM(Sales) AS Revenue FROM Sales GROUP BY Region;";
+      if(message.toLowerCase().includes("clean"))
+        reply = "Cleaning checklist: Remove nulls, standardize date formats, remove duplicates, normalize category labels.";
+
+      bot.innerHTML = `<span>${reply}</span>`;
+      box.appendChild(bot);
+      box.scrollTop = box.scrollHeight;
+    }, 500);
+
+    input.value = "";
   }
 
-  function copyToClipboard(elementId) {
-    const text = document.getElementById(elementId).textContent;
-    navigator.clipboard.writeText(text).then(() => alert('Copied!'));
-  }
-
-  function downloadExcelReport() {
-    const data = document.getElementById('excelFormula').textContent;
-    const blob = new Blob([data], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = 'KPI_Report.txt'; a.click();
-  }
-
-  // Resume Generator helpers
-  document.getElementById("rgJD").addEventListener("input", ()=>{
-    const jd = document.getElementById("rgJD").value;
-    const box = document.getElementById("rgKeywords");
-    if(jd.trim().length < 30){
-      box.style.display = "none";
-      return;
-    }
-    const keys = ["SQL","Python","Power BI","Tableau","Excel","Machine Learning","ML","Pandas","NumPy","Scikit-Learn","Dashboard","ETL"];
-    const found = keys.filter(k=> jd.toLowerCase().includes(k.toLowerCase()));
-    if(found.length){
-      box.style.display="block";
-      box.innerHTML = "<b>Keywords detected:</b> " + found.join(", ");
-    }else{
-      box.style.display="none";
-    }
-  });
-
-  function detectRole(jd){
-    jd = jd.toLowerCase();
-    if(jd.includes("power bi")) return "Power BI Developer";
-    if(jd.includes("tableau")) return "Tableau Developer";
-    if(jd.includes("machine learning") || jd.includes("ml") || jd.includes("ai")) return "Data Scientist";
-    if(jd.includes("business analyst")) return "Business Analyst";
-    return "Data Analyst";
-  }
-
+  /* -------------------------------------
+     RESUME GENERATOR — BACKEND CALL
+  ------------------------------------- */
   async function generateResume(){
     const company = document.getElementById("rgCompany").value.trim();
     const job = document.getElementById("rgJobTitle").value.trim();
     const jd = document.getElementById("rgJD").value.trim();
+
     const loader = document.getElementById("rgLoader");
     const result = document.getElementById("rgResult");
     const links = document.getElementById("rgLinks");
 
     if(!company || !job || !jd){
-      alert("Please fill Company, Job Title, and JD.");
+      alert("Enter Company, Job Title and Job Description.");
       return;
     }
+
     loader.style.display="block";
     result.style.display="none";
-    links.innerHTML="";
-
-    const detectedRole = detectRole(jd);
 
     try{
-      const res = await fetch("https://script.google.com/macros/s/AKfycbxKtgjRe_vZsFbgv3G7Q4KVWAkJUCEn8rTQpreXv-6mw41GmKeQrVmMd649-KDfN9G4xec",{
-        method:"POST",
-        body:JSON.stringify({
-          companyName:company,
-          jobTitle:job,
-          jobDescription:jd,
-          detectedRole:detectedRole,
-          output:"pdf-docx"
-        })
-      });
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbxKtgjRe_vZsFbgv3G7Q4KVWAkJUCEn8rTQpreXv-6mw41GmKeQrVmMd649-KDfN9G4xec/exec",
+        {
+          method:"POST",
+          body:JSON.stringify({companyName:company, jobTitle:job, jobDescription:jd})
+        }
+      );
       const data = await res.json();
-      loader.style.display="none";
 
-      if(data.status === "success"){
-        result.style.display="block";
-        let html="";
-        if(data.pdf) html += `<a href="${data.pdf}" target="_blank">Download PDF</a><br>`;
-        if(data.docx) html += `<a href="${data.docx}" target="_blank">Download DOCX</a>`;
-        links.innerHTML = html || "No download links returned from backend.";
-      }else{
-        alert("Error generating resume: " + data.message);
-      }
+      loader.style.display="none";
+      result.style.display="block";
+
+      let html = "";
+      if(data.pdf) html += `<a href="${data.pdf}" target="_blank">Download PDF</a><br>`;
+      if(data.docx) html += `<a href="${data.docx}" target="_blank">Download DOCX</a>`;
+
+      links.innerHTML = html;
+
     }catch(e){
       loader.style.display="none";
-      alert("Error calling backend. Please check your Apps Script URL.");
+      alert("Error communicating with resume backend.");
     }
   }
-
-  // AI Assistant using Vercel backend
-  async function sendAssistantMessage(){
-    const input = document.getElementById("assistantInput");
-    const box = document.getElementById("assistantChatBox");
-    const msg = input.value.trim();
-    if(!msg) return;
-
-    const me = document.createElement("div");
-    me.className="chat-msg chat-me";
-    me.innerHTML = `<span>${msg}</span>`;
-    box.appendChild(me);
-    box.scrollTop = box.scrollHeight;
-    input.value="";
-
-    try{
-      const res = await fetch("https://YOUR-VERCEL-APP.vercel.app/api/chat",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({message:msg})
-      });
-      const data = await res.json();
-      const bot = document.createElement("div");
-      bot.className="chat-msg chat-bot";
-      bot.innerHTML = `<span>${data.reply || "No reply from AI."}</span>`;
-      box.appendChild(bot);
-      box.scrollTop = box.scrollHeight;
-    }catch(e){
-      const err = document.createElement("div");
-      err.className="chat-msg chat-bot";
-      err.innerHTML = `<span>There was a problem connecting to the AI server.</span>`;
-      box.appendChild(err);
-      box.scrollTop = box.scrollHeight;
-    }
-  }
-
-  // Formula modal logic
-  function openFormulaAI() {
-    document.getElementById('formulaModal').style.display = 'flex';
-  }
-  function closeFormulaModal() {
-    document.getElementById('formulaModal').style.display = 'none';
-  }
-  function generateFormula() {
-    const formulaType = document.getElementById('formulaType').value;
-    const description = document.getElementById('formulaDesc').value;
-    let formula = '';
-    if (!description.trim()) {
-      alert('Please describe what you need');
-      return;
-    }
-    if (formulaType === 'sql') {
-      formula = 'SELECT Region, SUM(Sales) AS TotalSales FROM YourTable GROUP BY Region;';
-    } else if (formulaType === 'dax') {
-      formula = 'Sales Amount = SUMX(Sales, Sales[Quantity] * Sales[Price])';
-    } else if (formulaType === 'tableau') {
-      formula = 'IF SUM([Sales]) > AVG([Sales]) THEN "High" ELSE "Low" END';
-    } else if (formulaType === 'excel') {
-      formula = '=SUMIFS(Sales_Amount,Region,"South")';
-    }
-    document.getElementById('generatedFormula').textContent = formula;
-  }
-  function copyFormula() {
-    const formula = document.getElementById('generatedFormula').textContent;
-    if (!formula || formula === '') {
-      alert('Generate a formula first');
-      return;
-    }
-    navigator.clipboard.writeText(formula).then(() => {
-      alert('Formula copied to clipboard!');
-    }).catch(() => {
-      alert('Failed to copy. Please try again.');
-    });
-  }
-
-  window.addEventListener('click', function(event) {
-    const modal = document.getElementById('formulaModal');
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-
-      // ENHANCEMENT 1: AUTO-KPI GENERATION
-  let uploadedData = {};
-  function generateKPIs() {
-    if (!uploadedData.rows || uploadedData.rows.length === 0) return;
-    const rows = uploadedData.rows;
-    const kpis = [];
-    kpis.push({ name: 'Total Records', value: rows.length, desc: 'Total number of data rows' });
-    uploadedData.columns.forEach(col => {
-      const vals = rows.map(r => r[col]).filter(v => !isNaN(v) && v !== '');
-      if (vals.length > 0) {
-        const numVals = vals.map(Number);
-        kpis.push({ name: 'Sum_' + col, value: numVals.reduce((a,b) => a+b, 0).toFixed(2), desc: 'Total of ' + col });
-        kpis.push({ name: 'Avg_' + col, value: (numVals.reduce((a,b) => a+b, 0)/numVals.length).toFixed(2), desc: 'Average of ' + col });
-      }
-    });
-    let html = '<b>Generated KPIs:</b><table style="width:100%;border:1px solid #ddd;font-size:12px;"><tr><th>KPI</th><th>Value</th><th>Description</th></tr>';
-    kpis.forEach(k => html += '<tr><td>' + k.name + '</td><td>' + k.value + '</td><td>' + k.desc + '</td></tr>');
-    html += '</table>';
-    const kpiDiv = document.getElementById('kpi-output');
-    if (kpiDiv) kpiDiv.innerHTML = html;
-  }
-  
-  // ENHANCEMENT 2: SQL QUERY BUILDER
-  function buildSQL() {
-    if (!uploadedData.columns) return;
-    let sql = 'SELECT ';
-    sql += uploadedData.columns.slice(0, 3).join(', ');
-    sql += ' FROM your_table LIMIT 10;';
-    const sqlDiv = document.getElementById('sql-output');
-    if (sqlDiv) sqlDiv.innerHTML = '<pre style="background:#f5f5f5;padding:10px;border-radius:5px;">' + sql + '</pre>';
-  }
-  
-  // ENHANCEMENT 3: CHART PREVIEW
-  function previewChart() {
-    if (!uploadedData.rows) return;
-    const numericCols = uploadedData.columns.filter(col => !isNaN(uploadedData.rows[0][col]));
-    if (numericCols.length > 0) {
-      const labels = uploadedData.rows.slice(0, 10).map((r, i) => 'Row ' + i);
-      const data = uploadedData.rows.slice(0, 10).map(r => r[numericCols[0]] || 0);
-      if (document.getElementById('dataChart') && typeof Chart !== 'undefined') {
-        new Chart(document.getElementById('dataChart'), {
-          type: 'bar',
-          data: { labels: labels, datasets: [{ label: numericCols[0], data: data, backgroundColor: '#2563eb' }] },
-          options: { responsive: true }
-        });
-      }
-    }
-  }
-  
-  // ENHANCEMENT 4: DOWNLOAD CLEANED DATA
-  function downloadCleanedData() {
-    if (!uploadedData.rows) return;
-    let csv = uploadedData.columns.join(',') + '\n';
-    uploadedData.rows.forEach(row => {
-      csv += uploadedData.columns.map(col => row[col] || '').join(',') + '\n';
-    });
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'cleaned_data.csv';
-    link.click();
-  }
-  
-  // Store data globally and trigger enhancements
-  const originalDisplayPreview = displayPreview;
-  function displayPreviewEnhanced(headers, rows) {
-    uploadedData = { columns: headers, rows: rows };
-    originalDisplayPreview(headers, rows);
-    generateKPIs();
-    buildSQL();
-    previewChart();
-  }
-  displayPreview = displayPreviewEnhanced;
-
-      		// DATA LAB ENHANCEMENT: Proper file upload and KPI detection
-		document.getElementById("fileInput").addEventListener("change", handleFileUpload);
-
-		function handleFileUpload(e) {
-			const file = e.target.files[0];
-			if (!file) return;
-			document.getElementById("fileStatus").innerText = "Processing…";
-			const ext = file.name.split(".").pop().toLowerCase();
-			if (ext === "csv") {
-				Papa.parse(file, {
-					header: true,
-					dynamicTyping: true,
-					complete: function(res) {
-						window.__parsedData = res.data;
-						previewData(res.data);
-						renderActionButtons();
-						detectKPIs(res.data);
-						document.getElementById("fileStatus").innerText = "File uploaded successfully";
-					}
-				});
-			} else {
-				document.getElementById("fileStatus").innerText = "Unsupported file type";
-			}
-		}
-
-		function renderActionButtons() {
-			const div = document.getElementById("data-actions");
-			div.innerHTML = `<button id="btnAnalyze">Analyze & Generate KPIs</button> <button id="btnDownload">Download Cleaned CSV</button>`;
-			document.getElementById("btnAnalyze").onclick = () => detectKPIs(window.__parsedData);
-			document.getElementById("btnDownload").onclick = () => downloadCleanedCSV(window.__parsedData);
-		}
-
-		function previewData(data) {
-			const box = document.getElementById("data-preview");
-			if (!data || data.length === 0) return;
-			let html = "<table><thead><tr>";
-			Object.keys(data[0]).forEach(c => html += `<th>${c}</th>`);
-			html += "</tr></thead><tbody>";
-			data.slice(0, 50).forEach(r => {
-				html += "<tr>";
-				Object.values(r).forEach(v => html += `<td>${v}</td>`);
-				html += "</tr>";
-			});
-			html += "</tbody></table>";
-			box.innerHTML = html;
-		}
-
-		function detectKPIs(data) {
-			const box = document.getElementById("kpi-output");
-			if (!data || data.length === 0) return;
-			const sample = data[0];
-			const numCols = {};
-			Object.keys(sample).forEach(col => {
-				if (typeof sample[col] === "number") {
-					numCols[col] = data.map(r => r[col]);
-				}
-			});
-			let html = "";
-			Object.keys(numCols).forEach(col => {
-				const vals = numCols[col].filter(v => typeof v === "number");
-				if (vals.length === 0) return;
-				const tot = vals.reduce((a, b) => a + b, 0);
-				const avg = tot / vals.length;
-				const min = Math.min(...vals);
-				const max = Math.max(...vals);
-				html += `<div class="kpi-card"><h4>${col}</h4><p>Total: ${tot}</p><p>Average: ${avg.toFixed(2)}</p><p>Min: ${min}</p><p>Max: ${max}</p></div>`;
-			});
-			box.innerHTML = html || "<p>No numeric KPIs detected</p>";
-		}
-
-		function downloadCleanedCSV(data) {
-			const csv = Papa.unparse(data);
-			const blob = new Blob([csv], {type: "text/csv"});
-			const url = URL.createObjectURL(blob);
-			const a = document.createElement("a");
-			a.href = url;
-			a.download = "cleaned_data.csv";
-			a.click();
-		}
 
 </script>
 
-
-	<!-- AI TOOLS & DASHBOARDS CTA SECTION -->
-	<div id="ai-tools-section" style="background: linear-gradient(135deg, #3a0ca3 0%, #3730a3 100%); color: white; padding: 60px 20px; text-align: center; margin: 40px 0;">
-		<h2 style="font-size: 32px; margin-bottom: 10px;">🚀 AI-Powered Tools & Dashboards</h2>
-		<p style="font-size: 16px; margin-bottom: 30px; opacity: 0.95;">Explore advanced analytics, automation, and BI solutions</p>
-		<div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-			<a href="Ultimate_All_In_One.html" style="background: white; color: #3a0ca3; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; transition: 0.3s;">🧠 AI Analyst Lab</a>
-			<a href="power-bi-dashboard.html" style="background: #4cc9f0; color: #000; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; transition: 0.3s;">📊 Power BI Dashboard</a>
-			<a href="portfolio.html" style="background: rgba(255,255,255,0.2); color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; transition: 0.3s; border: 2px solid white;">📁 View Projects</a>
-		</div>
-	</div>
-</body>
 </html>
