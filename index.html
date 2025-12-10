@@ -1,724 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deepanraj A — Data Analyst | BI Developer | AI-Driven Insights</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deepanraj A — Data Analyst | BI Developer | AI Automation</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Portfolio of Deepanraj A — Data Analyst & BI Developer specializing in Power BI, Tableau, SQL, Python, Excel, and AI-powered automation including resume and dashboard generators.">
-  <meta name="keywords" content="Data Analyst, Power BI, Tableau, SQL, Python, Excel, Dashboard, KPI, AI, Resume Generator, Data Lab">
+<!-- SEO -->
+<meta name="description" content="Portfolio of Deepanraj A — Data Analyst & BI Developer specializing in Power BI, Tableau, SQL, Python, and AI automation.">
+<meta name="keywords" content="Data Analyst, BI Developer, Power BI, Tableau, SQL, Python, Dashboard, AI Tools">
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7W7ZPK3K34"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7W7ZPK3K34');
-  </script>
+<!-- Styles -->
+<link rel="stylesheet" href="style.css">
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- PapaParse -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <!-- SQL.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
-
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{
-      --bg:#f5f5f5;
-      --bg-card:#ffffff;
-      --bg-soft:#f3f4f6;
-      --border:#e5e7eb;
-      --text:#111827;
-      --text-soft:#4b5563;
-      --primary:#2563eb;
-      --primary-soft:#dbeafe;
-      --sidebar-bg:#0f172a;
-      --sidebar-text:#e5e7eb;
-    }
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-      overflow-x:hidden;
-    }
-
-    body.dark-mode{
-      --bg:#020617;
-      --bg-card:#020617;
-      --bg-soft:#0f172a;
-      --border:#1f2937;
-      --text:#e5e7eb;
-      --text-soft:#9ca3af;
-      --primary:#60a5fa;
-      --primary-soft:#1d4ed8;
-    }
-
-    .app{display:flex;min-height:100vh;}
-
-    /* SIDEBAR */
-    .sidebar{
-      width:260px;background:var(--sidebar-bg);color:var(--sidebar-text);
-      padding:20px 18px;display:flex;flex-direction:column;
-      position:fixed;top:0;bottom:0;left:0;
-    }
-    .sidebar-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
-    .sidebar-photo{
-      width:56px;height:56px;border-radius:50%;
-      border:3px solid var(--primary);box-shadow:0 0 18px rgba(37,99,235,0.7);
-      overflow:hidden;flex-shrink:0;
-    }
-    .sidebar-photo img{width:100%;height:100%;object-fit:cover;}
-    .sidebar-name{font-size:16px;font-weight:700;}
-    .sidebar-role{font-size:12px;color:#9ca3af;}
-
-    .sidebar-nav{margin-top:10px;}
-    .sidebar-nav button{
-      width:100%;text-align:left;border:none;background:transparent;
-      color:#cbd5f5;padding:10px;border-radius:8px;margin-bottom:5px;
-      font-size:14px;display:flex;align-items:center;gap:10px;
-      cursor:pointer;transition:.2s;
-    }
-    .sidebar-nav button:hover,
-    .sidebar-nav button.active{
-      background:rgba(37,99,235,0.18);color:#fff;
-    }
-
-    .sidebar-footer{margin-top:auto;font-size:12px;color:#6b7280;}
-
-    /* MAIN */
-    .main{margin-left:260px;width:calc(100% - 260px);padding:20px;}
-
-    /* SECTIONS */
-    .page-section{display:none;animation:fadeIn .4s ease;}
-    .page-section.active{display:block;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-    /* HERO */
-    .hero{
-      background:var(--bg-card);padding:32px;border-radius:20px;border:1px solid var(--border);
-      box-shadow:0 12px 30px rgba(15,23,42,.12);margin-bottom:24px;
-      position:relative;overflow:hidden;
-    }
-    .profile-wrapper{display:flex;align-items:center;gap:30px;}
-    .profile-photo-main{
-      width:150px;height:150px;border-radius:50%;border:4px solid var(--primary);
-      overflow:hidden;box-shadow:0 0 30px rgba(37,99,235,0.8);
-    }
-    .profile-info h1{font-size:32px;font-weight:800;margin-bottom:4px;}
-    .profile-title{font-size:16px;font-weight:600;color:var(--primary);}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
-
-    .btn{padding:10px 22px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;}
-    .btn-primary{background:var(--primary);color:#fff;}
-    .btn-outline{border:1px solid var(--primary);color:var(--primary);}
-    .btn-secondary{background:var(--bg-soft);border:1px solid var(--border);}
-
-  </style>
+<!-- Default Light Mode -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.remove("dark");
+});
+</script>
 </head>
+
 <body>
 
-<!-- LOADING OVERLAY -->
-<div id="loaderOverlay"><div class="loader-ring"></div></div>
-
-<!-- DARK MODE -->
-<div id="darkToggle">🌙</div>
-
-<!-- APP -->
-<div class="app">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div>
-      <div class="sidebar-header">
-        <div class="sidebar-photo"><img src="images/Photo.jpeg" alt="Deepanraj A"></div>
-        <div>
-          <div class="sidebar-name">Deepanraj A</div>
-          <div class="sidebar-role">Data Analyst • BI • AI</div>
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+    <div class="profile-box">
+        <div class="profile-photo">
+            <img src="images/Photo.jpeg" alt="Deepanraj A">
         </div>
-      </div>
+        <h2 class="name">Deepanraj A</h2>
+        <p class="role">Data Analyst • BI Developer • AI-Driven Automation</p>
 
-      <div class="sidebar-nav">
-        <button class="nav-btn active" data-section="home"><span class="icon">🏠</span> Home / Portfolio</button>
-        <button class="nav-btn" data-section="resume"><span class="icon">📝</span> Resume Generator</button>
-        <button class="nav-btn" data-section="datalab"><span class="icon">🧠</span> AI Data Lab</button>
-        <button class="nav-btn" data-section="powerbi"><span class="icon">📊</span> Power BI Dashboard</button>
-        <button class="nav-btn" data-section="contact"><span class="icon">📬</span> Contact</button>
-      </div>
+        <a href="#contact" class="hire-btn">📬 Hire Me</a>
+
+        <nav class="sidebar-nav">
+            <a href="#home" class="active">🏠 Home</a>
+            <a href="#projects">📁 Projects</a>
+            <a href="#tools">🧠 AI Tools</a>
+            <a href="#contact">📬 Contact</a>
+        </nav>
+
+        <div class="social-links">
+            <a href="https://linkedin.com/in/deepanraj-data-analyst" target="_blank">LinkedIn</a>
+            <a href="https://github.com/deeepanbe" target="_blank">GitHub</a>
+            <a href="mailto:deepanraj.a@outlook.com">Email</a>
+        </div>
     </div>
+</aside>
 
-    <div class="sidebar-footer">© 2025 • Deepanraj A</div>
-  </aside>
+<!-- ================= MAIN AREA ================= -->
+<main class="main">
 
-  <!-- MAIN -->
-  <main class="main">
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+    <h1>Deepanraj A</h1>
+    <h3>Data Analyst | BI Developer | AI Automation</h3>
 
-    <!-- HOME -->
-    <section id="home" class="page-section active">
+    <div class="hero-buttons">
+        <a href="resume/Deepanraj_A_Data_Analyst.pdf" class="btn primary" target="_blank">Download Resume</a>
+        <a href="Ultimate_All_In_One.html" class="btn secondary">AI Analyst Lab</a>
+        <a href="power-bi-dashboard.html" class="btn secondary">Power BI Dashboard</a>
+        <a href="#projects" class="btn outline">View Projects</a>
+    </div>
+</section>
 
-      <!-- HERO -->
-      <div class="hero">
-        <div class="profile-wrapper">
-          <div class="profile-photo-main">
-            <img src="images/Photo.jpeg">
-          </div>
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+        I am a Data Analyst and BI Developer with 9+ years of blended experience in Quality Engineering, Operations,
+        and Data Analytics. I specialize in Power BI, Tableau, SQL, Python, Excel, and AI-driven automation systems.
+    </p>
 
-          <div class="profile-info">
-            <h1>Deepanraj A</h1>
-            <div class="profile-title">Data Analyst | BI Developer | AI-Driven Insights</div>
+    <p>
+        I design KPI frameworks, dashboards, and automated reporting systems that help companies make better decisions
+        using data. I also build AI-powered solutions such as resume generators, KPI engines, and data analysis tools.
+    </p>
+</section>
 
-            <div class="hero-actions">
-              <a href="resume/Deepanraj_A_Data_Analyst.pdf" class="btn btn-primary" target="_blank">Download Resume</a>
-              <button class="btn btn-secondary" onclick="openDataLab()">🧠 AI Analyst Lab</button>
-              <button class="btn btn-secondary" onclick="openPowerBI()">📊 Power BI Dashboard</button>
-              <button class="btn btn-secondary" onclick="scrollToProjects()">📁 View Projects</button>
-            </div>
-          </div>
+<!-- ================= OVERVIEW METRICS ================= -->
+<section class="section stats">
+    <h2>Overview</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>9+</h3>
+            <p>Years Experience</p>
         </div>
-      </div>
-      <!-- ABOUT -->
-      <div class="section">
-        <h2>ABOUT ME</h2>
-        <div class="about-grid">
-          <div>
-            <p style="font-size:14px;margin-bottom:8px;">
-              I am a Data Analyst and BI Developer with 9+ years of blended experience in Engineering, Operations, and Data Analytics.
-              I specialize in Power BI, Tableau, SQL, Python, Excel, Automation, and AI-driven business insights.
-            </p>
-            <p style="font-size:14px;margin-bottom:8px;">
-              I build automated reporting systems, KPI frameworks, and dashboard solutions that help businesses make fast, confident decisions.
-              My projects include an AI-powered Data Lab, automated resume generator, and multiple BI dashboards.
-            </p>
-          </div>
 
-          <div>
-            <ul class="about-highlights">
-              <li>Transitioned from Mechanical / Quality Engineering into Data Analytics.</li>
-              <li>Expert in Power BI, SQL, Tableau, Python, Excel, and Automation.</li>
-              <li>Builds AI-based business tools and analytics systems.</li>
-              <li>Experience in sales, production, HR, operations, and MIS reporting.</li>
-            </ul>
-          </div>
+        <div class="stat-card">
+            <h3>25+</h3>
+            <p>Projects Completed</p>
         </div>
-      </div>
 
-      <!-- OVERVIEW -->
-      <div class="section">
-        <h2>OVERVIEW</h2>
-        <div class="overview-grid">
-          <div class="overview-card">
-            <div class="num">9+</div>
-            <div class="label">Years Experience</div>
-          </div>
-          <div class="overview-card">
-            <div class="num">25+</div>
-            <div class="label">Projects Completed</div>
-          </div>
-          <div class="overview-card">
-            <div class="num">10+</div>
-            <div class="label">Tools & Skills</div>
-          </div>
-          <div class="overview-card">
-            <div class="num">6</div>
-            <div class="label">Certifications</div>
-          </div>
+        <div class="stat-card">
+            <h3>10+</h3>
+            <p>Tools & Skills</p>
         </div>
-      </div>
 
-      <!-- SKILLS -->
-      <div class="section">
-        <h2>SKILLS</h2>
-        <div class="skills-layout">
+        <div class="stat-card">
+            <h3>6+</h3>
+            <p>Certifications</p>
+        </div>
+    </div>
+</section>
 
-          <div class="skill-block">
+<!-- ================= SKILLS ================= -->
+<section class="section">
+    <h2>Skills</h2>
+
+    <div class="skills-grid">
+
+        <div class="skill-box">
             <h3>🟧 Technical Skills</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Python (Pandas, NumPy)</span>
-              <span class="skill-tag">Power BI | DAX</span>
-              <span class="skill-tag">SQL: Joins, CTEs, Window Functions</span>
-              <span class="skill-tag">Tableau</span>
-              <span class="skill-tag">Excel (Advanced)</span>
+            <div class="tags">
+                <span>Python</span><span>Pandas</span><span>NumPy</span>
+                <span>SQL</span><span>DAX</span><span>Power Query</span>
             </div>
-          </div>
+        </div>
 
-          <div class="skill-block">
+        <div class="skill-box">
             <h3>🟦 Analytics Skills</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Data Cleaning</span>
-              <span class="skill-tag">EDA</span>
-              <span class="skill-tag">KPI Development</span>
-              <span class="skill-tag">Forecasting</span>
-              <span class="skill-tag">Reporting & Insights</span>
+            <div class="tags">
+                <span>Data Cleaning</span><span>EDA</span><span>KPI Design</span>
+                <span>Forecasting</span><span>Visualization</span>
             </div>
-          </div>
+        </div>
 
-          <div class="skill-block">
+        <div class="skill-box">
             <h3>🟩 Tools & Platforms</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Power BI</span>
-              <span class="skill-tag">Tableau</span>
-              <span class="skill-tag">Excel</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">MySQL / PostgreSQL</span>
-              <span class="skill-tag">GitHub</span>
-              <span class="skill-tag">AI Tools</span>
+            <div class="tags">
+                <span>Power BI</span><span>Tableau</span><span>Excel</span>
+                <span>Python</span><span>GitHub</span><span>AI Tools</span>
             </div>
-          </div>
-
         </div>
-      </div>
-
-      <!-- PROJECTS -->
-      <div class="section" id="projects-section">
-        <h2>PROJECTS</h2>
-        <div class="projects-grid">
-
-          <!-- Project 1 -->
-          <div class="project-card">
-            <img src="Thumbnail/sales_thumb.png" alt="Sales Dashboard">
-            <h3>Sales Performance Dashboard – Power BI</h3>
-            <p>
-              Revenue trends, customer insights, region-wise comparisons, dynamic DAX KPIs & drilldown.
-            </p>
-            <span class="tag-pill">Power BI</span>
-            <span class="tag-pill">SQL</span>
-            <span class="tag-pill">Excel</span>
-            <div class="project-actions">
-              <a href="#" class="btn-sm">View Dashboard</a>
-              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Code</a>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="project-card">
-            <img src="Thumbnail/churn_thumb.png" alt="Churn Analysis">
-            <h3>Customer Churn Prediction – Machine Learning</h3>
-            <p>
-              Built predictive model & retention strategy using Python, Logistic Regression, and Feature Engineering.
-            </p>
-            <span class="tag-pill">Python</span>
-            <span class="tag-pill">ML</span>
-            <div class="project-actions">
-              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Notebook</a>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="project-card">
-            <img src="Thumbnail/hr_thumb.png" alt="HR Analytics">
-            <h3>HR Analytics Dashboard – Tableau</h3>
-            <p>
-              Attrition tracking, hiring funnel, employee segmentation, and performance insights.
-            </p>
-            <span class="tag-pill">Tableau</span>
-            <span class="tag-pill">Excel</span>
-          </div>
-
-          <!-- Project 4 -->
-          <div class="project-card">
-            <img src="Thumbnail/resume_ai.png" alt="AI Resume Generator">
-            <h3>AI Resume Auto-Generator</h3>
-            <p>
-              JD → ATS resume automation using Apps Script + AI workflow. Exports PDF/DOCX.
-            </p>
-            <span class="tag-pill">Apps Script</span>
-            <span class="tag-pill">Automation</span>
-            <span class="tag-pill">AI</span>
-            <div class="project-actions">
-              <button class="btn-sm" onclick="openResumeSection()">Use Tool</button>
-              <a href="https://github.com/deeepanbe" target="_blank" class="btn-sm">View Code</a>
-            </div>
-          </div>
-
-          <!-- Project 5 -->
-          <div class="project-card">
-            <img src="Thumbnail/datalab_ai.png" alt="AI Data Lab">
-            <h3>AI Data Lab Engine</h3>
-            <p>
-              AI-powered workspace for CSV/Excel analysis, SQL playground, KPI generator, and BI templates.
-            </p>
-            <span class="tag-pill">JavaScript</span>
-            <span class="tag-pill">SQL.js</span>
-            <span class="tag-pill">AI</span>
-            <div class="project-actions">
-              <button class="btn-sm" onclick="openDataLab()">Open Data Lab</button>
-            </div>
-          </div>
-
-        </div>
-
-        <div style="margin-top:14px;">
-          <a href="https://github.com/deeepanbe?tab=repositories" target="_blank" style="color:var(--primary);font-weight:600;text-decoration:none;">
-            View More Projects →
-          </a>
-        </div>
-      </div>
-
-      <!-- EXPERIENCE -->
-      <div class="section">
-        <h2>EXPERIENCE</h2>
-
-        <div class="job">
-          <h3>Junior Data Analyst</h3>
-          <div class="company">Dakshin Home Fashions</div>
-          <div class="dates">2021 – Present</div>
-          <p>
-            Creating dashboards, automating MIS reports, production analytics, quality trend analysis,
-            BI reporting, KPI creation, and process optimization.
-          </p>
-        </div>
-
-        <div class="job">
-          <h3>Quality Engineer</h3>
-          <div class="company">Pilot Industries</div>
-          <div class="dates">2018 – 2021</div>
-          <p>
-            Root cause analysis, line QC, NCR handling, defect reduction, and KPI-based quality monitoring.
-          </p>
-        </div>
-      </div>
-
-      <!-- EDUCATION -->
-      <div class="section">
-        <h2>EDUCATION</h2>
-        <div class="job">
-          <h3>Bachelor of Engineering (Mechanical)</h3>
-          <div class="company">Pavai College of Technology</div>
-          <div class="dates">2012 – 2016</div>
-          <p>Strong foundation in mathematics, statistics, and applied engineering principles.</p>
-        </div>
-      </div>
-
-      <!-- CERTIFICATIONS -->
-      <div class="section">
-        <h2>CERTIFICATIONS</h2>
-
-        <div class="cert-grid">
-          <div class="cert-card">
-            <img src="images/logo/GOOGLE.jfif">
-            <h3>Google Data Analytics</h3>
-            <p>Google — 2024</p>
-          </div>
-
-          <div class="cert-card">
-            <img src="images/logo/EDURAKA.png">
-            <h3>Business Analyst Masters</h3>
-            <p>Edureka — 2025</p>
-          </div>
-
-          <div class="cert-card">
-            <img src="images/logo/POWERBI.jfif">
-            <h3>Microsoft SQL & Power BI</h3>
-            <p>Microsoft — 2025</p>
-          </div>
-
-          <div class="cert-card">
-            <img src="images/logo/TABLEAU.png">
-            <h3>Tableau Specialist</h3>
-            <p>Tableau — 2024</p>
-          </div>
-        </div>
-      </div>
-      <!-- ========================== -->
-      <!-- POWER BI DASHBOARD SECTION -->
-      <!-- ========================== -->
-      <section id="powerbi" class="page-section">
-        <div class="section">
-          <h2>POWER BI DASHBOARD</h2>
-          <p style="font-size:13px;color:var(--text-soft);margin-bottom:14px;">
-            Interactive Power BI dashboard. Embedded directly from your published report.
-          </p>
-
-          <iframe 
-            id="powerbiFrame"
-            src="https://deepanraj.work.gd/power-bi-dashboard.html"
-            style="width:100%;height:700px;border-radius:12px;border:1px solid var(--border);"
-            allowfullscreen>
-          </iframe>
-
-          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="https://deepanraj.work.gd/power-bi-dashboard.html" 
-               target="_blank" class="btn btn-outline">Open in New Tab</a>
-
-            <button class="btn btn-secondary" onclick="refreshPowerBI()">
-              Refresh Dashboard
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- =================== -->
-      <!-- AI DATA LAB SECTION -->
-      <!-- =================== -->
-      <section id="datalab" class="page-section">
-
-        <div class="section">
-          <h2>AI DATA LAB</h2>
-          <p style="font-size:13px;color:var(--text-soft);margin-bottom:8px;">
-            Upload CSV/Excel to generate KPIs, explore data, view stats, and receive AI-powered analysis suggestions.
-          </p>
-        </div>
-
-        <!-- FILE UPLOAD -->
-        <div class="section">
-          <h3 style="font-size:15px;margin-bottom:8px;">Upload File</h3>
-
-          <input type="file" id="fileInput" accept=".csv,.xlsx" />
-
-          <div id="fileStatus" style="margin-top:10px;font-size:13px;">Waiting for file…</div>
-
-          <button class="btn btn-secondary" onclick="simpleKPIStub()" style="margin-top:10px;">Analyze</button>
-
-          <div id="data-preview" style="margin-top:15px;border:1px solid #ddd;padding:10px;border-radius:8px;font-size:13px;">
-            <b>Data Preview</b>
-          </div>
-
-          <div id="kpi-output" style="margin-top:15px;border:1px solid #ddd;padding:10px;border-radius:8px;font-size:13px;">
-            <b>KPI Output</b>
-          </div>
-        </div>
-
-        <!-- AI CHAT COPILOT -->
-        <div class="section">
-          <h2>AI ANALYTICS COPILOT</h2>
-
-          <div class="panel">
-            <div class="label-small">Ask your analytics questions</div>
-
-            <div class="chat-box" id="datalabAiChat">
-              <div class="chat-msg chat-bot">
-                <span>Hello! I can suggest KPIs, SQL templates, insights, and cleaning steps.</span>
-              </div>
-            </div>
-
-            <div style="display:flex;gap:6px;margin-top:10px;">
-              <input type="text" id="datalabAiInput" placeholder="Example: KPI for sales data" 
-                     style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd;">
-              <button class="btn btn-primary" onclick="sendDataLabMessage()">Ask</button>
-            </div>
-
-            <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-              <button class="btn-sm" onclick="sendDataLabMessage('cleaning')">Cleaning Tips</button>
-              <button class="btn-sm" onclick="sendDataLabMessage('kpi')">Suggest KPIs</button>
-              <button class="btn-sm" onclick="sendDataLabMessage('sql')">SQL Templates</button>
-              <button class="btn-sm" onclick="sendDataLabMessage('formula')">Formulas / DAX</button>
-            </div>
-
-          </div>
-        </div>
-
-      </section>
-
-      <!-- ============================= -->
-      <!-- RESUME GENERATOR (AI - ATS) -->
-      <!-- ============================= -->
-      <section id="resume" class="page-section">
-
-        <div class="section">
-          <h2>AI RESUME GENERATOR (JD → ATS Resume)</h2>
-          <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">
-            Paste a Job Description and get an automatically generated ATS-optimized resume (PDF & DOCX).
-          </p>
-
-          <div class="panel">
-
-            <label class="label-small">Company:</label>
-            <input id="rgCompany" type="text" placeholder="Example: TCS, Infosys, Amazon">
-
-            <label class="label-small" style="margin-top:10px;">Job Title:</label>
-            <input id="rgJobTitle" type="text" placeholder="Example: Data Analyst">
-
-            <label class="label-small" style="margin-top:10px;">Job Description:</label>
-            <textarea id="rgJD" placeholder="Paste JD here..."></textarea>
-
-            <button class="btn btn-primary" style="margin-top:10px;" onclick="generateResume()">Generate Resume</button>
-
-            <div id="rgLoader" style="display:none;margin-top:10px;">Generating resume...</div>
-
-            <div id="rgResult" style="display:none;margin-top:10px;font-size:13px;">
-              <b>Resume Generated:</b>
-              <div id="rgLinks" style="margin-top:6px;"></div>
-            </div>
-
-          </div>
-        </div>
-
-      </section>
-
-      <!-- ================ -->
-      <!-- CONTACT SECTION -->
-      <!-- ================ -->
-      <section id="contact" class="page-section">
-        <div class="section">
-          <h2>CONTACT</h2>
-          <p style="margin-bottom:10px;color:var(--text-soft);">
-            Feel free to reach out for roles, freelance projects, or collaborations.
-          </p>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-            <form class="contact-form" action="https://formspree.io/f/mnnqanpn" method="POST">
-              <input type="text" name="name" placeholder="Name *" required>
-              <input type="email" name="email" placeholder="Email *" required>
-              <textarea name="message" placeholder="Message *" required></textarea>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-
-            <div>
-              <p>📧 <b>deepanraj.a@outlook.com</b></p>
-              <p>📧 <b>info@deepanraj.work.gd</b></p>
-              <p>📱 <b>+91 89409 91095</b></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <!-- FLOATING AI CHAT BUTTON -->
-  <div id="chatBtn">🤖</div>
-
-  <!-- FLOATING CHAT WINDOW -->
-  <div id="chatWindow">
-    <div style="padding:10px;font-size:13px;color:var(--text-soft);">
-      <b>Tip:</b> Open the <b>AI Assistant</b> tab in sidebar for full chat.
     </div>
-  </div>
+</section>
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="section">
+    <h2>Projects</h2>
 
+    <div class="projects-grid">
+
+        <div class="project-card">
+            <h3>Sales Performance Dashboard (Power BI)</h3>
+            <p>Interactive dashboard with revenue trends, drill-down charts, and YoY growth metrics.</p>
+            <div class="tags"><span>Power BI</span><span>SQL</span><span>Excel</span></div>
+            <div class="actions">
+                <a href="power-bi-dashboard.html" class="btn small">View Dashboard</a>
+                <a href="https://github.com/deeepanbe" target="_blank" class="btn small">Source Code</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Customer Churn Prediction (ML)</h3>
+            <p>Machine learning model for predicting customer churn with feature importance.</p>
+            <div class="tags"><span>Python</span><span>ML</span><span>Pandas</span></div>
+            <div class="actions">
+                <a href="https://github.com/deeepanbe" class="btn small" target="_blank">View Notebook</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>HR Workforce Analytics (Tableau)</h3>
+            <p>Tableau dashboard tracking attrition, headcount, performance, and hiring insights.</p>
+            <div class="tags"><span>Tableau</span><span>Excel</span><span>HR Analytics</span></div>
+            <div class="actions">
+                <a href="#" class="btn small">View Dashboard</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>AI Resume Generator</h3>
+            <p>AI pipeline to convert job descriptions into ATS-friendly resumes.</p>
+            <div class="tags"><span>Apps Script</span><span>AI</span><span>Automation</span></div>
+            <div class="actions">
+                <a href="resume/Deepanraj_A_Data_Analyst.pdf" class="btn small">Use Tool</a>
+                <a href="https://github.com/deeepanbe" class="btn small" target="_blank">Source Code</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>AI Data Lab Engine</h3>
+            <p>Upload CSV/Excel → Auto KPIs, SQL, BI Templates, Quick Analysis.</p>
+            <div class="tags"><span>JavaScript</span><span>SQL.js</span><span>AI</span></div>
+            <div class="actions">
+                <a href="Ultimate_All_In_One.html" class="btn small">Open Data Lab</a>
+            </div>
+        </div>
+
+    </div>
+
+    <p style="margin-top: 10px;">
+        <a href="portfolio.html" class="more-link">View More Projects →</a>
+    </p>
+</section>
+
+<!-- ================= AI TOOLS CTA ================= -->
+<section id="tools" class="cta-section">
+    <h2>AI-Powered Tools & Dashboards</h2>
+    <p>Explore automation tools, data labs, and BI dashboards.</p>
+
+    <div class="cta-buttons">
+        <a href="Ultimate_All_In_One.html" class="btn primary">🧠 AI Analyst Lab</a>
+        <a href="power-bi-dashboard.html" class="btn secondary">📊 Power BI Dashboard</a>
+        <a href="portfolio.html" class="btn outline">📁 View Projects</a>
+    </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section">
+    <h2>Contact</h2>
+
+    <p>If you’d like to discuss a role, project, or collaboration, feel free to reach out.</p>
+
+    <div class="contact-grid">
+
+        <form action="https://formspree.io/f/mnnqanpn" method="POST" class="contact-form">
+            <input type="text" name="name" placeholder="Name *" required>
+            <input type="email" name="email" placeholder="Email *" required>
+            <textarea name="message" placeholder="Message *" required></textarea>
+            <button class="btn primary" type="submit">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+            <p><b>Email:</b> deepanraj.a@outlook.com</p>
+            <p><b>Work Email:</b> info@deepanraj.work.gd</p>
+            <p><b>Phone:</b> +91 89409 91095</p>
+            <p><b>Location:</b> Karur, Tamil Nadu, India</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    © 2025 • Deepanraj A • Data Analyst & BI Developer
+</footer>
+
+<!-- JS -->
+<script src="script.js"></script>
+
+</main>
 </body>
-
-<!-- ====================== -->
-<!-- JAVASCRIPT CONTROLLERS -->
-<!-- ====================== -->
-<script>
-
-  /* -----------------------------
-      SIDEBAR NAVIGATION SWITCHER
-  ------------------------------ */
-  const navButtons = document.querySelectorAll(".nav-btn");
-  const sections = document.querySelectorAll(".page-section");
-
-  navButtons.forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const target = btn.getAttribute("data-section");
-
-      navButtons.forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-
-      sections.forEach(sec=>{
-        sec.id === target ? sec.classList.add("active") : sec.classList.remove("active");
-      });
-
-      window.scrollTo({top:0,behavior:"smooth"});
-    });
-  });
-
-  /* -------------------------
-     POWER BI - REFRESH
-  ------------------------- */
-  function refreshPowerBI(){
-    const frame = document.getElementById("powerbiFrame");
-    frame.src = frame.src;
-  }
-
-  /* ------------------------------------
-     FLOATING CHAT BUTTON – MINIMIZED AI
-  ------------------------------------ */
-  const chatBtn = document.getElementById("chatBtn");
-  const chatWindow = document.getElementById("chatWindow");
-
-  chatBtn.onclick = ()=>{
-    chatWindow.style.display =
-      chatWindow.style.display === "flex" ? "none" : "flex";
-  };
-
-  /* ----------------------------------------
-     DATA LAB AI MINI CHAT RESPONSE HANDLER
-  ---------------------------------------- */
-  function sendDataLabMessage(msgOverride=null){
-    const input = document.getElementById("datalabAiInput");
-    const message = msgOverride || input.value.trim();
-    if(!message) return;
-
-    const box = document.getElementById("datalabAiChat");
-
-    // User message
-    const me = document.createElement("div");
-    me.className = "chat-msg chat-me";
-    me.innerHTML = `<span>${message}</span>`;
-    box.appendChild(me);
-
-    // AI bot dummy reply
-    setTimeout(()=>{
-      const bot = document.createElement("div");
-      bot.className = "chat-msg chat-bot";
-
-      let reply = "I can assist with analytics, KPIs, SQL, cleaning steps, and dashboard planning.";
-
-      if(message.toLowerCase().includes("kpi"))
-        reply = "Here are suggested KPIs: Total Sales, Avg Order Value, YoY Growth, Conversion Rate, Retention Rate.";
-      if(message.toLowerCase().includes("sql"))
-        reply = "Sample SQL:\nSELECT Region, SUM(Sales) AS Revenue FROM Sales GROUP BY Region;";
-      if(message.toLowerCase().includes("clean"))
-        reply = "Cleaning checklist: Remove nulls, standardize date formats, remove duplicates, normalize category labels.";
-
-      bot.innerHTML = `<span>${reply}</span>`;
-      box.appendChild(bot);
-      box.scrollTop = box.scrollHeight;
-    }, 500);
-
-    input.value = "";
-  }
-
-  /* -------------------------------------
-     RESUME GENERATOR — BACKEND CALL
-  ------------------------------------- */
-  async function generateResume(){
-    const company = document.getElementById("rgCompany").value.trim();
-    const job = document.getElementById("rgJobTitle").value.trim();
-    const jd = document.getElementById("rgJD").value.trim();
-
-    const loader = document.getElementById("rgLoader");
-    const result = document.getElementById("rgResult");
-    const links = document.getElementById("rgLinks");
-
-    if(!company || !job || !jd){
-      alert("Enter Company, Job Title and Job Description.");
-      return;
-    }
-
-    loader.style.display="block";
-    result.style.display="none";
-
-    try{
-      const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbxKtgjRe_vZsFbgv3G7Q4KVWAkJUCEn8rTQpreXv-6mw41GmKeQrVmMd649-KDfN9G4xec/exec",
-        {
-          method:"POST",
-          body:JSON.stringify({companyName:company, jobTitle:job, jobDescription:jd})
-        }
-      );
-      const data = await res.json();
-
-      loader.style.display="none";
-      result.style.display="block";
-
-      let html = "";
-      if(data.pdf) html += `<a href="${data.pdf}" target="_blank">Download PDF</a><br>`;
-      if(data.docx) html += `<a href="${data.docx}" target="_blank">Download DOCX</a>`;
-
-      links.innerHTML = html;
-
-    }catch(e){
-      loader.style.display="none";
-      alert("Error communicating with resume backend.");
-    }
-  }
-
-</script>
-
 </html>
