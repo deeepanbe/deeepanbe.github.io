@@ -745,5 +745,11 @@ body > *:has(a[href*="wa.me"]) {
   display: none !important;
 }
 
+   /* Hide Email 2 using the hidden-email-2 class */
+.hidden-email-2 {
+  display: none !important;
+}
+
+
 
 }
