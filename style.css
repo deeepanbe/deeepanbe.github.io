@@ -713,15 +713,15 @@ ENHANCEMENTS - RED TITLE & ANIMATIONS
   }
 }
 
-/* HIDE EXTRA CONTACT INFO */
-/* Hide Email 2: info@deepanraj.work.gd */
-strong:nth-of-type(3),
-strong:nth-of-type(3) + p {
+/* HIDE EMAIL 2 AND WHATSAPP IN CONTACT SECTION */
+/* Hide Email 2 link by targeting info@deepanraj.work.gd */
+a[href*="info@deepanraj.work.gd"] {
   display: none !important;
 }
 
 /* Hide WhatsApp link */
-a[href*="wa.me"],
-a[href*="wa.me"] + p {
+a[href*="wa.me"] {
   display: none !important;
+}
+
 }
