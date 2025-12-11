@@ -571,27 +571,6 @@ async function generateResume() {
 </script>
 
 
-<!-- ENHANCEMENTS: About section with colorful gradient words -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Hide extra contact info
-  const emailElements = document.querySelectorAll('strong');
-  let emailCount = 0;
-  emailElements.forEach(el => {
-    if (el.textContent.includes('Email')) {
-      emailCount++;
-      if (emailCount > 1) {
-        el.parentElement.style.display = 'none';
-      }
-    }
-  });
-  // Hide WhatsApp
-  const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
-  whatsappLinks.forEach(el => {
-    el.parentElement.style.display = 'none';
-  });
-});
-</script>
 
 </body>
 </html>
