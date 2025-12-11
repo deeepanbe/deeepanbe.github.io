@@ -735,4 +735,15 @@ body > *:has(a[href*="wa.me"]) {
   display: none !important;
 }
 
+   /* Hide Email 2 paragraph using nth-child */
+.contact-info-box p:nth-child(2) {
+  display: none !important;
+}
+
+/* Hide WhatsApp button using class */
+.whatsapp-btn {
+  display: none !important;
+}
+
+
 }
