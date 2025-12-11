@@ -724,4 +724,15 @@ a[href*="wa.me"] {
   display: none !important;
 }
 
+/* Alternative approach: Hide parent elements containing Email 2 or WhatsApp text */
+/* Target any element that might contain the Email 2 text */
+body > *:has(a[href*="info@deepanraj.work.gd"]) {
+  display: none !important;
+}
+
+/* Hide parent of WhatsApp link */
+body > *:has(a[href*="wa.me"]) {
+  display: none !important;
+}
+
 }
