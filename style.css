@@ -712,3 +712,16 @@ ENHANCEMENTS - RED TITLE & ANIMATIONS
     font-size: 0.85rem;
   }
 }
+
+/* HIDE EXTRA CONTACT INFO */
+/* Hide Email 2: info@deepanraj.work.gd */
+strong:nth-of-type(3),
+strong:nth-of-type(3) + p {
+  display: none !important;
+}
+
+/* Hide WhatsApp link */
+a[href*="wa.me"],
+a[href*="wa.me"] + p {
+  display: none !important;
+}
