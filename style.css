@@ -487,3 +487,228 @@ body {
    CONTACT SECTION
 ================================================ */
 .contact-section {
+
+
+/* ================================================
+ENHANCEMENTS - RED TITLE & ANIMATIONS
+================================================ */
+
+/* RED PROFESSIONAL TITLE */
+.hero-title {
+  color: #e63946;
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* COLORFUL ANIMATED GRADIENT WORDS */
+.gradient-word {
+  background: linear-gradient(120deg, #ff6b6b, #feca57, #48dbfb, #5f27cd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 0 rgba(0,0,0,0.1); }
+  50% { text-shadow: 0 0 18px rgba(255,255,255,0.7); }
+}
+
+/* ENHANCED SKILL CARDS WITH ANIMATIONS */
+.skill-card {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  border: 1px solid rgba(148,163,184,0.4);
+  padding: 1.4rem 1.6rem;
+  border-radius: 18px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(96,165,250,0.25), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(96,165,250,0.7);
+  box-shadow: 0 22px 45px rgba(0,0,0,0.3);
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+}
+
+/* PROJECT CARD BUTTON FIXES */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-description {
+  max-height: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-pill {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  color: #0b1120;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+}
+
+.btn-ghost {
+  background: rgba(15,23,42,0.8);
+  color: #e5e7eb;
+  border: 1px solid rgba(148,163,184,0.6);
+}
+
+.btn-ghost:hover {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: rgba(96,165,250,0.7);
+}
+
+/* AI TOOLS BUTTONS - PROFESSIONAL */
+.ai-tools-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid rgba(148,163,184,0.7);
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn-outline:hover {
+  border-color: #22c55e;
+  background: rgba(34,197,94,0.1);
+  transform: translateY(-2px);
+}
+
+/* CONTACT SECTION CLEANUP */
+.contact-extra,
+.contact-whatsapp {
+  display: none !important;
+}
+
+.contact-card {
+  padding: 1.2rem 1.4rem;
+  border-radius: 16px;
+  background: radial-gradient(circle at top left, #1f2937, #020617);
+  border: 1px solid rgba(148,163,184,0.4);
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96,165,250,0.6);
+}
+
+/* PULSE DOT ANIMATION */
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,0.6);
+  animation: pulse 1.7s infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+  70% { box-shadow: 0 0 0 14px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+
+/* HERO IMAGE WITH GLOW */
+.profile-glow {
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  width: 260px;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 30px rgba(0,89,255,0.5);
+}
+
+.profile-glow img {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* RESPONSIVE IMPROVEMENTS */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .profile-glow {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .profile-glow img {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .skill-card {
+    padding: 1rem;
+  }
+  
+  .project-actions {
+    gap: 0.5rem;
+  }
+  
+  .btn-pill {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
