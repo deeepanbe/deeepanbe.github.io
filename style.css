@@ -750,6 +750,37 @@ body > *:has(a[href*="wa.me"]) {
   display: none !important;
 }
 
+/* ENHANCED CONTACT SECTION STYLING */
+.contact-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.contact-info-box p {
+  background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(59,130,246,0.1));
+  padding: 1rem 1.4rem;
+  border-radius: 10px;
+  border-left: 4px solid #22c55e;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.contact-info-box p:hover {
+  transform: translateX(8px);
+  border-left-color: #3b82f6;
+  background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(59,130,246,0.15));
+  box-shadow: 0 4px 12px rgba(34,197,94,0.2);
+}
+
+.contact-info-box b {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+
 
 
 }
