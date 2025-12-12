@@ -568,30 +568,6 @@ async function generateResume() {
     }
 }
 
-// Contact Form Handler
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-        
-        // Prepare the email data
-        const mailtoLink = `mailto:deepanraj.a@outlook.com?subject=New Contact from ${firstName} ${lastName}&body=${encodeURIComponent(
-            `Name: ${firstName} ${lastName}\nEmail: ${email}\nMessage: ${message}`
-        )}`;
-        
-        // Open the mailto link
-        window.location.href = mailtoLink;
-        
-        // Show success message
-        alert('Thank you for reaching out! Your email client will open to send the message.');
-        
-        // Reset the form
-        contactForm.reset();
     });
 }
 
