@@ -892,6 +892,90 @@ body > *:has(a[href*="wa.me"]) {
   color: #22c55e;
   font-weight: 700;
 }
+   
+/* IMPROVED CONTACT SECTION LAYOUT */
+.contact-container {
+    max-width: 1200px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4rem !important;
+    align-items: center !important;
+}
+
+.contact-grid {
+    display: contents;
+}
+
+.contact-content {
+    order: 1;
+}
+
+.contact-form-wrapper {
+    order: 2;
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px 15px !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+    background: #f9f9f9 !important;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none !important;
+    border-color: #4F27F5 !important;
+    background: white !important;
+    box-shadow: 0 0 0 3px rgba(79, 39, 245, 0.1) !important;
+}
+
+.contact-form button {
+    padding: 14px 30px !important;
+    background: linear-gradient(135deg, #4F27F5 0%, #E63946 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin-top: 1rem !important;
+}
+
+.contact-form button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(79, 39, 245, 0.4) !important;
+}
+
+#formSuccess {
+    text-align: center;
+    color: #27ae60;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    
+    .contact-form-wrapper {
+        order: 2 !important;
+    }
+}
 
 
 
