@@ -275,6 +275,7 @@ body {
     font-size: 32px;
     margin-bottom: 20px;
     font-weight: 700;
+       color: #E63946;
 }
 
 .about-grid {
@@ -311,6 +312,29 @@ body {
     padding: 25px;
     border-radius: 12px;
     box-shadow: var(--shadow);
+}
+
+.skill-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+    border-left-color: #E63946;
+    background: linear-gradient(135deg, var(--white) 0%, rgba(230, 57, 70, 0.05) 100%);
+}
+
+.skill-tags-span {
+    background: linear-gradient(135deg, #E63946 0%, #D62828 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 4px 4px;
+    transition: all 0.3s ease;
+}
+
+.skill-tags-span:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
 }
 
 .skill-tags span {
