@@ -1,1 +1,4 @@
-deepanraj.work.gd
+
+Type	Name	Value	TTL
+CNAME	www	deeepanbe.github.io	3600
+
