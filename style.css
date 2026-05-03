@@ -1,0 +1,88 @@
+/* style.css — Deepanraj Arumugam Portfolio
+   Shared design tokens and utility classes
+   Core page styles live inside each HTML file's <style> block
+   This file provides overrides, print styles, and shared utilities
+*/
+
+/* ===== PRINT / RESUME ===== */
+@media print {
+  .nav, .chat-fab, .chat-window, footer { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .hero { padding-top: 2rem !important; }
+  a { color: inherit !important; }
+}
+
+/* ===== SCROLLBAR ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
+}
+*::-webkit-scrollbar { width: 5px; height: 5px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 5px; }
+[data-theme="light"] * {
+  scrollbar-color: rgba(0,0,0,0.15) transparent;
+}
+[data-theme="light"] *::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); }
+
+/* ===== FOCUS ===== */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ===== SMOOTH LOAD ===== */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+main, .hero { animation: page-enter 0.5s ease both; }
+
+/* ===== DASHBOARD EMBED ===== */
+.dashboard-embed-wrap {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  aspect-ratio: 16/9;
+  position: relative;
+}
+.dashboard-embed-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.dashboard-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+.dashboard-placeholder-icon { font-size: 2.5rem; }
+
+/* ===== UTILITY ===== */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+.text-accent { color: var(--accent); }
+.text-blue { color: var(--blue); }
+.text-dim { color: var(--text-dim); }
+.mono { font-family: var(--font-mono); }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }

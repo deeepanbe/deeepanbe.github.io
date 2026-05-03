@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations Dashboard | Deepanraj Arumugam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0a0b0d;--surface:#111318;--surface-2:#191c22;--surface-3:#1f2330;--text:#e8eaf0;--text-dim:#8890a4;--text-faint:#454d62;--border:rgba(255,255,255,0.07);--border-bright:rgba(255,255,255,0.14);--accent:#4fffb0;--accent-dim:rgba(79,255,176,0.12);--blue:#5b9cf6;--blue-dim:rgba(91,156,246,0.12);--orange:#f5a623;--orange-dim:rgba(245,166,35,0.12);--red:#ff6b6b;--red-dim:rgba(255,107,107,0.12);--radius:16px;--font-body:'DM Sans',sans-serif;--font-display:'Fraunces',serif;--font-mono:'DM Mono',monospace;}
+    [data-theme="light"]{--bg:#f2f3f7;--surface:#fff;--surface-2:#e8eaf0;--text:#0d1117;--text-dim:#4a5568;--text-faint:#9aa3b5;--border:rgba(0,0,0,0.08);--border-bright:rgba(0,0,0,0.15);--accent:#007a47;--accent-dim:rgba(0,122,71,0.08);--blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;}
+    a{color:inherit;text-decoration:none;}
+    .container{width:min(calc(100% - 3rem),1280px);margin:0 auto;}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:color-mix(in srgb,var(--bg) 85%,transparent);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;gap:1rem;}
+    .brand{display:flex;align-items:center;gap:0.75rem;}
+    .brand-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--blue));display:grid;place-items:center;font-family:var(--font-mono);font-size:0.65rem;color:var(--bg);font-weight:700;}
+    .brand-name{font-family:var(--font-mono);font-size:0.8rem;}
+    .brand-name span{color:var(--accent);}
+    .nav-center{display:flex;gap:1rem;}
+    .nav-tab{font-family:var(--font-mono);font-size:0.72rem;padding:0.35rem 0.9rem;border-radius:8px;color:var(--text-dim);border:1px solid transparent;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.2s;cursor:pointer;}
+    .nav-tab:hover,.nav-tab.active{background:var(--surface-2);color:var(--text);border-color:var(--border);}
+    .nav-right{display:flex;gap:0.5rem;}
+    .icon-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border-bright);background:var(--surface);color:var(--text-dim);cursor:pointer;font-size:0.85rem;display:grid;place-items:center;transition:background 0.2s;}
+    .icon-btn:hover{background:var(--surface-2);color:var(--text);}
+    .back-btn{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);padding:0.35rem 0.75rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);transition:all 0.2s;letter-spacing:0.04em;text-transform:uppercase;}
+    .back-btn:hover{color:var(--text);border-color:var(--border-bright);}
+    .main{padding-top:60px;}
+    .dash-header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--border);}
+    .dash-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+    .dash-eyebrow{font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;}
+    .dash-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-0.02em;}
+    .dash-subtitle{color:var(--text-dim);font-size:0.875rem;margin-top:0.4rem;}
+    .dash-actions{display:flex;gap:0.5rem;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.1rem;border-radius:10px;font-size:0.82rem;font-weight:600;cursor:pointer;border:1px solid var(--border-bright);background:var(--surface);color:var(--text);transition:all 0.2s;font-family:var(--font-body);}
+    .btn:hover{background:var(--surface-2);}
+    .btn.accent{background:var(--accent-dim);color:var(--accent);border-color:rgba(79,255,176,0.25);}
+    .btn svg{width:13px;height:13px;}
+    .filter-bar{padding:1rem 0;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);}
+    .filter-label{font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;}
+    .filter-select{background:var(--surface);border:1px solid var(--border-bright);color:var(--text);padding:0.4rem 0.8rem;border-radius:8px;font-family:var(--font-mono);font-size:0.72rem;cursor:pointer;outline:none;}
+    .kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:1.5rem 0;}
+    .kpi{background:var(--surface);padding:1rem 1.25rem;transition:background 0.2s;}
+    .kpi:hover{background:var(--surface-2);}
+    .kpi-val{font-family:var(--font-display);font-size:1.5rem;font-weight:900;line-height:1;margin-bottom:0.25rem;}
+    .kpi-val.green{color:var(--accent);}
+    .kpi-val.blue{color:var(--blue);}
+    .kpi-val.orange{color:var(--orange);}
+    .kpi-val.red{color:var(--red);}
+    .kpi-label{font-family:var(--font-mono);font-size:0.63rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em;}
+    .kpi-delta{font-family:var(--font-mono);font-size:0.63rem;margin-top:0.35rem;}
+    .kpi-delta.up{color:var(--accent);}
+    .kpi-delta.dn{color:var(--red);}
+    .chart-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:1rem;margin-bottom:1rem;}
+    .chart-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem;}
+    .chart-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+    .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .chart-card-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .chart-card-title{font-weight:600;font-size:0.9rem;}
+    .chart-card-sub{font-family:var(--font-mono);font-size:0.66rem;color:var(--text-faint);margin-top:0.2rem;}
+    .chart-card-badge{font-family:var(--font-mono);font-size:0.64rem;padding:0.2rem 0.5rem;border-radius:5px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(79,255,176,0.2);}
+    .chart-body{padding:1.25rem;}
+    .chart-svg{width:100%;overflow:visible;}
+    .axis-label{font-family:'DM Mono',monospace;font-size:10px;fill:var(--text-faint);}
+    .bar-label{font-family:'DM Mono',monospace;font-size:9px;fill:var(--text-dim);}
+    .grid-line{stroke:var(--border);stroke-width:1;}
+    .chart-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .chart-area{opacity:0.12;}
+    .legend-item{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-dim);}
+    .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+    .alert-row{display:flex;align-items:flex-start;gap:0.75rem;padding:0.85rem 1rem;border-bottom:1px solid var(--border);}
+    .alert-row:last-child{border-bottom:none;}
+    .alert-dot{width:8px;height:8px;border-radius:50%;margin-top:0.35rem;flex-shrink:0;}
+    .alert-dot.red{background:var(--red);}
+    .alert-dot.orange{background:var(--orange);}
+    .alert-dot.green{background:var(--accent);}
+    .alert-title{font-weight:600;font-size:0.875rem;}
+    .alert-sub{font-size:0.78rem;color:var(--text-dim);margin-top:0.2rem;}
+    .alert-time{font-family:var(--font-mono);font-size:0.64rem;color:var(--text-faint);white-space:nowrap;margin-left:auto;padding-top:0.2rem;}
+    .table-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;}
+    th{font-family:var(--font-mono);font-size:0.66rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;padding:0.7rem 1rem;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
+    td{padding:0.7rem 1rem;font-size:0.84rem;border-bottom:1px solid var(--border);color:var(--text-dim);}
+    tr:last-child td{border-bottom:none;}
+    tr:hover td{background:var(--surface-2);}
+    .badge{display:inline-block;font-family:var(--font-mono);font-size:0.63rem;padding:0.18rem 0.45rem;border-radius:5px;}
+    .badge.green{background:var(--accent-dim);color:var(--accent);}
+    .badge.orange{background:var(--orange-dim);color:var(--orange);}
+    .badge.red{background:var(--red-dim);color:var(--red);}
+    .badge.blue{background:var(--blue-dim);color:var(--blue);}
+    @media(max-width:1024px){.kpi-strip{grid-template-columns:repeat(3,1fr);}.chart-grid,.chart-grid-2{grid-template-columns:1fr;}.chart-grid-3{grid-template-columns:1fr 1fr;}}
+    @media(max-width:600px){.kpi-strip{grid-template-columns:repeat(2,1fr);}.nav-center{display:none;}.chart-grid-3{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="brand"><div class="brand-mark">DA</div><div class="brand-name"><span>deepanraj</span>.be</div></div>
+    <div class="nav-center">
+      <a class="nav-tab" href="hr-dashboard.html">HR Analytics</a>
+      <a class="nav-tab" href="sales-dashboard.html">Sales</a>
+      <span class="nav-tab active">Operations</span>
+    </div>
+    <div class="nav-right">
+      <a href="index.html" class="back-btn">← Portfolio</a>
+      <button class="icon-btn" id="themeBtn">◐</button>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="container">
+    <div class="dash-header">
+      <div class="dash-title-row">
+        <div>
+          <div class="dash-eyebrow">// Operations KPI Dashboard</div>
+          <div class="dash-title">Manufacturing Intelligence</div>
+          <div class="dash-subtitle">OEE, defect rates, downtime, yield & quality — Live Plant Data</div>
+        </div>
+        <div class="dash-actions">
+          <button class="btn"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Export</button>
+          <button class="btn accent"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Refresh</button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <span class="filter-label">Filters:</span>
+        <select class="filter-select"><option>All Machines</option><option>Line A</option><option>Line B</option><option>Line C</option></select>
+        <select class="filter-select"><option>This Week</option><option>This Month</option><option>Q4 2024</option><option>FY 2024</option></select>
+        <select class="filter-select"><option>All Shifts</option><option>Day Shift</option><option>Night Shift</option></select>
+      </div>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi"><div class="kpi-val green">87.3%</div><div class="kpi-label">OEE</div><div class="kpi-delta up">↑ +2.1%</div></div>
+      <div class="kpi"><div class="kpi-val blue">94.8%</div><div class="kpi-label">Yield Rate</div><div class="kpi-delta up">↑ +0.6%</div></div>
+      <div class="kpi"><div class="kpi-val orange">2.4%</div><div class="kpi-label">Defect Rate</div><div class="kpi-delta up">↓ improved</div></div>
+      <div class="kpi"><div class="kpi-val red">4.2 hrs</div><div class="kpi-label">Downtime</div><div class="kpi-delta dn">↑ +0.8hrs</div></div>
+      <div class="kpi"><div class="kpi-val green">96.1%</div><div class="kpi-label">Availability</div><div class="kpi-delta up">↑ stable</div></div>
+      <div class="kpi"><div class="kpi-val blue">88.9%</div><div class="kpi-label">Performance</div><div class="kpi-delta up">↑ +1.4%</div></div>
+    </div>
+
+    <div class="chart-grid">
+      <!-- OEE Trend -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div><div class="chart-card-title">OEE Trend — Weekly</div><div class="chart-card-sub">Overall Equipment Effectiveness vs 85% world-class target</div></div>
+          <span class="chart-card-badge">Live</span>
+        </div>
+        <div class="chart-body">
+          <svg class="chart-svg" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="40" y1="20" x2="510" y2="20" class="grid-line"/>
+            <line x1="40" y1="60" x2="510" y2="60" class="grid-line"/>
+            <line x1="40" y1="100" x2="510" y2="100" class="grid-line"/>
+            <line x1="40" y1="140" x2="510" y2="140" class="grid-line"/>
+            <line x1="40" y1="180" x2="510" y2="180" class="grid-line"/>
+            <text x="32" y="24" class="axis-label" text-anchor="end">100</text>
+            <text x="32" y="64" class="axis-label" text-anchor="end">90</text>
+            <text x="32" y="104" class="axis-label" text-anchor="end">80</text>
+            <text x="32" y="144" class="axis-label" text-anchor="end">70</text>
+            <text x="32" y="184" class="axis-label" text-anchor="end">60</text>
+            <!-- 85% target line -->
+            <line x1="40" y1="80" x2="510" y2="80" stroke="#f5a623" stroke-width="1.5" stroke-dasharray="6,3"/>
+            <text x="512" y="84" class="axis-label" fill="#f5a623">85%</text>
+            <!-- OEE Area -->
+            <polygon fill="#4fffb0" class="chart-area"
+              points="44,120 84,130 124,110 164,100 204,115 244,90 284,85 324,95 364,80 404,75 444,70 484,68 484,180 44,180"/>
+            <polyline class="chart-line" stroke="#4fffb0"
+              points="44,120 84,130 124,110 164,100 204,115 244,90 284,85 324,95 364,80 404,75 444,70 484,68"/>
+            <circle cx="484" cy="68" r="4" fill="#4fffb0"/>
+            <text x="44" y="198" class="axis-label" text-anchor="middle">W39</text>
+            <text x="124" y="198" class="axis-label" text-anchor="middle">W41</text>
+            <text x="204" y="198" class="axis-label" text-anchor="middle">W43</text>
+            <text x="284" y="198" class="axis-label" text-anchor="middle">W45</text>
+            <text x="364" y="198" class="axis-label" text-anchor="middle">W47</text>
+            <text x="444" y="198" class="axis-label" text-anchor="middle">W49</text>
+          </svg>
+          <div style="display:flex;gap:1.5rem;margin-top:0.5rem;">
+            <div class="legend-item"><div class="legend-dot" style="background:#4fffb0"></div>OEE Actual</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#f5a623"></div>85% Target</div>
+          </div>
+        </div>
+      </div>
+      <!-- Alerts -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div><div class="chart-card-title">Active Alerts</div><div class="chart-card-sub">Maintenance & quality flags</div></div>
+          <span class="chart-card-badge" style="background:var(--red-dim);color:var(--red);border-color:rgba(255,107,107,0.3);">3 Critical</span>
+        </div>
+        <div>
+          <div class="alert-row">
+            <div class="alert-dot red"></div>
+            <div><div class="alert-title">Line B — Excessive Downtime</div><div class="alert-sub">Machine M-14 unplanned stop. 2.1 hrs lost this shift.</div></div>
+            <div class="alert-time">08:42</div>
+          </div>
+          <div class="alert-row">
+            <div class="alert-dot red"></div>
+            <div><div class="alert-title">Defect Rate Spike — Line A</div><div class="alert-sub">Defects at 5.8%, exceeding 3% threshold. QC notified.</div></div>
+            <div class="alert-time">07:15</div>
+          </div>
+          <div class="alert-row">
+            <div class="alert-dot orange"></div>
+            <div><div class="alert-title">OEE Below Target — Line C</div><div class="alert-sub">OEE at 81.2%, below 85% world-class benchmark.</div></div>
+            <div class="alert-time">06:30</div>
+          </div>
+          <div class="alert-row">
+            <div class="alert-dot orange"></div>
+            <div><div class="alert-title">Maintenance Due — M-08</div><div class="alert-sub">Scheduled PM overdue by 3 days. Raise work order.</div></div>
+            <div class="alert-time">Yesterday</div>
+          </div>
+          <div class="alert-row">
+            <div class="alert-dot green"></div>
+            <div><div class="alert-title">Yield Restored — Line A</div><div class="alert-sub">Yield back to 95.2% after adjustment at 06:00.</div></div>
+            <div class="alert-time">06:05</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid-3">
+      <!-- Defect Rate by Line -->
+      <div class="chart-card">
+        <div class="chart-card-header"><div><div class="chart-card-title">Defect Rate by Line</div><div class="chart-card-sub">% defective units this week</div></div></div>
+        <div class="chart-body">
+          <svg class="chart-svg" viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="135" x2="240" y2="135" class="grid-line"/>
+            <rect x="20" y="50" width="40" height="85" rx="4" fill="#ff6b6b" opacity="0.85"/>
+            <rect x="80" y="80" width="40" height="55" rx="4" fill="#f5a623" opacity="0.85"/>
+            <rect x="140" y="95" width="40" height="40" rx="4" fill="#4fffb0" opacity="0.85"/>
+            <text x="40" y="44" class="bar-label" text-anchor="middle">5.8%</text>
+            <text x="100" y="74" class="bar-label" text-anchor="middle">2.9%</text>
+            <text x="160" y="89" class="bar-label" text-anchor="middle">1.4%</text>
+            <line x1="0" y1="95" x2="240" y2="95" stroke="#f5a623" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="218" y="91" class="axis-label" fill="#f5a623">3% limit</text>
+            <text x="40" y="152" class="axis-label" text-anchor="middle">Line A</text>
+            <text x="100" y="152" class="axis-label" text-anchor="middle">Line B</text>
+            <text x="160" y="152" class="axis-label" text-anchor="middle">Line C</text>
+          </svg>
+        </div>
+      </div>
+      <!-- Downtime by Cause -->
+      <div class="chart-card">
+        <div class="chart-card-header"><div><div class="chart-card-title">Downtime by Cause</div><div class="chart-card-sub">Hours lost this month</div></div></div>
+        <div class="chart-body">
+          <div style="display:flex;flex-direction:column;gap:0.8rem;">
+            <div><div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.3rem;"><span>Mechanical</span><span style="font-family:var(--font-mono);color:var(--red);">18.4 hrs</span></div><div style="height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;"><div style="width:82%;height:100%;background:var(--red);border-radius:3px;"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.3rem;"><span>Setup & Changeover</span><span style="font-family:var(--font-mono);color:var(--orange);">11.2 hrs</span></div><div style="height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;"><div style="width:50%;height:100%;background:var(--orange);border-radius:3px;"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.3rem;"><span>Material Shortage</span><span style="font-family:var(--font-mono);color:var(--orange);">7.8 hrs</span></div><div style="height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;"><div style="width:35%;height:100%;background:var(--orange);border-radius:3px;"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.3rem;"><span>Power Outage</span><span style="font-family:var(--font-mono);color:var(--blue);">4.1 hrs</span></div><div style="height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;"><div style="width:18%;height:100%;background:var(--blue);border-radius:3px;"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:0.3rem;"><span>Quality Hold</span><span style="font-family:var(--font-mono);color:var(--accent);">2.3 hrs</span></div><div style="height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;"><div style="width:10%;height:100%;background:var(--accent);border-radius:3px;"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Yield -->
+      <div class="chart-card">
+        <div class="chart-card-header"><div><div class="chart-card-title">Yield by Product</div><div class="chart-card-sub">First-pass yield this week</div></div></div>
+        <div class="chart-body">
+          <svg class="chart-svg" viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="135" x2="240" y2="135" class="grid-line"/>
+            <rect x="10" y="25" width="32" height="110" rx="4" fill="#4fffb0" opacity="0.85"/>
+            <rect x="55" y="35" width="32" height="100" rx="4" fill="#5b9cf6" opacity="0.85"/>
+            <rect x="100" y="50" width="32" height="85" rx="4" fill="#f5a623" opacity="0.85"/>
+            <rect x="145" y="45" width="32" height="90" rx="4" fill="#4fffb0" opacity="0.7"/>
+            <rect x="190" y="65" width="32" height="70" rx="4" fill="#ff6b6b" opacity="0.85"/>
+            <text x="26" y="20" class="bar-label" text-anchor="middle">97.2%</text>
+            <text x="71" y="30" class="bar-label" text-anchor="middle">96.1%</text>
+            <text x="116" y="45" class="bar-label" text-anchor="middle">93.8%</text>
+            <text x="161" y="40" class="bar-label" text-anchor="middle">94.5%</text>
+            <text x="206" y="60" class="bar-label" text-anchor="middle">89.3%</text>
+            <text x="26" y="152" class="axis-label" text-anchor="middle">P1</text>
+            <text x="71" y="152" class="axis-label" text-anchor="middle">P2</text>
+            <text x="116" y="152" class="axis-label" text-anchor="middle">P3</text>
+            <text x="161" y="152" class="axis-label" text-anchor="middle">P4</text>
+            <text x="206" y="152" class="axis-label" text-anchor="middle">P5</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- MACHINE TABLE -->
+    <div class="chart-card" style="margin-bottom:2rem;">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">Machine Performance Summary</div><div class="chart-card-sub">Current shift status across all production lines</div></div>
+        <span class="chart-card-badge">Live</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Machine ID</th><th>Line</th><th>Status</th><th>OEE</th><th>Defect %</th><th>Uptime</th><th>Last PM</th><th>Next PM</th></tr></thead>
+          <tbody>
+            <tr><td>M-01</td><td>Line A</td><td><span class="badge green">Running</span></td><td>91.2%</td><td>1.8%</td><td>98.4%</td><td>05 Nov</td><td>05 Feb</td></tr>
+            <tr><td>M-08</td><td>Line A</td><td><span class="badge orange">PM Due</span></td><td>84.7%</td><td>3.2%</td><td>91.0%</td><td>08 Aug</td><td>Overdue</td></tr>
+            <tr><td>M-14</td><td>Line B</td><td><span class="badge red">Stopped</span></td><td>—</td><td>—</td><td>71.5%</td><td>12 Oct</td><td>21 Jan</td></tr>
+            <tr><td>M-21</td><td>Line B</td><td><span class="badge green">Running</span></td><td>88.9%</td><td>2.1%</td><td>95.8%</td><td>02 Dec</td><td>02 Mar</td></tr>
+            <tr><td>M-33</td><td>Line C</td><td><span class="badge green">Running</span></td><td>81.2%</td><td>2.7%</td><td>89.3%</td><td>18 Nov</td><td>18 Feb</td></tr>
+            <tr><td>M-41</td><td>Line C</td><td><span class="badge blue">Changeover</span></td><td>—</td><td>—</td><td>88.1%</td><td>25 Oct</td><td>25 Jan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

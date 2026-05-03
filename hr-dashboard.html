@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Analytics Dashboard | Deepanraj Arumugam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0a0b0d;--surface:#111318;--surface-2:#191c22;--surface-3:#1f2330;
+      --text:#e8eaf0;--text-dim:#8890a4;--text-faint:#454d62;
+      --border:rgba(255,255,255,0.07);--border-bright:rgba(255,255,255,0.14);
+      --accent:#4fffb0;--accent-dim:rgba(79,255,176,0.12);--accent-glow:rgba(79,255,176,0.25);
+      --blue:#5b9cf6;--blue-dim:rgba(91,156,246,0.12);
+      --orange:#f5a623;--orange-dim:rgba(245,166,35,0.12);
+      --red:#ff6b6b;--red-dim:rgba(255,107,107,0.12);
+      --radius:16px;--font-body:'DM Sans',sans-serif;--font-display:'Fraunces',serif;--font-mono:'DM Mono',monospace;
+    }
+    [data-theme="light"]{--bg:#f2f3f7;--surface:#fff;--surface-2:#e8eaf0;--surface-3:#dde0ea;--text:#0d1117;--text-dim:#4a5568;--text-faint:#9aa3b5;--border:rgba(0,0,0,0.08);--border-bright:rgba(0,0,0,0.15);--accent:#007a47;--accent-dim:rgba(0,122,71,0.08);--blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;}
+    a{color:inherit;text-decoration:none;}
+    .container{width:min(calc(100% - 3rem),1280px);margin:0 auto;}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:color-mix(in srgb,var(--bg) 85%,transparent);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;gap:1rem;}
+    .brand{display:flex;align-items:center;gap:0.75rem;}
+    .brand-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--blue));display:grid;place-items:center;font-family:var(--font-mono);font-size:0.65rem;color:var(--bg);font-weight:700;}
+    .brand-name{font-family:var(--font-mono);font-size:0.8rem;}
+    .brand-name span{color:var(--accent);}
+    .nav-center{display:flex;gap:1rem;}
+    .nav-tab{font-family:var(--font-mono);font-size:0.72rem;padding:0.35rem 0.9rem;border-radius:8px;color:var(--text-dim);border:1px solid transparent;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.2s;cursor:pointer;}
+    .nav-tab:hover,.nav-tab.active{background:var(--surface-2);color:var(--text);border-color:var(--border);}
+    .nav-right{display:flex;gap:0.5rem;}
+    .icon-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border-bright);background:var(--surface);color:var(--text-dim);cursor:pointer;font-size:0.85rem;display:grid;place-items:center;transition:background 0.2s;}
+    .icon-btn:hover{background:var(--surface-2);color:var(--text);}
+    .back-btn{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);padding:0.35rem 0.75rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);transition:all 0.2s;letter-spacing:0.04em;text-transform:uppercase;}
+    .back-btn:hover{color:var(--text);border-color:var(--border-bright);}
+
+    /* MAIN */
+    .main{padding-top:60px;}
+    .dash-header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--border);}
+    .dash-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+    .dash-eyebrow{font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;}
+    .dash-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-0.02em;}
+    .dash-subtitle{color:var(--text-dim);font-size:0.875rem;margin-top:0.4rem;}
+    .dash-actions{display:flex;gap:0.5rem;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.1rem;border-radius:10px;font-size:0.82rem;font-weight:600;cursor:pointer;border:1px solid var(--border-bright);background:var(--surface);color:var(--text);transition:all 0.2s;font-family:var(--font-body);}
+    .btn:hover{background:var(--surface-2);}
+    .btn.accent{background:var(--accent-dim);color:var(--accent);border-color:rgba(79,255,176,0.25);}
+    .btn svg{width:13px;height:13px;}
+
+    /* FILTER BAR */
+    .filter-bar{padding:1rem 0;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);}
+    .filter-label{font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;}
+    .filter-select{background:var(--surface);border:1px solid var(--border-bright);color:var(--text);padding:0.4rem 0.8rem;border-radius:8px;font-family:var(--font-mono);font-size:0.72rem;cursor:pointer;outline:none;}
+    .filter-select:focus{border-color:var(--accent);}
+
+    /* KPI STRIP */
+    .kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:1.5rem 0;}
+    .kpi{background:var(--surface);padding:1.25rem 1.5rem;position:relative;transition:background 0.2s;}
+    .kpi:hover{background:var(--surface-2);}
+    .kpi-val{font-family:var(--font-display);font-size:1.75rem;font-weight:900;line-height:1;margin-bottom:0.3rem;}
+    .kpi-val.green{color:var(--accent);}
+    .kpi-val.blue{color:var(--blue);}
+    .kpi-val.orange{color:var(--orange);}
+    .kpi-val.red{color:var(--red);}
+    .kpi-label{font-family:var(--font-mono);font-size:0.66rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em;}
+    .kpi-delta{font-family:var(--font-mono);font-size:0.68rem;margin-top:0.4rem;}
+    .kpi-delta.up{color:var(--accent);}
+    .kpi-delta.down{color:var(--red);}
+
+    /* CHART GRID */
+    .chart-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:1rem;margin-bottom:1rem;}
+    .chart-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem;}
+    .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .chart-card-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .chart-card-title{font-weight:600;font-size:0.9rem;}
+    .chart-card-sub{font-family:var(--font-mono);font-size:0.66rem;color:var(--text-faint);margin-top:0.2rem;}
+    .chart-card-badge{font-family:var(--font-mono);font-size:0.64rem;padding:0.2rem 0.5rem;border-radius:5px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(79,255,176,0.2);}
+    .chart-body{padding:1.25rem;}
+
+    /* SVG CHART STYLES */
+    .chart-svg{width:100%;overflow:visible;}
+    .axis-label{font-family:'DM Mono',monospace;font-size:10px;fill:var(--text-faint);}
+    .bar-label{font-family:'DM Mono',monospace;font-size:9px;fill:var(--text-dim);}
+    .chart-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    .chart-area{opacity:0.15;}
+    .grid-line{stroke:var(--border);stroke-width:1;}
+    .data-point{r:4;stroke-width:2;}
+
+    /* TABLE */
+    .table-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;}
+    th{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;padding:0.75rem 1rem;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
+    td{padding:0.75rem 1rem;font-size:0.85rem;border-bottom:1px solid var(--border);color:var(--text-dim);}
+    tr:last-child td{border-bottom:none;}
+    tr:hover td{background:var(--surface-2);}
+    .badge{display:inline-block;font-family:var(--font-mono);font-size:0.64rem;padding:0.2rem 0.5rem;border-radius:5px;}
+    .badge.high{background:var(--red-dim);color:var(--red);}
+    .badge.med{background:var(--orange-dim);color:var(--orange);}
+    .badge.low{background:var(--accent-dim);color:var(--accent);}
+    .badge.active{background:var(--blue-dim);color:var(--blue);}
+
+    /* DONUT */
+    .donut-wrap{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+    .legend-item{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-dim);}
+    .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+    @media(max-width:900px){.kpi-strip{grid-template-columns:repeat(3,1fr);}.chart-grid,.chart-grid-3{grid-template-columns:1fr;}}
+    @media(max-width:600px){.kpi-strip{grid-template-columns:repeat(2,1fr);}.nav-center{display:none;}}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="brand">
+      <div class="brand-mark">DA</div>
+      <div class="brand-name"><span>deepanraj</span>.be</div>
+    </div>
+    <div class="nav-center">
+      <span class="nav-tab active">HR Analytics</span>
+      <a class="nav-tab" href="sales-dashboard.html">Sales</a>
+      <a class="nav-tab" href="operations-dashboard.html">Operations</a>
+    </div>
+    <div class="nav-right">
+      <a href="index.html" class="back-btn">← Portfolio</a>
+      <button class="icon-btn" id="themeBtn">◐</button>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="container">
+    <div class="dash-header">
+      <div class="dash-title-row">
+        <div>
+          <div class="dash-eyebrow">// HR Analytics Dashboard</div>
+          <div class="dash-title">Workforce Intelligence</div>
+          <div class="dash-subtitle">Attrition, headcount, satisfaction & performance — FY 2024</div>
+        </div>
+        <div class="dash-actions">
+          <button class="btn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Export CSV
+          </button>
+          <button class="btn accent">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <span class="filter-label">Filters:</span>
+        <select class="filter-select"><option>All Departments</option><option>Engineering</option><option>Sales</option><option>Operations</option><option>HR</option><option>Finance</option></select>
+        <select class="filter-select"><option>FY 2024</option><option>FY 2023</option><option>FY 2022</option></select>
+        <select class="filter-select"><option>All Locations</option><option>Chennai</option><option>Kochi</option><option>Tamil Nadu</option></select>
+        <select class="filter-select"><option>All Levels</option><option>Junior</option><option>Mid</option><option>Senior</option><option>Lead</option></select>
+      </div>
+    </div>
+
+    <!-- KPI STRIP -->
+    <div class="kpi-strip">
+      <div class="kpi"><div class="kpi-val blue">1,284</div><div class="kpi-label">Total Headcount</div><div class="kpi-delta up">↑ +47 vs last year</div></div>
+      <div class="kpi"><div class="kpi-val red">14.2%</div><div class="kpi-label">Attrition Rate</div><div class="kpi-delta down">↑ +1.8% vs target</div></div>
+      <div class="kpi"><div class="kpi-val green">78%</div><div class="kpi-label">Satisfaction Score</div><div class="kpi-delta up">↑ +3% vs last year</div></div>
+      <div class="kpi"><div class="kpi-val orange">42 days</div><div class="kpi-label">Avg Time to Hire</div><div class="kpi-delta down">↓ slower by 5 days</div></div>
+      <div class="kpi"><div class="kpi-val green">91%</div><div class="kpi-label">Retention Rate</div><div class="kpi-delta up">↑ stable</div></div>
+    </div>
+
+    <!-- CHARTS ROW 1 -->
+    <div class="chart-grid">
+      <!-- Attrition by Month -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div><div class="chart-card-title">Monthly Attrition Trend</div><div class="chart-card-sub">Voluntary vs involuntary exits — FY 2024</div></div>
+          <span class="chart-card-badge">Live</span>
+        </div>
+        <div class="chart-body">
+          <svg class="chart-svg" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid lines -->
+            <line x1="40" y1="20" x2="510" y2="20" class="grid-line"/>
+            <line x1="40" y1="60" x2="510" y2="60" class="grid-line"/>
+            <line x1="40" y1="100" x2="510" y2="100" class="grid-line"/>
+            <line x1="40" y1="140" x2="510" y2="140" class="grid-line"/>
+            <line x1="40" y1="180" x2="510" y2="180" class="grid-line"/>
+            <!-- Y labels -->
+            <text x="32" y="24" class="axis-label" text-anchor="end">20</text>
+            <text x="32" y="64" class="axis-label" text-anchor="end">15</text>
+            <text x="32" y="104" class="axis-label" text-anchor="end">10</text>
+            <text x="32" y="144" class="axis-label" text-anchor="end">5</text>
+            <text x="32" y="184" class="axis-label" text-anchor="end">0</text>
+            <!-- Voluntary line -->
+            <polyline class="chart-line" stroke="#4fffb0"
+              points="44,120 84,100 124,110 164,80 204,90 244,70 284,85 324,65 364,75 404,55 444,60 484,50"/>
+            <polygon fill="#4fffb0" class="chart-area"
+              points="44,120 84,100 124,110 164,80 204,90 244,70 284,85 324,65 364,75 404,55 444,60 484,50 484,180 44,180"/>
+            <!-- Involuntary line -->
+            <polyline class="chart-line" stroke="#5b9cf6"
+              points="44,160 84,155 124,150 164,148 204,145 244,142 284,140 324,138 364,135 404,132 444,130 484,128"/>
+            <!-- Data points voluntary -->
+            <circle cx="44" cy="120" r="3.5" fill="#4fffb0" class="data-point"/>
+            <circle cx="164" cy="80" r="3.5" fill="#4fffb0" class="data-point"/>
+            <circle cx="244" cy="70" r="3.5" fill="#4fffb0" class="data-point"/>
+            <circle cx="484" cy="50" r="3.5" fill="#4fffb0" class="data-point"/>
+            <!-- X labels -->
+            <text x="44" y="198" class="axis-label" text-anchor="middle">Jan</text>
+            <text x="124" y="198" class="axis-label" text-anchor="middle">Mar</text>
+            <text x="204" y="198" class="axis-label" text-anchor="middle">May</text>
+            <text x="284" y="198" class="axis-label" text-anchor="middle">Jul</text>
+            <text x="364" y="198" class="axis-label" text-anchor="middle">Sep</text>
+            <text x="444" y="198" class="axis-label" text-anchor="middle">Nov</text>
+          </svg>
+          <div style="display:flex;gap:1.5rem;margin-top:0.5rem;">
+            <div class="legend-item"><div class="legend-dot" style="background:#4fffb0"></div>Voluntary</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#5b9cf6"></div>Involuntary</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attrition by Dept Donut -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div><div class="chart-card-title">Attrition by Department</div><div class="chart-card-sub">FY 2024 breakdown</div></div>
+        </div>
+        <div class="chart-body">
+          <div class="donut-wrap">
+            <svg viewBox="0 0 160 160" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#5b9cf6" stroke-width="28" stroke-dasharray="94.2 282.7" stroke-dashoffset="0"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#4fffb0" stroke-width="28" stroke-dasharray="70.7 282.7" stroke-dashoffset="-94.2"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#f5a623" stroke-width="28" stroke-dasharray="56.5 282.7" stroke-dashoffset="-164.9"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#ff6b6b" stroke-width="28" stroke-dasharray="42.4 282.7" stroke-dashoffset="-221.4"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#454d62" stroke-width="28" stroke-dasharray="18.8 282.7" stroke-dashoffset="-263.8"/>
+              <text x="80" y="76" text-anchor="middle" font-family="Fraunces,serif" font-size="22" font-weight="700" fill="#e8eaf0">182</text>
+              <text x="80" y="94" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#454d62">TOTAL EXITS</text>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:0.6rem;">
+              <div class="legend-item"><div class="legend-dot" style="background:#5b9cf6"></div>Engineering — 33%</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#4fffb0"></div>Sales — 25%</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#f5a623"></div>Operations — 20%</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div>HR — 15%</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#454d62"></div>Finance — 7%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW 2 -->
+    <div class="chart-grid-3">
+      <!-- Headcount Bar -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div><div class="chart-card-title">Headcount by Dept</div><div class="chart-card-sub">Current active employees</div></div>
+        </div>
+        <div class="chart-body">
+          <svg class="chart-svg" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="155" x2="260" y2="155" class="grid-line"/>
+            <!-- Bars -->
+            <rect x="15" y="55" width="32" height="100" rx="4" fill="#5b9cf6" opacity="0.8"/>
+            <rect x="60" y="80" width="32" height="75" rx="4" fill="#4fffb0" opacity="0.8"/>
+            <rect x="105" y="95" width="32" height="60" rx="4" fill="#f5a623" opacity="0.8"/>
+            <rect x="150" y="105" width="32" height="50" rx="4" fill="#ff6b6b" opacity="0.8"/>
+            <rect x="195" y="120" width="32" height="35" rx="4" fill="#454d62" opacity="0.9"/>
+            <!-- Values -->
+            <text x="31" y="50" class="bar-label" text-anchor="middle">412</text>
+            <text x="76" y="75" class="bar-label" text-anchor="middle">308</text>
+            <text x="121" y="90" class="bar-label" text-anchor="middle">247</text>
+            <text x="166" y="100" class="bar-label" text-anchor="middle">198</text>
+            <text x="211" y="115" class="bar-label" text-anchor="middle">119</text>
+            <!-- Labels -->
+            <text x="31" y="170" class="axis-label" text-anchor="middle">Eng</text>
+            <text x="76" y="170" class="axis-label" text-anchor="middle">Sales</text>
+            <text x="121" y="170" class="axis-label" text-anchor="middle">Ops</text>
+            <text x="166" y="170" class="axis-label" text-anchor="middle">HR</text>
+            <text x="211" y="170" class="axis-label" text-anchor="middle">Fin</text>
+          </svg>
+        </div>
+      </div>
+      <!-- Satisfaction Gauge -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div><div class="chart-card-title">Satisfaction Score</div><div class="chart-card-sub">Q4 2024 Employee Survey</div></div>
+        </div>
+        <div class="chart-body" style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+          <svg viewBox="0 0 200 120" width="200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="16" stroke-linecap="round"/>
+            <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="#4fffb0" stroke-width="16" stroke-linecap="round" stroke-dasharray="195 251" />
+            <text x="100" y="90" text-anchor="middle" font-family="Fraunces,serif" font-size="28" font-weight="900" fill="#4fffb0">78%</text>
+            <text x="100" y="110" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#454d62">SATISFIED</text>
+            <text x="20" y="128" font-family="DM Mono,monospace" font-size="8" fill="#454d62">0%</text>
+            <text x="168" y="128" font-family="DM Mono,monospace" font-size="8" fill="#454d62">100%</text>
+          </svg>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;width:100%;">
+            <div style="text-align:center;padding:0.5rem;background:var(--surface-2);border-radius:8px;">
+              <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--accent);">4.1</div>
+              <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-faint);">AVG RATING</div>
+            </div>
+            <div style="text-align:center;padding:0.5rem;background:var(--surface-2);border-radius:8px;">
+              <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--blue);">847</div>
+              <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-faint);">RESPONSES</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tenure Distribution -->
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div><div class="chart-card-title">Tenure Distribution</div><div class="chart-card-sub">Years of service breakdown</div></div>
+        </div>
+        <div class="chart-body">
+          <svg class="chart-svg" viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="155" x2="240" y2="155" class="grid-line"/>
+            <rect x="10" y="80" width="30" height="75" rx="4" fill="#ff6b6b" opacity="0.8"/>
+            <rect x="55" y="45" width="30" height="110" rx="4" fill="#f5a623" opacity="0.8"/>
+            <rect x="100" y="30" width="30" height="125" rx="4" fill="#4fffb0" opacity="0.8"/>
+            <rect x="145" y="60" width="30" height="95" rx="4" fill="#5b9cf6" opacity="0.8"/>
+            <rect x="190" y="100" width="30" height="55" rx="4" fill="#454d62" opacity="0.9"/>
+            <text x="25" y="75" class="bar-label" text-anchor="middle">18%</text>
+            <text x="70" y="40" class="bar-label" text-anchor="middle">27%</text>
+            <text x="115" y="25" class="bar-label" text-anchor="middle">31%</text>
+            <text x="160" y="55" class="bar-label" text-anchor="middle">16%</text>
+            <text x="205" y="95" class="bar-label" text-anchor="middle">8%</text>
+            <text x="25" y="170" class="axis-label" text-anchor="middle">&lt;1yr</text>
+            <text x="70" y="170" class="axis-label" text-anchor="middle">1-3yr</text>
+            <text x="115" y="170" class="axis-label" text-anchor="middle">3-5yr</text>
+            <text x="160" y="170" class="axis-label" text-anchor="middle">5-8yr</text>
+            <text x="205" y="170" class="axis-label" text-anchor="middle">8yr+</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="chart-card" style="margin-bottom:2rem;">
+      <div class="chart-card-header">
+        <div><div class="chart-card-title">High-Risk Attrition — Employee Detail</div><div class="chart-card-sub">Flagged employees with attrition probability &gt; 60% · Anonymized</div></div>
+        <span class="chart-card-badge">Confidential</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Employee ID</th><th>Department</th><th>Role Level</th><th>Tenure</th>
+              <th>Satisfaction</th><th>Attrition Risk</th><th>Last Review</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>EMP-2841</td><td>Engineering</td><td>Senior</td><td>2.3 yrs</td><td>2.1 / 5</td><td><span class="badge high">High 82%</span></td><td>Oct 2024</td><td><span class="badge active">Active</span></td></tr>
+            <tr><td>EMP-1092</td><td>Sales</td><td>Mid</td><td>1.1 yrs</td><td>2.4 / 5</td><td><span class="badge high">High 76%</span></td><td>Sep 2024</td><td><span class="badge active">Active</span></td></tr>
+            <tr><td>EMP-3371</td><td>Operations</td><td>Junior</td><td>0.8 yrs</td><td>2.8 / 5</td><td><span class="badge high">High 71%</span></td><td>Nov 2024</td><td><span class="badge active">Active</span></td></tr>
+            <tr><td>EMP-0847</td><td>HR</td><td>Senior</td><td>3.5 yrs</td><td>3.0 / 5</td><td><span class="badge med">Med 64%</span></td><td>Aug 2024</td><td><span class="badge active">Active</span></td></tr>
+            <tr><td>EMP-2219</td><td>Engineering</td><td>Lead</td><td>4.2 yrs</td><td>3.1 / 5</td><td><span class="badge med">Med 61%</span></td><td>Oct 2024</td><td><span class="badge active">Active</span></td></tr>
+            <tr><td>EMP-1553</td><td>Finance</td><td>Mid</td><td>2.7 yrs</td><td>3.3 / 5</td><td><span class="badge low">Low 38%</span></td><td>Nov 2024</td><td><span class="badge active">Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

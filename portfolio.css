@@ -1,0 +1,54 @@
+/* portfolio.css — Deepanraj Arumugam Portfolio
+   Additional / override styles for extended pages
+   Main styles live in index.html <style> block
+*/
+
+/* === CERTIFICATIONS PAGE === */
+.cert-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.cert-gallery-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cert-gallery-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-2px);
+}
+.cert-gallery-card img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+}
+.cert-gallery-card-body {
+  padding: 1rem 1.25rem;
+}
+
+/* === RESUME SECTION === */
+.resume-download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.resume-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s;
+}
+.resume-card:hover { border-color: var(--border-bright); }
+.resume-card-icon { font-size: 2rem; }
+.resume-card-title { font-weight: 600; font-size: 0.95rem; }
+.resume-card-desc { font-size: 0.82rem; color: var(--text-dim); }
