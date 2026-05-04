@@ -2,6 +2,14 @@
 
 **Data & Visualization Engineer | Power BI Developer | SQL · Python · Azure**
 
+[![Portfolio](https://img.shields.io/badge/portfolio-deepanraj.work.gd-blue?logo=html5)](https://deepanraj.work.gd/)
+[![Email](https://img.shields.io/badge/email-deepanraj.a%40outlook.com-orange?logo=gmail)](mailto:deepanraj.a@outlook.com)
+[![LinkedIn](https://img.shields.io/badge/linkedin-deepanraj--data--analyst-blue?logo=linkedin)](https://linkedin.com/in/deepanraj-data-analyst)
+[![Power BI](https://img.shields.io/badge/power-bi-yellow?logo=powerbi)](#)
+[![SQL](https://img.shields.io/badge/sql-postgresql-blue?logo=postgresql)](#)
+[![Python](https://img.shields.io/badge/python-3.x-green?logo=python)](#)
+[![Azure](https://img.shields.io/badge/azure-cloud-blue?logo=microsoftazure)](#)
+
 Live portfolio: [deeepanbe.github.io](https://deeepanbe.github.io)
 
 ---
