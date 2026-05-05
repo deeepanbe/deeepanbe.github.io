@@ -795,3 +795,329 @@ section.section-title {
   color: var(--accent-secondary);
   gap: 10px;
 }
+
+
+/* === TIMELINE (Experience) === */
+.timeline {
+  position: relative;
+  padding: 24px 0;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 40px;
+  border-left: 2px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+  border-left: 2px solid transparent;
+}
+
+.timeline-item:hover {
+  border-left-color: var(--accent-primary);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  border: 2px solid var(--bg-primary);
+}
+
+.timeline-item h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.timeline-item > p {
+  font-size: 0.875rem;
+  color: var(--accent-secondary);
+  margin-bottom: 12px;
+}
+
+.timeline-item ul {
+  list-style: none;
+}
+
+.timeline-item li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.timeline-item li::before {
+  content: '\2192';
+  position: absolute;
+  left: 0;
+  color: var(--accent-primary);
+  font-size: 0.75rem;
+  top: 3px;
+}
+
+/* === SECTION ALTERNATE BG === */
+.section-alt {
+  background: var(--bg-secondary);
+}
+
+/* === GRID LAYOUT === */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* === HERO TITLE === */
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 16px;
+}
+
+/* === HERO SUBTITLE === */
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  max-width: 700px;
+}
+
+/* === SECTION SUBTITLE === */
+.section-sub {
+  color: var(--text-muted);
+  margin-bottom: 40px;
+)
+
+/* === HERO SIDE === */
+.hero-side {
+  margin-top: 40px;
+}
+
+/* === PROFILE PHOTO CARD === */
+.profile-photo-card {
+  padding: 32px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.profile-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--border-color);
+  margin-bottom: 16px;
+}
+
+/* === HERO ACTIONS === */
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* === STATS ROW === */
+.stats-row {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-color);
+}
+
+.stat-card {
+  text-align: center;
+  padding: 8px;
+}
+
+/* === BTN PRIMARY === */
+.btn.primary {
+  background: var(--gradient-primary);
+  color: #0f172a;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.btn.primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* === BTN SECONDARY === */
+.btn.secondary {
+  background: transparent;
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.btn.secondary:hover {
+  background: rgba(96,165,250,0.1);
+  transform: translateY(-2px);
+}
+
+/* === PROGRESS BAR === */
+.progress-bar {
+  height: 4px;
+  background: var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+  width: 0;
+  transition: width 1s ease-out;
+}
+
+/* === TABS === */
+.section { padding: 100px 0; }
+
+.section h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* === CONTACT SECTION === */
+#contact .section-sub {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.contact-list {
+  list-style: none;
+  max-width: 400px;
+  margin: 0 auto 32px;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+
+.contact-list li a {
+  color: var(--accent-primary);
+}
+
+.contact-list li a:hover {
+  color: var(--accent-secondary);
+}
+
+/* === CERTS SECTION === */
+.certs-section .card {
+  background: none;
+  border: none;
+  padding: 16px 0;
+  box-shadow: none;
+  transition: none;
+}
+
+.certs-section .card:hover {
+  transform: none;
+}
+
+/* === DASHBOARD GRID RESPONSIVE === */
+@media (min-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid, .results-grid, .skills-grid, .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    min-height: auto;
+    padding: 120px 24px 80px;
+  }
+  section {
+    padding: 60px 0;
+  }
+  .nav { display: none; }
+  .nav.active { display: flex; flex-direction: column; gap: 12px; padding: 16px 0; }
+  .hero h1 { font-size: 2.5rem; }
+  .footer { padding: 32px 24px; }
+}
+
+/* === ANIMATED zählen === */
+.animated-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  margin-bottom: 32px;
+  border: 1px solid var(--border-color);
+}
+
+.animated-stats .stat-card {
+  text-align: center;
+}
+
+.animated-stats .stat-value {
+  display: block;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.animated-stats .stat-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .animated-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+/* === SCROLL BAR === */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
