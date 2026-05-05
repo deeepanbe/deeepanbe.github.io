@@ -1,49 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
-    <link rel="stylesheet" href="styles.css">
-    <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deepanraj Arumugam | Data Analyst & Power BI Developer | Portfolio</title>
+  <meta name="description" content="Data & Visualization Engineer with 8+ years of experience in Power BI, SQL, Python, Azure. View my dashboards, projects, and certifications.">
+  <meta name="keywords" content="data analyst, power bi developer, sql, python, azure, data visualization, dashboard, portfolio, ETL, bigquery, snowflake">
+  <meta name="author" content="Deepanraj Arumugam">
+  <link rel="canonical" href="https://deepanraj.work.gd/">
+  <meta property="og:title" content="Deepanraj Arumugam | Data Analyst & Power BI Developer">
+  <meta property="og:description" content="Building intelligent dashboards from raw operations data. 8+ years transforming manufacturing & operations datasets into actionable insights.">
+  <meta property="og:image" content="https://deepanraj.work.gd/assets/profile.jpg">
+  <meta property="og:url" content="https://deepanraj.work.gd/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deepanraj Arumugam | Data Analyst Portfolio">
+  <meta name="twitter:description" content="Data & Visualization Engineer - Power BI, SQL, Python, Azure specialist.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="portfolio.css">
+  <link rel="stylesheet" href="enhanced-styles.css">
 </head>
 <body>
-    <header>
-        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-        <h1>Welcome to My Page</h1>
-    </header>
-    <div class="dashboard">
-        <!-- Dashboard content here -->
+
+<!-- BACKGROUND -->
+<div class="analytics-bg"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container nav-container">
+    <div class="logo">DA</div>
+
+    <div class="header-name">Deepanraj Arumugam</div>
+
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#dashboards">Dashboards</a>
+      <a href="#certs">Certs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="darkModeToggle" class="btn-dark-mode" title="Toggle Dark Mode">🌙</button>
+      <a href="resume/Deepanraj_Arumugam_Data_Analyst.pdf" class="btn primary small" download>Resume</a>
     </div>
-    <form id="contact-form">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
-        <button type="submit">Submit</button>
-    </form>
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Simple validation
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            if (name && email) {
-                alert('Form submitted successfully!');
-            } else {
-                alert('Please fill in all fields.');
-            }
-        });
-    </script>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .dark-mode { background-color: #121212; color: #ffffff; }
-        .dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-        form { display: flex; flex-direction: column; margin-top: 20px; }
-    </style>
+
+    <button class="nav-toggle" id="navToggle">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="about" class="section hero">
+  <div class="container hero-grid">
+
+    <div>
+      <p class="eyebrow">Data & Visualization Engineer</p>
+      <h1 class="hero-title">Deepanraj Arumugam</h1>
+      <p class="hero-subtitle">Building intelligent dashboards from raw operations data.</p>
+
+      <p class="hero-body">
+        8 years turning complex manufacturing and operations datasets into Power BI dashboards,
+        ETL pipelines, and analytics systems that leadership teams rely on.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn primary">Hire Me</a>
+        <a href="resume/Deepanraj_Arumugam_Data_Analyst.pdf" class="btn secondary" download>Download Resume</a>
+      </div>
+
+      <!-- ANIMATED COUNTERS -->
+      <div class="stats-row animated-stats">
+        <div class="stat-card"><div class="stat-value" data-target="8">0</div><div class="stat-label">Years Exp.</div></div>
+        <div class="stat-card"><div class="stat-value" data-target="10">0</div><div class="stat-label">Dashboards</div></div>
+        <div class="stat-card"><div class="stat-value" data-target="40">0</div><div class="stat-label">Time Saved (%)</div></div>
+        <div class="stat-card"><div class="stat-value" data-target="30">0</div><div class="stat-label">Plan Efficiency (%)</div></div>
+      </div>
+    </div>
+
+    <!-- PROFILE PHOTO -->
+    <div class="hero-side">
+      <div class="card profile-photo-card">
+        <img src="assets/profile.jpg" alt="Deepanraj Arumugam" class="profile-photo">
+        <h3>Open to Work</h3>
+        <p>Power BI · SQL · Python · Azure</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="container">
+    <h2>Skills</h2>
+    <p class="section-sub">Full-stack analytics toolkit</p>
+
+    <div class="grid skills-grid">
+      <div class="card">Power BI · DAX · Power Query</div>
+      <div class="card">SQL · Oracle · T-SQL</div>
+      <div class="card">Python · Pandas · EDA</div>
+      <div class="card">Azure · BigQuery · Snowflake</div>
+      <div class="card">ETL Pipelines · Data Modeling</div>
+      <div class="card">Excel · GitHub · CI/CD</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section section-alt">
+  <div class="container">
+    <h2>Experience</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Dakshin Home Fashions</h3>
+        <p>Data Reporting Analyst · 2021–Present</p>
+        <ul>
+          <li>Developed and maintained Power BI dashboards for sales and inventory analytics</li>
+          <li>Built SQL queries for data extraction, transformation, and analysis</li>
+          <li>Automated daily reporting processes, reducing manual effort by 40%</li>
+          <li>Mentored team members on dashboard best practices and analytics</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>Lakshmi Life Sciences</h3>
+        <p>MIS Analyst · 2019–2020</p>
+        <ul>
+          <li>Managed data analytics and reporting initiatives for business intelligence</li>
+          <li>Created interactive dashboards for operational KPIs and performance tracking</li>
+          <li>Optimized database queries improving report generation time by 30%</li>
+          <li>Supported strategic decision-making through data-driven insights</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>Sundram Fasteners</h3>
+        <p>Process Analyst · 2016–2017</p>
+        <ul>
+          <li>Analyzed business processes and identified optimization opportunities</li>
+          <li>Created analytical reports for process improvement initiatives</li>
+          <li>Documented and standardized reporting procedures across departments</li>
+          <li>Contributed to process efficiency improvements and cost optimization</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2>Projects</h2>
+
+    <div class="project-grid">
+
+      <div class="card project-card">
+        <div class="project-thumb thumb-azure"></div>
+        <h3>Azure Analytics Pipeline</h3>
+        <p>End-to-end ETL + Power BI integration for real-time data processing.</p>
+        <div class="project-badges">
+          <span class="badge-tech azure">Azure</span>
+          <span class="badge-tech bi">Power BI</span>
+          <span class="badge-tech sql">SQL</span>
+        </div>
+        <a href="https://github.com/deeepanbe" class="btn ghost small" target="_blank">View Source →</a>
+      </div>
+
+      <div class="card project-card">
+        <div class="project-thumb thumb-sales"></div>
+        <h3>Sales Dashboard</h3>
+        <p>Inventory + dispatch analytics with real-time KPI tracking.</p>
+        <div class="project-badges">
+          <span class="badge-tech bi">Power BI</span>
+          <span class="badge-tech sql">SQL</span>
+        </div>
+        <a href="https://github.com/deeepanbe" class="btn ghost small" target="_blank">View Source →</a>
+      </div>
+
+      <div class="card project-card">
+        <div class="project-thumb thumb-python"></div>
+        <h3>Python Data Analytics</h3>
+        <p>Machine learning models and predictive analytics using Python & Pandas.</p>
+        <div class="project-badges">
+          <span class="badge-tech python">Python</span>
+          <span class="badge-tech analytics">Analytics</span>
+        </div>
+        <a href="https://github.com/deeepanbe" class="btn ghost small" target="_blank">View Source →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="case-studies" class="section">
+  <div class="container">
+    <h2>Results & Impact</h2>
+    <div class="case-studies-grid">
+      <div class="card case-study-card">
+        <h3>Automated Reporting Pipeline</h3>
+        <p class="metric">40% Time Saved</p>
+        <p><strong>Problem:</strong> Manual daily report generation consumed 3+ hours</p>
+        <p><strong>Solution:</strong> Built automated Power BI refresh and email scheduling</p>
+        <p><strong>Impact:</strong> Reduced manual effort by 40%, freed time for strategic analysis</p>
+      </div>
+      <div class="card case-study-card">
+        <h3>Query Optimization</h3>
+        <p class="metric">30% Performance Gain</p>
+        <p><strong>Problem:</strong> Dashboard queries took 5+ minutes to execute</p>
+        <p><strong>Solution:</strong> Optimized SQL with window functions & indexing</p>
+        <p><strong>Impact:</strong> Reduced query time to 12 seconds, improved user experience</p>
+      </div>
+      <div class="card case-study-card">
+        <h3>Real-time Operations Dashboard</h3>
+        <p class="metric">10+ Hours/Week Saved</p>
+        <p><strong>Problem:</strong> Operations team spent 10+ hours weekly on manual data compilation</p>
+        <p><strong>Solution:</strong> Created live Power BI dashboard with real-time data integration</p>
+        <p><strong>Impact:</strong> Enabled instant decision-making for 15+ stakeholders</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARDS -->
+<section id="dashboards" class="section section-alt">
+  <div class="container">
+    <h2>Live Dashboards</h2>
+    <p class="section-sub">Interactive Power BI dashboards showcasing real-time analytics</p>
+
+    <div class="dashboard-grid">
+
+      <div class="card dashboard-card">
+        <h3>HR Dashboard</h3>
+        <iframe src="hr-dashboard.html" class="dashboard-frame" title="HR Analytics Dashboard"></iframe>
+      </div>
+
+      <div class="card dashboard-card">
+        <h3>Sales Dashboard</h3>
+        <iframe src="sales-dashboard.html" class="dashboard-frame" title="Sales Performance Dashboard"></iframe>
+      </div>
+
+      <div class="card dashboard-card">
+        <h3>Operations Dashboard</h3>
+        <iframe src="operations-dashboard.html" class="dashboard-frame" title="Operations KPI Dashboard"></iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB STATS -->
+<section class="section">
+  <div class="container">
+    <div class="grid">
+      <div class="card github-stats-card">
+        <h3>GitHub Stats</h3>
+        <div class="gh-stats-row">
+          <div><span id="gh-repos">0</span><label>Repos</label></div>
+          <div><span id="gh-followers">0</span><label>Followers</label></div>
+          <div><span id="gh-stars">0</span><label>Stars</label></div>
+        </div>
+      </div>
+
+      <div class="card github-activity-card">
+        <h3>GitHub Activity</h3>
+        <img src="https://github-readme-activity-graph.vercel.app/graph?username=deeepanbe&theme=github-light" alt="GitHub Activity Graph">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATE SLIDER -->
+<section id="certs" class="section section-alt">
+  <div class="container">
+    <h2>Certificates & Certifications</h2>
+    <p class="section-sub">Professional credentials and industry certifications</p>
+
+    <div class="cert-slider">
+      <div class="cert-track">
+        <img src="content/cert_1.png" alt="Certificate 1">
+        <img src="content/cert_2.png" alt="Certificate 2">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2>Get In Touch</h2>
+    <p class="section-sub">Let's connect and discuss your data analytics needs</p>
+
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><strong>Email:</strong> <a href="mailto:deepanraj.a@outlook.com">deepanraj.a@outlook.com</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+918940991095">+91 89409 91095</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/deepanraj-data-analyst" target="_blank">deepanraj-data-analyst</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/deeepanbe" target="_blank">deeepanbe</a></p>
+      </div>
+
+      <form id="contactForm" class="contact-form">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input type="text" id="subject" name="subject" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn primary">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Deepanraj Arumugam. All rights reserved. | <a href="/privacy">Privacy</a> | <a href="/terms">Terms</a></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
