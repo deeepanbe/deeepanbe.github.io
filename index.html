@@ -2,335 +2,2006 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deepanraj Arumugam | Data Analyst & Power BI Developer | Portfolio</title>
-  <meta name="description" content="Data & Visualization Engineer with 8+ years of experience in Power BI, SQL, Python, Azure. View my dashboards, projects, and certifications.">
-  <meta name="keywords" content="data analyst, power bi developer, sql, python, azure, data visualization, dashboard, portfolio, ETL, bigquery, snowflake">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Deepanraj Arumugam | Senior Data Analyst & BI Developer | Portfolio</title>
+  <meta name="description" content="Senior Data Analyst with 6+ years experience. Expert in Power BI, SQL, Python, Tableau, Azure, BigQuery. View dashboards, projects, and certifications.">
+  <meta name="keywords" content="data analyst, business analyst, power bi, sql, python, tableau, azure, bigquery, snowflake, data visualization, dashboard, machine learning, etl, data engineering">
   <meta name="author" content="Deepanraj Arumugam">
-  <link rel="canonical" href="https://deepanraj.work.gd/">
-  <meta property="og:title" content="Deepanraj Arumugam | Data Analyst & Power BI Developer">
-  <meta property="og:description" content="Building intelligent dashboards from raw operations data. 8+ years transforming manufacturing & operations datasets into actionable insights.">
-  <meta property="og:image" content="https://deepanraj.work.gd/assets/profile.jpg">
-  <meta property="og:url" content="https://deepanraj.work.gd/">
+  <meta name="theme-color" content="#1F4E79">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deeepanbe.github.io">
+  <meta property="og:title" content="Deepanraj Arumugam | Senior Data Analyst & BI Developer">
+  <meta property="og:description" content="6+ years transforming data into actionable insights. Power BI, SQL, Python, Azure specialist.">
+  <meta property="og:image" content="https://deeepanbe.github.io/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Deepanraj Arumugam | Data Analyst Portfolio">
-  <meta name="twitter:description" content="Data & Visualization Engineer - Power BI, SQL, Python, Azure specialist.">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="portfolio.css">
-  <link rel="stylesheet" href="enhanced-styles.css">
+  <meta name="twitter:url" content="https://deeepanbe.github.io">
+  <meta name="twitter:title" content="Deepanraj Arumugam | Senior Data Analyst">
+  <meta name="twitter:description" content="Building intelligent dashboards from data. Power BI | SQL | Python | Azure">
+  <meta name="twitter:image" content="https://deeepanbe.github.io/assets/og-image.jpg">
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Deepanraj Arumugam",
+    "url": "https://deeepanbe.github.io",
+    "email": "deepanraj.a@outlook.com",
+    "jobTitle": "Senior Data Analyst",
+    "workLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chennai",
+        "addressCountry": "IN"
+      }
+    },
+    "sameAs": [
+      "https://linkedin.com/in/deepanraj-a-data-analyst",
+      "https://github.com/deeepanbe",
+      "https://www.deepanraj.work.gd"
+    ],
+    "skills": ["Power BI", "SQL", "Python", "Tableau", "Azure", "BigQuery", "Snowflake", "Data Analysis", "Business Intelligence", "Machine Learning", "ETL"],
+    "knowsAbout": ["Data Analytics", "Business Intelligence", "Data Visualization", "Python", "SQL", "Power BI", "Tableau"]
+  }
+  </script>
+  
+  <link rel="canonical" href="https://deeepanbe.github.io">
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231F4E79' width='100' height='100'/><text x='50' y='65' font-size='60' font-weight='bold' fill='white' text-anchor='middle'>D</text></svg>">
+  <style>
+    :root {
+      --primary: #1F4E79;
+      --primary-light: #A8D4F0;
+      --secondary: #2E5090;
+      --accent: #FF6B6B;
+      --text-dark: #1a1a1a;
+      --text-light: #555;
+      --bg-light: #f8f9fa;
+      --bg-white: #ffffff;
+      --border-color: #e0e0e0;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+    }
+
+    body.dark-mode {
+      --text-dark: #ffffff;
+      --text-light: #aaa;
+      --bg-light: #1a1a1a;
+      --bg-white: #222;
+      --border-color: #444;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    body.dark-mode .navbar {
+      background: var(--bg-white);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      font-size: 1.8rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      flex: 1;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(20deg);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      border: none;
+      background: none;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Sections */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 6rem 0;
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      min-height: 2.5rem;
+      font-weight: 600;
+    }
+
+    .typing-text {
+      color: var(--primary-light);
+      display: inline-block;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    .hero-location {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .open-to-work {
+      background: rgba(255,255,255,0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .hero-visual {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .visual-card {
+      background: white;
+      color: var(--primary);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .visual-header {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    .visual-metric {
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .metric-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 0.5rem;
+    }
+
+    /* About Section */
+    .about {
+      background: var(--bg-light);
+      padding: 5rem 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-content h3 {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--primary);
+    }
+
+    .about-content p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .about-list {
+      list-style: none;
+    }
+
+    .about-list li {
+      padding: 0.75rem 0;
+      color: var(--text-light);
+      display: flex;
+      gap: 1rem;
+    }
+
+    .about-skills-chart h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .radar-skill {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .skill-bar {
+      background: var(--border-color);
+      height: 8px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-fill {
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      height: 100%;
+      transition: width 0.6s ease;
+    }
+
+    .skill-percent {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Skills Section */
+    .skills {
+      padding: 5rem 0;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-category {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-5px);
+    }
+
+    .category-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .badge-primary {
+      background: rgba(31, 78, 121, 0.1);
+      color: var(--primary);
+    }
+
+    .badge-secondary {
+      background: rgba(255, 107, 107, 0.1);
+      color: #FF6B6B;
+    }
+
+    .badge-accent {
+      background: rgba(162, 155, 254, 0.1);
+      color: #A29BFE;
+    }
+
+    .badge-info {
+      background: rgba(0, 184, 148, 0.1);
+      color: #00B894;
+    }
+
+    .badge-success {
+      background: rgba(27, 219, 130, 0.1);
+      color: #1BDB82;
+    }
+
+    .badge-light {
+      background: rgba(128, 128, 128, 0.1);
+      color: #808080;
+    }
+
+    /* Experience Section */
+    .experience {
+      background: var(--bg-light);
+      padding: 5rem 0;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--primary-light);
+    }
+
+    .timeline-item {
+      margin-left: 100px;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -74px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border: 3px solid white;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    body.dark-mode .timeline-content {
+      background: var(--bg-white);
+    }
+
+    .timeline-header {
+      margin-bottom: 1rem;
+    }
+
+    .timeline-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .timeline-company {
+      display: block;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-date {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .timeline-description {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .timeline-achievements {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .timeline-achievements li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-light);
+      position: relative;
+    }
+
+    .timeline-achievements li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 5rem 0;
+    }
+
+    .project-filters {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      border: 2px solid var(--border-color);
+      background: transparent;
+      color: var(--text-dark);
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .project-card {
+      background: var(--bg-white);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-emoji {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .project-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-badge {
+      display: inline-block;
+      background: rgba(31, 78, 121, 0.1);
+      color: var(--primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .project-cta {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Certifications Section */
+    .certifications {
+      background: var(--bg-light);
+      padding: 5rem 0;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .cert-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    body.dark-mode .cert-card {
+      background: var(--bg-white);
+    }
+
+    .cert-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .cert-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .cert-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .cert-issuer {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .cert-date {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .cert-skills {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* GitHub Stats */
+    .github-stats {
+      padding: 5rem 0;
+    }
+
+    .github-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: scale(1.05);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
+    .github-embed {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-light);
+      border-radius: 8px;
+    }
+
+    .github-link {
+      font-size: 1.1rem;
+    }
+
+    .github-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 5rem 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .contact-form {
+      background: rgba(255,255,255,0.95);
+      padding: 2rem;
+      border-radius: 8px;
+      color: var(--text-dark);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.1);
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-icon {
+      font-size: 1.8rem;
+    }
+
+    .contact-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .contact-info a {
+      color: white;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      text-decoration: none;
+      color: white;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0 1rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section a {
+      color: #aaa;
+      text-decoration: none;
+      line-height: 1.8;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #444;
+      padding-top: 2rem;
+      text-align: center;
+      color: #aaa;
+    }
+
+    .footer-links {
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes blink {
+      0%, 49%, 100% { opacity: 1; }
+      50%, 99% { opacity: 0; }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .slide-in {
+      animation: slideInLeft 0.6s ease-out forwards;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--bg-white);
+        padding: 2rem;
+        gap: 1rem;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .nav-container {
+        gap: 1rem;
+      }
+
+      .hero .container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        left: 12px;
+      }
+
+      .timeline-item {
+        margin-left: 50px;
+      }
+
+      .timeline-marker {
+        left: -32px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      .hero {
+        padding: 3rem 0;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-filters {
+        gap: 0.5rem;
+      }
+
+      .filter-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<!-- BACKGROUND -->
-<div class="analytics-bg"></div>
-
-<!-- HEADER -->
-<header class="site-header">
-  <div class="container nav-container">
-    <div class="logo">DA</div>
-
-    <div class="header-name">Deepanraj Arumugam</div>
-
-    <nav class="nav">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#dashboards">Dashboards</a>
-      <a href="#certs">Certs</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="header-actions">
-      <button id="darkModeToggle" class="btn-dark-mode" title="Toggle Dark Mode">🌙</button>
-      <a href="resume/Deepanraj_Arumugam_Data_Analyst.pdf" class="btn primary small" download>Resume</a>
-    </div>
-
-    <button class="nav-toggle" id="navToggle">☰</button>
-  </div>
-</header>
-
-<!-- HERO -->
-<section id="about" class="section hero">
-  <div class="container hero-grid">
-
-    <div>
-      <p class="eyebrow">Data & Visualization Engineer</p>
-      <h1 class="hero-title">Deepanraj Arumugam</h1>
-      <p class="hero-subtitle">Building intelligent dashboards from raw operations data.</p>
-
-      <p class="hero-body">
-        8 years turning complex manufacturing and operations datasets into Power BI dashboards,
-        ETL pipelines, and analytics systems that leadership teams rely on.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#contact" class="btn primary">Hire Me</a>
-        <a href="resume/Deepanraj_Arumugam_Data_Analyst.pdf" class="btn secondary" download>Download Resume</a>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">📊</span>
+        <span class="logo-text">Deepanraj</span>
       </div>
-
-      <!-- ANIMATED COUNTERS -->
-      <div class="stats-row animated-stats">
-        <div class="stat-card"><div class="stat-value" data-target="8">0</div><div class="stat-label">Years Exp.</div></div>
-        <div class="stat-card"><div class="stat-value" data-target="10">0</div><div class="stat-label">Dashboards</div></div>
-        <div class="stat-card"><div class="stat-value" data-target="40">0</div><div class="stat-label">Time Saved (%)</div></div>
-        <div class="stat-card"><div class="stat-value" data-target="30">0</div><div class="stat-label">Plan Efficiency (%)</div></div>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <a href="#contact" class="btn btn-primary btn-sm">Let's Connect</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
+  </nav>
 
-    <!-- PROFILE PHOTO -->
-    <div class="hero-side">
-      <div class="card profile-photo-card">
-        <img src="assets/profile.jpg" alt="Deepanraj Arumugam" class="profile-photo">
-        <h3>Open to Work</h3>
-        <p>Power BI · SQL · Python · Azure</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="section">
-  <div class="container">
-    <h2>Skills</h2>
-    <p class="section-sub">Full-stack analytics toolkit</p>
-
-    <div class="grid skills-grid">
-      <div class="card">Power BI · DAX · Power Query</div>
-      <div class="card">SQL · Oracle · T-SQL</div>
-      <div class="card">Python · Pandas · EDA</div>
-      <div class="card">Azure · BigQuery · Snowflake</div>
-      <div class="card">ETL Pipelines · Data Modeling</div>
-      <div class="card">Excel · GitHub · CI/CD</div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" class="section section-alt">
-  <div class="container">
-    <h2>Experience</h2>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>Dakshin Home Fashions</h3>
-        <p>Data Reporting Analyst · 2021–Present</p>
-        <ul>
-          <li>Developed and maintained Power BI dashboards for sales and inventory analytics</li>
-          <li>Built SQL queries for data extraction, transformation, and analysis</li>
-          <li>Automated daily reporting processes, reducing manual effort by 40%</li>
-          <li>Mentored team members on dashboard best practices and analytics</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <h3>Lakshmi Life Sciences</h3>
-        <p>MIS Analyst · 2019–2020</p>
-        <ul>
-          <li>Managed data analytics and reporting initiatives for business intelligence</li>
-          <li>Created interactive dashboards for operational KPIs and performance tracking</li>
-          <li>Optimized database queries improving report generation time by 30%</li>
-          <li>Supported strategic decision-making through data-driven insights</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <h3>Sundram Fasteners</h3>
-        <p>Process Analyst · 2016–2017</p>
-        <ul>
-          <li>Analyzed business processes and identified optimization opportunities</li>
-          <li>Created analytical reports for process improvement initiatives</li>
-          <li>Documented and standardized reporting procedures across departments</li>
-          <li>Contributed to process efficiency improvements and cost optimization</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="section">
-  <div class="container">
-    <h2>Projects</h2>
-
-    <div class="project-grid">
-
-      <div class="card project-card">
-        <div class="project-thumb thumb-azure"></div>
-        <h3>Azure Analytics Pipeline</h3>
-        <p>End-to-end ETL + Power BI integration for real-time data processing.</p>
-        <div class="project-badges">
-          <span class="badge-tech azure">Azure</span>
-          <span class="badge-tech bi">Power BI</span>
-          <span class="badge-tech sql">SQL</span>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">👋 Welcome to my portfolio</div>
+        
+        <h1 class="hero-title">Deepanraj Arumugam</h1>
+        
+        <div class="hero-subtitle">
+          <span class="typing-text">Senior Data Analyst</span>
         </div>
-        <a href="https://github.com/deeepanbe" class="btn ghost small" target="_blank">View Source →</a>
-      </div>
-
-      <div class="card project-card">
-        <div class="project-thumb thumb-sales"></div>
-        <h3>Sales Dashboard</h3>
-        <p>Inventory + dispatch analytics with real-time KPI tracking.</p>
-        <div class="project-badges">
-          <span class="badge-tech bi">Power BI</span>
-          <span class="badge-tech sql">SQL</span>
+        
+        <p class="hero-description">
+          6+ years transforming complex datasets into actionable business intelligence. 
+          I specialize in building <strong>Power BI dashboards</strong>, <strong>SQL analytics</strong>, 
+          <strong>Python automation</strong>, and <strong>cloud data pipelines</strong> that drive 
+          strategic decision-making.
+        </p>
+        
+        <div class="hero-location">
+          📍 Chennai, India • <span class="open-to-work">🟢 Open to Work</span>
         </div>
-        <a href="https://github.com/deeepanbe" class="btn ghost small" target="_blank">View Source →</a>
-      </div>
-
-      <div class="card project-card">
-        <div class="project-thumb thumb-python"></div>
-        <h3>Python Data Analytics</h3>
-        <p>Machine learning models and predictive analytics using Python & Pandas.</p>
-        <div class="project-badges">
-          <span class="badge-tech python">Python</span>
-          <span class="badge-tech analytics">Analytics</span>
+        
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-outline">Get In Touch</a>
+          <a href="resume.pdf" class="btn btn-secondary" download>📥 Download Resume</a>
         </div>
-        <a href="https://github.com/deeepanbe" class="btn ghost small" target="_blank">View Source →</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CASE STUDIES -->
-<section id="case-studies" class="section">
-  <div class="container">
-    <h2>Results & Impact</h2>
-    <div class="case-studies-grid">
-      <div class="card case-study-card">
-        <h3>Automated Reporting Pipeline</h3>
-        <p class="metric">40% Time Saved</p>
-        <p><strong>Problem:</strong> Manual daily report generation consumed 3+ hours</p>
-        <p><strong>Solution:</strong> Built automated Power BI refresh and email scheduling</p>
-        <p><strong>Impact:</strong> Reduced manual effort by 40%, freed time for strategic analysis</p>
-      </div>
-      <div class="card case-study-card">
-        <h3>Query Optimization</h3>
-        <p class="metric">30% Performance Gain</p>
-        <p><strong>Problem:</strong> Dashboard queries took 5+ minutes to execute</p>
-        <p><strong>Solution:</strong> Optimized SQL with window functions & indexing</p>
-        <p><strong>Impact:</strong> Reduced query time to 12 seconds, improved user experience</p>
-      </div>
-      <div class="card case-study-card">
-        <h3>Real-time Operations Dashboard</h3>
-        <p class="metric">10+ Hours/Week Saved</p>
-        <p><strong>Problem:</strong> Operations team spent 10+ hours weekly on manual data compilation</p>
-        <p><strong>Solution:</strong> Created live Power BI dashboard with real-time data integration</p>
-        <p><strong>Impact:</strong> Enabled instant decision-making for 15+ stakeholders</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DASHBOARDS -->
-<section id="dashboards" class="section section-alt">
-  <div class="container">
-    <h2>Live Dashboards</h2>
-    <p class="section-sub">Interactive Power BI dashboards showcasing real-time analytics</p>
-
-    <div class="dashboard-grid">
-
-      <div class="card dashboard-card">
-        <h3>HR Dashboard</h3>
-        <iframe src="hr-dashboard.html" class="dashboard-frame" title="HR Analytics Dashboard"></iframe>
-      </div>
-
-      <div class="card dashboard-card">
-        <h3>Sales Dashboard</h3>
-        <iframe src="sales-dashboard.html" class="dashboard-frame" title="Sales Performance Dashboard"></iframe>
-      </div>
-
-      <div class="card dashboard-card">
-        <h3>Operations Dashboard</h3>
-        <iframe src="operations-dashboard.html" class="dashboard-frame" title="Operations KPI Dashboard"></iframe>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- GITHUB STATS -->
-<section class="section">
-  <div class="container">
-    <div class="grid">
-      <div class="card github-stats-card">
-        <h3>GitHub Stats</h3>
-        <div class="gh-stats-row">
-          <div><span id="gh-repos">0</span><label>Repos</label></div>
-          <div><span id="gh-followers">0</span><label>Followers</label></div>
-          <div><span id="gh-stars">0</span><label>Stars</label></div>
+        
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value">6+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">25+</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">40%</div>
+            <div class="stat-label">Efficiency Gains</div>
+          </div>
         </div>
       </div>
-
-      <div class="card github-activity-card">
-        <h3>GitHub Activity</h3>
-        <img src="https://github-readme-activity-graph.vercel.app/graph?username=deeepanbe&theme=github-light" alt="GitHub Activity Graph">
+      
+      <div class="hero-visual">
+        <div class="visual-card">
+          <div class="visual-header">Quick Stats</div>
+          <div class="visual-metric">
+            <div class="metric-label">Top Skills</div>
+            <div class="metric-value">Power BI, SQL, Python</div>
+          </div>
+          <div class="visual-metric">
+            <div class="metric-label">Certifications</div>
+            <div class="metric-value">4 Professional</div>
+          </div>
+          <div class="visual-metric">
+            <div class="metric-label">Tech Stack</div>
+            <div class="metric-value">Azure, BigQuery, Snowflake</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CERTIFICATE SLIDER -->
-<section id="certs" class="section section-alt">
-  <div class="container">
-    <h2>Certificates & Certifications</h2>
-    <p class="section-sub">Professional credentials and industry certifications</p>
-
-    <div class="cert-slider">
-      <div class="cert-track">
-        <img src="content/cert_1.png" alt="Certificate 1">
-        <img src="content/cert_2.png" alt="Certificate 2">
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      
+      <div class="about-grid">
+        <div class="about-content">
+          <h3>Professional Background</h3>
+          <p>
+            I'm a Senior Data Analyst with 6+ years of hands-on experience transforming raw operational 
+            and business data into impactful dashboards, reports, and actionable insights.
+          </p>
+          <p>
+            My expertise spans <strong>Power BI</strong>, <strong>Tableau</strong>, <strong>SQL</strong>, 
+            <strong>Python</strong>, and cloud platforms like <strong>Azure</strong> and <strong>Google BigQuery</strong>. 
+            I've successfully delivered 25+ analytics projects that improved operational efficiency, 
+            reduced reporting time by 40%, and enabled data-driven decision-making across diverse teams.
+          </p>
+          
+          <h3>What I Do</h3>
+          <ul class="about-list">
+            <li>🎯 Design and deploy <strong>interactive BI dashboards</strong> for real-time business insights</li>
+            <li>📊 Build <strong>scalable ETL pipelines</strong> and data warehouses using SQL, Python, and cloud platforms</li>
+            <li>🔍 Conduct exploratory data analysis to uncover trends, patterns, and optimization opportunities</li>
+            <li>💡 Partner with stakeholders to translate business requirements into analytics solutions</li>
+            <li>📈 Apply machine learning techniques for predictive analytics and forecasting</li>
+            <li>⚡ Automate recurring reports and data workflows to enhance efficiency</li>
+          </ul>
+        </div>
+        
+        <div class="about-skills-chart">
+          <h3>Core Competencies</h3>
+          <div class="skills-radar">
+            <div class="radar-skill">
+              <div class="skill-name">Power BI & DAX<span class="skill-percent">92%</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 92%"></div></div>
+            </div>
+            <div class="radar-skill">
+              <div class="skill-name">SQL & Databases<span class="skill-percent">95%</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+            </div>
+            <div class="radar-skill">
+              <div class="skill-name">Python & ML<span class="skill-percent">88%</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 88%"></div></div>
+            </div>
+            <div class="radar-skill">
+              <div class="skill-name">Tableau<span class="skill-percent">85%</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+            </div>
+            <div class="radar-skill">
+              <div class="skill-name">Azure & Cloud<span class="skill-percent">80%</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+            </div>
+            <div class="radar-skill">
+              <div class="skill-name">Business Analysis<span class="skill-percent">90%</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT SECTION -->
-<section id="contact" class="section">
-  <div class="container">
-    <h2>Get In Touch</h2>
-    <p class="section-sub">Let's connect and discuss your data analytics needs</p>
-
-    <div class="contact-wrapper">
-      <div class="contact-info">
-        <h3>Contact Information</h3>
-        <p><strong>Email:</strong> <a href="mailto:deepanraj.a@outlook.com">deepanraj.a@outlook.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+918940991095">+91 89409 91095</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/deepanraj-data-analyst" target="_blank">deepanraj-data-analyst</a></p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/deeepanbe" target="_blank">deeepanbe</a></p>
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <h2 class="section-title">Skills & Technologies</h2>
+      
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3 class="category-title">📊 BI & Visualization</h3>
+          <div class="skill-badges">
+            <span class="badge badge-primary">Power BI</span>
+            <span class="badge badge-primary">Tableau</span>
+            <span class="badge badge-primary">Looker Studio</span>
+            <span class="badge badge-primary">DAX</span>
+            <span class="badge badge-primary">Power Query</span>
+            <span class="badge badge-primary">RLS & Drill-through</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3 class="category-title">🗄️ SQL & Databases</h3>
+          <div class="skill-badges">
+            <span class="badge badge-secondary">Oracle SQL</span>
+            <span class="badge badge-secondary">MS SQL Server</span>
+            <span class="badge badge-secondary">BigQuery</span>
+            <span class="badge badge-secondary">Snowflake</span>
+            <span class="badge badge-secondary">Azure SQL</span>
+            <span class="badge badge-secondary">Window Functions</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3 class="category-title">🐍 Python & ML</h3>
+          <div class="skill-badges">
+            <span class="badge badge-accent">Pandas</span>
+            <span class="badge badge-accent">NumPy</span>
+            <span class="badge badge-accent">Scikit-learn</span>
+            <span class="badge badge-accent">SARIMA</span>
+            <span class="badge badge-accent">Prophet</span>
+            <span class="badge badge-accent">Streamlit</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3 class="category-title">☁️ Cloud & Platforms</h3>
+          <div class="skill-badges">
+            <span class="badge badge-info">Azure SQL Database</span>
+            <span class="badge badge-info">Azure Blob Storage</span>
+            <span class="badge badge-info">GCP BigQuery</span>
+            <span class="badge badge-info">DP-900 Certified</span>
+            <span class="badge badge-info">GitHub Actions</span>
+            <span class="badge badge-info">CI/CD Pipelines</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3 class="category-title">💼 Business Analysis</h3>
+          <div class="skill-badges">
+            <span class="badge badge-success">Requirements Gathering</span>
+            <span class="badge badge-success">KPI Definition</span>
+            <span class="badge badge-success">Process Mapping</span>
+            <span class="badge badge-success">Root Cause Analysis</span>
+            <span class="badge badge-success">Stakeholder Mgmt</span>
+            <span class="badge badge-success">Data Modeling</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3 class="category-title">📈 Other Tools</h3>
+          <div class="skill-badges">
+            <span class="badge badge-light">Advanced Excel</span>
+            <span class="badge badge-light">Git & GitHub</span>
+            <span class="badge badge-light">ETL Pipelines</span>
+            <span class="badge badge-light">Data Validation</span>
+            <span class="badge badge-light">Matplotlib/Seaborn</span>
+            <span class="badge badge-light">Jupyter Notebooks</span>
+          </div>
+        </div>
       </div>
-
-      <form id="contactForm" class="contact-form">
-        <div class="form-group">
-          <label for="name">Name *</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject *</label>
-          <input type="text" id="subject" name="subject" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Message *</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn primary">Send Message</button>
-      </form>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <p>&copy; 2026 Deepanraj Arumugam. All rights reserved. | <a href="/privacy">Privacy</a> | <a href="/terms">Terms</a></p>
-  </div>
-</footer>
+  <!-- Experience Timeline -->
+  <section id="experience" class="experience">
+    <div class="container">
+      <h2 class="section-title">Professional Experience</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Data Analyst — Operations & Business Intelligence</h3>
+              <span class="timeline-company">🏭 Dakshin Home Fashions, Karur</span>
+              <span class="timeline-date">Mar 2021 – Present (4+ years)</span>
+            </div>
+            <p class="timeline-description">
+              Leading analytics initiatives for operations and business intelligence across manufacturing and supply chain domains.
+            </p>
+            <ul class="timeline-achievements">
+              <li>Designed and deployed Power BI dashboards monitoring operational KPIs, enabling real-time performance tracking for 15+ stakeholders</li>
+              <li>Automated recurring reports using Power BI and Excel, reducing manual effort by 40% and freeing team capacity for strategic analysis</li>
+              <li>Built consolidated datasets using Oracle SQL (joins, CTEs, window functions) to support cross-functional analysis and decision-making</li>
+              <li>Performed Python-based exploratory data analysis to identify operational inefficiencies and present actionable insights</li>
+              <li>Standardized datasets and reporting processes, improving consistency and enabling reliable downstream BI tools</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3 class="timeline-title">MIS & Quality Analyst</h3>
+              <span class="timeline-company">🏥 Lakshmi Life Sciences Ltd, Coimbatore</span>
+              <span class="timeline-date">Feb 2019 – Jan 2020 (1 year)</span>
+            </div>
+            <p class="timeline-description">
+              Built and maintained MIS dashboards and reports for quality and operational performance tracking.
+            </p>
+            <ul class="timeline-achievements">
+              <li>Created MIS dashboards and reports to track operational performance and quality KPIs for stakeholder reviews</li>
+              <li>Analyzed quality data using SQL and Excel to identify defect patterns and recommend corrective actions</li>
+              <li>Prepared daily, weekly, and monthly reports supporting production planning and operational decision-making</li>
+              <li>Implemented data validation processes across operational datasets, improving reporting accuracy and reliability</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Process & Reporting Analyst</h3>
+              <span class="timeline-company">⚙️ Sundram Fasteners Limited, Chennai</span>
+              <span class="timeline-date">May 2016 – Oct 2017 (1.5 years)</span>
+            </div>
+            <p class="timeline-description">
+              Analyzed production data and standardized MIS reporting for manufacturing operations.
+            </p>
+            <ul class="timeline-achievements">
+              <li>Analyzed production data to monitor operational performance using standardized dashboards and reports</li>
+              <li>Standardized MIS reporting to track production KPIs and quality metrics consistently across departments</li>
+              <li>Worked with engineering teams to identify process gaps, analyze root causes, and recommend improvements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">Innovative data solutions across industries</p>
+      
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="power-bi">Power BI</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+        <button class="filter-btn" data-filter="sql">SQL</button>
+        <button class="filter-btn" data-filter="ml">ML</button>
+        <button class="filter-btn" data-filter="azure">Azure</button>
+        <button class="filter-btn" data-filter="tableau">Tableau</button>
+      </div>
+      
+      <div class="projects-grid">
+        <div class="project-card" data-category="power-bi sql azure">
+          <div class="project-header">
+            <span class="project-emoji">📊</span>
+            <h3>powerbi-universal-analytics-dashboard</h3>
+          </div>
+          <p class="project-desc">Professional Power BI dashboard for Finance, Sales, HR, and Marketing using 100k synthetic dataset with DAX measures, drillthroughs.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Power BI</span>
+            <span class="tech-badge">DAX</span>
+            <span class="tech-badge">SQL</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/powerbi-universal-analytics-dashboard" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="sql azure python">
+          <div class="project-header">
+            <span class="project-emoji">🏢</span>
+            <h3>enterprise-analytics-project</h3>
+          </div>
+          <p class="project-desc">End-to-end enterprise analytics using Snowflake, SQL, Python, Azure Blob Storage, and Power BI for e-commerce analysis.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Snowflake</span>
+            <span class="tech-badge">SQL</span>
+            <span class="tech-badge">Azure</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/enterprise-analytics-project" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="sql">
+          <div class="project-header">
+            <span class="project-emoji">🌐</span>
+            <h3>gcp-bigquery-ecommerce-analysis</h3>
+          </div>
+          <p class="project-desc">E-Commerce Analytics using Google Cloud BigQuery with SQL analysis on Brazilian e-commerce dataset.</p>
+          <div class="project-tech">
+            <span class="tech-badge">BigQuery</span>
+            <span class="tech-badge">SQL</span>
+            <span class="tech-badge">GCP</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/gcp-bigquery-ecommerce-analysis" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="python ml">
+          <div class="project-header">
+            <span class="project-emoji">👥</span>
+            <h3>customer-segmentation-ml</h3>
+          </div>
+          <p class="project-desc">RFM and K-means customer segmentation using Python and ML. Includes clustering analysis and customer profiling.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Scikit-learn</span>
+            <span class="tech-badge">Pandas</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/customer-segmentation-ml" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="python ml tableau">
+          <div class="project-header">
+            <span class="project-emoji">📉</span>
+            <h3>customer-churn-prediction-ml</h3>
+          </div>
+          <p class="project-desc">ML model to predict customer churn using Python, scikit-learn, and Tableau with interactive dashboard.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">ML</span>
+            <span class="tech-badge">Tableau</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/customer-churn-prediction-ml" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="python power-bi">
+          <div class="project-header">
+            <span class="project-emoji">📅</span>
+            <h3>sales-forecasting-dashboard-powerbi</h3>
+          </div>
+          <p class="project-desc">Advanced time series forecasting dashboard in Power BI with Python integration. Predicts sales with 94% accuracy.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Power BI</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">SARIMA</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/sales-forecasting-dashboard-powerbi" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="python">
+          <div class="project-header">
+            <span class="project-emoji">🧑‍💼</span>
+            <h3>IBM-HR-ATTRITION-ANALYSIS</h3>
+          </div>
+          <p class="project-desc">Exploratory data analysis of IBM HR dataset identifying key attrition factors using Pandas and Seaborn visualization.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">EDA</span>
+            <span class="tech-badge">Pandas</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/IBM-HR-ATTRITION-ANALYSIS" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="python sql power-bi">
+          <div class="project-header">
+            <span class="project-emoji">🛍️</span>
+            <h3>retail-sales-analytics</h3>
+          </div>
+          <p class="project-desc">Comprehensive retail sales analysis using SQL, Python, and Power BI with data extraction, ETL, and interactive dashboards.</p>
+          <div class="project-tech">
+            <span class="tech-badge">SQL</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Power BI</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/retail-sales-analytics" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+        
+        <div class="project-card" data-category="python power-bi">
+          <div class="project-header">
+            <span class="project-emoji">📦</span>
+            <h3>retail-inventory-management</h3>
+          </div>
+          <p class="project-desc">Inventory management system with Python and Power BI optimizing stock levels and reducing waste by 22%.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Power BI</span>
+            <span class="tech-badge">Analytics</span>
+          </div>
+          <div class="project-cta">
+            <a href="https://github.com/deeepanbe/retail-inventory-management" target="_blank" class="btn btn-sm btn-primary">View Repository</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="certifications">
+    <div class="container">
+      <h2 class="section-title">Certifications & Credentials</h2>
+      
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-icon">🏆</div>
+          <h3>Google Data Analytics Professional Certificate</h3>
+          <p class="cert-issuer">Google / Coursera</p>
+          <p class="cert-date">July 2025</p>
+          <div class="cert-skills">Data Analysis, Visualization, SQL</div>
+          <a href="https://coursera.org" target="_blank" class="btn btn-sm btn-primary">Verify</a>
+        </div>
+        
+        <div class="cert-card">
+          <div class="cert-icon">📊</div>
+          <h3>Data Visualization Fundamentals</h3>
+          <p class="cert-issuer">Microsoft / Coursera</p>
+          <p class="cert-date">April 2025</p>
+          <div class="cert-skills">Power BI, Tableau, Design</div>
+          <a href="https://coursera.org" target="_blank" class="btn btn-sm btn-primary">Verify</a>
+        </div>
+        
+        <div class="cert-card">
+          <div class="cert-icon">☁️</div>
+          <h3>Microsoft Azure Data Fundamentals (DP-900)</h3>
+          <p class="cert-issuer">Microsoft</p>
+          <p class="cert-date">March 2024</p>
+          <div class="cert-skills">Azure, Cloud, Data Services</div>
+          <a href="https://learn.microsoft.com/en-us/certifications/" target="_blank" class="btn btn-sm btn-primary">Verify</a>
+        </div>
+        
+        <div class="cert-card">
+          <div class="cert-icon">💼</div>
+          <h3>Business Analyst Master Program</h3>
+          <p class="cert-issuer">Edureka</p>
+          <p class="cert-date">March 2025</p>
+          <div class="cert-skills">Requirements, Process, Analytics</div>
+          <a href="https://edureka.co" target="_blank" class="btn btn-sm btn-primary">Verify</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub Stats Section -->
+  <section id="github-stats" class="github-stats">
+    <div class="container">
+      <h2 class="section-title">GitHub Activity</h2>
+      
+      <div class="github-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div class="stat-value">30+</div>
+          <div class="stat-label">Public Repositories</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-value">25+</div>
+          <div class="stat-label">Total Stars</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-value">50+</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-value">500+</div>
+          <div class="stat-label">Contributions</div>
+        </div>
+      </div>
+      
+      <div class="github-embed">
+        <p class="github-link">
+          🔗 <a href="https://github.com/deeepanbe" target="_blank">Visit my GitHub Profile</a> 
+          to explore all projects and contributions
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title">Let's Connect</h2>
+      <p class="section-subtitle">Reach out for collaborations, opportunities, or just to say hi!</p>
+      
+      <div class="contact-grid">
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required placeholder="john@example.com">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required placeholder="Project Inquiry">
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Tell me about your needs..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          </form>
+        </div>
+        
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <div>
+              <div class="contact-label">Email</div>
+              <a href="mailto:deepanraj.a@outlook.com">deepanraj.a@outlook.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <span class="contact-icon">📱</span>
+            <div>
+              <div class="contact-label">Phone</div>
+              <a href="tel:+918940991095">+91 89409 91095</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <span class="contact-icon">💼</span>
+            <div>
+              <div class="contact-label">LinkedIn</div>
+              <a href="https://linkedin.com/in/deepanraj-a-data-analyst" target="_blank">deepanraj-a-data-analyst</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <span class="contact-icon">🐙</span>
+            <div>
+              <div class="contact-label">GitHub</div>
+              <a href="https://github.com/deeepanbe" target="_blank">@deeepanbe</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <span class="contact-icon">🌐</span>
+            <div>
+              <div class="contact-label">Portfolio</div>
+              <a href="https://www.deepanraj.work.gd" target="_blank">deepanraj.work.gd</a>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <a href="https://linkedin.com/in/deepanraj-a-data-analyst" target="_blank" class="social-btn" title="LinkedIn">in</a>
+            <a href="https://github.com/deeepanbe" target="_blank" class="social-btn" title="GitHub">⚙️</a>
+            <a href="mailto:deepanraj.a@outlook.com" class="social-btn" title="Email">📧</a>
+            <a href="https://www.deepanraj.work.gd" target="_blank" class="social-btn" title="Portfolio">🌐</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Deepanraj Arumugam</h4>
+          <p>Senior Data Analyst | Business Intelligence Developer</p>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://linkedin.com/in/deepanraj-a-data-analyst" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/deeepanbe" target="_blank">GitHub</a></li>
+            <li><a href="mailto:deepanraj.a@outlook.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Deepanraj Arumugam. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <span>•</span>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+    
+    // Load theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    }
+    
+    // Mobile Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when link clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+    
+    // Navbar Active Link
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+    
+    // Typing Animation
+    const typingText = document.querySelector('.typing-text');
+    const roles = ['Senior Data Analyst', 'Business Analyst', 'BI Developer', 'Data Engineer'];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typeAnimation() {
+      const currentRole = roles[roleIndex];
+      
+      if (isDeleting) {
+        typingText.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingText.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      if (!isDeleting && charIndex === currentRole.length) {
+        setTimeout(() => { isDeleting = true; }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+      
+      setTimeout(typeAnimation, isDeleting ? 50 : 100);
+    }
+    
+    typeAnimation();
+    
+    // Project Filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.getAttribute('data-filter');
+        
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category').includes(filter)) {
+            card.style.display = 'block';
+            card.classList.add('fade-in');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+    
+    // Contact Form Handling
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // Construct mailto link
+        const mailtoLink = `mailto:deepanraj.a@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+        window.location.href = mailtoLink;
+        
+        contactForm.reset();
+      });
+    }
+    
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('section, .timeline-item, .project-card, .cert-card').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
