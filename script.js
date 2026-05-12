@@ -261,11 +261,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 /* ===========================
    INITIALIZE ON PAGE LOAD
    =========================== */
-document.addEventListener('DOMContentLoaded', () => {
+function initializeSiteEnhancements() {
   initDarkMode();
   initContactForm();
   initPrivateAccessPortal();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeSiteEnhancements, { once: true });
+} else {
+  initializeSiteEnhancements();
+}
 
 /* ===========================
    PRIVATE ACCESS PORTAL
