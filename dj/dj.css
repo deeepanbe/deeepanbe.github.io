@@ -1,0 +1,251 @@
+:root {
+  --bg-primary: #F7F5F0;
+  --bg-secondary: #EEEAE2;
+  --bg-accent: #1A1A18;
+  --text-primary: #1A1A18;
+  --text-secondary: #4A4844;
+  --text-muted: #8A8680;
+  --accent-gold: #C8973A;
+  --accent-teal: #1E7B6B;
+  --border: #D8D4CC;
+  --white: #FFFFFF;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+.dj-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 310px 1fr;
+}
+
+.dj-sidebar {
+  background: var(--bg-accent);
+  color: var(--white);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dj-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dj-avatar,
+.dj-msg__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-gold);
+  color: var(--bg-accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.dj-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.dj-tagline {
+  color: #D7D1C6;
+  font-size: 13px;
+}
+
+.dj-sidebar__nav {
+  display: grid;
+  gap: 10px;
+  margin: 42px 0;
+}
+
+.dj-mode {
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: #EDE7DC;
+  border-radius: 8px;
+  padding: 13px 14px;
+  cursor: pointer;
+}
+
+.dj-mode.active,
+.dj-mode:hover {
+  background: var(--bg-primary);
+  color: var(--bg-accent);
+}
+
+.dj-back {
+  color: #D7D1C6;
+  text-decoration: none;
+}
+
+.dj-main {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 0;
+}
+
+.dj-messages {
+  overflow: auto;
+  padding: 42px;
+}
+
+.dj-msg {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.dj-msg--user {
+  justify-content: flex-end;
+}
+
+.dj-msg--user .dj-msg__bubble {
+  background: var(--accent-teal);
+  color: var(--white);
+}
+
+.dj-msg__bubble {
+  max-width: min(720px, 86%);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.dj-msg__bubble pre {
+  overflow: auto;
+  background: var(--bg-accent);
+  color: var(--bg-primary);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.dj-msg__bubble code {
+  font-family: var(--font-mono);
+}
+
+.dj-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 58px;
+}
+
+.dj-chip,
+.upload-inner button {
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 999px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.dj-input-bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 18px 28px;
+  background: rgba(247,245,240,0.92);
+  border-top: 1px solid var(--border);
+}
+
+#dj-input {
+  resize: none;
+  min-height: 50px;
+  max-height: 160px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.dj-send-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--bg-accent);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.dj-upload-zone {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(247,245,240,0.88);
+}
+
+.upload-inner {
+  border: 1px dashed var(--accent-teal);
+  background: var(--white);
+  border-radius: 14px;
+  padding: 34px;
+  text-align: center;
+}
+
+#file-input {
+  display: none;
+}
+
+.dot-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 3px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  animation: dotPulse 1s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-4px); opacity: 1; }
+}
+
+@media (max-width: 820px) {
+  .dj-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dj-sidebar {
+    min-height: auto;
+  }
+
+  .dj-sidebar__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 24px 0;
+  }
+
+  .dj-messages {
+    padding: 24px 16px;
+  }
+
+  .dj-msg__bubble {
+    max-width: 92%;
+  }
+}

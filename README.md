@@ -1,104 +1,90 @@
-# Deepanraj Arumugam — Portfolio
+# Deepanraj A. — Portfolio
 
-**Data & Visualization Engineer | Power BI Developer | SQL · Python · Azure**
+Live: [deeepanbe.github.io](https://deeepanbe.github.io)
 
-[![Portfolio](https://img.shields.io/badge/portfolio-deepanraj.work.gd-blue?logo=html5)](https://deepanraj.work.gd/)
-[![Email](https://img.shields.io/badge/email-deepanraj.a%40outlook.com-orange?logo=gmail)](mailto:deepanraj.a@outlook.com)
-[![LinkedIn](https://img.shields.io/badge/linkedin-deepanraj--data--analyst-blue?logo=linkedin)](https://linkedin.com/in/deepanraj-data-analyst)
-[![Power BI](https://img.shields.io/badge/power-bi-yellow?logo=powerbi)](#)
-[![SQL](https://img.shields.io/badge/sql-postgresql-blue?logo=postgresql)](#)
-[![Python](https://img.shields.io/badge/python-3.x-green?logo=python)](#)
-[![Azure](https://img.shields.io/badge/azure-cloud-blue?logo=microsoftazure)](#)
+Data Analyst & BI Developer portfolio with an editorial-light design system and DJ AI integration.
 
-Live portfolio: [deeepanbe.github.io](https://deeepanbe.github.io)
+## Positioning
 
----
+Deepanraj A. is a Power BI Developer and Operations Analyst with 4+ years across manufacturing, textile, merchandising, quality, and operations analytics.
 
-## 📁 Folder Structure
+Target roles:
 
+- Data Analyst
+- BI Developer
+- Data Engineer
+- Operations Analyst
+- Power BI Developer
+
+Target locations:
+
+- Bengaluru
+- Chennai
+- Kochi
+- Remote-friendly analytics teams
+
+## Portfolio Stack
+
+- HTML
+- CSS
+- Vanilla JavaScript
+- GitHub Pages
+
+## DJ AI
+
+DJ AI is Deepanraj's portfolio assistant.
+
+Live page: [deeepanbe.github.io/dj/dj.html](https://deeepanbe.github.io/dj/dj.html)
+
+Current frontend features:
+
+- Project explanation assistant
+- SQL generator mode
+- Python helper mode
+- Resume analyzer mode
+- Dataset upload shell
+- Local fallback answers before backend deployment
+
+Planned backend:
+
+- FastAPI
+- OpenAI
+- Markdown knowledge base
+- Pandas dataset analysis
+- Render deployment
+
+## Suggested Repository Plan
+
+- `deeepanbe.github.io` — public portfolio
+- `dj-ai-backend` — private FastAPI backend
+- `dj-ai-knowledge` — private knowledge base
+- `dj-ai` — public recruiter-facing DJ AI showcase
+
+## Key Files
+
+```text
+index.html
+style.css
+main.js
+dj/
+  dj.html
+  dj.css
+  dj.js
+  dj-config.js
+  dj-widget.js
+assets/
+  resume.pdf
 ```
-/
-├── index.html                      ← Main portfolio homepage
-├── style.css                       ← Shared design tokens & utilities
-├── script.js                       ← Shared JS (theme, typing, chatbot, AI)
-├── portfolio.css                   ← Extended page styles
-├── portfolio.js                    ← Extended utilities
-├── manifest.json                   ← PWA manifest
-│
-├── hr-dashboard.html               ← HR Analytics interactive demo
-├── sales-dashboard.html            ← Sales Performance dashboard demo
-├── operations-dashboard.html       ← Manufacturing/OPS KPI dashboard demo
-│
-├── resume/
-│   ├── Deepanraj_DataVisualization_Engineer.pdf    ← Primary resume
-│   ├── Deepanraj_DataVisualization_Engineer_v2.pdf ← Alternate version
-│   ├── Deepanraj_DataVisualization_Engineer_v3.pdf ← Alternate version
-│   └── Deepanraj_Operational_Analyst.pdf           ← Ops-focused resume
-│
-├── content/
-│   └── certifications/
-│       ├── cert_1.png              ← Certificate image 1
-│       └── cert_2.png              ← Certificate image 2
-│
-└── assets/
-    └── (icons, images — add as needed)
-```
 
----
+## SEO Focus
 
-## ✨ Features
-
-- **AI-Powered Chatbot** — Claude-powered assistant answers recruiter questions about skills, experience, and availability in real time
-- **Typing Animation** — Cycles through role titles (Data Analyst, BI Developer, Visualization Engineer, etc.)
-- **Live Dashboards** — Three fully interactive SVG dashboard demos: HR Analytics, Sales Performance, Operations KPIs
-- **Download Resume** — Direct PDF download buttons for both resume versions
-- **Certificate Gallery** — Lightbox viewer for certificate images
-- **Dark / Light Mode** — Full CSS variable theming with localStorage persistence
-- **Scroll Animations** — Fade-up entrance animations on all sections
-- **Responsive** — Mobile-first, works down to 360px
-- **PWA Ready** — manifest.json included for installability
-
----
-
-## 🚀 Deployment (GitHub Pages)
-
-1. Push all files to your `main` branch
-2. Go to **Settings → Pages → Branch: main / root**
-3. Your portfolio will be live at `https://deeepanbe.github.io`
-
----
-
-## 📄 Resume Files
-
-| File | Purpose |
-|------|---------|
-| `Deepanraj_DataVisualization_Engineer.pdf` | Primary — for Data Viz / BI Developer roles |
-| `Deepanraj_Operational_Analyst.pdf` | For Operations Analyst roles |
-
-To add more resumes: drop PDF into the `/resume/` folder and add a new `<a>` tag in the Resume section of `index.html`.
-
----
-
-## 🖼️ Certificate Images
-
-Place certificate images in `/content/certifications/` named `cert_1.png`, `cert_2.png`, etc.
-The gallery in `index.html` auto-hides cards if the image file is missing (`onerror` handler).
-To add more: duplicate the `.cert-img-card` block and update the `src` path.
-
----
-
-## 🤖 AI Chatbot
-
-The chatbot uses the Anthropic Claude API (`claude-sonnet-4-20250514`).
-The API key is handled by the platform — no key setup needed on GitHub Pages when served via claude.ai artifacts.
-
-For standalone deployment, you'll need to proxy the API call through a backend service (never expose API keys in frontend).
-
----
-
-## 📞 Contact
-
-- Email: deepanraj.a@outlook.com
-- Phone: +91 89409 91095
-- LinkedIn: [linkedin.com/in/deepanraj-data-analyst](https://linkedin.com/in/deepanraj-data-analyst)
-- GitHub: [github.com/deeepanbe](https://github.com/deeepanbe)
+- Data Analyst Chennai
+- Data Analyst Bengaluru
+- Power BI Developer
+- BI Developer
+- SQL Analyst
+- Python Data Analyst
+- Azure Data Engineer
+- Manufacturing Analytics
+- Textile Analytics
+- Operations Analytics

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJ — AI Data Analyst | Deepanraj</title>
+  <meta name="description" content="DJ AI is Deepanraj A.'s portfolio assistant for SQL generation, Power BI project explanations, Python help, resume review, and dataset analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dj.css">
+</head>
+<body>
+  <div class="dj-layout">
+    <aside class="dj-sidebar">
+      <div class="dj-sidebar__brand">
+        <div class="dj-avatar">DJ</div>
+        <div>
+          <div class="dj-name">DJ AI</div>
+          <div class="dj-tagline">Data Analyst Assistant</div>
+        </div>
+      </div>
+      <nav class="dj-sidebar__nav" aria-label="DJ modes">
+        <button class="dj-mode active" data-mode="chat">Chat</button>
+        <button class="dj-mode" data-mode="sql">SQL Generator</button>
+        <button class="dj-mode" data-mode="python">Python Helper</button>
+        <button class="dj-mode" data-mode="resume">Resume Analyzer</button>
+        <button class="dj-mode" data-mode="upload">Dataset Upload</button>
+      </nav>
+      <div class="dj-sidebar__footer">
+        <a href="../" class="dj-back">← Back to Portfolio</a>
+      </div>
+    </aside>
+
+    <main class="dj-main">
+      <div class="dj-messages" id="dj-messages">
+        <div class="dj-msg dj-msg--ai">
+          <div class="dj-msg__avatar">DJ</div>
+          <div class="dj-msg__bubble" id="greeting-bubble"></div>
+        </div>
+        <div class="dj-suggestions" id="dj-suggestions"></div>
+      </div>
+
+      <div class="dj-upload-zone" id="dj-upload-zone" style="display:none">
+        <div class="upload-inner">
+          <div class="upload-icon">Data</div>
+          <p>Drop CSV / XLSX / JSON here</p>
+          <input type="file" id="file-input" accept=".csv,.xlsx,.json">
+          <button type="button" onclick="document.getElementById('file-input').click()">Choose File</button>
+        </div>
+      </div>
+
+      <div class="dj-input-bar">
+        <textarea id="dj-input" placeholder="Ask DJ anything..." rows="1" onkeydown="handleKey(event)"></textarea>
+        <button class="dj-send-btn" type="button" onclick="sendMessage()" aria-label="Send message">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
+          </svg>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <script src="dj-config.js"></script>
+  <script src="dj.js"></script>
+</body>
+</html>
