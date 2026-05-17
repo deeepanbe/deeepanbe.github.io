@@ -1,5 +1,6 @@
 let conversationHistory = [];
 let currentMode = 'chat';
+const djRateLimit = createLocalRateLimiter({ limit: 60, windowMs: 60_000 });
 
 const SYSTEM_PROMPTS = {
   chat: "You are DJ, Deepanraj A.'s AI Data Analyst assistant. Explain his projects, resume, skills, and analytics workflow clearly.",
@@ -37,8 +38,21 @@ function renderSuggestions() {
 
 async function sendMessage(customText = null) {
   const input = document.getElementById('dj-input');
-  const text = customText || input.value.trim();
+  const rate = djRateLimit();
+  if (!rate.allowed) {
+    appendMessage('ai', 'DJ is rate limited for a moment. Please wait a few seconds and try again.');
+    return;
+  }
+
+  const sanitized = sanitizeDJInput(customText || input.value.trim());
+  const text = sanitized.value;
   if (!text) return;
+
+  if (sanitized.blocked) {
+    appendMessage('ai', text);
+    input.value = '';
+    return;
+  }
 
   input.value = '';
   appendMessage('user', text);
@@ -49,9 +63,13 @@ async function sendMessage(customText = null) {
     const shouldUseBackend = DJ_CONFIG.BACKEND_URL && !DJ_CONFIG.BACKEND_URL.includes('your-dj-api');
     if (!shouldUseBackend) throw new Error('Backend not configured');
 
+    const token = sessionStorage.getItem('dj_access_token');
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
     const response = await fetch(`${DJ_CONFIG.BACKEND_URL}/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ messages: conversationHistory, mode: currentMode })
     });
 
@@ -65,6 +83,42 @@ async function sendMessage(customText = null) {
     appendMessage('ai', reply);
     conversationHistory.push({ role: 'assistant', content: reply });
   }
+}
+
+function createLocalRateLimiter({ limit, windowMs }) {
+  const timestamps = [];
+  return function checkLimit() {
+    const now = Date.now();
+    while (timestamps.length && now - timestamps[0] > windowMs) timestamps.shift();
+    if (timestamps.length >= limit) {
+      return { allowed: false, retryAfterMs: windowMs - (now - timestamps[0]) };
+    }
+    timestamps.push(now);
+    return { allowed: true, retryAfterMs: 0 };
+  };
+}
+
+function sanitizeDJInput(value) {
+  const cleaned = String(value || '')
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '')
+    .trim()
+    .slice(0, 8000);
+
+  const blocked = [
+    /ignore\s+(all\s+)?previous\s+instructions/i,
+    /reveal\s+(the\s+)?(system|developer)\s+prompt/i,
+    /print\s+(your\s+)?hidden\s+instructions/i,
+    /bypass\s+(security|auth|authentication)/i,
+    /forget\s+(your\s+)?rules/i,
+    /show\s+(api\s+key|jwt|secret)/i
+  ].some((pattern) => pattern.test(cleaned));
+
+  return {
+    value: blocked
+      ? 'Blocked prompt-injection attempt. Please ask DJ a normal analytics, project, SQL, Python, or resume question.'
+      : cleaned,
+    blocked
+  };
 }
 
 function localDJResponse(text) {

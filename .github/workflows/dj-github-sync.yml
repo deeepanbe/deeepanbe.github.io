@@ -1,0 +1,16 @@
+name: DJ GitHub Knowledge Sync
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger DJ backend GitHub sync
+        run: |
+          curl -X POST "${{ secrets.DJ_BACKEND_URL }}/sync/github" \
+            -H "Authorization: Bearer ${{ secrets.DJ_SYNC_JWT }}" \
+            -H "Content-Type: application/json"

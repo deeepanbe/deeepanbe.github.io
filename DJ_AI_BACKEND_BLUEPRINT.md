@@ -4,6 +4,10 @@ Create this as a separate private repository:
 
 `dj-ai-backend`
 
+The current portfolio repo includes a safe scaffold under `/backend` and
+`/frontend/security` so the private repo can be created quickly without
+committing secrets.
+
 ## Structure
 
 ```text
@@ -24,6 +28,7 @@ dj-ai-backend/
 │   ├── powerbi_notes.md
 │   └── certifications.md
 ├── .env
+├── .env.example
 ├── requirements.txt
 └── Procfile
 ```
@@ -85,6 +90,14 @@ Environment variable:
 
 ```text
 OPENAI_API_KEY=your_openai_key_here
+```
+
+For Claude production, use:
+
+```text
+CLAUDE_API_KEY=your_claude_key_here
+CLAUDE_MODEL=claude-3-5-sonnet-20240620
+JWT_SECRET=long_random_secret
 ```
 
 After deployment, update:
