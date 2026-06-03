@@ -1,24 +1,10 @@
 {
-  "name": "Deepanraj Arumugam | Data & Visualization Engineer",
-  "short_name": "Deepanraj Portfolio",
-  "description": "Data Analyst | Power BI Developer | SQL · Python · Azure specialist with 8 years of experience.",
+  "name": "Deepanraj Arumugam | AI Analytics Portfolio",
+  "short_name": "Deepanraj AI Analytics",
+  "description": "Premium portfolio for a Data Analyst and AI Solutions Developer specializing in Power BI, SQL, Python, Excel automation, dashboards, and AI analytics.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0b0d",
-  "theme_color": "#4fffb0",
-  "orientation": "portrait-primary",
-  "icons": [
-    {
-      "src": "assets/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "background_color": "#ffffff",
+  "theme_color": "#1677ff",
+  "orientation": "portrait-primary"
 }

@@ -1,90 +1,130 @@
-# Deepanraj A. — Portfolio
+# Deepanraj Arumugam - AI Analytics Portfolio
 
-Live: [deeepanbe.github.io](https://deeepanbe.github.io)
+Live site: https://deeepanbe.github.io
 
-Data Analyst & BI Developer portfolio with an editorial-light design system and DJ AI integration.
+Premium GitHub Pages portfolio for a Data Analyst and AI Solutions Developer. The site is designed to feel like a modern AI analytics platform, with recruiter-first storytelling, client-ready service positioning, dashboard case studies, a DJ AI copilot, resume preview, certifications, and a private resource center.
 
 ## Positioning
 
-Deepanraj A. is a Power BI Developer and Operations Analyst with 4+ years across manufacturing, textile, merchandising, quality, and operations analytics.
+Deepanraj Arumugam builds intelligent dashboards, automation systems, and AI-powered analytics solutions across Power BI, SQL, Python, Excel, Tableau, Azure concepts, and business intelligence workflows.
 
-Target roles:
+Target audiences:
+
+- HR recruiters
+- Hiring managers
+- Freelance clients
+- Startup founders
+- Analytics teams
+
+Target opportunities:
 
 - Data Analyst
 - BI Developer
-- Data Engineer
-- Operations Analyst
 - Power BI Developer
+- Analytics Engineer
+- AI-assisted Analytics Developer
+- Freelance dashboard and reporting projects
 
-Target locations:
+## Core Experience
 
-- Bengaluru
-- Chennai
-- Kochi
-- Remote-friendly analytics teams
+- Premium light-theme SaaS visual system
+- Sticky navigation with active section states
+- Floating previous, next, and back-to-top navigation
+- Recruiter-optimized hero with profile image, KPI counters, CTAs, and AI preview
+- Currently-learning ticker for PL-300, Azure Data Factory, dbt, and Snowflake SQL
+- Client-ready services and consulting sections
+- Enterprise-style project case studies
+- DJ AI assistant drawer and full workspace
+- Certifications and experience timeline
+- GitHub contribution activity proof and public Open Graph image
+- Resume preview, download, LinkedIn, GitHub, email, WhatsApp, and Formspree fallback CTAs
+- Encoded private access validation with session timeout
+- Mobile responsive layout and accessibility-focused controls
 
-## Portfolio Stack
+## Repository Structure
+
+```text
+/
+  index.html                 # Main AI analytics platform portfolio
+  sales-dashboard.html        # Dashboard demo
+  hr-dashboard.html           # Dashboard demo
+  operations-dashboard.html   # Dashboard demo
+  ai/                         # DJ AI assistant scripts and docs
+  assets/                     # Profile, resume, screenshots, secure files
+  assets/og-image.svg         # Public social preview image
+  certifications/             # Certification documentation
+  components/                 # Static component architecture notes
+  dashboards/                 # Dashboard demo documentation
+  dj/                         # Full DJ AI workspace
+  pages/                      # Page architecture notes
+  private/                    # Private access documentation
+  projects/                   # Case study documentation
+  scripts/                    # Site interaction scripts
+  styles/                     # Premium design system CSS
+```
+
+## Project Case Studies
+
+- Power BI Universal Analytics Dashboard
+- Enterprise Analytics Project
+- Customer Segmentation ML
+- BigQuery E-Commerce Analysis
+- Olist E-Commerce BI Dashboard
+- Sales Forecasting Dashboard
+- Retail Inventory Management
+
+Each showcased project is framed by business problem, tools used, measurable impact, GitHub link, live demo or assistant-driven case study.
+
+## DJ AI
+
+DJ AI is a portfolio copilot for:
+
+- Project explanations
+- SQL generation
+- Python and pandas workflows
+- Excel reporting help
+- Power BI DAX measures
+- Dashboard recommendations
+- Data cleaning checklists
+- Resume and recruiter fit review
+
+The current GitHub Pages version includes a polished local fallback assistant. The backend-ready integration point remains available through `DJ_CONFIG.BACKEND_URL`.
+
+## Private Access
+
+Private Access is implemented for static hosting compatibility:
+
+- Encoded SHA-256 password validation
+- Session timeout
+- Authorized resource area
+- Resume, certificates, and dashboard resource downloads
+
+Static-site note: GitHub Pages cannot provide true server-side secrecy. Private Access is a professional presentation layer for authorized resources in this public repo. Confidential files should move to server-backed storage when required.
+
+## Stack
 
 - HTML
 - CSS
 - Vanilla JavaScript
 - GitHub Pages
 
-## DJ AI
-
-DJ AI is Deepanraj's portfolio assistant.
-
-Live page: [deeepanbe.github.io/dj/dj.html](https://deeepanbe.github.io/dj/dj.html)
-
-Current frontend features:
-
-- Project explanation assistant
-- SQL generator mode
-- Python helper mode
-- Resume analyzer mode
-- Dataset upload shell
-- Local fallback answers before backend deployment
-
-Planned backend:
-
-- FastAPI
-- OpenAI
-- Markdown knowledge base
-- Pandas dataset analysis
-- Render deployment
-
-## Suggested Repository Plan
-
-- `deeepanbe.github.io` — public portfolio
-- `dj-ai-backend` — private FastAPI backend
-- `dj-ai-knowledge` — private knowledge base
-- `dj-ai` — public recruiter-facing DJ AI showcase
-
-## Key Files
-
-```text
-index.html
-style.css
-main.js
-dj/
-  dj.html
-  dj.css
-  dj.js
-  dj-config.js
-  dj-widget.js
-assets/
-  resume.pdf
-```
+No build step is required.
 
 ## SEO Focus
 
-- Data Analyst Chennai
-- Data Analyst Bengaluru
+- Data Analyst
 - Power BI Developer
+- Microsoft PL-300
 - BI Developer
 - SQL Analyst
+- BigQuery
+- Snowflake
+- GCP
 - Python Data Analyst
-- Azure Data Engineer
-- Manufacturing Analytics
-- Textile Analytics
-- Operations Analytics
+- AI Analytics Developer
+- Analytics Consultant
+- Dashboard Automation
+- KPI Reporting
+- Chennai
+- Bengaluru
+- Kochi

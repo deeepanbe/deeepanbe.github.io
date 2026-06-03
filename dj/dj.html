@@ -3,61 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DJ — AI Data Analyst | Deepanraj</title>
-  <meta name="description" content="DJ AI is Deepanraj A.'s portfolio assistant for SQL generation, Power BI project explanations, Python help, resume review, and dataset analysis.">
+  <title>DJ AI Workspace | Deepanraj Arumugam</title>
+  <meta name="description" content="DJ AI is Deepanraj Arumugam's portfolio copilot for SQL, Python, Excel, Power BI DAX, dashboard recommendations, data cleaning, resume review, and project explanations.">
+  <meta name="theme-color" content="#ffffff">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="dj.css">
 </head>
 <body>
-  <div class="dj-layout">
-    <aside class="dj-sidebar">
-      <div class="dj-sidebar__brand">
-        <div class="dj-avatar">DJ</div>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="DJ AI workspace navigation">
+      <a class="brand" href="../">
+        <span>DA</span>
         <div>
-          <div class="dj-name">DJ AI</div>
-          <div class="dj-tagline">Data Analyst Assistant</div>
+          <strong>Deepanraj</strong>
+          <small>AI Analytics Portfolio</small>
         </div>
-      </div>
-      <nav class="dj-sidebar__nav" aria-label="DJ modes">
-        <button class="dj-mode active" data-mode="chat">Chat</button>
-        <button class="dj-mode" data-mode="sql">SQL Generator</button>
-        <button class="dj-mode" data-mode="python">Python Helper</button>
-        <button class="dj-mode" data-mode="resume">Resume Analyzer</button>
-        <button class="dj-mode" data-mode="upload">Dataset Upload</button>
+      </a>
+
+      <button class="new-chat" type="button" data-new-chat>New Chat</button>
+
+      <nav class="mode-list" aria-label="Assistant modes">
+        <button class="mode active" type="button" data-mode="chat">Portfolio Chat</button>
+        <button class="mode" type="button" data-mode="sql">SQL Assistant</button>
+        <button class="mode" type="button" data-mode="python">Python Assistant</button>
+        <button class="mode" type="button" data-mode="excel">Excel Helper</button>
+        <button class="mode" type="button" data-mode="dax">Power BI DAX</button>
+        <button class="mode" type="button" data-mode="dashboard">Dashboard Engine</button>
+        <button class="mode" type="button" data-mode="cleaning">Data Cleaning</button>
+        <button class="mode" type="button" data-mode="upload">Dataset Upload</button>
+        <button class="mode" type="button" data-mode="resume">Resume Fit</button>
       </nav>
-      <div class="dj-sidebar__footer">
-        <a href="../" class="dj-back">← Back to Portfolio</a>
-      </div>
+
+      <section class="history-block" aria-label="Chat history">
+        <div class="history-title">Chat History</div>
+        <div class="history-list" data-history-list></div>
+      </section>
+
+      <a class="portfolio-link" href="../">Back to Portfolio</a>
     </aside>
 
-    <main class="dj-main">
-      <div class="dj-messages" id="dj-messages">
-        <div class="dj-msg dj-msg--ai">
-          <div class="dj-msg__avatar">DJ</div>
-          <div class="dj-msg__bubble" id="greeting-bubble"></div>
+    <main class="chat-shell">
+      <header class="chat-header">
+        <div>
+          <strong>DJ AI</strong>
+          <span>Recruiter and client-facing analytics copilot</span>
         </div>
-        <div class="dj-suggestions" id="dj-suggestions"></div>
-      </div>
+        <div class="status-pill"><span></span> Local + backend-ready</div>
+      </header>
 
-      <div class="dj-upload-zone" id="dj-upload-zone" style="display:none">
-        <div class="upload-inner">
-          <div class="upload-icon">Data</div>
-          <p>Drop CSV / XLSX / JSON here</p>
+      <section class="messages" id="dj-messages" aria-live="polite">
+        <article class="message assistant">
+          <div class="avatar">DJ</div>
+          <div class="bubble" id="greeting-bubble"></div>
+        </article>
+      </section>
+
+      <section class="quick-prompts" id="dj-suggestions" aria-label="Quick prompts"></section>
+
+      <section class="upload-zone" id="dj-upload-zone" hidden>
+        <div class="upload-card">
+          <strong>Dataset Upload Shell</strong>
+          <p>Select CSV, XLSX, or JSON. The static portfolio explains the workflow; backend analysis activates when the API is connected.</p>
           <input type="file" id="file-input" accept=".csv,.xlsx,.json">
-          <button type="button" onclick="document.getElementById('file-input').click()">Choose File</button>
+          <button type="button" data-file-button>Choose File</button>
         </div>
-      </div>
+      </section>
 
-      <div class="dj-input-bar">
-        <textarea id="dj-input" placeholder="Ask DJ anything..." rows="1" onkeydown="handleKey(event)"></textarea>
-        <button class="dj-send-btn" type="button" onclick="sendMessage()" aria-label="Send message">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
-          </svg>
+      <form class="composer" data-chat-form>
+        <textarea id="dj-input" rows="1" placeholder="Ask DJ about Deepanraj's projects, SQL, Python, Excel, DAX, dashboards, or resume fit"></textarea>
+        <button type="submit" aria-label="Send message">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"></path></svg>
         </button>
-      </div>
+      </form>
     </main>
   </div>
 

@@ -1,73 +1,70 @@
-// portfolio.js — Deepanraj Arumugam Portfolio
-// Shared JS utilities used across all pages
+// Shared legacy helpers for older portfolio experiments.
+// The production site uses scripts/platform.js and stays light-theme only.
 
-// ===== THEME =====
-(function () {
-  const root = document.documentElement;
-  const saved = localStorage.getItem('da-theme');
-  const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark';
-  root.setAttribute('data-theme', saved || system);
-})();
-
-function initThemeToggle(btnId) {
-  const btn = document.getElementById(btnId);
-  if (!btn) return;
-  const root = document.documentElement;
-  btn.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('da-theme', next);
-    btn.textContent = next === 'dark' ? '◐' : '●';
-  });
-}
-
-// ===== SCROLL FADE =====
 function initFadeUp() {
-  const els = document.querySelectorAll('.fade-up');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  const els = document.querySelectorAll(".fade-up");
+  if (!els.length || !("IntersectionObserver" in window)) return;
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("visible");
+      obs.unobserve(entry.target);
     });
   }, { threshold: 0.08 });
-  els.forEach(el => obs.observe(el));
+
+  els.forEach((el) => obs.observe(el));
 }
 
-// ===== EXP TOGGLE =====
 function toggleExp(header) {
   const body = header.nextElementSibling;
-  const icon = header.querySelector('.toggle-icon');
-  const isOpen = body.classList.toggle('open');
-  icon.classList.toggle('open', isOpen);
-  icon.textContent = isOpen ? '−' : '+';
+  const icon = header.querySelector(".toggle-icon");
+  const isOpen = body?.classList.toggle("open");
+  if (icon) {
+    icon.classList.toggle("open", Boolean(isOpen));
+    icon.textContent = isOpen ? "-" : "+";
+  }
 }
 
-// ===== TYPING =====
 function initTyping(elId, roles) {
   const el = document.getElementById(elId);
-  if (!el) return;
-  let ri = 0, ci = 0, deleting = false;
+  if (!el || !roles?.length) return;
+
+  let roleIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
   function type() {
-    const r = roles[ri];
+    const role = roles[roleIndex];
     if (!deleting) {
-      el.textContent = r.slice(0, ++ci);
-      if (ci === r.length) { deleting = true; setTimeout(type, 1800); return; }
+      charIndex += 1;
+      el.textContent = role.slice(0, charIndex);
+      if (charIndex === role.length) {
+        deleting = true;
+        window.setTimeout(type, 1600);
+        return;
+      }
     } else {
-      el.textContent = r.slice(0, --ci);
-      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+      charIndex -= 1;
+      el.textContent = role.slice(0, charIndex);
+      if (charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
     }
-    setTimeout(type, deleting ? 45 : 80);
+    window.setTimeout(type, deleting ? 45 : 80);
   }
+
   type();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle('themeBtn');
+document.addEventListener("DOMContentLoaded", () => {
   initFadeUp();
-  initTyping('typingText', [
-    'Data Analyst · SQL · Power BI',
-    'BI Developer · DAX · Power Query',
-    'Data Visualization Engineer',
-    'Azure & Cloud Data Specialist',
-    'Python · Pandas · EDA Expert'
+  initTyping("typingText", [
+    "Data Analyst / SQL / Power BI",
+    "BI Developer / DAX / Power Query",
+    "Data Visualization Engineer",
+    "Azure and Cloud Data Specialist",
+    "Python / Pandas / EDA"
   ]);
 });

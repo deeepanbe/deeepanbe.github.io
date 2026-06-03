@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HR Analytics Dashboard | Deepanraj Arumugam</title>
+  <meta name="description" content="Professional HR analytics dashboard preview with headcount, attrition, department distribution, hiring pipeline, satisfaction, and retention KPIs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:#0a0b0d;--surface:#111318;--surface-2:#191c22;--surface-3:#1f2330;
-      --text:#e8eaf0;--text-dim:#8890a4;--text-faint:#454d62;
-      --border:rgba(255,255,255,0.07);--border-bright:rgba(255,255,255,0.14);
-      --accent:#4fffb0;--accent-dim:rgba(79,255,176,0.12);--accent-glow:rgba(79,255,176,0.25);
-      --blue:#5b9cf6;--blue-dim:rgba(91,156,246,0.12);
-      --orange:#f5a623;--orange-dim:rgba(245,166,35,0.12);
-      --red:#ff6b6b;--red-dim:rgba(255,107,107,0.12);
-      --radius:16px;--font-body:'DM Sans',sans-serif;--font-display:'Fraunces',serif;--font-mono:'DM Mono',monospace;
+      --bg:#f7fbff;--surface:#fff;--surface-2:#edf4fb;--surface-3:#e2ebf5;
+      --text:#102033;--text-dim:#486078;--text-faint:#6f8093;
+      --border:rgba(16,32,51,0.09);--border-bright:rgba(22,119,255,0.2);
+      --accent:#1677ff;--accent-dim:rgba(22,119,255,0.08);--accent-glow:rgba(22,119,255,0.18);
+      --blue:#16b7d8;--blue-dim:rgba(22,183,216,0.1);
+      --orange:#f3a712;--orange-dim:rgba(243,167,18,0.12);
+      --red:#ef4444;--red-dim:rgba(239,68,68,0.1);
+      --radius:8px;--font-body:'DM Sans',sans-serif;--font-display:'Fraunces',serif;--font-mono:'DM Mono',monospace;
     }
     [data-theme="light"]{--bg:#f2f3f7;--surface:#fff;--surface-2:#e8eaf0;--surface-3:#dde0ea;--text:#0d1117;--text-dim:#4a5568;--text-faint:#9aa3b5;--border:rgba(0,0,0,0.08);--border-bright:rgba(0,0,0,0.15);--accent:#007a47;--accent-dim:rgba(0,122,71,0.08);--blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -44,7 +45,7 @@
     .dash-header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--border);}
     .dash-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
     .dash-eyebrow{font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;}
-    .dash-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-0.02em;}
+    .dash-title{font-family:var(--font-display);font-size:2rem;font-weight:900;letter-spacing:0;}
     .dash-subtitle{color:var(--text-dim);font-size:0.875rem;margin-top:0.4rem;}
     .dash-actions{display:flex;gap:0.5rem;flex-wrap:wrap;}
     .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.1rem;border-radius:10px;font-size:0.82rem;font-weight:600;cursor:pointer;border:1px solid var(--border-bright);background:var(--surface);color:var(--text);transition:all 0.2s;font-family:var(--font-body);}
@@ -126,8 +127,7 @@
       <a class="nav-tab" href="operations-dashboard.html">Operations</a>
     </div>
     <div class="nav-right">
-      <a href="index.html" class="back-btn">← Portfolio</a>
-      <button class="icon-btn" id="themeBtn">◐</button>
+      <a href="index.html" class="back-btn">&larr; Back to Portfolio</a>
     </div>
   </div>
 </nav>

@@ -1,10 +1,11 @@
 const DJ_CONFIG = {
-  BACKEND_URL: 'https://your-dj-api.onrender.com',
-  GREETING: "Hi! I'm DJ, Deepanraj's AI assistant. I can explain his projects, generate SQL, analyze datasets, or help review your resume. What would you like to explore?",
+  BACKEND_URL: "https://your-dj-api.onrender.com",
+  GREETING: "Hi, I am DJ AI. I can explain Deepanraj's projects, generate SQL, draft Python analysis, help with Excel reporting, suggest Power BI DAX, recommend dashboards, and summarize recruiter fit.",
   SUGGESTIONS: [
-    "Tell me about the Power BI dashboards",
+    "Explain Deepanraj's strongest Power BI project",
     "Generate SQL for top 10 customers by revenue",
-    "What Python projects has Deepanraj built?",
-    "Explain the Azure Data Engineer project"
+    "Create Python pandas steps for cleaning sales data",
+    "Suggest DAX measures for inventory performance",
+    "Recommend dashboard pages for an operations report"
   ]
 };

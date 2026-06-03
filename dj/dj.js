@@ -1,223 +1,384 @@
-let conversationHistory = [];
-let currentMode = 'chat';
-const djRateLimit = createLocalRateLimiter({ limit: 60, windowMs: 60_000 });
+(function () {
+  "use strict";
 
-const SYSTEM_PROMPTS = {
-  chat: "You are DJ, Deepanraj A.'s AI Data Analyst assistant. Explain his projects, resume, skills, and analytics workflow clearly.",
-  sql: "You are DJ, a SQL expert assistant. Generate clean, well-commented SQL and explain it briefly.",
-  python: "You are DJ, a Python data analysis assistant. Use pandas, numpy, matplotlib, seaborn, or scikit-learn.",
-  resume: "You are DJ, a resume and career coach for Data Analyst, BI Developer, and Data Engineer roles.",
-  upload: "You are DJ, a data analysis assistant. Help users inspect CSV, XLSX, and JSON datasets."
-};
+  const config = window.DJ_CONFIG || {
+    GREETING: "Hi, I am DJ AI. Ask me about Deepanraj's analytics projects, SQL, Python, Power BI, Excel, or resume fit.",
+    SUGGESTIONS: [
+      "Explain Deepanraj's strongest project",
+      "Generate a SQL query for sales trends",
+      "Suggest Power BI KPIs",
+      "Review resume fit for Data Analyst"
+    ],
+    BACKEND_URL: ""
+  };
 
-const LOCAL_KNOWLEDGE = `
-Deepanraj A. is a Power BI Developer and Operations Analyst with 4+ years across manufacturing, textile, merchandising, quality, and operations analytics.
-Target roles: Data Analyst, Data Engineer, BI Developer.
-Target cities: Bengaluru, Chennai, Kochi.
-Skills: Power BI, DAX, Power Query, Oracle SQL, T-SQL, Azure SQL, Python, Pandas, NumPy, Scikit-learn, Azure Data Factory, Blob Storage, Tableau, Excel VBA.
-Projects: Sales & Inventory Dashboard, Azure Data Pipeline, Customer Segmentation Model, LinkedIn Automation System, SQL Cheat Sheet Visual, EDA Automation Script.
-Certifications: Google Data Analytics Professional Certificate, Business Analyst Master Certification, Tata and BCG Forage simulations, PL-300 in progress.
-`;
+  const storageKey = "deepanraj.dj.workspace.history.v2";
+  const rateLimit = createRateLimiter({ limit: 45, windowMs: 60 * 1000 });
 
-window.onload = () => {
-  document.getElementById('greeting-bubble').textContent = DJ_CONFIG.GREETING;
-  renderSuggestions();
-  const params = new URLSearchParams(window.location.search);
-  const prompt = params.get('prompt');
-  if (prompt) {
-    setTimeout(() => sendMessage(prompt), 350);
-  }
-};
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
-function renderSuggestions() {
-  const container = document.getElementById('dj-suggestions');
-  container.innerHTML = DJ_CONFIG.SUGGESTIONS.map((suggestion) =>
-    `<button class="dj-chip" onclick="sendChip('${escapeAttr(suggestion)}')">${suggestion}</button>`
-  ).join('');
-}
+  const messagesEl = $("#dj-messages");
+  const greetingEl = $("#greeting-bubble");
+  const suggestionsEl = $("#dj-suggestions");
+  const form = $("[data-chat-form]");
+  const input = $("#dj-input");
+  const uploadZone = $("#dj-upload-zone");
+  const fileInput = $("#file-input");
+  const historyList = $("[data-history-list]");
+  const modeButtons = $$("[data-mode]");
 
-async function sendMessage(customText = null) {
-  const input = document.getElementById('dj-input');
-  const rate = djRateLimit();
-  if (!rate.allowed) {
-    appendMessage('ai', 'DJ is rate limited for a moment. Please wait a few seconds and try again.');
-    return;
-  }
+  let mode = "chat";
+  let activeId = createId();
+  let messages = [];
+  let history = loadHistory();
 
-  const sanitized = sanitizeDJInput(customText || input.value.trim());
-  const text = sanitized.value;
-  if (!text) return;
+  const systemKnowledge = {
+    profile: "Deepanraj Arumugam is a Data Analyst and AI Solutions Developer with Power BI, SQL, Python, Excel, Tableau, Azure concepts, and 4+ years of operations and manufacturing analytics experience.",
+    projects: "Portfolio projects include Power BI Universal Analytics Dashboard, Enterprise Analytics Project, Customer Segmentation ML, BigQuery E-Commerce Analysis, Sales Forecasting Dashboard, and Retail Inventory Management.",
+    services: "Services include Power BI dashboards, SQL analytics, Excel automation, Python scripting, KPI reporting, data cleaning, and AI analytics integration.",
+    target: "Target audiences include HR recruiters, hiring managers, freelance clients, startup founders, and analytics teams."
+  };
 
-  if (sanitized.blocked) {
-    appendMessage('ai', text);
-    input.value = '';
-    return;
+  function createId() {
+    return `chat-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   }
 
-  input.value = '';
-  appendMessage('user', text);
-  conversationHistory.push({ role: 'user', content: text });
-  const thinking = appendThinking();
+  function createRateLimiter({ limit, windowMs }) {
+    const timestamps = [];
+    return function check() {
+      const now = Date.now();
+      while (timestamps.length && now - timestamps[0] > windowMs) timestamps.shift();
+      if (timestamps.length >= limit) return false;
+      timestamps.push(now);
+      return true;
+    };
+  }
 
-  try {
-    const shouldUseBackend = DJ_CONFIG.BACKEND_URL && !DJ_CONFIG.BACKEND_URL.includes('your-dj-api');
-    if (!shouldUseBackend) throw new Error('Backend not configured');
+  function loadHistory() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(storageKey) || "[]");
+      return Array.isArray(parsed) ? parsed.slice(0, 10) : [];
+    } catch {
+      return [];
+    }
+  }
 
-    const token = sessionStorage.getItem('dj_access_token');
-    const headers = { 'Content-Type': 'application/json' };
-    if (token) headers.Authorization = `Bearer ${token}`;
+  function saveHistory() {
+    localStorage.setItem(storageKey, JSON.stringify(history.slice(0, 10)));
+  }
 
-    const response = await fetch(`${DJ_CONFIG.BACKEND_URL}/chat`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ messages: conversationHistory, mode: currentMode })
+  function persistConversation() {
+    if (messages.length < 2) return;
+    const firstUser = messages.find((msg) => msg.role === "user");
+    const title = firstUser ? firstUser.content.slice(0, 58) : "DJ AI conversation";
+    const entry = { id: activeId, title, mode, messages: messages.slice(-14) };
+    history = [entry, ...history.filter((item) => item.id !== activeId)].slice(0, 10);
+    saveHistory();
+    renderHistory();
+  }
+
+  function renderHistory() {
+    if (!historyList) return;
+    historyList.innerHTML = "";
+    if (!history.length) {
+      const empty = document.createElement("div");
+      empty.className = "history-empty";
+      empty.textContent = "No saved chats yet.";
+      historyList.appendChild(empty);
+      return;
+    }
+
+    history.forEach((item) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = item.title;
+      button.addEventListener("click", () => {
+        activeId = item.id;
+        mode = item.mode || "chat";
+        messages = item.messages || [];
+        setMode(mode);
+        renderConversation();
+      });
+      historyList.appendChild(button);
+    });
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function highlightCode(code, language) {
+    const keywordMap = {
+      sql: ["SELECT", "FROM", "WHERE", "GROUP", "BY", "ORDER", "SUM", "COUNT", "AVG", "CASE", "WHEN", "THEN", "END", "JOIN", "ON", "DATE_TRUNC"],
+      python: ["import", "from", "def", "return", "for", "in", "as", "print", "groupby", "read_csv", "read_excel"],
+      dax: ["CALCULATE", "DIVIDE", "SUM", "AVERAGE", "FILTER", "ALL", "DATESYTD", "NULLIF"]
+    };
+    let safe = escapeHtml(code);
+    (keywordMap[language] || []).forEach((word) => {
+      safe = safe.replace(new RegExp(`\\b${word}\\b`, "gi"), (match) => `<span class="code-keyword">${match}</span>`);
+    });
+    return safe;
+  }
+
+  function formatMarkdown(text) {
+    const fences = [];
+    const withoutFences = String(text).replace(/```(\w+)?\n([\s\S]*?)```/g, (_, language = "text", code) => {
+      const token = `CODE_BLOCK_${fences.length}_TOKEN`;
+      fences.push({ language: language.toLowerCase(), code });
+      return token;
     });
 
-    const data = await response.json();
-    removeThinking(thinking);
-    appendMessage('ai', data.reply);
-    conversationHistory.push({ role: 'assistant', content: data.reply });
-  } catch (err) {
-    removeThinking(thinking);
-    const reply = localDJResponse(text);
-    appendMessage('ai', reply);
-    conversationHistory.push({ role: 'assistant', content: reply });
-  }
-}
+    let html = escapeHtml(withoutFences)
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/\n{2,}/g, "</p><p>")
+      .replace(/\n/g, "<br>");
 
-function createLocalRateLimiter({ limit, windowMs }) {
-  const timestamps = [];
-  return function checkLimit() {
-    const now = Date.now();
-    while (timestamps.length && now - timestamps[0] > windowMs) timestamps.shift();
-    if (timestamps.length >= limit) {
-      return { allowed: false, retryAfterMs: windowMs - (now - timestamps[0]) };
+    html = `<p>${html}</p>`.replace(/<p><\/p>/g, "");
+    fences.forEach((fence, index) => {
+      const token = `CODE_BLOCK_${index}_TOKEN`;
+      const block = `<pre><code class="language-${fence.language}">${highlightCode(fence.code, fence.language)}</code></pre>`;
+      html = html.replace(`<p>${token}</p>`, block).replace(token, block);
+    });
+
+    return html;
+  }
+
+  function appendMessage(role, content, options = {}) {
+    const row = document.createElement("article");
+    row.className = `message ${role === "user" ? "user" : "assistant"}`;
+
+    const avatar = document.createElement("div");
+    avatar.className = "avatar";
+    avatar.textContent = role === "user" ? "You" : "DJ";
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    if (options.raw) bubble.textContent = content;
+    else bubble.innerHTML = formatMarkdown(content);
+
+    if (role === "user") row.append(bubble, avatar);
+    else row.append(avatar, bubble);
+
+    messagesEl.appendChild(row);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return bubble;
+  }
+
+  function renderConversation() {
+    const first = messagesEl.querySelector(".message");
+    messagesEl.innerHTML = "";
+    if (!messages.length && first) {
+      messagesEl.appendChild(first);
+      return;
     }
-    timestamps.push(now);
-    return { allowed: true, retryAfterMs: 0 };
-  };
-}
-
-function sanitizeDJInput(value) {
-  const cleaned = String(value || '')
-    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '')
-    .trim()
-    .slice(0, 8000);
-
-  const blocked = [
-    /ignore\s+(all\s+)?previous\s+instructions/i,
-    /reveal\s+(the\s+)?(system|developer)\s+prompt/i,
-    /print\s+(your\s+)?hidden\s+instructions/i,
-    /bypass\s+(security|auth|authentication)/i,
-    /forget\s+(your\s+)?rules/i,
-    /show\s+(api\s+key|jwt|secret)/i
-  ].some((pattern) => pattern.test(cleaned));
-
-  return {
-    value: blocked
-      ? 'Blocked prompt-injection attempt. Please ask DJ a normal analytics, project, SQL, Python, or resume question.'
-      : cleaned,
-    blocked
-  };
-}
-
-function localDJResponse(text) {
-  const lower = text.toLowerCase();
-
-  if (currentMode === 'sql' || lower.includes('sql') || lower.includes('revenue') || lower.includes('customer')) {
-    return `Here is a recruiter-ready SQL example:\n\n\`\`\`sql\nSELECT\n  customer_id,\n  SUM(revenue) AS total_revenue,\n  COUNT(DISTINCT order_id) AS total_orders\nFROM sales_orders\nGROUP BY customer_id\nORDER BY total_revenue DESC\nFETCH FIRST 10 ROWS ONLY;\n\`\`\`\n\nThis identifies the top 10 customers by revenue. Deepanraj can adapt this logic for Oracle SQL, T-SQL, or BigQuery depending on the source system.`;
+    messages.forEach((message) => appendMessage(message.role, message.content));
   }
 
-  if (currentMode === 'python' || lower.includes('python') || lower.includes('pandas')) {
-    return `A clean Python analytics starter:\n\n\`\`\`python\nimport pandas as pd\n\ndf = pd.read_csv('sales.csv')\ndf['order_date'] = pd.to_datetime(df['order_date'])\nsummary = df.groupby('region', as_index=False)['revenue'].sum()\nprint(summary.sort_values('revenue', ascending=False))\n\`\`\`\n\nDeepanraj uses this style for quick EDA, KPI checks, and dashboard-ready datasets.`;
+  function sanitize(value) {
+    const cleaned = String(value || "")
+      .replace(/[\u0000-\u001f]/g, "")
+      .trim()
+      .slice(0, 5000);
+
+    const blocked = [
+      /ignore\s+(all\s+)?previous\s+instructions/i,
+      /reveal\s+(system|developer|hidden)\s+prompt/i,
+      /show\s+(api\s+key|secret|token)/i,
+      /bypass\s+(security|auth|authentication)/i,
+      /forget\s+(your\s+)?rules/i
+    ].some((pattern) => pattern.test(cleaned));
+
+    return {
+      blocked,
+      value: blocked ? "Blocked prompt-injection attempt. Please ask DJ a normal analytics, project, SQL, Python, Excel, Power BI, or resume question." : cleaned
+    };
   }
 
-  if (currentMode === 'resume' || lower.includes('resume') || lower.includes('ats')) {
-    return `Resume review framework:\n\n1. Lead with Power BI, SQL, Python, Azure, and operations analytics keywords.\n2. Add measurable outcomes such as report time reduction, inventory value tracked, and dashboard adoption.\n3. Convert duties into impact statements.\n4. Feature 3-4 projects with tools, business problem, and outcome.\n\nEstimated ATS focus areas: Power BI, DAX, SQL, Python, Azure, Tableau, Excel, Data Modeling, Dashboard Design.`;
+  async function backendReply(text) {
+    const backendUrl = config.BACKEND_URL || "";
+    if (!backendUrl || backendUrl.includes("your-dj-api")) throw new Error("Backend not configured");
+
+    const response = await fetch(`${backendUrl}/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mode, messages: [...messages, { role: "user", content: text }] })
+    });
+
+    if (!response.ok) throw new Error("Backend request failed");
+    const data = await response.json();
+    return data.reply || data.message || "";
   }
 
-  if (lower.includes('power bi') || lower.includes('dashboard')) {
-    return `Deepanraj's Power BI positioning:\n\n- Builds KPI dashboards for sales, inventory, HR, and operations.\n- Uses DAX, Power Query, slicers, drill-through, and data modeling.\n- Focuses on business decisions, not only visuals.\n- Strong use case: tracking inventory and operational performance for manufacturing/textile teams.`;
+  function localReply(text) {
+    const lower = text.toLowerCase();
+
+    if (mode === "sql" || lower.includes("sql") || lower.includes("query")) {
+      return `SQL assistant response:\n\n\`\`\`sql\nSELECT\n  region,\n  DATE_TRUNC('month', order_date) AS sales_month,\n  SUM(revenue) AS total_revenue,\n  COUNT(DISTINCT order_id) AS order_count,\n  SUM(profit) / NULLIF(SUM(revenue), 0) AS margin_rate\nFROM sales_orders\nWHERE order_date >= DATE '2025-01-01'\nGROUP BY region, DATE_TRUNC('month', order_date)\nORDER BY sales_month, total_revenue DESC;\n\`\`\`\n\nBusiness value: this turns raw orders into a monthly performance view for regional sales review.`;
+    }
+
+    if (mode === "python" || lower.includes("python") || lower.includes("pandas")) {
+      return `Python assistant response:\n\n\`\`\`python\nimport pandas as pd\n\ndf = pd.read_excel('operations.xlsx')\ndf.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')\ndf['report_date'] = pd.to_datetime(df['report_date'], errors='coerce')\ndf = df.drop_duplicates()\nsummary = df.groupby('department', as_index=False)['cost'].sum()\nprint(summary.sort_values('cost', ascending=False))\n\`\`\`\n\nThis workflow supports repeatable cleaning, validation, and dashboard-ready outputs.`;
+    }
+
+    if (mode === "excel" || lower.includes("excel")) {
+      return `Excel helper response:\n\n1. Import raw data with Power Query.\n2. Standardize column names, date formats, and numeric types.\n3. Load a clean table into the workbook data model.\n4. Build pivot summaries and KPI cells.\n5. Protect the reporting sheet and expose only refresh controls.\n\nThis is client-friendly because the report can be refreshed without breaking formulas.`;
+    }
+
+    if (mode === "dax" || lower.includes("dax") || lower.includes("power bi")) {
+      return `Power BI DAX assistant response:\n\n\`\`\`dax\nTotal Revenue = SUM('Sales'[Revenue])\n\nRevenue LY =\nCALCULATE([Total Revenue], SAMEPERIODLASTYEAR('Date'[Date]))\n\nRevenue YoY % =\nDIVIDE([Total Revenue] - [Revenue LY], [Revenue LY])\n\`\`\`\n\nThese measures help hiring managers see that Deepanraj thinks in reusable semantic layers, not one-off visuals.`;
+    }
+
+    if (mode === "dashboard" || lower.includes("dashboard") || lower.includes("kpi")) {
+      return `Dashboard recommendation engine:\n\n**Overview page**: revenue, margin, stock value, open orders, and exception count.\n\n**Trend page**: month-over-month movement, category mix, and regional contribution.\n\n**Operations page**: stock aging, reorder risk, pending actions, and supplier delay.\n\n**Decision page**: top issues, recommended next action, and owner fields.`;
+    }
+
+    if (mode === "cleaning" || lower.includes("clean")) {
+      return `Data cleaning helper:\n\n1. Create a data profile for missing values, duplicates, data types, and outliers.\n2. Standardize IDs, dates, category labels, and currency fields.\n3. Validate totals against the source report.\n4. Document assumptions in a transformation log.\n5. Export a BI-ready table and a rejected-records table.`;
+    }
+
+    if (mode === "resume" || lower.includes("resume") || lower.includes("ats") || lower.includes("hire")) {
+      return `Resume fit summary:\n\nDeepanraj should be positioned as a Data Analyst and AI Solutions Developer with Power BI, SQL, Python, Excel automation, Azure data concepts, and operations analytics experience.\n\nBest keywords: Power BI, DAX, SQL, Python, Pandas, Excel, Tableau, Azure Data Factory, Data Cleaning, KPI Reporting, Dashboard Design, Business Intelligence, Stakeholder Communication.`;
+    }
+
+    return `${systemKnowledge.profile}\n\n${systemKnowledge.projects}\n\n${systemKnowledge.services}\n\nBest recruiter signal: Deepanraj combines business context, BI delivery, and AI-assisted analytics workflows, which makes the portfolio feel like a professional analytics product rather than a static resume.`;
   }
 
-  if (lower.includes('azure') || lower.includes('data engineer')) {
-    return `Azure Data Pipeline summary:\n\nDeepanraj's Azure project direction uses Azure Data Factory, Blob Storage, and Azure SQL to move raw files into structured analytics tables. It supports a Data Analyst to Data Engineer transition by showing ingestion, transformation, storage, and BI readiness.`;
+  function thinkingNode() {
+    const row = document.createElement("article");
+    row.className = "message assistant";
+    row.innerHTML = '<div class="avatar">DJ</div><div class="bubble"><span class="typing-dots"><span></span><span></span><span></span></span></div>';
+    messagesEl.appendChild(row);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return row;
   }
 
-  return `${SYSTEM_PROMPTS[currentMode]}\n\n${LOCAL_KNOWLEDGE}\n\nBased on your question, I would explain Deepanraj as a business-focused analyst who combines operations domain knowledge with Power BI, SQL, Python, Azure, Tableau, and Excel to build practical dashboards and analytics workflows.`;
-}
+  async function streamAssistantReply(text) {
+    const message = { role: "assistant", content: "" };
+    const bubble = appendMessage("assistant", "", { raw: true });
+    const chunks = text.split(/(\s+)/);
 
-function sendChip(text) {
-  document.getElementById('dj-suggestions').style.display = 'none';
-  sendMessage(text);
-}
+    for (let index = 0; index < chunks.length; index += 1) {
+      message.content += chunks[index];
+      bubble.textContent = message.content;
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      await new Promise((resolve) => window.setTimeout(resolve, chunks[index].trim() ? 22 : 8));
+    }
 
-function appendMessage(role, text) {
-  const container = document.getElementById('dj-messages');
-  const div = document.createElement('div');
-  div.className = `dj-msg dj-msg--${role === 'user' ? 'user' : 'ai'}`;
-  div.innerHTML = role === 'ai'
-    ? `<div class="dj-msg__avatar">DJ</div><div class="dj-msg__bubble">${formatMessage(text)}</div>`
-    : `<div class="dj-msg__bubble">${escapeHtml(text)}</div>`;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-  return div;
-}
-
-function formatMessage(text) {
-  return escapeHtml(text)
-    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br>');
-}
-
-function appendThinking() {
-  const container = document.getElementById('dj-messages');
-  const div = document.createElement('div');
-  div.className = 'dj-msg dj-msg--ai dj-thinking';
-  div.innerHTML = `<div class="dj-msg__avatar">DJ</div><div class="dj-msg__bubble"><span class="dot-pulse"></span><span class="dot-pulse" style="animation-delay:0.2s"></span><span class="dot-pulse" style="animation-delay:0.4s"></span></div>`;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-  return div;
-}
-
-function removeThinking(el) {
-  el.remove();
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
+    bubble.innerHTML = formatMarkdown(message.content);
+    messages.push(message);
+    persistConversation();
   }
-}
 
-document.querySelectorAll('.dj-mode').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.dj-mode').forEach((mode) => mode.classList.remove('active'));
-    btn.classList.add('active');
-    currentMode = btn.dataset.mode;
-    document.getElementById('dj-upload-zone').style.display = currentMode === 'upload' ? 'flex' : 'none';
-    conversationHistory = [];
-  });
-});
+  async function sendMessage(text) {
+    const rateOk = rateLimit();
+    if (!rateOk) {
+      appendMessage("assistant", "DJ is rate limited for a moment. Please wait a few seconds and try again.");
+      return;
+    }
 
-document.getElementById('file-input').addEventListener('change', (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
-  appendMessage('ai', `Dataset upload selected: ${file.name}. Backend upload analysis will activate after the FastAPI service is deployed and DJ_CONFIG.BACKEND_URL is updated.`);
-});
+    const sanitized = sanitize(text);
+    if (!sanitized.value) return;
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
+    const user = { role: "user", content: sanitized.value };
+    messages.push(user);
+    appendMessage("user", user.content);
 
-function escapeAttr(value) {
-  return escapeHtml(value).replace(/`/g, '&#096;');
-}
+    const thinking = thinkingNode();
+    let reply = sanitized.value;
+
+    if (!sanitized.blocked) {
+      try {
+        reply = await backendReply(sanitized.value);
+      } catch {
+        reply = localReply(sanitized.value);
+      }
+    }
+
+    thinking.remove();
+    await streamAssistantReply(reply);
+  }
+
+  function setMode(nextMode) {
+    mode = nextMode;
+    modeButtons.forEach((button) => button.classList.toggle("active", button.dataset.mode === mode));
+    if (uploadZone) uploadZone.hidden = mode !== "upload";
+    input.placeholder = `Ask DJ in ${mode.toUpperCase()} mode`;
+  }
+
+  function renderSuggestions() {
+    if (!suggestionsEl) return;
+    suggestionsEl.innerHTML = "";
+    (config.SUGGESTIONS || []).forEach((suggestion) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = suggestion;
+      button.addEventListener("click", () => sendMessage(suggestion));
+      suggestionsEl.appendChild(button);
+    });
+  }
+
+  function init() {
+    if (greetingEl) greetingEl.textContent = config.GREETING || "Hi, I am DJ AI.";
+    renderSuggestions();
+    renderHistory();
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = input.value;
+      input.value = "";
+      input.style.height = "auto";
+      sendMessage(value);
+    });
+
+    input?.addEventListener("input", () => {
+      input.style.height = "auto";
+      input.style.height = `${Math.min(input.scrollHeight, 170)}px`;
+    });
+
+    input?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => setMode(button.dataset.mode || "chat"));
+    });
+
+    $("[data-new-chat]")?.addEventListener("click", () => {
+      persistConversation();
+      activeId = createId();
+      messages = [];
+      renderConversation();
+      if (greetingEl) greetingEl.textContent = config.GREETING || "Hi, I am DJ AI.";
+      input.focus();
+    });
+
+    $("[data-file-button]")?.addEventListener("click", () => fileInput?.click());
+    fileInput?.addEventListener("change", (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      sendMessage(`Dataset selected: ${file.name}. Explain how you would inspect and clean this file.`);
+      if (uploadZone) uploadZone.hidden = true;
+      setMode("cleaning");
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const prompt = params.get("prompt");
+    if (prompt) window.setTimeout(() => sendMessage(prompt), 350);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+})();
