@@ -4,83 +4,783 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DJ AI Workspace | Deepanraj Arumugam</title>
-  <meta name="description" content="DJ AI is Deepanraj Arumugam's portfolio copilot for SQL, Python, Excel, Power BI DAX, dashboard recommendations, data cleaning, resume review, and project explanations.">
-  <meta name="theme-color" content="#ffffff">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="dj.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --border: #1e2d45;
+      --accent: #1677ff;
+      --accent-glow: rgba(22,119,255,0.15);
+      --gold: #f59e0b;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --green: #10b981;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .logo { font-weight: 700; font-size: 1.05rem; color: var(--accent); letter-spacing: -0.3px; }
+    .logo span { color: var(--gold); }
+    header nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 1.25rem;
+      transition: color 0.2s;
+    }
+    header nav a:hover { color: var(--text); }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      display: inline-block;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    aside {
+      width: 220px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+    .sidebar-section {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+    .mode-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: all 0.15s;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 2px;
+    }
+    .mode-btn:hover { background: var(--surface2); color: var(--text); }
+    .mode-btn.active { background: var(--accent-glow); color: var(--accent); font-weight: 600; }
+    .mode-btn .icon { font-size: 1rem; width: 20px; text-align: center; }
+    .new-chat-btn {
+      margin: 1rem;
+      padding: 0.65rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-align: center;
+    }
+    .new-chat-btn:hover { opacity: 0.85; }
+
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      scroll-behavior: smooth;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .msg { display: flex; gap: 0.75rem; max-width: 780px; }
+    .msg.user { flex-direction: row-reverse; align-self: flex-end; }
+    .avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; flex-shrink: 0;
+    }
+    .msg.ai .avatar { background: linear-gradient(135deg, #1677ff, #7c3aed); color: #fff; }
+    .msg.user .avatar { background: var(--surface2); color: var(--accent); border: 1px solid var(--border); }
+    .bubble {
+      padding: 0.85rem 1.1rem;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      max-width: calc(100% - 50px);
+      word-wrap: break-word;
+    }
+    .msg.ai .bubble {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-top-left-radius: 4px;
+    }
+    .msg.user .bubble {
+      background: var(--accent);
+      color: #fff;
+      border-top-right-radius: 4px;
+    }
+    .bubble pre {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 0.75rem 0 0 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .bubble code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(22,119,255,0.1);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+    .bubble pre code { background: transparent; padding: 0; }
+    .bubble strong { color: var(--gold); }
+    .bubble ul, .bubble ol { margin: 0.5rem 0 0 1.2rem; }
+    .bubble li { margin-bottom: 0.35rem; }
+    .bubble p { margin: 0.5rem 0; }
+    .bubble p:first-child { margin-top: 0; }
+    .bubble p:last-child { margin-bottom: 0; }
+
+    .typing-indicator {
+      display: flex; align-items: center; gap: 4px;
+      padding: 0.75rem 1.1rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      border-top-left-radius: 4px;
+      width: fit-content;
+    }
+    .typing-indicator span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); opacity: 0.6;
+      animation: bounce 1.2s infinite;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px); opacity:1} }
+
+    .quick-prompts {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding: 0 1.5rem 0.75rem;
+      flex-shrink: 0;
+    }
+    .qp-btn {
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .qp-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+    .input-area {
+      padding: 1rem 1.5rem 1.25rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .input-row {
+      display: flex; gap: 0.75rem; align-items: flex-end;
+    }
+    .input-box {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: none;
+      min-height: 48px;
+      max-height: 160px;
+      line-height: 1.5;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .input-box:focus { border-color: var(--accent); }
+    .input-box::placeholder { color: var(--text-muted); }
+    .send-btn {
+      width: 48px; height: 48px;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.2s, transform 0.1s;
+      flex-shrink: 0;
+    }
+    .send-btn:hover { opacity: 0.85; }
+    .send-btn:active { transform: scale(0.95); }
+    .send-btn svg { width: 20px; height: 20px; fill: #fff; }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .welcome-logo {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #1677ff, #7c3aed);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 32px rgba(22,119,255,0.3);
+    }
+    .welcome h2 { font-size: 1.5rem; font-weight: 700; }
+    .welcome p { color: var(--text-muted); font-size: 0.9rem; max-width: 380px; line-height: 1.65; }
+    .welcome-chips {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      justify-content: center; max-width: 500px; margin-top: 0.5rem;
+    }
+    .welcome-chip {
+      padding: 0.5rem 1rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .welcome-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 420px;
+      width: 100%;
+    }
+    .modal h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .modal p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.65; margin-bottom: 1.25rem; }
+    .modal p code { background: var(--surface2); padding: 0.2em 0.4em; border-radius: 4px; }
+    .modal a { color: var(--accent); }
+    .modal input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      outline: none;
+      margin-bottom: 1rem;
+    }
+    .modal input:focus { border-color: var(--accent); }
+    .modal-btns { display: flex; gap: 0.75rem; }
+    .modal-btns button {
+      flex: 1; padding: 0.7rem;
+      border-radius: 8px; border: none;
+      font-family: inherit; font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border) !important; }
+    .btn-primary:hover, .btn-secondary:hover { opacity: 0.8; }
+
+    .settings-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.45rem 0.8rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .settings-btn:hover { color: var(--text); border-color: var(--accent); }
+
+    @media (max-width: 640px) {
+      aside { display: none; }
+      .quick-prompts { padding: 0 1rem 0.75rem; }
+      .input-area { padding: 0.75rem 1rem 1rem; }
+      .chat-messages { padding: 1rem; }
+      header nav { display: none; }
+      .welcome h2 { font-size: 1.25rem; }
+      .welcome-chips { max-width: 100%; }
+      .bubble { max-width: 100%; }
+    }
+  </style>
 </head>
 <body>
-  <div class="workspace">
-    <aside class="sidebar" aria-label="DJ AI workspace navigation">
-      <a class="brand" href="../">
-        <span>DA</span>
-        <div>
-          <strong>Deepanraj</strong>
-          <small>AI Analytics Portfolio</small>
-        </div>
-      </a>
 
-      <button class="new-chat" type="button" data-new-chat>New Chat</button>
-
-      <nav class="mode-list" aria-label="Assistant modes">
-        <button class="mode active" type="button" data-mode="chat">Portfolio Chat</button>
-        <button class="mode" type="button" data-mode="sql">SQL Assistant</button>
-        <button class="mode" type="button" data-mode="python">Python Assistant</button>
-        <button class="mode" type="button" data-mode="excel">Excel Helper</button>
-        <button class="mode" type="button" data-mode="dax">Power BI DAX</button>
-        <button class="mode" type="button" data-mode="dashboard">Dashboard Engine</button>
-        <button class="mode" type="button" data-mode="cleaning">Data Cleaning</button>
-        <button class="mode" type="button" data-mode="upload">Dataset Upload</button>
-        <button class="mode" type="button" data-mode="resume">Resume Fit</button>
-      </nav>
-
-      <section class="history-block" aria-label="Chat history">
-        <div class="history-title">Chat History</div>
-        <div class="history-list" data-history-list></div>
-      </section>
-
-      <a class="portfolio-link" href="../">Back to Portfolio</a>
-    </aside>
-
-    <main class="chat-shell">
-      <header class="chat-header">
-        <div>
-          <strong>DJ AI</strong>
-          <span>Recruiter and client-facing analytics copilot</span>
-        </div>
-        <div class="status-pill"><span></span> Local + backend-ready</div>
-      </header>
-
-      <section class="messages" id="dj-messages" aria-live="polite">
-        <article class="message assistant">
-          <div class="avatar">DJ</div>
-          <div class="bubble" id="greeting-bubble"></div>
-        </article>
-      </section>
-
-      <section class="quick-prompts" id="dj-suggestions" aria-label="Quick prompts"></section>
-
-      <section class="upload-zone" id="dj-upload-zone" hidden>
-        <div class="upload-card">
-          <strong>Dataset Upload Shell</strong>
-          <p>Select CSV, XLSX, or JSON. The static portfolio explains the workflow; backend analysis activates when the API is connected.</p>
-          <input type="file" id="file-input" accept=".csv,.xlsx,.json">
-          <button type="button" data-file-button>Choose File</button>
-        </div>
-      </section>
-
-      <form class="composer" data-chat-form>
-        <textarea id="dj-input" rows="1" placeholder="Ask DJ about Deepanraj's projects, SQL, Python, Excel, DAX, dashboards, or resume fit"></textarea>
-        <button type="submit" aria-label="Send message">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"></path></svg>
-        </button>
-      </form>
-    </main>
+<div class="modal-overlay" id="apiModal">
+  <div class="modal">
+    <h3>🔑 Connect Your Anthropic API Key</h3>
+    <p>
+      DJ AI uses the <strong>Claude API</strong> to give you real AI — smarter than a chatbot, personalised to Deepanraj's portfolio, resume, and projects.<br><br>
+      Your key is stored only in <code>sessionStorage</code> (gone when you close the tab). It never leaves your browser.<br><br>
+      Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+    </p>
+    <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." autocomplete="off">
+    <div class="modal-btns">
+      <button class="btn-primary" onclick="saveApiKey()">Connect & Launch DJ AI</button>
+      <button class="btn-secondary" onclick="skipApiKey()">Skip (Demo Mode)</button>
+    </div>
   </div>
+</div>
 
-  <script src="dj-config.js"></script>
-  <script src="dj.js"></script>
+<header>
+  <div style="display:flex;align-items:center;gap:0.75rem">
+    <div class="logo">DJ <span>AI</span></div>
+    <span style="font-size:0.75rem;color:var(--text-muted)"><span class="status-dot"></span>Deepanraj's Personal AI</span>
+  </div>
+  <nav>
+    <a href="https://deeepanbe.github.io">← Portfolio</a>
+    <button class="settings-btn" onclick="showApiModal()">⚙ API Key</button>
+  </nav>
+</header>
+
+<div class="workspace">
+
+  <aside>
+    <button class="new-chat-btn" onclick="newChat()">+ New Chat</button>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Modes</div>
+      <button class="mode-btn active" onclick="setMode('portfolio', this)" id="mode-portfolio">
+        <span class="icon">🎯</span> Portfolio Chat
+      </button>
+      <button class="mode-btn" onclick="setMode('sql', this)">
+        <span class="icon">🗄️</span> SQL Assistant
+      </button>
+      <button class="mode-btn" onclick="setMode('python', this)">
+        <span class="icon">🐍</span> Python Assistant
+      </button>
+      <button class="mode-btn" onclick="setMode('powerbi', this)">
+        <span class="icon">📊</span> Power BI & DAX
+      </button>
+      <button class="mode-btn" onclick="setMode('excel', this)">
+        <span class="icon">📗</span> Excel Helper
+      </button>
+      <button class="mode-btn" onclick="setMode('dashboard', this)">
+        <span class="icon">🖥️</span> Dashboard Design
+      </button>
+      <button class="mode-btn" onclick="setMode('recruiter', this)">
+        <span class="icon">💼</span> Recruiter Pitch
+      </button>
+      <button class="mode-btn" onclick="setMode('career', this)">
+        <span class="icon">🚀</span> Career Coach
+      </button>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">About Deepanraj</div>
+      <div style="font-size:0.78rem;color:var(--text-muted);line-height:1.65;padding:0.25rem 0">
+        Data Analyst & Power BI Developer<br>
+        Tamil Nadu → Chennai / Bengaluru<br>
+        8+ yrs experience<br>
+        Power BI · SQL · Python · Azure
+      </div>
+    </div>
+  </aside>
+
+  <div class="chat-area">
+    <div class="chat-messages" id="chatMessages">
+      <div class="welcome" id="welcomeScreen">
+        <div class="welcome-logo">DJ</div>
+        <h2>Hi, I'm DJ AI 👋</h2>
+        <p>Deepanraj's personal AI assistant — built on Claude. I know his projects, resume, skills, and story. Ask me anything.</p>
+        <div class="welcome-chips">
+          <div class="welcome-chip" onclick="sendQuick('Tell me about Deepanraj\'s Power BI projects')">📊 Power BI projects</div>
+          <div class="welcome-chip" onclick="sendQuick('Write a SQL query for sales analysis')">🗄️ SQL query help</div>
+          <div class="welcome-chip" onclick="sendQuick('Why should I hire Deepanraj for a Data Analyst role?')">💼 Why hire me?</div>
+          <div class="welcome-chip" onclick="sendQuick('Generate DAX measures for inventory tracking')">📐 DAX measures</div>
+          <div class="welcome-chip" onclick="sendQuick('Help me with Python pandas data cleaning')">🐍 Python cleaning</div>
+          <div class="welcome-chip" onclick="sendQuick('What certifications does Deepanraj have?')">🏆 Certifications</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-prompts" id="quickPrompts" style="display:none">
+      <button class="qp-btn" onclick="sendQuick('Write a SQL query')">SQL query</button>
+      <button class="qp-btn" onclick="sendQuick('Generate DAX measures')">DAX measures</button>
+      <button class="qp-btn" onclick="sendQuick('Python pandas help')">Python</button>
+      <button class="qp-btn" onclick="sendQuick('Design a KPI dashboard')">Dashboard KPIs</button>
+      <button class="qp-btn" onclick="sendQuick('Why hire Deepanraj?')">Recruiter pitch</button>
+    </div>
+
+    <div class="input-area">
+      <div class="input-row">
+        <textarea
+          class="input-box"
+          id="userInput"
+          placeholder="Ask me anything — SQL, DAX, Python, Power BI, resume, career advice..."
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let apiKey = sessionStorage.getItem('dj_api_key') || '';
+let currentMode = 'portfolio';
+let conversationHistory = [];
+let isStreaming = false;
+
+const DEEPANRAJ_BIO = `You are DJ AI — the personal AI assistant of Deepanraj Arumugam, a Data Analyst and Power BI Developer based in Tamil Nadu, India.
+
+About Deepanraj:
+- 8+ years professional experience across manufacturing operations and data analytics
+- Current: Quality cum Junior Merchandiser at Dakshin Home Fashions (since March 2021), home textile/apparel exports
+- Previous: Lakshmi Life Sciences Ltd (MIS/quality), Sundram Fasteners Limited (process reporting)
+- Education: B.E. Mechanical Engineering, Pavai College of Technology (Anna University, 2016)
+- Target roles: Data Analyst, BI Developer, Power BI Developer — in Chennai, Bengaluru, Kochi
+- Open to relocation
+
+Technical stack:
+- Power BI: DAX, Power Query, data modeling, drill-throughs, executive dashboards
+- SQL: Oracle, T-SQL, Azure SQL, BigQuery, Snowflake
+- Python: Pandas, NumPy, Scikit-learn, ARIMA forecasting, EDA
+- Azure: ADF, Blob Storage, Azure SQL Database, DP-900 certified
+- Excel automation, Tableau, GCP BigQuery, GitHub Pages portfolio (HTML/CSS/JS)
+
+Certifications:
+- Google Data Analytics Professional Certificate (Coursera, 2024)
+- Microsoft Azure Data Fundamentals DP-900
+- Business Analyst Master Certification (Edureka)
+- Tata Group Data Visualisation (Forage)
+- BCG Data Science and Analytics (Forage)
+- Microsoft PL-300 Power BI (In Progress)
+
+Key projects:
+1. Power BI Universal Analytics Dashboard — sales, inventory, operations KPIs with drill-throughs
+2. Enterprise Analytics Project — Azure ADF + SQL pipeline architecture
+3. Customer Segmentation ML — K-means clustering, RFM analysis
+4. BigQuery E-Commerce Analysis — 99,441 orders, revenue SQL insights
+5. Olist E-Commerce BI Dashboard — Power Query preprocessing, DAX measures
+6. Sales Forecasting Dashboard — ARIMA time-series Python model
+7. Retail Inventory Management — stock optimization, reorder analytics
+
+Portfolio: https://deeepanbe.github.io
+GitHub: https://github.com/deeepanbe
+LinkedIn: https://linkedin.com/in/deepanraj-data-analyst
+Email: deepanraj.a@outlook.com`;
+
+const SYSTEM_PROMPTS = {
+  portfolio: `${DEEPANRAJ_BIO}
+
+Your role: Answer any question about Deepanraj's background, projects, skills, experience, and suitability for roles. Be enthusiastic but honest. Highlight measurable impact and specific technical skills. Keep responses concise, professional, and compelling.`,
+
+  sql: `${DEEPANRAJ_BIO}
+
+Your role: Expert SQL assistant for analytics. Help write, optimize, and explain queries across Oracle, T-SQL, BigQuery, Snowflake, Azure SQL. Always:
+- Provide complete, runnable SQL
+- Add comments explaining logic
+- Suggest indexes or optimization when relevant
+- Format code clearly in code blocks`,
+
+  python: `${DEEPANRAJ_BIO}
+
+Your role: Expert Python data analyst. Help with Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn, EDA, and data automation. Always:
+- Provide complete, runnable Python code
+- Use Pandas idioms correctly
+- Add inline comments
+- Suggest better alternatives for inefficient patterns`,
+
+  powerbi: `${DEEPANRAJ_BIO}
+
+Your role: Expert Power BI and DAX consultant. Help design DAX measures, Power Query M code, data models, relationships, and dashboard layouts. Always:
+- Write complete DAX measures with proper CALCULATE, FILTER, ALL patterns
+- Explain context transition
+- Suggest star schema design when relevant
+- Provide M code snippets when needed`,
+
+  excel: `${DEEPANRAJ_BIO}
+
+Your role: Expert Excel automation assistant. Help with formulas (XLOOKUP, dynamic arrays, LAMBDA), Power Query in Excel, VBA macros, pivot tables. Always provide complete, copy-paste ready formulas.`,
+
+  dashboard: `${DEEPANRAJ_BIO}
+
+Your role: Expert data visualization and dashboard designer. Help design KPI dashboards, choose right charts, define metrics, create storytelling layouts, and structure executive reports. Be specific and actionable.`,
+
+  recruiter: `${DEEPANRAJ_BIO}
+
+Your role: Deepanraj's career advocate. When recruiters ask, give compelling, specific answers that highlight his 8+ years cross-domain experience, self-taught analytics stack, and portfolio evidence. Be confident, concise, and business-focused.`,
+
+  career: `${DEEPANRAJ_BIO}
+
+Your role: Career coach for Deepanraj's transition. Help with resume strategy, interview prep, LinkedIn optimization, salary negotiation, job search in Chennai/Bengaluru market, and skill gap planning. Be specific, realistic, and actionable.`
+};
+
+function showApiModal() {
+  document.getElementById('apiModal').style.display = 'flex';
+}
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key.startsWith('sk-ant')) {
+    alert('Please enter a valid Anthropic API key (starts with sk-ant-)');
+    return;
+  }
+  apiKey = key;
+  sessionStorage.setItem('dj_api_key', key);
+  document.getElementById('apiModal').style.display = 'none';
+}
+
+function skipApiKey() {
+  document.getElementById('apiModal').style.display = 'none';
+}
+
+window.addEventListener('load', () => {
+  if (!apiKey) showApiModal();
+});
+
+function setMode(mode, btn) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  conversationHistory = [];
+}
+
+function newChat() {
+  conversationHistory = [];
+  const messages = document.getElementById('chatMessages');
+  messages.innerHTML = `
+    <div class="welcome" id="welcomeScreen">
+      <div class="welcome-logo">DJ</div>
+      <h2>New Chat 👋</h2>
+      <p>Ask me anything about Deepanraj's work, SQL, Power BI, Python, or career advice.</p>
+    </div>`;
+  document.getElementById('quickPrompts').style.display = 'none';
+}
+
+function sendQuick(text) {
+  document.getElementById('userInput').value = text;
+  sendMessage();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+}
+
+function scrollToBottom() {
+  const msgs = document.getElementById('chatMessages');
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function appendMessage(role, content) {
+  const welcome = document.getElementById('welcomeScreen');
+  if (welcome) welcome.remove();
+  document.getElementById('quickPrompts').style.display = 'flex';
+
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.textContent = role === 'ai' ? 'DJ' : 'DA';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.innerHTML = formatMessage(content);
+
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  msgs.appendChild(div);
+  scrollToBottom();
+  return bubble;
+}
+
+function formatMessage(text) {
+  text = String(text);
+  const fences = [];
+  
+  // Extract code blocks
+  text = text.replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) => {
+    const token = `CODE_BLOCK_${fences.length}_TOKEN`;
+    fences.push({ lang: lang || 'text', code: code.trim() });
+    return token;
+  });
+
+  // Escape HTML
+  text = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Inline code
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Bold
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // Italic
+  text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  // Lists
+  text = text.replace(/\n- /g, '\n<li>');
+  text = text.replace(/(<li>.*)/s, '<ul>$1</ul>');
+  text = text.replace(/<li>/g, '<li>').replace(/<\/li>/g, '</li>');
+  // Line breaks
+  text = text.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
+  
+  // Re-insert code blocks
+  fences.forEach((fence, i) => {
+    const token = `CODE_BLOCK_${i}_TOKEN`;
+    const escaped = fence.code
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    const block = `<pre><code>${escaped}</code></pre>`;
+    text = text.replace(token, block);
+  });
+
+  return `<p>${text}</p>`.replace(/<p><\/p>/g, '');
+}
+
+async function sendMessage() {
+  if (isStreaming) return;
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  if (!apiKey) {
+    showApiModal();
+    return;
+  }
+
+  input.value = '';
+  input.style.height = 'auto';
+  isStreaming = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  appendMessage('user', text);
+  conversationHistory.push({ role: 'user', content: text });
+
+  const welcome = document.getElementById('welcomeScreen');
+  if (welcome) welcome.remove();
+  const msgs = document.getElementById('chatMessages');
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'msg ai';
+  typingDiv.id = 'typing';
+  typingDiv.innerHTML = `
+    <div class="avatar">DJ</div>
+    <div class="typing-indicator"><span></span><span></span><span></span></div>`;
+  msgs.appendChild(typingDiv);
+  scrollToBottom();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-3-5-sonnet-20241022',
+        max_tokens: 1500,
+        system: SYSTEM_PROMPTS[currentMode],
+        messages: conversationHistory
+      })
+    });
+
+    const data = await response.json();
+    document.getElementById('typing')?.remove();
+
+    if (data.error) {
+      appendMessage('ai', `⚠️ API Error: ${data.error.message}. Please check your API key in Settings.`);
+    } else {
+      const reply = data.content[0].text;
+      conversationHistory.push({ role: 'assistant', content: reply });
+      appendMessage('ai', reply);
+    }
+
+  } catch (err) {
+    document.getElementById('typing')?.remove();
+    appendMessage('ai', `⚠️ Connection error: ${err.message}. Make sure your API key is valid and you have internet access.`);
+  }
+
+  isStreaming = false;
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('quickPrompts').style.display = 'flex';
+}
+</script>
 </body>
 </html>
