@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: DJ AI Platform API
+  version: 2.0.0
+servers:
+  - url: https://your-dj-api.example.com
+paths:
+  /health:
+    get:
+      responses:
+        '200': {description: OK}
+  /auth/register:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email,password]
+              properties:
+                email: {type: string, format: email}
+                password: {type: string, minLength: 10}
+                displayName: {type: string}
+      responses:
+        '201': {description: Created}
+  /auth/login:
+    post:
+      responses:
+        '200': {description: Authenticated}
+  /chat:
+    post:
+      responses:
+        '200': {description: AI response}
+        '403': {description: Human verification failed}
+  /workspaces:
+    get: {responses: {'200': {description: Workspaces}}}
+    post: {responses: {'201': {description: Created}}}
+  /conversations:
+    get: {responses: {'200': {description: Conversations}}}
+    post: {responses: {'201': {description: Created}}}
+  /memory:
+    post: {responses: {'201': {description: Created}}}
+  /memory/search:
+    get: {responses: {'200': {description: Similar memories}}}
+  /documents:
+    post: {responses: {'201': {description: Indexed document}}}
+  /rag/search:
+    get: {responses: {'200': {description: Retrieved chunks}}}
+  /agent/run:
+    post: {responses: {'200': {description: Agent result}}}
+  /usage:
+    get: {responses: {'200': {description: Usage summary}}}
+  /billing/checkout:
+    post: {responses: {'200': {description: Stripe checkout URL}}}
+  /billing/webhook:
+    post: {responses: {'200': {description: Webhook accepted}}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
