@@ -2,6 +2,15 @@
 
 Live site: https://deeepanbe.github.io
 
+## Recent maintenance (DJ AI reliability pass)
+
+- **Fixed:** the DJ AI chat widget (`dj/dj.js`) parsed the backend's reply from `data.reply`/`data.message`, but `POST /chat` returns the reply under `data.text`. This meant that even with the backend fully configured, the widget always silently fell back to canned local answers. It now reads `data.text` first.
+- **Fixed:** the widget never sent a `session_id`, so the backend's per-session rate limiting on `/chat` was effectively inactive. It now generates and sends a per-tab session id.
+- **Added:** request timeout (20s, `AbortController`) and a clearer thrown error (including the backend's error message) on failed chat requests.
+- **Added:** retry-with-backoff (`AI_REQUEST_MAX_RETRIES`, default 2) and a request timeout (`AI_REQUEST_TIMEOUT_MS`, default 25s) around all three AI providers (OpenAI/Anthropic/Gemini) in `backend/ai/provider.js`, so transient 429/5xx/timeout failures no longer surface as a hard 500 to the user.
+- Verified: no hardcoded secrets in the repo, `npm audit` reports 0 vulnerabilities, all 12 backend tests pass (`cd backend && npm test`).
+- See `backend/.env.example` for the two new optional env vars (`AI_REQUEST_TIMEOUT_MS`, `AI_REQUEST_MAX_RETRIES`).
+
 Premium GitHub Pages portfolio for a Data Analyst and AI Solutions Developer. The site is designed to feel like a modern AI analytics platform, with recruiter-first storytelling, client-ready service positioning, dashboard case studies, a DJ AI copilot, resume preview, certifications, and a private resource center.
 
 ## Positioning

@@ -13,7 +13,21 @@
   };
 
   const storageKey = "deepanraj.dj.workspace.history.v2";
+  const sessionIdKey = "deepanraj.dj.session.id.v1";
   const rateLimit = createRateLimiter({ limit: 45, windowMs: 60 * 1000 });
+
+  function getSessionId() {
+    try {
+      let id = sessionStorage.getItem(sessionIdKey);
+      if (!id) {
+        id = createId();
+        sessionStorage.setItem(sessionIdKey, id);
+      }
+      return id;
+    } catch {
+      return "";
+    }
+  }
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -205,15 +219,43 @@
     const backendUrl = config.BACKEND_URL || "";
     if (!backendUrl || backendUrl.includes("your-dj-api")) throw new Error("Backend not configured");
 
-    const response = await fetch(`${backendUrl}/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ mode, messages: [...messages, { role: "user", content: text }] })
-    });
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
+    let authToken = "";
+    try { authToken = localStorage.getItem("dj.auth.token") || ""; } catch { authToken = ""; }
 
-    if (!response.ok) throw new Error("Backend request failed");
+    let response;
+    try {
+      response = await fetch(`${backendUrl}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {})
+        },
+        body: JSON.stringify({
+          mode,
+          session_id: getSessionId(),
+          page: window.location.pathname,
+          messages: [...messages, { role: "user", content: text }]
+        }),
+        signal: controller.signal
+      });
+    } finally {
+      window.clearTimeout(timeout);
+    }
+
+    if (!response.ok) {
+      let detail = "";
+      try { detail = (await response.json()).error || ""; } catch { detail = ""; }
+      throw new Error(detail || "Backend request failed");
+    }
+
     const data = await response.json();
-    return data.reply || data.message || "";
+    // The backend (/chat) returns the reply under `text`; keep `reply`/`message`
+    // as fallbacks in case an older or alternate backend shape is deployed.
+    const reply = data.text || data.reply || data.message || "";
+    if (!reply) throw new Error("Backend returned an empty response");
+    return reply;
   }
 
   function localReply(text) {
