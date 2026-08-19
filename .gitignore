@@ -1,7 +1,40 @@
+# Environment and secrets
 .env
+.env.*
+!.env.example
 backend/.env
-backend/chroma_db/
+backend/.env.*
+!backend/.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Node / Python
+a node_modules/
+node_modules/
+backend/node_modules/
 backend/__pycache__/
 backend/**/__pycache__/
 *.pyc
-node_modules/
+.pytest_cache/
+
+# Local databases / vector stores
+backend/chroma_db/
+*.sqlite
+*.sqlite3
+
+# Local tooling / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build / coverage outputs
+dist/
+build/
+coverage/
+
+# Local logs
+*.log
+npm-debug.log*
