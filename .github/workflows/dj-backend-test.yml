@@ -1,0 +1,34 @@
+name: DJ AI backend tests
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/dj-backend-test.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package.json
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: Run tests
+        run: npm test
