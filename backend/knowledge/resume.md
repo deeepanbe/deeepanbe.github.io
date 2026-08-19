@@ -1,34 +1,13 @@
-# Deepanraj A. Professional Profile
+# resume.md
 
-## Current Positioning
+Location: (add location)
+Experience: (summarize years & roles)
 
-Power BI Developer and Operations Analyst with 4+ years across manufacturing,
-home textile, quality, merchandising, and operations analytics.
+Education: (degrees / certifications)
 
-## Target Roles
+Public resume highlights:
+- Power BI dashboards with executive & operational views
+- SQL-based analytics and ETL patterns
+- Python automation for reporting and data prep
 
-- Data Analyst
-- Data Engineer
-- BI Developer
-- Power BI Developer
-
-## Target Locations
-
-- Bengaluru
-- Chennai
-- Kochi
-
-## Skills
-
-- Power BI: DAX, Power Query, data modeling, dashboard design
-- SQL: Oracle SQL, T-SQL, Azure SQL, CTEs, joins, aggregations
-- Python: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn
-- Azure: SQL Database, Blob Storage, Azure Data Factory
-- Other: Tableau, Excel VBA, Git, dashboard storytelling
-
-## Certifications
-
-- Google Data Analytics Professional Certificate
-- Business Analyst Master Certification
-- Tata and BCG Forage simulations
-- Microsoft PL-300 in progress
+(Replace this content with the canonical resume text you want DJ to reference.)
