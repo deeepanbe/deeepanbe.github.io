@@ -1,130 +1,156 @@
-# Deepanraj Arumugam - AI Analytics Portfolio
+# DJ AI — Deepanraj AI Analytics Platform
 
-Live site: https://deeepanbe.github.io
+**Live portfolio:** https://deeepanbe.github.io  
+**Repository:** https://github.com/deeepanbe/deeepanbe.github.io
 
-Premium GitHub Pages portfolio for a Data Analyst and AI Solutions Developer. The site is designed to feel like a modern AI analytics platform, with recruiter-first storytelling, client-ready service positioning, dashboard case studies, a DJ AI copilot, resume preview, certifications, and a private resource center.
+DJ AI is a portfolio-driven AI analytics platform built around **Data Analytics, Power BI, SQL, Python, automation, and AI-assisted workflows**. The repository combines a public portfolio, DJ AI assistant experience, backend services, analytics demos, an Android-ready foundation, and GitHub automation.
 
-## Positioning
+## Vision
 
-Deepanraj Arumugam builds intelligent dashboards, automation systems, and AI-powered analytics solutions across Power BI, SQL, Python, Excel, Tableau, Azure concepts, and business intelligence workflows.
+Build DJ AI into a practical personal AI assistant that can combine modern language models with:
 
-Target audiences:
+- Conversation and context
+- Personal knowledge and portfolio context
+- Retrieval-augmented generation (RAG)
+- Data and document analysis
+- SQL / Python / Power BI assistance
+- GitHub-aware development workflows
+- Automation and future integrations
 
-- HR recruiters
-- Hiring managers
-- Freelance clients
-- Startup founders
-- Analytics teams
+DJ AI is an **AI orchestration platform**, not a newly trained foundation model. Model providers are isolated behind a provider layer so the product can evolve without locking the entire application to one vendor.
 
-Target opportunities:
-
-- Data Analyst
-- BI Developer
-- Power BI Developer
-- Analytics Engineer
-- AI-assisted Analytics Developer
-- Freelance dashboard and reporting projects
-
-## Core Experience
-
-- Premium light-theme SaaS visual system
-- Sticky navigation with active section states
-- Floating previous, next, and back-to-top navigation
-- Recruiter-optimized hero with profile image, KPI counters, CTAs, and AI preview
-- Currently-learning ticker for PL-300, Azure Data Factory, dbt, and Snowflake SQL
-- Client-ready services and consulting sections
-- Enterprise-style project case studies
-- DJ AI assistant drawer and full workspace
-- Certifications and experience timeline
-- GitHub contribution activity proof and public Open Graph image
-- Resume preview, download, LinkedIn, GitHub, email, WhatsApp, and Formspree fallback CTAs
-- Encoded private access validation with session timeout
-- Mobile responsive layout and accessibility-focused controls
-
-## Repository Structure
+## Repository at a glance
 
 ```text
-/
-  index.html                 # Main AI analytics platform portfolio
-  sales-dashboard.html        # Dashboard demo
-  hr-dashboard.html           # Dashboard demo
-  operations-dashboard.html   # Dashboard demo
-  ai/                         # DJ AI assistant scripts and docs
-  assets/                     # Profile, resume, screenshots, secure files
-  assets/og-image.svg         # Public social preview image
-  certifications/             # Certification documentation
-  components/                 # Static component architecture notes
-  dashboards/                 # Dashboard demo documentation
-  dj/                         # Full DJ AI workspace
-  pages/                      # Page architecture notes
-  private/                    # Private access documentation
-  projects/                   # Case study documentation
-  scripts/                    # Site interaction scripts
-  styles/                     # Premium design system CSS
+.
+├── index.html                 # Public portfolio
+├── dj/                        # DJ AI web workspace and UI
+├── ai/                        # Client-side assistant/bridge logic
+├── backend/                   # API, AI providers, auth, RAG, persistence
+├── android/                   # Android-ready integration foundation
+├── app/                       # Platform-side browser logic
+├── frontend/security/         # Client-side security helpers
+├── dashboards/                # Dashboard documentation
+├── projects/                 # Analytics case studies
+├── assets/                   # Public portfolio assets
+├── scripts/                   # Platform scripts
+├── .github/                  # CI/CD and GitHub configuration
+└── docs/                     # Architecture and engineering documentation
 ```
 
-## Project Case Studies
+## DJ AI architecture
 
-- Power BI Universal Analytics Dashboard
-- Enterprise Analytics Project
-- Customer Segmentation ML
-- BigQuery E-Commerce Analysis
-- Olist E-Commerce BI Dashboard
-- Sales Forecasting Dashboard
-- Retail Inventory Management
+```text
+Browser / Mobile
+      │
+      ▼
+Portfolio + DJ AI UI
+      │
+      ▼
+API / Authentication / Rate Limits
+      │
+      ▼
+AI Orchestrator
+      ├── Model Provider Layer
+      ├── Conversation Context
+      ├── Knowledge / RAG
+      ├── Tool Registry
+      └── Safety / Validation
+      │
+      ▼
+External Models + Services
+```
 
-Each showcased project is framed by business problem, tools used, measurable impact, GitHub link, live demo or assistant-driven case study.
+See [`docs/DJ_AI_ARCHITECTURE.md`](docs/DJ_AI_ARCHITECTURE.md) for the detailed design and extension points.
 
-## DJ AI
+## Current capabilities
 
-DJ AI is a portfolio copilot for:
+### Portfolio
+- Recruiter-oriented Data Analyst / BI positioning
+- Power BI, SQL, Python and analytics case studies
+- Dashboard demonstrations
+- Resume and professional contact paths
+- Responsive, accessibility-focused interface
+- SEO and social metadata
 
-- Project explanations
-- SQL generation
-- Python and pandas workflows
-- Excel reporting help
-- Power BI DAX measures
-- Dashboard recommendations
-- Data cleaning checklists
-- Resume and recruiter fit review
+### DJ AI
+- Portfolio-aware assistant
+- SQL, Python, Excel and Power BI guidance
+- Conversation context for authenticated sessions
+- Long-term memory/RAG foundation
+- Secure backend provider abstraction
+- Turnstile and rate-limit protection
+- Multi-provider architecture for OpenAI, Anthropic and Gemini
 
-The current GitHub Pages version includes a polished local fallback assistant. The backend-ready integration point remains available through `DJ_CONFIG.BACKEND_URL`.
+### Backend
+- Node.js / Express API
+- PostgreSQL persistence
+- Authentication foundation
+- RAG/memory foundation
+- Billing/webhook foundation
+- Health endpoint
+- Security middleware
+- Automated tests
 
-## Private Access
+## Model configuration
 
-Private Access is implemented for static hosting compatibility:
+The backend keeps model credentials server-side. Configure the provider through environment variables; never place API keys in frontend JavaScript.
 
-- Encoded SHA-256 password validation
-- Session timeout
-- Authorized resource area
-- Resume, certificates, and dashboard resource downloads
+Example:
 
-Static-site note: GitHub Pages cannot provide true server-side secrecy. Private Access is a professional presentation layer for authorized resources in this public repo. Confidential files should move to server-backed storage when required.
+```env
+AI_PROVIDER=openai
+OPENAI_API_KEY=your_secret_here
+MODEL=gpt-5.6-luna
+```
 
-## Stack
+Other provider adapters are available through the backend provider layer.
 
-- HTML
-- CSS
-- Vanilla JavaScript
-- GitHub Pages
+## Local development
 
-No build step is required.
+### Backend
 
-## SEO Focus
+```bash
+cd backend
+npm install
+npm test
+npm start
+```
 
-- Data Analyst
-- Power BI Developer
-- Microsoft PL-300
-- BI Developer
-- SQL Analyst
-- BigQuery
-- Snowflake
-- GCP
-- Python Data Analyst
-- AI Analytics Developer
-- Analytics Consultant
-- Dashboard Automation
-- KPI Reporting
-- Chennai
-- Bengaluru
-- Kochi
+Create `backend/.env` from `backend/.env.example` and provide only the secrets required by the features you enable.
+
+### Static portfolio
+
+The portfolio is intentionally compatible with GitHub Pages and does not require a frontend build step for its current static layer.
+
+## Security
+
+Never commit API keys, GitHub tokens, database passwords, JWT secrets, webhook signing secrets, or other credentials. GitHub Pages cannot make files inside a public repository private. Sensitive documents must live in authenticated server-backed storage rather than a public `assets/` path.
+
+See [`SECURITY.md`](SECURITY.md) and [`docs/SECURITY_POSTURE.md`](docs/SECURITY_POSTURE.md).
+
+## Engineering standards
+
+- Preserve working functionality before refactoring.
+- Keep AI providers behind adapters.
+- Validate untrusted input.
+- Keep secrets server-side.
+- Add tests for critical behavior.
+- Prefer small, reviewable changes.
+- Do not claim unsupported AI capabilities.
+
+## Roadmap
+
+1. Harden the existing backend and public portfolio.
+2. Complete the DJ AI orchestration/tool layer.
+3. Expand document and data-analysis workflows.
+4. Add secure GitHub-aware developer tools.
+5. Improve persistent memory and RAG quality.
+6. Build a production Android client on the existing API foundation.
+7. Add evaluation, observability, and model-routing controls.
+
+## Author
+
+**Deepanraj Arumugam** — Data Analyst / AI Analytics Developer  
+GitHub: https://github.com/deeepanbe  
+LinkedIn: https://www.linkedin.com/in/deepanraj-data-analyst
