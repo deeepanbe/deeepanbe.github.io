@@ -1,108 +1,117 @@
-# DJ AI Backend — Secure AI Foundation
+# DJ AI Backend — Multi-user AI Platform
 
-This service is the server-side foundation for the future multi-user DJ AI platform. It keeps provider credentials on the server, verifies browser requests with Cloudflare Turnstile, rate-limits abuse, and preserves the existing frontend's local fallback behavior.
+This service is the secure backend for the DJ AI platform. Provider credentials stay server-side; browser traffic is protected with CORS, Turnstile, rate limits, and bounded inputs. PostgreSQL + pgvector provide accounts, workspaces, conversations, memory, RAG and usage persistence.
 
 ## Architecture
 
 ```text
-Browser DJ AI
-    │
-    │ POST /chat + short-lived Turnstile token
-    ▼
-Node/Express API
-    ├── CORS allowlist
-    ├── IP rate limit
-    ├── session rate limit
-    ├── Turnstile verification
-    ├── input validation
-    └── AI provider abstraction
-            │
-            ▼
-        OpenAI Responses API
+Web / Android / Extension
+        │ HTTPS
+        ▼
+Node 22 + Express
+  ├─ Turnstile / rate limits / CORS
+  ├─ Auth + verified accounts
+  ├─ Workspace tenant isolation
+  ├─ Conversations + memory
+  ├─ RAG / pgvector
+  ├─ Agent tools
+  ├─ Usage + billing
+  └─ AI provider router
+       ├─ OpenAI
+       ├─ Anthropic
+       └─ Gemini
 ```
 
 ## Local setup
 
-1. `cd backend`
-2. Copy `.env.example` to `.env`.
-3. Set `OPENAI_API_KEY` and `TURNSTILE_SECRET` in the server environment.
-4. Set `CORS_ORIGINS` to the exact origin hosting the frontend.
-5. Run `npm install`.
-6. Run `npm run dev`.
-7. Run `npm test`.
+### Option A — Docker
 
-Do not commit `.env`, API keys, Turnstile secrets, or production credentials.
+1. `cp .env.example .env`
+2. Set at least `OPENAI_API_KEY`, `JWT_SECRET`, `TURNSTILE_SECRET` and `CORS_ORIGINS`.
+3. `docker compose up --build`
+4. API: `http://localhost:8787`
 
-## Turnstile
+The compose stack includes PostgreSQL with pgvector and automatically runs `migrations/001_platform.sql` on first database creation.
 
-Create a Cloudflare Turnstile site. The **site key is public** and belongs in frontend configuration. The **secret key stays only on the backend** as `TURNSTILE_SECRET`.
+### Option B — Node
 
-The backend fails closed when a token is missing or cannot be verified. A browser cannot bypass this by simply knowing the public site key.
+1. `npm install`
+2. Configure `.env` and a PostgreSQL/pgvector database.
+3. Run `npm test`.
+4. Run `npm start`.
 
-For local development, use Cloudflare's official Turnstile test credentials and a local origin such as `http://localhost:8000`.
+Never commit `.env` or production secrets.
 
-## API
+## Core endpoints
 
-### `GET /health`
+### Public
 
-Returns service configuration status without exposing secrets.
+- `GET /health`
+- `POST /chat` — public chat with Turnstile verification
+- `POST /auth/register`
+- `GET /auth/verify?token=...`
+- `POST /auth/login`
 
-### `POST /chat`
+### Authenticated
 
-Accepts either the current frontend shape:
+Send `Authorization: Bearer <access_token>`.
 
-```json
-{
-  "mode": "chat",
-  "messages": [{"role": "user", "content": "Hello"}],
-  "session_id": "chat-123",
-  "turnstileToken": "..."
-}
-```
+- `GET /auth/me`
+- `GET/POST /workspaces`
+- `GET/POST /conversations`
+- `GET /conversations/:id/messages`
+- `POST /memory`
+- `GET /memory/search?q=...`
+- `POST /documents` — text ingestion/chunking/embedding
+- `GET /rag/search`
+- `POST /agent/run`
+- `GET /usage`
+- `POST /billing/checkout`
 
-or the simpler server shape:
+### Stripe
 
-```json
-{
-  "page": "index.html",
-  "mode": "chat",
-  "message": "Hello",
-  "session_id": "chat-123",
-  "turnstileToken": "..."
-}
-```
+- `POST /billing/webhook`
 
-The response is:
+The webhook is mounted before the JSON parser and verifies the Stripe signature against the raw request body.
 
-```json
-{"ok":true,"model":"...","text":"..."}
-```
+## Data model
 
-## Security decisions
+`users → workspaces → workspace_members → conversations → messages`
 
-- No `x-backend-secret` is accepted or required.
-- No OpenAI credential is sent to the browser.
-- CORS is an allowlist, not an authentication mechanism.
+User/workspace memory and document chunks are embedded into pgvector. Queries always scope private data by authenticated user/workspace ownership.
+
+## Security
+
+- No backend secret is accepted from the browser.
+- No OpenAI/Anthropic/Gemini credential is shipped to clients.
 - Turnstile is verified server-side.
-- IP and session rate limits are enforced before the model call.
-- Message size is bounded.
-- Security headers disable framing and caching of API responses.
-- Logs contain verification/error metadata, not user message content.
-- The provider is abstracted so Claude/Gemini/other providers can be added later without rewriting the API contract.
+- CORS is an origin allowlist, not authentication.
+- Passwords use bcrypt.
+- Access tokens are signed JWTs with an issuer and expiry.
+- Vector searches are tenant-scoped.
+- Stripe webhooks are HMAC-verified and timestamp-bounded.
+- Rate limits apply to chat and authentication endpoints.
+- Input sizes are bounded.
 
-## Frontend bridge
+## Providers
 
-`../ai/dj-secure-bridge.js` can transparently add a Turnstile token to existing `POST /chat` calls. It contains no server secret. `dj/dj-config.js` exposes only `BACKEND_URL` and the public `TURNSTILE_SITE_KEY`.
+Set `AI_PROVIDER=openai`, `anthropic`, or `gemini`. OpenAI uses the Responses API; embeddings use `text-embedding-3-small` by default. Provider-specific credentials remain backend-only.
 
-The current public portfolio should keep the backend URL/site key empty until the API is deployed and configured. The local assistant remains the fallback.
+## Email verification
 
-## Next platform phases
+Production registration requires `RESEND_API_KEY` and `EMAIL_FROM`. In non-production mode, the API returns a verification URL to make local development easy.
 
-1. Authentication and verified customer accounts
-2. PostgreSQL + tenant isolation
-3. Persistent conversation and user-controlled memory
-4. File ingestion + RAG + pgvector
-5. Agent orchestration and tool permissions
-6. Multi-provider model routing
-7. Projects/workspaces
-8. Usage metering, billing, observability, and production deployment
+## Frontend
+
+`dj/dj-config.js` contains only public configuration. `app/dj-platform.js` is the web client for account/workspace/memory/RAG/agent/billing APIs. `dashboard.html`, `login.html`, `signup.html`, `verify-email.html`, and `billing.html` provide the first customer UI.
+
+## Client apps
+
+- `extension/` — Manifest V3 browser extension scaffold.
+- `android/` — Jetpack Compose Android starter using the same backend contract.
+
+Production Android signing, Play Console publishing, extension-store publishing, and third-party account setup require owner credentials and cannot be completed safely from GitHub source code alone.
+
+## Full status
+
+See `../DJ_AI_PLATFORM_STATUS.md` for the phase-by-phase implementation status and the remaining deployment credentials/setup.
