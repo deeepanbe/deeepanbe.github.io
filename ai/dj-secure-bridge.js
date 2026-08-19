@@ -18,6 +18,7 @@
 
   let widgetId = null;
   let readyPromise = null;
+  let tokenPromise = null;
   const originalFetch = window.fetch.bind(window);
 
   function loadTurnstile() {
@@ -48,19 +49,31 @@
   async function getToken() {
     await loadTurnstile();
     if (!window.turnstile) throw new Error('Turnstile is unavailable');
+    if (tokenPromise) return tokenPromise;
 
-    if (widgetId === null) {
-      const host = document.createElement('div');
-      host.hidden = true;
-      host.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(host);
-      widgetId = window.turnstile.render(host, {
-        sitekey: siteKey,
-        size: 'invisible'
-      });
-    }
+    tokenPromise = new Promise((resolve, reject) => {
+      if (widgetId === null) {
+        const host = document.createElement('div');
+        host.hidden = true;
+        host.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(host);
+        widgetId = window.turnstile.render(host, {
+          sitekey: siteKey,
+          size: 'invisible',
+          execution: 'execute',
+          callback: resolve,
+          'error-callback': () => reject(new Error('Turnstile verification failed')),
+          'expired-callback': () => reject(new Error('Turnstile token expired')),
+          'timeout-callback': () => reject(new Error('Turnstile verification timed out'))
+        });
+      }
 
-    return window.turnstile.execute(widgetId);
+      window.turnstile.execute(widgetId);
+    }).finally(() => {
+      tokenPromise = null;
+    });
+
+    return tokenPromise;
   }
 
   window.fetch = async function (input, init) {
