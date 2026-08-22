@@ -1,12 +1,15 @@
 /* DJ AI runtime configuration — safe to commit.
- * These are PUBLIC values only (a URL and a Turnstile *site* key, which is
- * meant to be public by design). Never put an API key, JWT secret, or
- * Turnstile *secret* key in this file — those belong only in your hosting
- * provider's environment variables (e.g. Render's dashboard).
  *
- * Once your backend is deployed, replace the two placeholder values below,
- * commit, and push. GitHub Pages will pick it up automatically — no build
- * step required.
+ * Keep real secrets out of this file. The browser may contain only public
+ * values such as the backend URL and Turnstile site key.
+ *
+ * The backend has not been hard-coded here because the hosting provider's
+ * final public URL must be verified after deployment. An empty URL keeps the
+ * portfolio safe and allows DJ AI's documented local/graceful fallback until
+ * the real backend is connected.
+ *
+ * After deployment, replace the two empty strings with the verified public
+ * backend URL and Turnstile site key, then commit and push.
  */
-window.DJ_BACKEND_URL = 'https://YOUR-BACKEND-DOMAIN.example.com';
-window.DJ_TURNSTILE_SITE_KEY = 'YOUR_PUBLIC_TURNSTILE_SITE_KEY';
+window.DJ_BACKEND_URL = '';
+window.DJ_TURNSTILE_SITE_KEY = '';
