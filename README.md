@@ -1,15 +1,15 @@
-# Deepanraj Arumugam - AI Analytics Portfolio
+# Deepanraj Arumugam — AI Analytics Portfolio
 
-Live site: https://deeepanbe.github.io
+[![Live Site](https://img.shields.io/badge/live-deeepanbe.github.io-1677ff?style=flat-square)](https://deeepanbe.github.io)
+[![Backend Tests](https://img.shields.io/badge/backend%20tests-12%2F12%20passing-2ea44f?style=flat-square)](backend/test)
+[![Stack](https://img.shields.io/badge/stack-Node.js%20%7C%20Express%20%7C%20PostgreSQL-informational?style=flat-square)](backend)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](LICENSE)
 
-## Recent maintenance (DJ AI reliability pass)
+**Live site:** https://deeepanbe.github.io
 
-- **Fixed:** the DJ AI chat widget (`dj/dj.js`) parsed the backend's reply from `data.reply`/`data.message`, but `POST /chat` returns the reply under `data.text`. This meant that even with the backend fully configured, the widget always silently fell back to canned local answers. It now reads `data.text` first.
-- **Fixed:** the widget never sent a `session_id`, so the backend's per-session rate limiting on `/chat` was effectively inactive. It now generates and sends a per-tab session id.
-- **Added:** request timeout (20s, `AbortController`) and a clearer thrown error (including the backend's error message) on failed chat requests.
-- **Added:** retry-with-backoff (`AI_REQUEST_MAX_RETRIES`, default 2) and a request timeout (`AI_REQUEST_TIMEOUT_MS`, default 25s) around all three AI providers (OpenAI/Anthropic/Gemini) in `backend/ai/provider.js`, so transient 429/5xx/timeout failures no longer surface as a hard 500 to the user.
-- Verified: no hardcoded secrets in the repo, `npm audit` reports 0 vulnerabilities, all 12 backend tests pass (`cd backend && npm test`).
-- See `backend/.env.example` for the two new optional env vars (`AI_REQUEST_TIMEOUT_MS`, `AI_REQUEST_MAX_RETRIES`).
+A recruiter-facing portfolio for a Data Analyst / BI Developer, built as a full mini AI platform rather than a static page: a secure Node/Express backend, a multi-provider AI orchestration layer (OpenAI / Anthropic / Gemini with retry-and-fallback), Postgres-backed auth and conversation memory, and **DJ AI** — a personal AI copilot embedded across the site that can answer questions about the projects, generate SQL/Python/DAX on request, and discuss recruiter fit, without needing the visitor to bring their own API key.
+
+See [`CHANGELOG.md`](CHANGELOG.md) for the most recent engineering pass.
 
 Premium GitHub Pages portfolio for a Data Analyst and AI Solutions Developer. The site is designed to feel like a modern AI analytics platform, with recruiter-first storytelling, client-ready service positioning, dashboard case studies, a DJ AI copilot, resume preview, certifications, and a private resource center.
 
@@ -86,18 +86,14 @@ Each showcased project is framed by business problem, tools used, measurable imp
 
 ## DJ AI
 
-DJ AI is a portfolio copilot for:
+DJ AI is a personal AI copilot embedded across the site — not a scripted FAQ bot. It runs on a secure Node/Express backend (`/backend`) that holds the AI provider key server-side (never exposed to the browser), with:
 
-- Project explanations
-- SQL generation
-- Python and pandas workflows
-- Excel reporting help
-- Power BI DAX measures
-- Dashboard recommendations
-- Data cleaning checklists
-- Resume and recruiter fit review
+- Multi-provider support (OpenAI, Anthropic, Gemini) with automatic retry-with-backoff and timeouts
+- Optional Postgres-backed user accounts, conversation history, and long-term memory (degrades gracefully if no database is configured)
+- Cloudflare Turnstile bot protection so the API budget isn't drained by scrapers
+- A single public config file (`dj/production-config.js`) is all that's needed to point every page at a deployed backend — no build step, works with plain GitHub Pages
 
-The current GitHub Pages version includes a polished local fallback assistant. The backend-ready integration point remains available through `DJ_CONFIG.BACKEND_URL`.
+It can explain the projects below, generate SQL/Python/DAX on request, walk through Excel/Power BI workflows, and discuss recruiter fit — as a real conversation, not a fixed set of canned answers.
 
 ## Private Access
 
