@@ -1,7 +1,11 @@
 name: DJ AI Platform CI
 
 on:
+  workflow_dispatch:
   push:
+    branches:
+      - main
+      - 'feature/**'
     paths:
       - 'backend/**'
       - 'app/**'
@@ -9,12 +13,21 @@ on:
       - 'android/**'
       - '.github/workflows/dj-platform-ci.yml'
   pull_request:
+    branches:
+      - main
     paths:
       - 'backend/**'
       - 'app/**'
       - 'extension/**'
       - 'android/**'
       - '.github/workflows/dj-platform-ci.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dj-ai-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   backend:
@@ -23,10 +36,15 @@ jobs:
       run:
         working-directory: backend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install
-      - run: npm test
-      - run: npm audit --omit=dev --audit-level=high
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Dependency security audit
+        run: npm audit --omit=dev --audit-level=high

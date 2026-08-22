@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Improved
+- Reframed the repository around DJ AI as the flagship AI analytics platform.
+- Added a production-oriented DJ AI architecture document.
+- Added a documented security posture and repository security policy.
+- Strengthened secret/build/local-file ignore rules.
+- Documented multi-provider AI architecture and mobile/API direction.
+- Improved repository setup and engineering guidance.
+
 ## DJ AI reliability pass — August 2026
 
 A full audit of the DJ AI chat system found it was built correctly in principle (a Node/Express backend holding the AI provider key server-side, never exposed to the browser) but was broken or inconsistent across every surface that used it.
