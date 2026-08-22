@@ -71,6 +71,46 @@ class GeminiProvider {
   }
 }
 
+class OllamaProvider {
+  // Talks to a self-hosted Ollama server (https://ollama.com) running an
+  // open-weight model (e.g. llama3.2, phi3.5) on your own rented machine.
+  // No third-party AI company is involved once the server is running -
+  // OLLAMA_BASE_URL just needs to point at a server you control.
+  constructor({ baseUrl, model }) {
+    this.name = 'ollama';
+    this.model = model;
+    this.baseUrl = baseUrl.replace(/\/+$/, '');
+  }
+  async generate({ system, user, maxOutputTokens = 800 }) {
+    // Self-hosted CPU inference is much slower than a hosted API - give it
+    // more room before timing out rather than reusing the tight default.
+    const timeoutMs = Number(process.env.OLLAMA_TIMEOUT_MS || 120_000);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(`${this.baseUrl}/api/generate`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          model: this.model,
+          system,
+          prompt: user,
+          stream: false,
+          options: { num_predict: maxOutputTokens }
+        }),
+        signal: controller.signal
+      });
+      const text = await response.text();
+      let body = {};
+      try { body = text ? JSON.parse(text) : {}; } catch { body = { raw: text }; }
+      if (!response.ok) throw new Error(`Ollama server HTTP ${response.status}`);
+      return (body.response || '').trim();
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+}
+
 function createAIProvider(config = process.env) {
   const provider = String(config.AI_PROVIDER || 'openai').toLowerCase();
   if (provider === 'openai') {
@@ -85,7 +125,11 @@ function createAIProvider(config = process.env) {
     if (!config.GEMINI_API_KEY) throw new Error('GEMINI_API_KEY is not configured');
     return new GeminiProvider({ apiKey: config.GEMINI_API_KEY, model: config.GEMINI_MODEL || 'gemini-2.5-flash' });
   }
+  if (provider === 'ollama') {
+    if (!config.OLLAMA_BASE_URL) throw new Error('OLLAMA_BASE_URL is not configured');
+    return new OllamaProvider({ baseUrl: config.OLLAMA_BASE_URL, model: config.OLLAMA_MODEL || 'llama3.2' });
+  }
   throw new Error(`Unsupported AI_PROVIDER: ${provider}`);
 }
 
-module.exports = { OpenAIProvider, AnthropicProvider, GeminiProvider, createAIProvider, withRetry, isRetryable };
+module.exports = { OpenAIProvider, AnthropicProvider, GeminiProvider, OllamaProvider, createAIProvider, withRetry, isRetryable };
