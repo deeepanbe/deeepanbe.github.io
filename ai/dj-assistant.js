@@ -266,8 +266,76 @@
     messages.push(userMessage);
     renderMessage(userMessage);
 
-    const reply = sanitized.blocked ? sanitized.value : responseFor(sanitized.value);
-    await streamReply(reply);
+    if (sanitized.blocked) {
+      await streamReply(sanitized.value);
+      return;
+    }
+
+    const indicator = appendTypingIndicator();
+    let reply;
+    try {
+      reply = await backendReply(sanitized.value);
+    } catch {
+      reply = null;
+    }
+    indicator.remove();
+
+    if (reply) {
+      const message = { role: "assistant", content: reply };
+      const bubble = renderMessage(message, { raw: false });
+      bubble.innerHTML = formatMarkdown(reply);
+      messages.push(message);
+      persistCurrentConversation();
+    } else {
+      await streamReply(responseFor(sanitized.value));
+    }
+  }
+
+  async function backendReply(text) {
+    const backendUrl = window.DJ_BACKEND_URL || (window.DJ_CONFIG && window.DJ_CONFIG.BACKEND_URL) || "";
+    if (!backendUrl || backendUrl.includes("YOUR-BACKEND") || backendUrl.includes("your-dj-api")) return null;
+
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
+    let authToken = "";
+    try { authToken = localStorage.getItem("dj.auth.token") || ""; } catch { authToken = ""; }
+
+    let response;
+    try {
+      response = await fetch(`${backendUrl}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {})
+        },
+        body: JSON.stringify({
+          mode,
+          session_id: getSessionId(),
+          page: window.location.pathname,
+          messages: [...messages, { role: "user", content: text }]
+        }),
+        signal: controller.signal
+      });
+    } finally {
+      window.clearTimeout(timeout);
+    }
+
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.text || data.reply || data.message || null;
+  }
+
+  function getSessionId() {
+    try {
+      let id = sessionStorage.getItem("deepanraj.dj.session.id.v1");
+      if (!id) {
+        id = createId();
+        sessionStorage.setItem("deepanraj.dj.session.id.v1", id);
+      }
+      return id;
+    } catch {
+      return "";
+    }
   }
 
   form.addEventListener("submit", (event) => {

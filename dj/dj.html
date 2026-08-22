@@ -379,22 +379,6 @@
 </head>
 <body>
 
-<div class="modal-overlay" id="apiModal">
-  <div class="modal">
-    <h3>🔑 Connect Your Anthropic API Key</h3>
-    <p>
-      DJ AI uses the <strong>Claude API</strong> to give you real AI — smarter than a chatbot, personalised to Deepanraj's portfolio, resume, and projects.<br><br>
-      Your key is stored only in <code>sessionStorage</code> (gone when you close the tab). It never leaves your browser.<br><br>
-      Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
-    </p>
-    <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." autocomplete="off">
-    <div class="modal-btns">
-      <button class="btn-primary" onclick="saveApiKey()">Connect & Launch DJ AI</button>
-      <button class="btn-secondary" onclick="skipApiKey()">Skip (Demo Mode)</button>
-    </div>
-  </div>
-</div>
-
 <header>
   <div style="display:flex;align-items:center;gap:0.75rem">
     <div class="logo">DJ <span>AI</span></div>
@@ -402,7 +386,6 @@
   </div>
   <nav>
     <a href="https://deeepanbe.github.io">← Portfolio</a>
-    <button class="settings-btn" onclick="showApiModal()">⚙ API Key</button>
   </nav>
 </header>
 
@@ -491,11 +474,30 @@
   </div>
 </div>
 
+<script src="production-config.js"></script>
+<script src="dj-config.js"></script>
 <script>
-let apiKey = sessionStorage.getItem('dj_api_key') || '';
 let currentMode = 'portfolio';
 let conversationHistory = [];
 let isStreaming = false;
+
+const DJ_BACKEND_URL = (window.DJ_CONFIG && window.DJ_CONFIG.BACKEND_URL) || window.DJ_BACKEND_URL || '';
+const DJ_BACKEND_CONFIGURED = Boolean(DJ_BACKEND_URL) && !DJ_BACKEND_URL.includes('YOUR-BACKEND') && !DJ_BACKEND_URL.includes('your-dj-api');
+
+function getSessionId() {
+  try {
+    let id = sessionStorage.getItem('deepanraj.dj.session.id.v1');
+    if (!id) {
+      id = `s-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      sessionStorage.setItem('deepanraj.dj.session.id.v1', id);
+    }
+    return id;
+  } catch { return ''; }
+}
+
+function showBackendNotice() {
+  appendMessage('ai', "DJ AI's backend is still being connected by Deepanraj. Feel free to type a question — it'll work as soon as the connection is live, no setup needed on your end.");
+}
 
 const DEEPANRAJ_BIO = `You are DJ AI — the personal AI assistant of Deepanraj Arumugam, a Data Analyst and Power BI Developer based in Tamil Nadu, India.
 
@@ -582,27 +584,8 @@ Your role: Deepanraj's career advocate. When recruiters ask, give compelling, sp
 Your role: Career coach for Deepanraj's transition. Help with resume strategy, interview prep, LinkedIn optimization, salary negotiation, job search in Chennai/Bengaluru market, and skill gap planning. Be specific, realistic, and actionable.`
 };
 
-function showApiModal() {
-  document.getElementById('apiModal').style.display = 'flex';
-}
-
-function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key.startsWith('sk-ant')) {
-    alert('Please enter a valid Anthropic API key (starts with sk-ant-)');
-    return;
-  }
-  apiKey = key;
-  sessionStorage.setItem('dj_api_key', key);
-  document.getElementById('apiModal').style.display = 'none';
-}
-
-function skipApiKey() {
-  document.getElementById('apiModal').style.display = 'none';
-}
-
 window.addEventListener('load', () => {
-  if (!apiKey) showApiModal();
+  if (!DJ_BACKEND_CONFIGURED) showBackendNotice();
 });
 
 function setMode(mode, btn) {
@@ -720,11 +703,6 @@ async function sendMessage() {
   const text = input.value.trim();
   if (!text) return;
 
-  if (!apiKey) {
-    showApiModal();
-    return;
-  }
-
   input.value = '';
   input.style.height = 'auto';
   isStreaming = true;
@@ -745,36 +723,60 @@ async function sendMessage() {
   msgs.appendChild(typingDiv);
   scrollToBottom();
 
+  if (!DJ_BACKEND_CONFIGURED) {
+    document.getElementById('typing')?.remove();
+    appendMessage('ai', "DJ AI's backend isn't connected yet — Deepanraj is setting that up. Check back soon!");
+    isStreaming = false;
+    document.getElementById('sendBtn').disabled = false;
+    return;
+  }
+
+  let authToken = '';
+  try { authToken = localStorage.getItem('dj.auth.token') || ''; } catch { authToken = ''; }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch(`${DJ_BACKEND_URL}/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
+        ...(authToken ? { Authorization: `Bearer ${authToken}` } : {})
       },
       body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 1500,
-        system: SYSTEM_PROMPTS[currentMode],
+        mode: currentMode,
+        session_id: getSessionId(),
+        page: window.location.pathname,
         messages: conversationHistory
-      })
+      }),
+      signal: controller.signal
     });
 
-    const data = await response.json();
     document.getElementById('typing')?.remove();
 
-    if (data.error) {
-      appendMessage('ai', `⚠️ API Error: ${data.error.message}. Please check your API key in Settings.`);
+    if (!response.ok) {
+      let detail = '';
+      try { detail = (await response.json()).error || ''; } catch { detail = ''; }
+      appendMessage('ai', `⚠️ ${detail || 'DJ AI had trouble replying just now.'} Please try again in a moment.`);
     } else {
-      const reply = data.content[0].text;
-      conversationHistory.push({ role: 'assistant', content: reply });
-      appendMessage('ai', reply);
+      const data = await response.json();
+      const reply = data.text || data.reply || data.message || '';
+      if (!reply) {
+        appendMessage('ai', '⚠️ DJ AI returned an empty response. Please try again.');
+      } else {
+        conversationHistory.push({ role: 'assistant', content: reply });
+        appendMessage('ai', reply);
+      }
     }
-
   } catch (err) {
     document.getElementById('typing')?.remove();
-    appendMessage('ai', `⚠️ Connection error: ${err.message}. Make sure your API key is valid and you have internet access.`);
+    const message = err.name === 'AbortError'
+      ? 'DJ AI took too long to respond. Please try again.'
+      : `Connection error: ${err.message}. Please try again in a moment.`;
+    appendMessage('ai', `⚠️ ${message}`);
+  } finally {
+    clearTimeout(timeout);
   }
 
   isStreaming = false;
