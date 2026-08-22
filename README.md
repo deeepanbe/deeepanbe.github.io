@@ -1,14 +1,14 @@
 # DJ AI — Deepanraj AI Analytics Platform
 
 [![Live Site](https://img.shields.io/badge/live-deeepanbe.github.io-1677ff?style=flat-square)](https://deeepanbe.github.io)
-[![Backend Tests](https://img.shields.io/badge/backend%20tests-12%2F12%20passing-2ea44f?style=flat-square)](backend/test)
+[![Backend Tests](https://img.shields.io/badge/backend%20tests-20%2F20%20passing-2ea44f?style=flat-square)](backend/test)
 [![Stack](https://img.shields.io/badge/stack-Node.js%20%7C%20Express%20%7C%20PostgreSQL-informational?style=flat-square)](backend)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](LICENSE)
 
 **Live portfolio:** https://deeepanbe.github.io
 **Repository:** https://github.com/deeepanbe/deeepanbe.github.io
 
-A recruiter-facing portfolio for a Data Analyst / BI Developer, built as a full mini AI platform rather than a static page: a secure Node/Express backend, a multi-provider AI orchestration layer (OpenAI / Anthropic / Gemini with retry-and-fallback), Postgres-backed auth and conversation memory, and **DJ AI** — a personal AI copilot embedded across the site that can answer questions about the projects, generate SQL/Python/DAX on request, and discuss recruiter fit, without needing the visitor to bring their own API key.
+A recruiter-facing portfolio for a Data Analyst / BI Developer, built as a full mini AI platform rather than a static page: a secure Node/Express backend, a multi-provider AI orchestration layer (OpenAI / Anthropic / Gemini / Ollama with retry-and-fallback), Postgres-backed auth and conversation memory, and **DJ AI** — a personal AI copilot embedded across the site that can answer questions about the projects, generate SQL/Python/DAX on request, and discuss recruiter fit, without needing the visitor to bring their own API key.
 
 See [`CHANGELOG.md`](CHANGELOG.md) for the most recent engineering pass.
 
@@ -85,7 +85,7 @@ See [`docs/DJ_AI_ARCHITECTURE.md`](docs/DJ_AI_ARCHITECTURE.md) for the detailed 
 ### DJ AI
 DJ AI is a personal AI copilot embedded across the site — not a scripted FAQ bot. It runs on a secure Node/Express backend (`/backend`) that holds the AI provider key server-side (never exposed to the browser), with:
 
-- Multi-provider support (OpenAI, Anthropic, Gemini) with automatic retry-with-backoff and timeouts
+- Multi-provider support (OpenAI, Anthropic, Gemini, and self-hosted Ollama) with automatic retry-with-backoff and timeouts where supported
 - Optional Postgres-backed user accounts, conversation history, and long-term memory (degrades gracefully if no database is configured)
 - Cloudflare Turnstile bot protection so the API budget isn't drained by scrapers
 - A single public config file (`dj/production-config.js`) is all that's needed to point every page at a deployed backend — no build step, works with plain GitHub Pages
@@ -114,7 +114,7 @@ OPENAI_API_KEY=your_secret_here
 MODEL=gpt-5.6-luna
 ```
 
-Other provider adapters are available through the backend provider layer.
+Other provider adapters, including the self-hosted Ollama option, are available through the backend provider layer.
 
 ## Local development
 
