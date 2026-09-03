@@ -8,61 +8,71 @@
 **Live portfolio:** https://deeepanbe.github.io  
 **Repository:** https://github.com/deeepanbe/deeepanbe.github.io
 
-## Career positioning
+## Professional Positioning
 
-**Deepanraj A — experienced operations / quality / textile merchandising professional transitioning into Data Analytics and BI.**
+**Deepanraj A — Data Analyst / BI / Operations Analytics candidate with ~9 years of operations, quality, manufacturing and textile-export domain experience.**
 
-The portfolio combines practical business-process experience with hands-on learning in **Power BI, SQL, Excel, Python, Tableau and Streamlit**. The analytics work is presented as portfolio evidence rather than as commercial data-analytics employment experience.
+The portfolio demonstrates how that business context is being combined with hands-on **Power BI, SQL, Python, Excel, Tableau and Streamlit** capability. Portfolio projects are explicitly separated from commercial analytics employment experience.
 
-Core target roles: **Data Analyst, BI Developer, MIS/Reporting Analyst, Operations Analyst, Manufacturing/Supply Chain Analyst and Power BI Analyst.**
+**Target roles:** Data Analyst · BI Analyst · Power BI Analyst · MIS/Reporting Analyst · Operations Analyst · Manufacturing/Supply Chain Analyst
 
-## DJ AI platform
+## Senior-level analytics approach
 
-DJ AI is the engineering project inside the portfolio: a Node/Express backend, multi-provider AI orchestration layer, PostgreSQL foundation, authentication/memory components, security middleware and a browser-based assistant experience.
+Projects are developed around a repeatable workflow:
 
-Supported provider architecture includes OpenAI, Anthropic, Gemini and a self-hosted Ollama option. Provider credentials remain server-side and are never intended to be placed in the public portfolio code.
+**Business problem → Data understanding → Data quality → Modeling → Analysis → KPI governance → Visualization → Insight → Decision → Reproducibility**
 
-DJ AI is an **AI orchestration application**, not a newly trained foundation model. Its roadmap includes stronger retrieval, tools, evaluation and production integrations.
+The portfolio emphasizes traceable metrics, explicit assumptions, data validation, reusable analysis, decision-first dashboards and honest limitations. See [Senior Data Analyst Standards](docs/SENIOR_DATA_ANALYST_STANDARD.md).
 
-## Portfolio analytics projects
+## DJ AI Platform
 
-The portfolio includes hands-on projects covering:
+DJ AI is the engineering project inside the portfolio: a Node/Express backend, multi-provider AI orchestration layer, PostgreSQL foundation, authentication/memory components, security middleware and browser-based assistant experience.
 
-- Power BI RFM customer segmentation
-- Python HR attrition exploratory analysis
-- Tableau digital-marketing lead reporting
-- Python/Streamlit GDP visualization
-- Python hotel-booking analysis
+Supported provider architecture includes OpenAI, Anthropic, Gemini and a self-hosted Ollama option. Provider credentials remain server-side and are never intended to be placed in public portfolio code.
 
-Project claims should be reproducible from the repository datasets, notebooks, dashboards or exported reports. Unsupported business-impact numbers are deliberately avoided.
+DJ AI is an **AI orchestration application, not a newly trained foundation model**. Its roadmap includes stronger retrieval, tools, evaluation and production integrations.
 
-## Repository at a glance
+## Analytics Portfolio
+
+- Power BI Universal Analytics Dashboard — KPI modeling, DAX, Power Query and SQL
+- Olist E-Commerce BI Dashboard — marketplace, order lifecycle and logistics analytics
+- Sales Forecasting Dashboard — planning and demand visibility
+- BigQuery E-Commerce Analysis — warehouse SQL and revenue/order analysis
+- Customer Segmentation ML — Python/pandas/scikit-learn segmentation
+- HR Attrition Analysis — Python/Pandas EDA and business interpretation
+- Hotel Booking Analysis — cancellation, ADR and time-pattern analysis
+
+Detailed case-study structure: [projects/analytics-case-studies.md](projects/analytics-case-studies.md)
+
+## Repository Structure
 
 ```text
 .
-├── index.html                 # Public portfolio
+├── index.html                 # Public analytics portfolio
 ├── dj/                        # DJ AI workspace and UI
 ├── ai/                        # Assistant/bridge logic
 ├── backend/                   # API, providers, auth, persistence
 ├── android/                   # Android-ready integration foundation
 ├── app/                       # Platform-side browser logic
 ├── dashboards/                # Dashboard documentation
-├── projects/                 # Analytics case studies
-├── assets/                   # Portfolio assets
+├── projects/                  # Analytics case studies
+├── assets/                    # Portfolio assets
 ├── scripts/                   # Platform scripts
 ├── .github/                  # CI/CD configuration
-└── docs/                     # Architecture and engineering documentation
+└── docs/                      # Architecture and analytics standards
 ```
 
-## Engineering standards
+## Engineering & Analytics Standards
 
 - Preserve working functionality before refactoring.
+- Validate data and untrusted input before using results.
 - Keep AI providers behind adapters.
-- Validate untrusted input.
 - Keep secrets server-side.
-- Add tests for critical behaviour.
+- Test critical backend behavior.
+- Make important metrics traceable and reproducible.
+- Document assumptions and limitations.
 - Prefer small, reviewable changes.
-- Do not claim unsupported AI or analytics capabilities.
+- Never claim unsupported analytics, AI, employment or business-impact results.
 
 ## Security
 
@@ -70,7 +80,7 @@ Never commit API keys, database passwords, JWT secrets, webhook signing secrets,
 
 ## Author
 
-**Deepanraj A** — Experienced Operations / Quality Professional transitioning into Data Analytics & BI  
+**Deepanraj A** — Data Analytics / BI candidate with operations, quality and textile-export domain experience.  
 GitHub: https://github.com/deeepanbe  
 LinkedIn: https://www.linkedin.com/in/deepanraj-data-analyst  
 Portfolio: https://deeepanbe.github.io
