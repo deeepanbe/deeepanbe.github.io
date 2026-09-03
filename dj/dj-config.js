@@ -3,13 +3,33 @@ const DJ_CONFIG = {
   // Stripe secrets, or backend authentication secrets in this file.
   BACKEND_URL: window.DJ_BACKEND_URL || "",
   TURNSTILE_SITE_KEY: window.DJ_TURNSTILE_SITE_KEY || "",
-  GREETING: "Hi, I am DJ AI. I am Deepanraj's portfolio assistant. Ask me about his Data Analyst / BI positioning, verified projects, Power BI, SQL, Python, Excel, or recruiter fit.",
+  GREETING: "Hi, I am DJ AI. I am Deepanraj's portfolio assistant. Ask me about his verified Data Analyst / BI projects, Power BI, SQL, Python, Excel, operations analytics, or recruiter fit.",
   SUGGESTIONS: [
-    "What is Deepanraj's strongest analytics project?",
+    "What is Deepanraj's strongest verified analytics project?",
     "Explain his Power BI RFM project",
     "What SQL skills does he demonstrate?",
     "Summarize his Python analytics capability",
     "Why is his operations experience useful for analytics?"
+  ],
+  POSITIONING: "Data Analyst / BI / Operations Analytics candidate with approximately 9 years of operations, quality, manufacturing and textile-export domain experience.",
+  TARGET_ROLES: [
+    "Data Analyst",
+    "BI Analyst",
+    "Power BI Analyst",
+    "MIS / Reporting Analyst",
+    "Operations Analyst",
+    "Manufacturing / Supply Chain Analyst"
+  ],
+  VERIFIED_PROJECTS: [
+    "Power BI Universal Analytics Dashboard",
+    "Olist E-Commerce BI Dashboard",
+    "BigQuery E-Commerce Analysis",
+    "Customer Segmentation — RFM Analysis",
+    "IBM HR Attrition Analysis",
+    "Digital Marketing Leads Performance",
+    "GDP Dashboard",
+    "Hotel Booking Analysis",
+    "Sales Forecasting Dashboard"
   ]
 };
 
