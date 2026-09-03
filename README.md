@@ -1,7 +1,7 @@
 # DJ AI — Deepanraj AI Analytics Portfolio
 
 [![Live Site](https://img.shields.io/badge/live-deeepanbe.github.io-1677ff?style=flat-square)](https://deeepanbe.github.io)
-[![Backend Tests](https://img.shields.io/badge/backend%20tests-20%2F20%20passing-2ea44f?style=flat-square)](backend/test)
+[![Backend Tests](https://img.shields.io/badge/backend%20tests-20%2F20%20passing-2ea44c-2ea44c?style=flat-square)](backend/test)
 [![Stack](https://img.shields.io/badge/stack-Node.js%20%7C%20Express%20%7C%20PostgreSQL-informational?style=flat-square)](backend)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](LICENSE)
 
@@ -84,5 +84,5 @@ Never commit API keys, database passwords, JWT secrets, webhook signing secrets,
 
 **Deepanraj A** — Data Analytics / BI candidate with operations, quality and textile-export domain experience.  
 GitHub: https://github.com/deeepanbe  
-LinkedIn: https://www.linkedin.com/in/deeepanraj-data-analyst  
+LinkedIn: https://in.linkedin.com/in/deepanraj-data-analyst  
 Portfolio: https://deeepanbe.github.io
