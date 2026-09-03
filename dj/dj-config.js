@@ -3,13 +3,13 @@ const DJ_CONFIG = {
   // Stripe secrets, or backend authentication secrets in this file.
   BACKEND_URL: window.DJ_BACKEND_URL || "",
   TURNSTILE_SITE_KEY: window.DJ_TURNSTILE_SITE_KEY || "",
-  GREETING: "Hi, I am DJ AI. I can explain Deepanraj's projects, generate SQL, draft Python analysis, help with Excel reporting, suggest Power BI DAX, recommend dashboards, and summarize recruiter fit.",
+  GREETING: "Hi, I am DJ AI. I am Deepanraj's portfolio assistant. Ask me about his Data Analyst / BI positioning, verified projects, Power BI, SQL, Python, Excel, or recruiter fit.",
   SUGGESTIONS: [
-    "Explain Deepanraj's strongest Power BI project",
-    "Generate SQL for top 10 customers by revenue",
-    "Create Python pandas steps for cleaning sales data",
-    "Suggest DAX measures for inventory performance",
-    "Recommend dashboard pages for an operations report"
+    "What is Deepanraj's strongest analytics project?",
+    "Explain his Power BI RFM project",
+    "What SQL skills does he demonstrate?",
+    "Summarize his Python analytics capability",
+    "Why is his operations experience useful for analytics?"
   ]
 };
 
