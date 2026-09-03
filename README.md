@@ -36,11 +36,13 @@ DJ AI is an **AI orchestration application, not a newly trained foundation model
 
 - Power BI Universal Analytics Dashboard — KPI modeling, DAX, Power Query and SQL
 - Olist E-Commerce BI Dashboard — marketplace, order lifecycle and logistics analytics
-- Sales Forecasting Dashboard — planning and demand visibility
 - BigQuery E-Commerce Analysis — warehouse SQL and revenue/order analysis
-- Customer Segmentation ML — Python/pandas/scikit-learn segmentation
-- HR Attrition Analysis — Python/Pandas EDA and business interpretation
-- Hotel Booking Analysis — cancellation, ADR and time-pattern analysis
+- Customer Segmentation — RFM analysis with approximately 235K transaction records
+- IBM HR Attrition Analysis — Python/Pandas exploratory analysis of 1,470 employee records
+- Digital Marketing Leads Performance — Tableau/Excel dashboard analysis of 2,399 leads
+- GDP Dashboard — Python/Pandas/Streamlit analysis of World Bank GDP data for 1960–2022
+- Hotel Booking Analysis — Python/Pandas analysis of 119,390 booking records
+- Sales Forecasting Dashboard — planning and demand-visibility portfolio work; refer to the case study for verified implementation details
 
 Detailed case-study structure: [projects/analytics-case-studies.md](projects/analytics-case-studies.md)
 
@@ -55,7 +57,7 @@ Detailed case-study structure: [projects/analytics-case-studies.md](projects/ana
 ├── android/                   # Android-ready integration foundation
 ├── app/                       # Platform-side browser logic
 ├── dashboards/                # Dashboard documentation
-├── projects/                  # Analytics case studies
+├── projects/                 # Analytics case studies
 ├── assets/                    # Portfolio assets
 ├── scripts/                   # Platform scripts
 ├── .github/                  # CI/CD configuration
@@ -82,5 +84,5 @@ Never commit API keys, database passwords, JWT secrets, webhook signing secrets,
 
 **Deepanraj A** — Data Analytics / BI candidate with operations, quality and textile-export domain experience.  
 GitHub: https://github.com/deeepanbe  
-LinkedIn: https://www.linkedin.com/in/deepanraj-data-analyst  
+LinkedIn: https://www.linkedin.com/in/deeepanraj-data-analyst  
 Portfolio: https://deeepanbe.github.io
