@@ -1,71 +1,105 @@
 # Deepanraj Arumugam
 
-### Data Analyst | Power BI | SQL | Python | AI-Assisted Analytics
+### Data Analyst | Business Intelligence | SQL | Power BI | Python | Operations Analytics
 
-I build decision-ready analytics systems that connect business questions to data, dashboards, automation, and practical AI workflows. My focus is on SQL analysis, Power BI, Python, Excel, data storytelling, and AI-assisted productivity.
+I build **decision-ready analytics solutions** that connect business questions to reliable data, KPI definitions, dashboards, automation, and practical AI-assisted workflows.
+
+My differentiator is the combination of **~9 years of real operations, quality, manufacturing and textile-export business experience** with hands-on analytics capability. I focus on turning operational data into insights that stakeholders can use.
 
 [Portfolio](https://deeepanbe.github.io) · [DJ AI](https://deeepanbe.github.io/dj/dj.html) · [LinkedIn](https://www.linkedin.com/in/deepanraj-data-analyst)
 
 ---
 
+## 🎯 Professional Positioning
+
+**Target roles:** Data Analyst · BI Analyst · Power BI Analyst · MIS/Reporting Analyst · Operations Analyst · Manufacturing/Supply Chain Analyst
+
+I am transitioning into a dedicated analytics/BI role while bringing substantial domain experience from operations and quality environments. This portfolio demonstrates **senior-level analytical thinking and engineering discipline without misrepresenting portfolio work as commercial analytics employment**.
+
+### What I bring
+
+- Business problem framing and stakeholder-oriented analysis
+- SQL joins, CTEs, window functions and analytical data preparation
+- Power BI semantic modeling, DAX, Power Query and KPI design
+- Python/Pandas data cleaning, EDA and repeatable analysis
+- Excel operational reporting, reconciliation and validation
+- Data quality checks, metric definitions and source-to-dashboard thinking
+- Decision-first dashboard storytelling
+- AI-assisted analytics workflows with modular, security-aware architecture
+
+---
+
 ## 🚀 Flagship Project — DJ AI
 
-**DJ AI** is an AI analytics assistant platform designed to combine modern language models with portfolio knowledge, conversation context, RAG, and future tool integrations.
+**DJ AI** is an AI analytics assistant and orchestration platform inside this portfolio. It combines portfolio knowledge, conversation context, retrieval-oriented architecture and provider adapters for practical analyst workflows.
 
-It is being developed as an orchestration platform rather than a foundation model, with a provider layer that can support multiple AI vendors.
+It is intentionally an **orchestration application rather than a newly trained foundation model**. The repository includes a Node/Express backend, PostgreSQL foundation, authentication/memory components, security middleware, browser experience and CI workflows.
 
-Explore the [DJ AI workspace](https://deeepanbe.github.io/dj/dj.html) or read the [architecture documentation](https://github.com/deeepanbe/deeepanbe.github.io/blob/main/docs/DJ_AI_ARCHITECTURE.md).
+[Explore DJ AI](https://deeepanbe.github.io/dj/dj.html) · [Architecture](https://github.com/deeepanbe/deeepanbe.github.io/blob/main/docs/DJ_AI_ARCHITECTURE.md)
 
-## Analytics Focus
+---
 
-- Power BI dashboards, DAX, Power Query, KPI design, and reporting
-- SQL analysis, joins, CTEs, window functions, data modeling, and validation
-- Python analytics with pandas, exploratory analysis, and practical ML workflows
-- Excel reporting, formulas, pivots, and repeatable reporting processes
-- Tableau and data storytelling
-- AI-assisted SQL, DAX, Python, documentation, research, and analyst workflows
+## 📊 Featured Analytics Work
 
-## Featured Work
+| Project | Business Question | Stack | Capability |
+|---|---|---|---|
+| Power BI Universal Analytics Dashboard | How can leadership review cross-functional KPIs consistently? | Power BI, DAX, Power Query, SQL | Semantic modeling, KPI design, drill-through |
+| Olist E-Commerce BI Dashboard | What drives orders, sellers, reviews and logistics outcomes? | Power BI, DAX, Python | End-to-end BI and marketplace analytics |
+| Sales Forecasting Dashboard | How can sales planning and demand visibility improve? | Power BI, Python | Forecasting and decision support |
+| BigQuery E-Commerce Analysis | What are the key revenue, order and product patterns? | BigQuery, SQL | Cloud warehouse SQL and business analysis |
+| Customer Segmentation ML | Which customer groups show different behavior? | Python, pandas, scikit-learn | Applied ML and interpretation |
+| HR Attrition Analysis | Which employee characteristics are associated with attrition? | Python, Pandas, EDA | Exploratory analysis and business interpretation |
+| Hotel Booking Analysis | What patterns explain cancellations and revenue behavior? | Python, Pandas | Data cleaning, EDA and trend analysis |
 
-| Project | Focus | Tools |
-|---|---|---|
-| DJ AI | AI analytics assistant and orchestration platform | JavaScript, Node.js, PostgreSQL, AI APIs |
-| Power BI Universal Analytics Dashboard | Cross-functional KPI reporting | Power BI, DAX, SQL |
-| Sales Forecasting Dashboard | Sales planning and demand visibility | Power BI, Python |
-| Enterprise Analytics Project | End-to-end analytics workflow | SQL, Python, Azure concepts, Power BI |
-| BigQuery E-Commerce Analysis | Order, customer, and product analysis | BigQuery, SQL |
-| Customer Segmentation ML | Customer targeting and cohort discovery | Python, pandas, scikit-learn |
+[Analytics case-study framework](https://github.com/deeepanbe/deeepanbe.github.io/blob/main/projects/analytics-case-studies.md)
 
-## Technical Toolkit
+---
 
-**BI:** Power BI, DAX, Power Query, Tableau, Excel  
-**Data:** SQL, Python, pandas, NumPy, EDA, data cleaning, data modeling  
-**Platforms:** PostgreSQL, BigQuery, Snowflake, Azure concepts  
-**AI:** AI APIs, RAG architecture, prompt design, tool-oriented workflows  
-**Engineering:** Git, GitHub, REST APIs, CI workflows, security-aware development
+## 🧠 Senior-Level Analytics Workflow
 
-## Analytics Mindset
+1. **Business problem** — define the decision that needs support.
+2. **Data understanding** — identify source, grain, keys, missingness and reliability.
+3. **Data quality** — validate duplicates, nulls, outliers, reconciliation and business rules.
+4. **Data modeling** — create clean analytical structures and reusable metrics.
+5. **Analysis** — use SQL/Python/BI appropriately.
+6. **KPI governance** — define measures, assumptions and calculation logic.
+7. **Visualization** — prioritize trends, drivers, exceptions and segmentation.
+8. **Recommendation** — translate findings into a decision or next action.
+9. **Reproducibility** — document inputs, transformations, assumptions and outputs.
+10. **Automation mindset** — identify repeatable reporting workflows that can be improved.
 
-A strong project should answer:
+[Senior Data Analyst Standards](https://github.com/deeepanbe/deeepanbe.github.io/blob/main/docs/SENIOR_DATA_ANALYST_STANDARD.md)
 
-1. What business problem are we solving?
-2. What data is available and how reliable is it?
-3. What transformation and analysis are required?
-4. Which KPIs actually matter?
-5. What does the dashboard or model reveal?
-6. What decision can a stakeholder make from the result?
-7. How can the workflow be automated or improved?
+---
 
-## Repository Standards
+## 🛠 Technical Toolkit
 
-DJ AI follows these principles:
+**BI & Reporting:** Power BI · DAX · Power Query · Tableau · Excel · KPI/MIS reporting  
+**SQL & Data:** SQL · PostgreSQL · BigQuery · data modeling · validation · reconciliation  
+**Python:** Python · Pandas · NumPy · EDA · Jupyter · Streamlit · practical ML  
+**Cloud Concepts:** Azure Data Factory · Azure SQL · Blob Storage · GCP/BigQuery  
+**AI:** AI APIs · RAG architecture · prompt design · tool-oriented analyst workflows  
+**Engineering:** Git · GitHub · REST APIs · CI/CD · modular architecture · security-aware development
 
-- Keep provider credentials server-side.
-- Treat uploaded documents and model output as untrusted data.
-- Preserve working functionality when refactoring.
-- Test critical backend behavior.
-- Keep architecture modular and extensible.
-- Never claim unsupported capabilities.
+---
+
+## 🔎 Portfolio Quality Principles
+
+- **No fabricated metrics:** published numbers should be traceable to a dataset, notebook, dashboard or documented source.
+- **No inflated experience:** portfolio projects are clearly separated from commercial employment experience.
+- **Decision-first dashboards:** visualizations answer business questions.
+- **Reusable analysis:** transformations and calculations are understandable and repeatable.
+- **Data quality before insight:** validation is part of the analysis.
+- **Security by design:** credentials and secrets stay outside public code.
+- **Production mindset:** tests, documentation, modularity and CI are part of the deliverable.
+
+---
+
+## 📈 Career Direction
+
+I am looking for a dedicated analytics/BI opportunity where I can combine **real operational domain knowledge with SQL, Power BI, Python and data storytelling** to improve reporting, identify business drivers and support better decisions.
+
+**Preferred role families:** Data Analyst · BI Analyst · Power BI Analyst · MIS/Reporting Analyst · Operations Analyst · Manufacturing/Supply Chain Analyst
 
 ## Connect
 
