@@ -1,107 +1,86 @@
-# DJ AI Backend Blueprint
+# DJ AI Backend Architecture
 
-Create this as a separate private repository:
+The production DJ AI backend in this repository is Node.js + Express. This document describes the implementation that is actually configured, rather than the older FastAPI concept.
 
-`dj-ai-backend`
+## Runtime
+- Node.js >= 22
+- Express 4
+- PostgreSQL via pg
+- JWT authentication
+- express-rate-limit
+- Cloudflare Turnstile
+- Multi-provider AI adapter: OpenAI, Anthropic, Gemini, Ollama
 
-The current portfolio repo includes a safe scaffold under `/backend` and
-`/frontend/security` so the private repo can be created quickly without
-committing secrets.
+## Request flow
 
-## Structure
+    GitHub Pages
+       | POST /chat: session_id + Turnstile token
+       v
+    Node / Express
+       | CORS + security headers
+       | IP rate limit
+       | session rate limit
+       | Turnstile verification
+       | authenticated conversation ownership check
+       | portfolio knowledge
+       | optional PostgreSQL memory / RAG
+       | AI provider adapter
+       v
+    JSON { ok, provider, model, text }
 
-```text
-dj-ai-backend/
-├── main.py
-├── routes/
-│   ├── chat.py
-│   ├── upload.py
-│   └── health.py
-├── services/
-│   ├── ai_service.py
-│   ├── rag_service.py
-│   └── data_service.py
-├── knowledge/
-│   ├── resume.md
-│   ├── projects.md
-│   ├── sql_notes.md
-│   ├── powerbi_notes.md
-│   └── certifications.md
-├── .env
-├── .env.example
-├── requirements.txt
-└── Procfile
-```
+## Core endpoints
 
-## main.py
+### GET /health
+Returns backend, AI provider, Turnstile, database and platform status.
 
-```python
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from routes import chat, upload, health
+### POST /chat
+Required: message or messages, session_id, and turnstileToken.
+Optional: conversation_id, page, and mode.
+The backend never accepts an AI API key from the browser.
 
-app = FastAPI(title="DJ AI Backend", version="1.0.0")
+## Environment
+Set these on the backend host only:
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "https://deeepanbe.github.io",
-        "http://localhost:3000",
-        "http://127.0.0.1:5500"
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    AI_PROVIDER=openai
+    OPENAI_API_KEY=...
+    MODEL=<provider-supported-model>
+    DATABASE_URL=...
+    TURNSTILE_SECRET=...
+    CORS_ORIGINS=https://deeepanbe.github.io
 
-app.include_router(health.router)
-app.include_router(chat.router, prefix="/chat")
-app.include_router(upload.router, prefix="/upload")
-```
+Provider alternatives use ANTHROPIC_API_KEY, GEMINI_API_KEY, or OLLAMA_BASE_URL as appropriate. Never commit secrets.
 
-## requirements.txt
+## Frontend configuration
+`dj/production-config.js` contains public configuration only:
 
-```text
-fastapi==0.110.0
-uvicorn==0.27.0
-openai==1.14.0
-pandas==2.2.0
-numpy==1.26.4
-openpyxl==3.1.2
-python-multipart==0.0.9
-python-dotenv==1.0.1
-```
+    window.DJ_BACKEND_URL = "https://<verified-backend-host>";
+    window.DJ_TURNSTILE_SITE_KEY = "<public-turnstile-site-key>";
 
-## Render Deployment
+The backend URL and Turnstile site key are safe for browser delivery. The Turnstile secret key remains on the backend.
 
-Build command:
+The shared `dj/turnstile-client.js` renders an invisible Turnstile challenge and supplies the one-time token to `/chat`.
 
-```bash
-pip install -r requirements.txt
-```
+## Deployment checklist
+1. Deploy the Node backend with Node >= 22.
+2. Configure TURNSTILE_SECRET.
+3. Configure CORS_ORIGINS for the GitHub Pages origin.
+4. Verify GET /health reports turnstile_configured: true and ai_configured: true; database.ok should be true when a database is intended.
+5. Put the verified public backend URL and Turnstile site key into dj/production-config.js.
+6. Open /dj/dj.html and test a real chat request.
+7. Confirm a missing or invalid Turnstile token is rejected with HTTP 403.
+8. Confirm repeated requests eventually receive the configured rate-limit response.
+9. Run the backend test suite before release.
 
-Start command:
+## Security posture
+- API keys remain server-side.
+- Browser requests use a public Turnstile site key only.
+- Prompt-injection attempts are filtered in the UI and supplied knowledge is treated as untrusted data.
+- CORS is allow-list based.
+- Security headers disable framing and unnecessary browser capabilities.
+- Request size and message length are bounded.
+- IP and session throttling protect the chat endpoint.
+- Persistent conversations are checked for user ownership.
+- AI provider calls use timeouts and retries for transient failures.
 
-```bash
-uvicorn main:app --host 0.0.0.0 --port $PORT
-```
-
-Environment variable:
-
-```text
-OPENAI_API_KEY=your_openai_key_here
-```
-
-For Claude production, use:
-
-```text
-CLAUDE_API_KEY=your_claude_key_here
-CLAUDE_MODEL=claude-3-5-sonnet-20240620
-JWT_SECRET=long_random_secret
-```
-
-After deployment, update:
-
-```js
-DJ_CONFIG.BACKEND_URL = "https://dj-ai-backend.onrender.com";
-```
+## Product boundary
+DJ AI is an AI orchestration application. It does not claim to be a newly trained foundation model. Portfolio facts should come from verified knowledge files; generated SQL, Python and DAX are examples unless backed by project evidence.
