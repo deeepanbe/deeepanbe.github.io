@@ -300,6 +300,8 @@
     let authToken = "";
     try { authToken = localStorage.getItem("dj.auth.token") || ""; } catch { authToken = ""; }
 
+    const turnstileToken = await window.DJTurnstile.getToken();
+
     let response;
     try {
       response = await fetch(`${backendUrl}/chat`, {
@@ -312,6 +314,7 @@
           mode,
           session_id: getSessionId(),
           page: window.location.pathname,
+          turnstileToken,
           messages: [...messages, { role: "user", content: text }]
         }),
         signal: controller.signal
