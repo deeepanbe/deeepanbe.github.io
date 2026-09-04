@@ -291,6 +291,30 @@
     }
   }
 
+  async function ensureTurnstileClient() {
+    if (window.DJTurnstile) return;
+    await new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[data-dj-turnstile-client]');
+      if (existing) {
+        existing.addEventListener('load', resolve, { once: true });
+        existing.addEventListener('error', reject, { once: true });
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = new URL('/dj/production-config.js', window.location.origin).href;
+      script.onload = () => {
+        const helper = document.createElement('script');
+        helper.src = new URL('/dj/turnstile-client.js', window.location.origin).href;
+        helper.dataset.djTurnstileClient = 'true';
+        helper.onload = resolve;
+        helper.onerror = reject;
+        document.head.appendChild(helper);
+      };
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
   async function backendReply(text) {
     const backendUrl = window.DJ_BACKEND_URL || (window.DJ_CONFIG && window.DJ_CONFIG.BACKEND_URL) || "";
     if (!backendUrl || backendUrl.includes("YOUR-BACKEND") || backendUrl.includes("your-dj-api")) return null;
@@ -300,6 +324,7 @@
     let authToken = "";
     try { authToken = localStorage.getItem("dj.auth.token") || ""; } catch { authToken = ""; }
 
+    await ensureTurnstileClient();
     const turnstileToken = await window.DJTurnstile.getToken();
 
     let response;
