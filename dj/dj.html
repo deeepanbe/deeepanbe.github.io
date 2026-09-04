@@ -476,6 +476,7 @@
 
 <script src="production-config.js"></script>
 <script src="dj-config.js"></script>
+<script src="turnstile-client.js"></script>
 <script>
 let currentMode = 'portfolio';
 let conversationHistory = [];
@@ -737,6 +738,17 @@ async function sendMessage() {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20000);
 
+  let turnstileToken;
+  try {
+    turnstileToken = await window.DJTurnstile.getToken();
+  } catch (err) {
+    document.getElementById('typing')?.remove();
+    appendMessage('ai', '⚠️ Human verification is not configured yet. Please check back soon.');
+    isStreaming = false;
+    document.getElementById('sendBtn').disabled = false;
+    return;
+  }
+
   try {
     const response = await fetch(`${DJ_BACKEND_URL}/chat`, {
       method: 'POST',
@@ -748,6 +760,7 @@ async function sendMessage() {
         mode: currentMode,
         session_id: getSessionId(),
         page: window.location.pathname,
+        turnstileToken,
         messages: conversationHistory
       }),
       signal: controller.signal
