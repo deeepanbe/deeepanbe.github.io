@@ -34,10 +34,3 @@ const DJ_CONFIG = {
 };
 
 window.DJ_CONFIG = DJ_CONFIG;
-
-if (DJ_CONFIG.BACKEND_URL && DJ_CONFIG.TURNSTILE_SITE_KEY) {
-  const script = document.createElement('script');
-  script.src = '/ai/dj-secure-bridge.js';
-  script.defer = true;
-  document.head.appendChild(script);
-}
