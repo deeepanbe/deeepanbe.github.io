@@ -17,3 +17,11 @@ Run:
 `python -m py_compile agent_loop.py`
 
 The loop returns `ready_for_approval` only after validation and tests pass.
+
+
+## CI
+All DJ automation checks are consolidated in `.github/workflows/dj-ci.yml`.
+Pushes and pull requests run the backend smoke test and job-profile tests; pull requests also run the review assistant. The bounded agent loop and portfolio audit are manual/scheduled operations.
+
+## Production rule
+A green CI run is required before merging changes. AI-generated repository writes remain approval-gated and are opened as review pull requests.
