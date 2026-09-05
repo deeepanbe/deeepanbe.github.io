@@ -1,0 +1,1 @@
+Flask==3.1.0\nflask-cors==5.0.0\ngunicorn==23.0.0\n
