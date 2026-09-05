@@ -6,7 +6,13 @@ on:
   workflow_dispatch:
 
 jobs:
+  config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configuration note
+        run: echo "DJ GitHub sync runs only when DJ_BACKEND_URL and DJ_SYNC_JWT repository secrets are configured."
   sync:
+    if: ${{ secrets.DJ_BACKEND_URL != '' && secrets.DJ_SYNC_JWT != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Trigger DJ backend GitHub sync
