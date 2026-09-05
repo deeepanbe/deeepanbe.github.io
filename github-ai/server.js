@@ -508,6 +508,9 @@ app.get("/api/agent/next", async (_req,res,next)=>{
 
 
 app.post("/api/agent/run", async (req,res,next)=>{
+  const expected=process.env.DJ_AGENT_JWT || "";
+  const auth=String(req.headers.authorization || "");
+  if(!expected || auth !== "Bearer " + expected) return res.status(401).json({ok:false,error:"Agent authentication required"});
   const started=Date.now();
   try{
     requireGithub();
