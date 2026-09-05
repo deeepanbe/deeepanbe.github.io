@@ -152,6 +152,34 @@ app.post("/api/analysis/repository", async (req,res,next)=>{
     ].filter(Boolean)});
   } catch(e){next(e);}
 });
+
+app.post("/api/agent/plan", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.body?.repo);
+    const repoName=req.body.repo;
+    const meta=(await github.repos.get({owner,repo:repoName})).data;
+    const tree=(await github.git.getTree({owner,repo:repoName,tree_sha:meta.data.default_branch,recursive:"true"})).data;
+    const files=tree.tree.filter(x=>x.type==="blob").map(x=>x.path);
+    const priority=[];
+    if(!files.some(x=>/^readme(\\.|$)/i.test(x))) priority.push({priority:"high",area:"Documentation",action:"Create a production-quality README with architecture, setup, usage and deployment."});
+    if(!files.some(x=>x.startsWith(".github/workflows/"))) priority.push({priority:"high",area:"CI/CD",action:"Add automated validation workflow for linting, tests and build checks."});
+    if(!files.some(x=>/(test|spec)\\./i.test(x))) priority.push({priority:"medium",area:"Testing",action:"Add automated tests around the most important application paths."});
+    if(files.some(x=>/\\.(env|pem|key)$/i.test(x))) priority.push({priority:"critical",area:"Secrets",action:"Review potentially sensitive files and move secrets to deployment environment variables."});
+    priority.push({priority:"medium",area:"Maintainability",action:"Review duplicated logic, error handling and configuration boundaries."});
+    priority.push({priority:"medium",area:"Security",action:"Review dependencies, authentication, authorization and input validation."});
+    res.json({ok:true,repository:meta.full_name,default_branch:meta.default_branch,plan:priority,principle:"Propose first; write only after explicit approval."});
+  } catch(e){next(e);}
+});
+
+app.get("/api/repos/:repo/health", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.params.repo);
+    const meta=(await github.repos.get({owner,repo:req.params.repo})).data;
+    const branch=meta.default_branch;
+    const runs=await github.actions.listWorkflowRunsForRepo({owner,repo:req.params.repo,per_page:10});
+    res.json({ok:true,repository:meta.full_name,default_branch:branch,workflow_runs:runs.data.workflow_runs.map(r=>({id:r.id,name:r.name,status:r.status,conclusion:r.conclusion,created_at:r.created_at,url:r.html_url}))});
+  } catch(e){next(e);}
+});
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
