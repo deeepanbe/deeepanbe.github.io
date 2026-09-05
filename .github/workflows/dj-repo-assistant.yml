@@ -4,7 +4,7 @@ on:
     types: [opened, synchronize, reopened]
 permissions:
   contents: read
-  pull-requests: read
+  pull-requests: write
 jobs:
   review:
     runs-on: ubuntu-latest
@@ -18,7 +18,11 @@ jobs:
           GITHUB_OWNER: ${{ github.repository_owner }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: python repo-assistant/agent.py
+        run: python repo-assistant/agent.py > review.md
+      - name: Comment review findings
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file review.md
       - uses: actions/upload-artifact@v4
         with:
           name: dj-repo-review
