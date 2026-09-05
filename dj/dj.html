@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n  <meta name="theme-color" content="#111827">\n  <meta name="mobile-web-app-capable" content="yes">\n  <meta name="apple-mobile-web-app-capable" content="yes">\n  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n  <link rel="manifest" href="./manifest.webmanifest">
   <title>DJ AI Workspace | Deepanraj Arumugam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -797,5 +797,5 @@ async function sendMessage() {
   document.getElementById('quickPrompts').style.display = 'flex';
 }
 </script>
-</body>
+<script>\n  if ("serviceWorker" in navigator) {\n    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));\n  }\n</script>\n</body>
 </html>
