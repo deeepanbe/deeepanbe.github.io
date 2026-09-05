@@ -429,6 +429,38 @@ function chooseModelSafe(task){
   return process.env.GENERAL_MODEL||process.env.OPENAI_MODEL||"gpt-5.6-luna";
 }
 
+
+
+app.get("/api/agent/next", async (_req,res,next)=>{
+  try{
+    requireGithub();
+    const {data}=await github.repos.listForUser({username:owner,per_page:100,sort:"updated"});
+    const scored=[];
+    for(const r of data){
+      try{
+        const [commits,issues,pulls]=await Promise.all([
+          github.repos.listCommits({owner,repo:r.name,per_page:10}),
+          github.issues.listForRepo({owner,repo:r.name,state:"open",per_page:100}),
+          github.pulls.list({owner,repo:r.name,state:"open",per_page:100})
+        ]);
+        const issueCount=issues.data.filter(x=>!x.pull_request).length;
+        const pullCount=pulls.data.length;
+        const score=Math.min(100,Math.round(45+commits.data.length*4+pullCount*5+Math.max(0,10-issueCount)*2));
+        scored.push({repo:r.name,language:r.language,score,open_issues:issueCount,open_pulls:pullCount});
+      }catch{}
+    }
+    scored.sort((a,b)=>a.score-b.score);
+    const target=scored[0]||null;
+    res.json({ok:true,recommendation:target?{
+      action:"inspect_and_improve",
+      repository:target.repo,
+      reason:"Lowest current development score in the accessible portfolio",
+      suggested_task:"Inspect architecture, security, tests, CI/CD and documentation; propose the highest-value safe improvement.",
+      score:target.score
+    }:null,portfolio:scored});
+  }catch(e){next(e);}
+});
+
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
