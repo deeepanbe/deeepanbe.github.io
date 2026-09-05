@@ -102,6 +102,23 @@ def next_action():
     r=ranked[0] if ranked else None
     return jsonify({"recommendation":"Improve repository documentation, tests and reproducibility first.","repository":r["full_name"] if r else None})
 
+@app.post("/api/agent/apply")
+def apply_change():
+    b=request.get_json(force=True)
+    if b.get("confirm")!="APPROVE": return jsonify({"error":"Explicit APPROVE confirmation required"}),400
+    name,path,content=b.get("repo"),b.get("path"),b.get("content")
+    if not all(isinstance(x,str) and x.strip() for x in [name,path,content]): return jsonify({"error":"repo, path and content are required"}),400
+    base=gh(f"/repos/{OWNER}/{name}")
+    default=base["default_branch"]
+    branch_name="dj-ai/"+datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    ref=gh(f"/repos/{OWNER}/{name}/git/ref/heads/{default}")
+    gh(f"/repos/{OWNER}/{name}/git/refs","POST",{"ref":"refs/heads/"+branch_name,"sha":ref["object"]["sha"]})
+    old=gh(f"/repos/{OWNER}/{name}/contents/{path}?ref={default}")
+    payload={"message":"feat: apply approved DJ AI change","content":base64.b64encode(content.encode()).decode(),"sha":old["sha"],"branch":branch_name}
+    gh(f"/repos/{OWNER}/{name}/contents/{path}","PUT",payload)
+    pr=gh(f"/repos/{OWNER}/{name}/pulls","POST",{"title":"DJ AI: approved improvement","head":branch_name,"base":default,"body":"Created by DJ GitHub AI after explicit user approval. Please review before merging."})
+    return jsonify({"ok":True,"branch":branch_name,"pull_request":pr.get("html_url"),"message":"Change committed to a review PR; merge remains manual."})
+
 @app.post("/api/webhook")
 def webhook():
     secret=os.getenv("GITHUB_WEBHOOK_SECRET",""); sig=request.headers.get("X-Hub-Signature-256","")
