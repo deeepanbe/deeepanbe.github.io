@@ -16,7 +16,7 @@ app.set('trust proxy', process.env.TRUST_PROXY === 'true'); app.disable('x-power
 app.use('/billing', billingWebhook);
 app.use(express.json({ limit: '2mb', strict: true, verify: (req, res, buf) => { req.rawBody = Buffer.from(buf); } }));
 const PORT = Number(process.env.PORT || 8787);
-const CORS_ORIGINS = (process.env.CORS_ORIGINS || '').split(',').map(v => v.trim()).filter(Boolean);
+const CORS_ORIGINS = (process.env.CORS_ORIGINS || 'https://deeepanbe.github.io,https://deepanraj.work.gd,http://localhost:8000,http://localhost:5500').split(',').map(v => v.trim()).filter(Boolean);
 const MODEL = process.env.MODEL || 'gpt-5.6-luna';
 const MAX_MESSAGE_LENGTH = Number(process.env.MAX_MESSAGE_LENGTH || 5000);
 const MAX_OUTPUT_TOKENS = Number(process.env.MAX_OUTPUT_TOKENS || 1200);
