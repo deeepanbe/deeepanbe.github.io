@@ -1,0 +1,38 @@
+name: DJ Portfolio Audit
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+permissions:
+  contents: read
+  metadata: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Audit public repositories
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          owner=os.environ["OWNER"]; token=os.environ["GH_TOKEN"]
+          def get(url):
+            r=urllib.request.Request(url,headers={"Authorization":f"Bearer {token}","Accept":"application/vnd.github+json"})
+            with urllib.request.urlopen(r) as x:return json.load(x)
+          repos=get(f"https://api.github.com/users/{owner}/repos?per_page=100&type=public")
+          rows=[]
+          for r in repos:
+            try:
+              get(f"https://api.github.com/repos/{owner}/{r['name']}/contents/README.md")
+              readme=True
+            except: readme=False
+            rows.append({"repo":r["full_name"],"default_branch":r["default_branch"],"size_kb":r["size"],"has_readme":readme,"language":r["language"]})
+          with open("repo-audit.json","w") as f: json.dump(rows,f,indent=2)
+          print(json.dumps(rows,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dj-portfolio-audit
+          path: repo-audit.json
