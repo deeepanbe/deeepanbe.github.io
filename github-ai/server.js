@@ -366,6 +366,52 @@ app.get("/api/agent/learning", async (_req,res,next)=>{
   }catch(e){next(e);}
 });
 
+
+
+async function validatePatch(repoName, path, baseContent, newContent){
+  const checks=[];
+  if(newContent.length===0) checks.push("Generated content is empty");
+  if(newContent.includes("-----BEGIN ") || /(?:api[_-]?key|secret|token)\\s*[:=]\\s*["'][^"']{12,}/i.test(newContent)) checks.push("Possible secret detected in generated content");
+  const ext=(path.split(".").pop()||"").toLowerCase();
+  if(["js","mjs","cjs"].includes(ext)){
+    try { new Function(newContent); checks.push("JavaScript syntax check passed"); } catch(e){ checks.push("JavaScript syntax check failed: "+e.message); }
+  }
+  const oldLines=baseContent.split("\\n").length, newLines=newContent.split("\\n").length;
+  if(Math.abs(newLines-oldLines)>Math.max(200,oldLines*2)) checks.push("Large change detected; review carefully");
+  return {passed:checks.filter(x=>/passed/i.test(x)).length, warnings:checks.filter(x=>!/passed/i.test(x)), old_lines:oldLines,new_lines:newLines};
+}
+
+app.post("/api/agent/validate", async (req,res,next)=>{
+  try{
+    requireGithub(); assertRepo(req.body?.repo);
+    const repoName=req.body.repo,path=String(req.body.path||"");
+    const proposal=approvals.get(String(req.body.proposal_id||""));
+    if(!proposal || proposal.repo!==repoName || proposal.path!==path) throw Object.assign(new Error("Proposal not found"),{status:404});
+    const file=await getTextFile(repoName,path);
+    const validation=await validatePatch(repoName,path,file.content,proposal.proposed_content);
+    proposal.validation=validation;
+    audit.push({action:"patch_validated",repo:repoName,path,proposal_id:req.body.proposal_id,created_at:new Date().toISOString()});
+    res.json({ok:true,proposal_id:req.body.proposal_id,validation});
+  }catch(e){next(e);}
+});
+
+app.post("/api/agent/apply-approved", async (req,res,next)=>{
+  try{
+    requireGithub();
+    const id=String(req.body?.proposal_id||"");
+    const p=approvals.get(id);
+    if(!p || !p.approved) throw Object.assign(new Error("Explicit approval is required"),{status:403});
+    if(p.validation?.warnings?.length) throw Object.assign(new Error("Validation warnings must be reviewed before applying"),{status:409});
+    const result=await github.repos.createOrUpdateFileContents({
+      owner,repo:p.repo,path:p.path,message:String(req.body.commit_message||"DJ GitHub AI: approved improvement").slice(0,160),
+      content:Buffer.from(p.proposed_content,"utf8").toString("base64"),branch:p.branch,sha:p.sha
+    });
+    audit.push({action:"approved_change_applied",repo:p.repo,path:p.path,branch:p.branch,commit:result.data.commit?.sha,created_at:new Date().toISOString()});
+    approvals.delete(id);
+    res.json({ok:true,commit_sha:result.data.commit?.sha,branch:p.branch});
+  }catch(e){next(e);}
+});
+
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
