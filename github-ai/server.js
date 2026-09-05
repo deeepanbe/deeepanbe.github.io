@@ -5,6 +5,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import { Octokit } from "@octokit/rest";
 import crypto from "node:crypto";
+import { runAutonomousLoop } from "./autonomous-loop.js";
 
 const app = express();
 const port = Number(process.env.PORT || 8787);
@@ -505,6 +506,25 @@ app.get("/api/agent/next", async (_req,res,next)=>{
 });
 
 
+
+app.post("/api/agent/run", async (req,res,next)=>{
+  const started=Date.now();
+  try{
+    requireGithub();
+    const result=await runAutonomousLoop({
+      github, owner,
+      apiKey:process.env.OPENAI_API_KEY,
+      model:process.env.OPENAI_MODEL || "gpt-5.6-luna",
+      maxRepos:Math.min(Number(req.body?.max_repos||3),10),
+      dryRun:req.body?.dry_run===true
+    });
+    audit.push({action:"autonomous_run",...result,duration_ms:Date.now()-started,created_at:new Date().toISOString()});
+    res.status(result.action==="failed"?500:200).json({ok:result.action!=="failed",...result,duration_ms:Date.now()-started});
+  }catch(e){
+    audit.push({action:"autonomous_run_failed",error:e.message,duration_ms:Date.now()-started,created_at:new Date().toISOString()});
+    next(e);
+  }
+});
 
 app.get("/api/agent/health",(req,res)=>{
   res.json({ok:true,agent:"DJ GitHub AI",version:"1.0",capabilities:[
