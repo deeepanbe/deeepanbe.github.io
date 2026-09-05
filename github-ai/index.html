@@ -3,7 +3,7 @@
 <title>DJ GitHub AI</title>
 <style>body{font-family:system-ui;margin:0;background:#0b1020;color:#eef2ff}main{max-width:1000px;margin:auto;padding:32px}.card{background:#121a2e;border:1px solid #26314d;border-radius:16px;padding:20px;margin:16px 0}button{padding:10px 14px;border:0;border-radius:9px;cursor:pointer}pre{white-space:pre-wrap;overflow:auto}small{color:#9aa8c7}</style></head>
 <body><main><h1>DJ GitHub AI</h1><p>Repository intelligence and controlled development agent.</p>
-<div class="card"><button id="load">Connect GitHub AI</button><span id="status"></span></div>
+<div class="card"><button id="load">Connect GitHub AI</button> <small>Backend: <span id="apiEndpoint"></span></small><span id="status"></span></div>
 <div class="card"><h2>Repositories</h2><div id="repos">Not connected.</div></div>
 <div class="card"><h2>Repository Intelligence</h2><select id="repoSelect"><option value="">Select a repository</option></select> <button id="analyze">Analyze</button><pre id="analysis">Choose a repository to see its development profile.</pre></div>
 <div class="card"><h2>Development Plan</h2><button id="plan">Generate Improvement Plan</button><pre id="planOut">Select a repository first.</pre></div>
@@ -15,20 +15,20 @@
 <div class="card"><h2>Agent workflow</h2><p>Discover → analyze → prioritize → generate → validate → review → approve → branch → PR → learn.</p></div>
 <div class="card"><h2>Agent policy</h2><p>Read and analyse automatically. Repository writes require explicit approval. No autonomous merge, delete, permission changes, or secret handling.</p></div>
 <script>
-const API=window.DJ_GITHUB_AI_API||"";
+const API=(window.DJ_GITHUB_AI_API||"https://dj-ai-api.onrender.com").replace(/\/$/,"");
 const $=id=>document.getElementById(id);
 let currentProposal=null;
 
 async function api(path,options={}){
-  if(!API) throw new Error("API endpoint is not configured. Set DJ_GITHUB_AI_API.");
-  const r=await fetch(API+path,{...options,headers:{"Content-Type":"application/json",...(options.headers||{})}});
+  if(!API) throw new Error("API endpoint is not configured.");
+  const controller=new AbortController(); const timeout=setTimeout(()=>controller.abort(),30000);\n  let r; try { r=await fetch(API+path,{...options,signal:controller.signal,headers:{"Content-Type":"application/json",...(options.headers||{})}}); } finally { clearTimeout(timeout); }
   const d=await r.json().catch(()=>({error:"Invalid server response"}));
   if(!r.ok) throw new Error(d.error||d.message||("Request failed: "+r.status));
   return d;
 }
 function show(id,value){$(id).textContent=typeof value==="string"?value:JSON.stringify(value,null,2)}
 
-async function load(){
+$("apiEndpoint").textContent=API;\nasync function load(){
   show("status"," Connecting...");
   try{
     const h=await api("/health");
