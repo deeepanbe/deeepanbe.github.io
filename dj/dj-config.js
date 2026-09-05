@@ -1,8 +1,8 @@
 const DJ_CONFIG = {
   // Public configuration only. Never put API keys, JWT secrets, database credentials,
   // Stripe secrets, or backend authentication secrets in this file.
-  BACKEND_URL: window.DJ_BACKEND_URL || "",
-  TURNSTILE_SITE_KEY: window.DJ_TURNSTILE_SITE_KEY || "",
+  BACKEND_URL: window.DJ_BACKEND_URL || "https://dj-ai-api.onrender.com",
+  TURNSTILE_SITE_KEY: window.DJ_TURNSTILE_SITE_KEY || "0x4AAAAAAEa5MU57ym5Hg_OL",
   GREETING: "Hi, I am DJ AI. I am Deepanraj's portfolio assistant. Ask me about his verified Data Analyst / BI projects, Power BI, SQL, Python, Excel, operations analytics, or recruiter fit.",
   SUGGESTIONS: [
     "What is Deepanraj's strongest verified analytics project?",
