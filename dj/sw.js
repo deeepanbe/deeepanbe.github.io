@@ -1,4 +1,4 @@
-const CACHE_NAME = "dj-ai-v2";
+const CACHE_NAME = "dj-ai-v3";
 const APP_SHELL = [
   "./dj.html",
   "./dj-config.js",
@@ -27,13 +27,22 @@ self.addEventListener("fetch", event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
+  const networkFirst = request.destination === "document" || /\\/dj-(config|client|turnstile-client)\\.js$/i.test(url.pathname);
   event.respondWith(
-    caches.match(request).then(cached => cached || fetch(request).then(response => {
-      if (response.ok) {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-      }
-      return response;
-    }).catch(() => caches.match("./dj.html")))
+    networkFirst
+      ? fetch(request).then(response => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          }
+          return response;
+        }).catch(() => caches.match(request).then(cached => cached || caches.match("./dj.html")))
+      : caches.match(request).then(cached => cached || fetch(request).then(response => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          }
+          return response;
+        }).catch(() => caches.match("./dj.html")))
   );
 });
