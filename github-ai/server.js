@@ -180,6 +180,40 @@ app.get("/api/repos/:repo/health", async (req,res,next)=>{
     res.json({ok:true,repository:meta.full_name,default_branch:branch,workflow_runs:runs.data.workflow_runs.map(r=>({id:r.id,name:r.name,status:r.status,conclusion:r.conclusion,created_at:r.created_at,url:r.html_url}))});
   } catch(e){next(e);}
 });
+
+async function getTextFile(repoName,path){
+  const {data}=await github.repos.getContent({owner,repo:repoName,path});
+  if(Array.isArray(data)||data.type!=="file") throw Object.assign(new Error("Text file required"),{status:400});
+  return {sha:data.sha,content:Buffer.from(data.content,"base64").toString("utf8")};
+}
+
+app.post("/api/agent/propose", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.body?.repo);
+    const repoName=req.body.repo, path=String(req.body.path||"");
+    const instruction=String(req.body.instruction||"").trim();
+    if(!path || path.includes("..") || !instruction) throw Object.assign(new Error("repo, path and instruction are required"),{status:400});
+    if(/(^|\/)(\.env|.*\.(pem|key|p12))$/i.test(path)) throw Object.assign(new Error("Sensitive files are blocked"),{status:403});
+    const file=await getTextFile(repoName,path);
+    const max=Number(process.env.AGENT_MAX_FILE_CHARS||120000);
+    if(file.content.length>max) throw Object.assign(new Error("File is too large for V1 patch generation"),{status:413});
+    const proposalText = "DJ GitHub AI proposal\n\nInstruction: "+instruction+"\n\nTarget: "+path+"\n\nCurrent file length: "+file.content.length+" characters.\n\nNo repository write has been performed.";
+    const id=crypto.randomUUID();
+    const meta=(await github.repos.get({owner,repo:repoName})).data;
+    approvals.set(id,{repo:repoName,branch:req.body.branch||meta.default_branch,path,sha:file.sha,reason:instruction,proposed_content:file.content,created_at:new Date().toISOString(),proposal_only:true});
+    audit.push({id,action:"agent_proposal_created",repo:repoName,path,created_at:new Date().toISOString()});
+    res.status(201).json({ok:true,proposal_id:id,proposal:proposalText,requires_approval:true,write_performed:false});
+  } catch(e){next(e);}
+});
+
+app.get("/api/repos/:repo/security", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.params.repo);
+    const meta=(await github.repos.get({owner,repo:req.params.repo})).data;
+    const advisories=await github.dependabot.listAlertsForRepo({owner,repo:req.params.repo,state:"open",per_page:100}).catch(()=>({data:[]}));
+    res.json({ok:true,repository:meta.full_name,open_dependabot_alerts:advisories.data.length,alerts:advisories.data.slice(0,25).map(a=>({package:a.dependency?.package?.name,severity:a.security_advisory?.severity,state:a.state,url:a.html_url}))});
+  } catch(e){next(e);}
+});
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
