@@ -111,8 +111,9 @@ export async function runAutonomousLoop({ github, owner, apiKey, model = "gpt-5.
     try {
       const meta = await withRetry(() => github.repos.get({ owner, repo: repo.name }), { label: "read repository" });
       const base = meta.data.default_branch;
+      const baseRef = await withRetry(() => github.git.getRef({ owner, repo: repo.name, ref: "heads/" + base }), { label: "get repository head" });
       const tree = await withRetry(
-        () => github.git.getTree({ owner, repo: repo.name, tree_sha: base, recursive: "true" }),
+        () => github.git.getTree({ owner, repo: repo.name, tree_sha: baseRef.data.object.sha, recursive: "true" }),
         { label: "read repository tree" }
       );
       const files = tree.data.tree.filter(x => x.type === "blob").map(x => x.path);
