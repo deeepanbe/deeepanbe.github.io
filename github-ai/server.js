@@ -461,6 +461,15 @@ app.get("/api/agent/next", async (_req,res,next)=>{
   }catch(e){next(e);}
 });
 
+
+
+app.get("/api/agent/health",(req,res)=>{
+  res.json({ok:true,agent:"DJ GitHub AI",version:"1.0",capabilities:[
+    "repository intelligence","AI patch generation","patch validation",
+    "approved branch writes","pull request creation","security policy","audit trail"
+  ],safety:{approval_required:true,automatic_merge:false,secret_access:false}});
+});
+
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
