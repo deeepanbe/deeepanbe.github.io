@@ -1,0 +1,9 @@
+{
+  "experiment":"dj-code-model-baseline",
+  "model_size":"1b",
+  "context_length":8192,
+  "precision":"bf16",
+  "seed":42,
+  "dataset_version":"v0",
+  "eval_suite":"github-ai/evaluation/tasks.json"
+}
