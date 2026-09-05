@@ -1,23 +1,19 @@
 # DJ GitHub AI
 
-DJ GitHub AI is an approval-gated software engineering agent for a GitHub portfolio.
-
-## Current capabilities
-- Repository intelligence and prioritization
-- AI-assisted task planning
-- Patch generation
-- Deterministic patch validation
-- Approval-gated repository writes
-- Pull-request review automation
-- Audit trail and learning schema
-- Model routing
-- Evaluation/promotion framework
+Approval-gated AI software engineer for GitHub portfolios.
 
 ## Agent loop
-Discover → Understand → Plan → Generate → Validate → Test → Review → Approve → Branch/PR → Evaluate → Learn.
+Discover → Understand → Plan → Generate → Validate → Test → Retry on failure (max 3) → Security Review → Human Approval → Branch/PR → Evaluate → Learn.
+
+## Events
+Pull requests, commits, issues and workflow failures can become agent tasks. Event handling must verify webhook signatures and deduplicate deliveries.
 
 ## Safety
-DJ does not automatically merge, force-push, delete repositories, change permissions, access secret files, or submit external job applications.
+The loop is bounded. It cannot automatically merge, force-push, delete repositories, change permissions, access secret files, or submit external applications.
 
-## Roadmap
-Build high-quality evaluations and permitted engineering datasets first. Train a proprietary DJ model only after small-model experiments demonstrate a measurable advantage over the existing model baseline.
+## Verification
+Run:
+`python agent_loop_test.py`
+`python -m py_compile agent_loop.py`
+
+The loop returns `ready_for_approval` only after validation and tests pass.
