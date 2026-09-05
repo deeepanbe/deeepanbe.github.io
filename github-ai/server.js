@@ -412,6 +412,23 @@ app.post("/api/agent/apply-approved", async (req,res,next)=>{
   }catch(e){next(e);}
 });
 
+
+
+app.get("/api/model/route",(req,res)=>{
+  const task=String(req.query.task||"general");
+  const key=process.env.OPENAI_API_KEY;
+  const gateway=chooseModelSafe(task);
+  res.json({ok:true,provider:process.env.AI_PROVIDER||"openai",model:gateway,configured:Boolean(key)});
+});
+
+function chooseModelSafe(task){
+  const t=String(task).toLowerCase();
+  if(/security|vulnerab|secret/.test(t)) return process.env.SECURITY_MODEL||process.env.OPENAI_MODEL||"gpt-5.6-luna";
+  if(/code|refactor|bug|test|github|repository/.test(t)) return process.env.CODING_MODEL||process.env.OPENAI_MODEL||"gpt-5.6-luna";
+  if(/plan|architect|design|research/.test(t)) return process.env.REASONING_MODEL||process.env.OPENAI_MODEL||"gpt-5.6-luna";
+  return process.env.GENERAL_MODEL||process.env.OPENAI_MODEL||"gpt-5.6-luna";
+}
+
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
