@@ -1,58 +1,16 @@
 services:
   - type: web
     name: dj-ai-api
-    runtime: node
-    plan: free
-    rootDir: backend
-    buildCommand: npm install
-    startCommand: npm start
-    healthCheckPath: /health
+    runtime: python
+    rootDir: github-ai/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
     envVars:
-      - key: NODE_ENV
-        value: production
-      - key: AI_PROVIDER
-        value: openai
+      - key: GITHUB_OWNER
+        value: deeepanbe
       - key: MODEL
         value: gpt-5.6-luna
-      - key: EMBEDDING_MODEL
-        value: text-embedding-3-small
-      - key: PORT
-        value: "10000"
-      - key: DATABASE_SSL
-        value: "true"
-      - key: TRUST_PROXY
-        value: "true"
-      - key: PUBLIC_APP_URL
-        value: https://deeepanbe.github.io
       - key: CORS_ORIGINS
         value: https://deeepanbe.github.io
-      - key: JWT_SECRET
-        generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: dj-ai-db
-          property: connectionString
-      - key: OPENAI_API_KEY
-        sync: false
-      - key: TURNSTILE_SECRET
-        sync: false
-      - key: TURNSTILE_SITE_KEY
-        sync: false
-      - key: RESEND_API_KEY
-        sync: false
-      - key: EMAIL_FROM
-        sync: false
-      - key: STRIPE_SECRET_KEY
-        sync: false
-      - key: STRIPE_WEBHOOK_SECRET
-        sync: false
-      - key: STRIPE_PRICE_PRO
-        sync: false
-      - key: STRIPE_PRICE_TEAM
-        sync: false
-
-databases:
-  - name: dj-ai-db
-    plan: free
-    databaseName: djai
-    user: djai
+      - key: STATE_FILE
+        value: /tmp/dj-agent-state.json
