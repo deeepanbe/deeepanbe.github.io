@@ -1,0 +1,41 @@
+name: DJ GitHub Autonomous Review
+
+on:
+  schedule:
+    - cron: "30 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dj-autonomous-review
+  cancel-in-progress: true
+
+jobs:
+  run:
+    if: ${{ secrets.DJ_GITHUB_AI_URL != '' && secrets.DJ_AGENT_JWT != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run DJ AI with bounded retries
+        env:
+          DJ_GITHUB_AI_URL: ${{ secrets.DJ_GITHUB_AI_URL }}
+          DJ_AGENT_JWT: ${{ secrets.DJ_AGENT_JWT }}
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            code=$(curl -sS -o response.json -w "%{http_code}" \
+              --max-time 120 --retry 2 --retry-delay 3 \
+              -X POST "$DJ_GITHUB_AI_URL/api/agent/run" \
+              -H "Authorization: Bearer $DJ_AGENT_JWT" \
+              -H "Content-Type: application/json" \
+              --data '{"max_repos":3,"dry_run":false}') || code=000
+            cat response.json 2>/dev/null || true
+            if [ "$code" -ge 200 ] && [ "$code" -lt 300 ]; then exit 0; fi
+            echo "DJ AI attempt $attempt failed with HTTP $code"
+            if [ "$attempt" -lt 3 ]; then sleep $((attempt * 10)); fi
+          done
+          exit 1
+      - name: Configuration note
+        if: ${{ secrets.DJ_GITHUB_AI_URL == '' || secrets.DJ_AGENT_JWT == '' }}
+        run: echo "Autonomous review disabled until DJ_GITHUB_AI_URL and DJ_AGENT_JWT are configured."
