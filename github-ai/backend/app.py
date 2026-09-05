@@ -129,6 +129,16 @@ def webhook():
     event=request.headers.get("X-GitHub-Event","unknown")
     payload=request.get_json(silent=True) or {}
     s=state(); s["patterns"].append({"event":event,"repo":payload.get("repository",{}).get("full_name"),"action":payload.get("action"),"at":datetime.now(timezone.utc).isoformat()}); s["patterns"]=s["patterns"][-500:]; save(s)
+    if event=="pull_request" and payload.get("action") in {"opened","synchronize","reopened"} and OPENAI_KEY:
+        pr=payload.get("pull_request",{}); repo_name=payload.get("repository",{}).get("name"); number=payload.get("number")
+        if repo_name and number:
+            try:
+                files=gh(f"/repos/{OWNER}/{repo_name}/pulls/{number}/files?per_page=50")
+                patches="\n\n".join((f"FILE {x.get('filename')}\n{x.get('patch','')[:8000]}") for x in files)
+                review=ai(f"Review this pull request for correctness, security, maintainability and tests. Give only specific findings with severity and actionable fixes. PR #{number}.\n{patches}")
+                gh(f"/repos/{OWNER}/{repo_name}/issues/{number}/comments","POST",{"body":"## DJ GitHub AI review\\n\\n"+review["answer"]})
+            except Exception as review_error:
+                s=state(); s.setdefault("errors",[]).append(str(review_error)); save(s)
     return jsonify({"ok":True,"event":event})
 
 @app.errorhandler(Exception)
