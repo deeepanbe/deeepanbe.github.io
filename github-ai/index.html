@@ -16,5 +16,37 @@
 <div class="card"><h2>Agent policy</h2><p>Read and analyse automatically. Repository writes require explicit approval. No autonomous merge, delete, permission changes, or secret handling.</p></div>
 <script>
 const API=window.DJ_GITHUB_AI_API||"";
-async function load(){const s=document.getElementById("status"),r=document.getElementById("repos");if(!API){s.textContent=" Configure DJ_GITHUB_AI_API for the deployed API.";return}try{const h=await fetch(API+"/health").then(x=>x.json());s.textContent=h.ok?" AI service online":" AI service unavailable";const d=await fetch(API+"/api/repos").then(x=>x.json());r.innerHTML=d.repositories?.length?d.repositories.map(x=>"<div style='padding:10px 0;border-bottom:1px solid #26314d'><b>"+x.full_name+"</b><br><small>"+(x.language||"Unknown")+" · "+x.open_issues+" open issues · updated "+new Date(x.updated_at).toLocaleDateString()+"</small></div>").join(""):"No repositories returned."}catch(e){s.textContent=" Connection failed";r.textContent=e.message}}</script>
+const $=id=>document.getElementById(id);
+let currentProposal=null;
+
+async function api(path,options={}){
+  if(!API) throw new Error("API endpoint is not configured. Set DJ_GITHUB_AI_API.");
+  const r=await fetch(API+path,{...options,headers:{"Content-Type":"application/json",...(options.headers||{})}});
+  const d=await r.json().catch(()=>({error:"Invalid server response"}));
+  if(!r.ok) throw new Error(d.error||d.message||("Request failed: "+r.status));
+  return d;
+}
+function show(id,value){$(id).textContent=typeof value==="string"?value:JSON.stringify(value,null,2)}
+
+async function load(){
+  show("status"," Connecting...");
+  try{
+    const h=await api("/health");
+    $("status").textContent=h.ok?" AI service online":" AI service unavailable";
+    const d=await api("/api/repos");
+    const list=d.repositories||[];
+    $("repos").innerHTML=list.length?list.map(x=>`<div style="padding:10px 0;border-bottom:1px solid #26314d"><b>${x.full_name}</b><br><small>${x.language||"Unknown"} · ${x.open_issues||0} open issues · updated ${new Date(x.updated_at).toLocaleDateString()}</small></div>`).join(""):"No repositories returned.";
+    $("repoSelect").innerHTML='<option value="">Select a repository</option>'+list.map(x=>`<option value="${x.name||x.full_name.split("/").pop()}">${x.full_name}</option>`).join("");
+  }catch(e){$("status").textContent=" Connection failed";show("repos",e.message)}
+}
+$("load").onclick=load;
+
+$("analyze").onclick=async()=>{const repo=$("repoSelect").value;if(!repo)return show("analysis","Select a repository first.");try{show("analysis","Analyzing...");show("analysis",await api("/api/repos/"+encodeURIComponent(repo)+"/overview"))}catch(e){show("analysis",e.message)}};
+$("plan").onclick=async()=>{const repo=$("repoSelect").value;if(!repo)return show("planOut","Select a repository first.");try{show("planOut","Planning...");show("planOut",await api("/api/agent/task",{method:"POST",body:JSON.stringify({task:"Analyze and create a safe improvement plan for repository "+repo})}))}catch(e){show("planOut",e.message)}};
+$("propose").onclick=async()=>{const repo=$("repoSelect").value,path=$("path").value.trim(),instruction="Improve this file safely, preserving existing behavior and adding tests where appropriate.";if(!repo||!path)return show("proposal","Select a repository and enter a file path.");try{show("proposal","Generating AI patch...");currentProposal=await api("/api/agent/generate",{method:"POST",body:JSON.stringify({repo,path,instruction})});show("proposal",currentProposal)}catch(e){show("proposal",e.message)}};
+$("intel").onclick=async()=>{try{show("intelOut","Scanning all repositories...");show("intelOut",await api("/api/intelligence"))}catch(e){show("intelOut",e.message)}};
+$("runTask").onclick=async()=>{const task=$("task").value.trim();if(!task)return show("taskOut","Enter a task.");try{show("taskOut","Planning...");show("taskOut",await api("/api/agent/task",{method:"POST",body:JSON.stringify({task})}))}catch(e){show("taskOut",e.message)}};
+$("validate").onclick=async()=>{if(!currentProposal?.proposal_id)return show("validation","Generate a proposal first.");try{show("validation","Validating...");show("validation",await api("/api/agent/validate",{method:"POST",body:JSON.stringify({repo:$("repoSelect").value,path:$("path").value,proposal_id:currentProposal.proposal_id})}))}catch(e){show("validation",e.message)}};
+$("next").onclick=async()=>{try{show("nextOut","Ranking repositories...");show("nextOut",await api("/api/agent/next"))}catch(e){show("nextOut",e.message)}};
+</script>
 </main></body></html>
