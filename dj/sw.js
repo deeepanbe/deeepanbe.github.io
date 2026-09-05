@@ -1,4 +1,4 @@
-const CACHE_NAME = "dj-ai-v1";
+const CACHE_NAME = "dj-ai-v2";
 const APP_SHELL = [
   "./dj.html",
   "./dj-config.js",
