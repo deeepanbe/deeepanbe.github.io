@@ -214,6 +214,54 @@ app.get("/api/repos/:repo/security", async (req,res,next)=>{
     res.json({ok:true,repository:meta.full_name,open_dependabot_alerts:advisories.data.length,alerts:advisories.data.slice(0,25).map(a=>({package:a.dependency?.package?.name,severity:a.security_advisory?.severity,state:a.state,url:a.html_url}))});
   } catch(e){next(e);}
 });
+
+async function generateAiPatch({instruction,path,currentContent,context}){
+  const key=process.env.OPENAI_API_KEY;
+  if(!key) throw Object.assign(new Error("OPENAI_API_KEY is not configured"),{status:503});
+  const model=process.env.OPENAI_MODEL || "gpt-5.6-luna";
+  const prompt=[
+    "You are DJ GitHub AI, a careful software-development agent.",
+    "Return ONLY valid JSON with keys: summary, risks, tests, new_content.",
+    "new_content must contain the complete replacement content for the target text file.",
+    "Do not include markdown fences. Never include secrets. Preserve unrelated behavior.",
+    "Instruction: "+instruction,
+    "Target path: "+path,
+    "Repository context: "+context,
+    "Current content:\\n"+currentContent
+  ].join("\\n\\n");
+  const response=await fetch("https://api.openai.com/v1/chat/completions",{
+    method:"POST",
+    headers:{"Authorization":"Bearer "+key,"Content-Type":"application/json"},
+    body:JSON.stringify({model,messages:[{role:"system",content:"You modify source code safely and conservatively."},{role:"user",content:prompt}],temperature:0.1,response_format:{type:"json_object"}})
+  });
+  if(!response.ok) throw Object.assign(new Error("AI provider request failed"),{status:502});
+  const data=await response.json();
+  const raw=data.choices?.[0]?.message?.content;
+  if(!raw) throw Object.assign(new Error("AI provider returned no patch"),{status:502});
+  const result=JSON.parse(raw);
+  if(typeof result.new_content!=="string") throw Object.assign(new Error("AI returned invalid patch"),{status:502});
+  return result;
+}
+
+app.post("/api/agent/generate", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.body?.repo);
+    const repoName=req.body.repo, path=String(req.body.path||""), instruction=String(req.body.instruction||"").trim();
+    if(!path || path.includes("..") || !instruction) throw Object.assign(new Error("repo, path and instruction are required"),{status:400});
+    if(/(^|\/)(\.env|.*\.(pem|key|p12))$/i.test(path)) throw Object.assign(new Error("Sensitive files are blocked"),{status:403});
+    const file=await getTextFile(repoName,path);
+    const max=Number(process.env.AGENT_MAX_FILE_CHARS||120000);
+    if(file.content.length>max) throw Object.assign(new Error("File is too large for V1 AI generation"),{status:413});
+    const meta=(await github.repos.get({owner,repo:repoName})).data;
+    const tree=(await github.git.getTree({owner,repo:repoName,tree_sha:meta.data.default_branch,recursive:"true"})).data;
+    const context=tree.tree.filter(x=>x.type==="blob").slice(0,300).map(x=>x.path).join("\\n");
+    const ai=await generateAiPatch({instruction,path,currentContent:file.content,context});
+    const id=crypto.randomUUID();
+    approvals.set(id,{repo:repoName,branch:req.body.branch||meta.default_branch,path,sha:file.sha,reason:instruction,proposed_content:ai.new_content,created_at:new Date().toISOString(),ai_summary:ai.summary,risks:ai.risks,tests:ai.tests});
+    audit.push({id,action:"ai_patch_generated",repo:repoName,path,created_at:new Date().toISOString()});
+    res.status(201).json({ok:true,proposal_id:id,summary:ai.summary,risks:ai.risks,tests:ai.tests,current_sha:file.sha,proposed_content:ai.new_content,requires_approval:true,write_performed:false});
+  } catch(e){next(e);}
+});
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
