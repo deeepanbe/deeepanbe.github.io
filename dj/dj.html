@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n  <meta name="theme-color" content="#111827">\n  <meta name="mobile-web-app-capable" content="yes">\n  <meta name="apple-mobile-web-app-capable" content="yes">\n  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.webmanifest">
   <title>DJ AI Workspace | Deepanraj Arumugam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -365,6 +370,21 @@
     }
     .settings-btn:hover { color: var(--text); border-color: var(--accent); }
 
+    .connection-pill {
+      display:inline-flex;align-items:center;gap:0.4rem;
+      padding:0.28rem 0.55rem;border-radius:999px;
+      background:var(--surface2);border:1px solid var(--border);
+      color:var(--text-muted);font-size:0.7rem;
+    }
+    .connection-pill.online { color:#10b981;border-color:rgba(16,185,129,.35); }
+    .connection-pill.offline { color:#f59e0b;border-color:rgba(245,158,11,.35); }
+    .message-actions { display:flex;gap:.4rem;margin-top:.55rem; }
+    .copy-btn { border:1px solid var(--border);background:var(--surface);color:var(--text-muted);border-radius:6px;padding:.25rem .5rem;font:inherit;font-size:.7rem;cursor:pointer; }
+    .copy-btn:hover { color:var(--text);border-color:var(--accent); }
+    .msg.ai .bubble { position:relative; }
+    .status-dot.offline { background:#f59e0b;box-shadow:0 0 8px #f59e0b; }
+    .toast { position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.6rem .85rem;border-radius:8px;font-size:.78rem;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,.35); }
+
     @media (max-width: 640px) {
       aside { display: none; }
       .quick-prompts { padding: 0 1rem 0.75rem; }
@@ -382,9 +402,11 @@
 <header>
   <div style="display:flex;align-items:center;gap:0.75rem">
     <div class="logo">DJ <span>AI</span></div>
-    <span style="font-size:0.75rem;color:var(--text-muted)"><span class="status-dot"></span>Deepanraj's Personal AI</span>
+    <span id="connectionPill" class="connection-pill"><span id="statusDot" class="status-dot"></span><span id="statusText">Checking AI…</span></span>
   </div>
-  <nav>
+  <nav style="display:flex;align-items:center;gap:0.65rem">
+    <button class="settings-btn" id="installBtn" style="display:none" onclick="installPWA()">Install App</button>
+    <button class="settings-btn" id="clearChatBtn" onclick="clearChat()" title="Clear current conversation">Clear</button>
     <a href="https://deeepanbe.github.io">← Portfolio</a>
   </nav>
 </header>
@@ -474,13 +496,36 @@
   </div>
 </div>
 
-<script src="production-config.js?v=20260905"></script>
-<script src="dj-config.js?v=20260905"></script>
-<script src="turnstile-client.js?v=20260905"></script>
+<script>
+let deferredInstallPrompt = null;
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  const btn = document.getElementById("installBtn");
+  if (btn) btn.style.display = "inline-block";
+});
+async function installPWA() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  const btn = document.getElementById("installBtn");
+  if (btn) btn.style.display = "none";
+}
+window.addEventListener("appinstalled", () => {
+  const btn = document.getElementById("installBtn");
+  if (btn) btn.style.display = "none";
+});
+</script>
+<script src="production-config.js?v=20260905.2"></script>
+<script src="dj-config.js?v=20260905.2"></script>
+<script src="turnstile-client.js?v=20260905.2"></script>
 <script>
 let currentMode = 'portfolio';
 let conversationHistory = [];
 let isStreaming = false;
+let backendHealthy = false;
+const HISTORY_KEY = 'deepanraj.dj.history.v2';
 
 const DJ_BACKEND_URL = (window.DJ_CONFIG && window.DJ_CONFIG.BACKEND_URL) || window.DJ_BACKEND_URL || '';
 const DJ_BACKEND_CONFIGURED = Boolean(DJ_BACKEND_URL) && !DJ_BACKEND_URL.includes('YOUR-BACKEND') && !DJ_BACKEND_URL.includes('your-dj-api');
@@ -497,7 +542,42 @@ function getSessionId() {
 }
 
 function showBackendNotice() {
-  appendMessage('ai', "DJ AI's backend is still being connected by Deepanraj. Feel free to type a question — it'll work as soon as the connection is live, no setup needed on your end.");
+  appendMessage('ai', "DJ AI is ready. Ask me about Deepanraj's analytics projects, SQL, DAX, Python, Power BI, Excel, or career profile.");
+}
+function showToast(message) {
+  const old = document.querySelector('.toast'); if (old) old.remove();
+  const t = document.createElement('div'); t.className='toast'; t.textContent=message;
+  document.body.appendChild(t); setTimeout(()=>t.remove(),2200);
+}
+function saveHistory() {
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(conversationHistory.slice(-20))); } catch {}
+}
+function loadHistory() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    if (!Array.isArray(saved) || !saved.length) return;
+    conversationHistory = saved;
+    saved.forEach(m => appendMessage(m.role === 'assistant' ? 'ai' : 'user', m.content));
+  } catch {}
+}
+function clearChat() {
+  conversationHistory = [];
+  try { localStorage.removeItem(HISTORY_KEY); } catch {}
+  document.getElementById('chatMessages').innerHTML = '<div class="welcome" id="welcomeScreen"><div class="welcome-logo">DJ</div><h2>New Chat 👋</h2><p>Ask me anything about Deepanraj’s work, SQL, Power BI, Python, or career advice.</p></div>';
+  document.getElementById('quickPrompts').style.display='none';
+  showToast('Conversation cleared');
+}
+async function checkBackend() {
+  const pill=document.getElementById('connectionPill'), dot=document.getElementById('statusDot'), label=document.getElementById('statusText');
+  if (!DJ_BACKEND_CONFIGURED) { backendHealthy=false; pill.className='connection-pill offline'; dot.classList.add('offline'); label.textContent='Backend setup'; return; }
+  try {
+    const r=await fetch(DJ_BACKEND_URL + '/health', {cache:'no-store'});
+    const data=await r.json();
+    backendHealthy=Boolean(r.ok && data && data.ok);
+  } catch { backendHealthy=false; }
+  pill.className='connection-pill '+(backendHealthy?'online':'offline');
+  dot.classList.toggle('offline',!backendHealthy);
+  label.textContent=backendHealthy?'AI Online':'AI Offline';
 }
 
 const DEEPANRAJ_BIO = `You are DJ AI — the personal AI assistant of Deepanraj Arumugam, a Data Analyst and Power BI Developer based in Tamil Nadu, India.
@@ -659,7 +739,8 @@ function formatMessage(text) {
   const fences = [];
   
   // Extract code blocks
-  text = text.replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) => {
+  text = text.replace(/```(\w*)
+?([\s\S]*?)```/g, (_, lang, code) => {
     const token = `CODE_BLOCK_${fences.length}_TOKEN`;
     fences.push({ lang: lang || 'text', code: code.trim() });
     return token;
@@ -678,11 +759,16 @@ function formatMessage(text) {
   // Italic
   text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   // Lists
-  text = text.replace(/\n- /g, '\n<li>');
+  text = text.replace(/
+- /g, '
+<li>');
   text = text.replace(/(<li>.*)/s, '<ul>$1</ul>');
   text = text.replace(/<li>/g, '<li>').replace(/<\/li>/g, '</li>');
   // Line breaks
-  text = text.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
+  text = text.replace(/
+
+/g, '</p><p>').replace(/
+/g, '<br>');
   
   // Re-insert code blocks
   fences.forEach((fence, i) => {
@@ -711,6 +797,7 @@ async function sendMessage() {
 
   appendMessage('user', text);
   conversationHistory.push({ role: 'user', content: text });
+  saveHistory();
 
   const welcome = document.getElementById('welcomeScreen');
   if (welcome) welcome.remove();
@@ -726,7 +813,7 @@ async function sendMessage() {
 
   if (!DJ_BACKEND_CONFIGURED) {
     document.getElementById('typing')?.remove();
-    appendMessage('ai', "DJ AI's backend isn't connected yet — Deepanraj is setting that up. Check back soon!");
+    appendMessage('ai', "⚠️ The AI backend is not configured yet. Please try again after the deployment is updated.");
     isStreaming = false;
     document.getElementById('sendBtn').disabled = false;
     return;
@@ -779,6 +866,7 @@ async function sendMessage() {
         appendMessage('ai', '⚠️ DJ AI returned an empty response. Please try again.');
       } else {
         conversationHistory.push({ role: 'assistant', content: reply });
+        saveHistory();
         appendMessage('ai', reply);
       }
     }
@@ -797,5 +885,21 @@ async function sendMessage() {
   document.getElementById('quickPrompts').style.display = 'flex';
 }
 </script>
-<script>\n  if ("serviceWorker" in navigator) {\n    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));\n  }\n</script>\n</body>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js?v=2").catch(() => {}));
+  }
+  window.addEventListener('online', () => checkBackend());
+  window.addEventListener('offline', () => {
+    const pill=document.getElementById('connectionPill'); if(pill) pill.className='connection-pill offline';
+    const dot=document.getElementById('statusDot'); if(dot) dot.classList.add('offline');
+    const label=document.getElementById('statusText'); if(label) label.textContent='Offline';
+  });
+  window.addEventListener('load', async () => {
+    if (conversationHistory.length === 0) loadHistory();
+    await checkBackend();
+    if (!conversationHistory.length && !DJ_BACKEND_CONFIGURED) showBackendNotice();
+  });
+</script>
+</body>
 </html>
