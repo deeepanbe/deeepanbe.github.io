@@ -470,6 +470,15 @@ app.get("/api/agent/health",(req,res)=>{
   ],safety:{approval_required:true,automatic_merge:false,secret_access:false}});
 });
 
+
+app.get("/api/evaluate",(req,res)=>{
+  const r=req.query;
+  const tests=r.tests==="true", validation=r.validation==="true", review=r.review==="true";
+  const security=Math.max(0,parseInt(r.security||"0",10)||0);
+  const score=(tests?40:0)+(validation?30:0)+(review?20:0)+(security===0?10:Math.max(0,10-security*3));
+  res.json({ok:true,score,promote:score>=85,criteria:{tests,validation,review,security_findings:security}});
+});
+
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
