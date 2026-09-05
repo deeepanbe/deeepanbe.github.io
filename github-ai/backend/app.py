@@ -10,6 +10,8 @@ OPENAI_KEY=os.getenv("OPENAI_API_KEY","")
 OWNER=os.getenv("GITHUB_OWNER","deeepanbe")
 MODEL=os.getenv("MODEL","gpt-5.6-luna")
 STATE_FILE=os.getenv("STATE_FILE","agent_state.json")
+APPROVAL_KEY=os.getenv("DJ_APPROVAL_KEY","")
+WEBHOOK_SECRET=os.getenv("GITHUB_WEBHOOK_SECRET","")
 
 def gh(path, method="GET", payload=None):
     url="https://api.github.com"+path
@@ -37,9 +39,13 @@ def state():
 def save(s):
     with open(STATE_FILE,"w",encoding="utf-8") as f:json.dump(s,f,indent=2)
 
+def require_approval_key():
+    supplied=request.headers.get("X-DJ-Approval-Key","")
+    return bool(APPROVAL_KEY and hmac.compare_digest(supplied, APPROVAL_KEY))
+
 @app.get("/health")
 def health():
-    return jsonify({"ok":True,"service":"dj-github-ai","github_configured":bool(GH_TOKEN),"ai_configured":bool(OPENAI_KEY),"owner":OWNER,"version":"3.0.0"})
+    return jsonify({"ok":True,"service":"dj-github-ai","github_configured":bool(GH_TOKEN),"ai_configured":bool(OPENAI_KEY),"owner":OWNER,"version":"3.1.0","approval_configured":bool(APPROVAL_KEY),"webhook_configured":bool(WEBHOOK_SECRET)})
 
 @app.get("/api/repos")
 def api_repos(): return jsonify({"repositories":[{"full_name":r["full_name"],"name":r["name"],"language":r.get("language"),"open_issues":r.get("open_issues_count",0),"updated_at":r["updated_at"],"default_branch":r["default_branch"]} for r in repos()]})
@@ -104,6 +110,8 @@ def next_action():
 
 @app.post("/api/agent/apply")
 def apply_change():
+    if not require_approval_key():
+        return jsonify({"error":"Authenticated approval key required"}),401
     b=request.get_json(force=True)
     if b.get("confirm")!="APPROVE": return jsonify({"error":"Explicit APPROVE confirmation required"}),400
     name,path,content=b.get("repo"),b.get("path"),b.get("content")
@@ -121,11 +129,11 @@ def apply_change():
 
 @app.post("/api/webhook")
 def webhook():
-    secret=os.getenv("GITHUB_WEBHOOK_SECRET",""); sig=request.headers.get("X-Hub-Signature-256","")
+    secret=WEBHOOK_SECRET; sig=request.headers.get("X-Hub-Signature-256","")
     raw=request.get_data()
-    if secret:
-        expected="sha256="+hmac.new(secret.encode(),raw,hashlib.sha256).hexdigest()
-        if not hmac.compare_digest(expected,sig): return jsonify({"error":"invalid signature"}),401
+    if not secret: return jsonify({"error":"Webhook secret is not configured"}),503
+    expected="sha256="+hmac.new(secret.encode(),raw,hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(expected,sig): return jsonify({"error":"invalid signature"}),401
     event=request.headers.get("X-GitHub-Event","unknown")
     payload=request.get_json(silent=True) or {}
     s=state(); s["patterns"].append({"event":event,"repo":payload.get("repository",{}).get("full_name"),"action":payload.get("action"),"at":datetime.now(timezone.utc).isoformat()}); s["patterns"]=s["patterns"][-500:]; save(s)
