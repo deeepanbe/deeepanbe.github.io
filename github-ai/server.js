@@ -51,7 +51,7 @@ app.get("/api/repos/:repo/tree", async (req, res, next) => {
   try {
     requireGithub(); assertRepo(req.params.repo);
     const meta = await github.repos.get({ owner, repo:req.params.repo });
-    const { data } = await github.git.getTree({ owner, repo:req.params.repo, tree_sha:meta.data.default_branch, recursive:"true" });
+    const { data } = await github.git.getTree({ owner, repo:req.params.repo, tree_sha:meta.default_branch, recursive:"true" });
     res.json({ ok:true, repository:meta.data.full_name, default_branch:meta.data.default_branch,
       files:data.tree.filter(x=>x.type==="blob").map(x=>({path:x.path,sha:x.sha,size:x.size})) });
   } catch(e) { next(e); }
