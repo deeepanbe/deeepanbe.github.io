@@ -107,6 +107,51 @@ app.post("/api/changes/:id/apply",async(req,res,next)=>{
   } catch(e){next(e);}
 });
 
+
+app.get("/api/repos/:repo/issues", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.params.repo);
+    const {data}=await github.issues.listForRepo({owner,repo:req.params.repo,state:"open",per_page:100,sort:"updated"});
+    res.json({ok:true,issues:data.filter(i=>!i.pull_request).map(i=>({number:i.number,title:i.title,labels:i.labels.map(x=>x.name),updated_at:i.updated_at,url:i.html_url}))});
+  } catch(e){next(e);}
+});
+
+app.get("/api/repos/:repo/pulls", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.params.repo);
+    const {data}=await github.pulls.list({owner,repo:req.params.repo,state:"open",per_page:100,sort:"updated",direction:"desc"});
+    res.json({ok:true,pulls:data.map(p=>({number:p.number,title:p.title,user:p.user?.login,updated_at:p.updated_at,url:p.html_url}))});
+  } catch(e){next(e);}
+});
+
+app.get("/api/repos/:repo/commits", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.params.repo);
+    const {data}=await github.repos.listCommits({owner,repo:req.params.repo,per_page:30});
+    res.json({ok:true,commits:data.map(x=>({sha:x.sha,message:x.commit.message.split("\n")[0],author:x.author?.login||x.commit.author?.name,date:x.commit.author?.date,url:x.html_url}))});
+  } catch(e){next(e);}
+});
+
+app.post("/api/analysis/repository", async (req,res,next)=>{
+  try {
+    requireGithub(); assertRepo(req.body?.repo);
+    const repo=req.body.repo;
+    const meta=(await github.repos.get({owner,repo})).data;
+    const tree=(await github.git.getTree({owner,repo,tree_sha:meta.default_branch,recursive:"true"})).data;
+    const files=tree.tree.filter(x=>x.type==="blob");
+    const ext={};
+    for(const f of files){const m=f.path.match(/\.([A-Za-z0-9]+)$/); if(m) ext[m[1]]=(ext[m[1]]||0)+1;}
+    const top=files.sort((a,b)=>(b.size||0)-(a.size||0)).slice(0,10).map(x=>({path:x.path,size:x.size||0}));
+    const score=Math.max(0,Math.min(100,50+(meta.has_issues?10:0)+(meta.has_wiki?5:0)+(meta.has_projects?5:0)+(files.some(x=>/test|spec/i.test(x.path))?15:0)+(files.some(x=>/readme/i.test(x.path))?10:0)+(files.some(x=>/\.github\/workflows\//.test(x.path))?10:0)));
+    res.json({ok:true,repository:meta.full_name,default_branch:meta.default_branch,stars:meta.stargazers_count,forks:meta.forks_count,open_issues:meta.open_issues_count,file_count:files.length,technology_profile:ext,largest_files:top,readiness_score:score,recommendations:[
+      !files.some(x=>/readme/i.test(x.path))&&"Add or improve README documentation",
+      !files.some(x=>/\.github\/workflows\//.test(x.path))&&"Add CI workflow for repeatable validation",
+      !files.some(x=>/test|spec/i.test(x.path))&&"Add automated tests for critical paths",
+      "Review dependencies and security configuration",
+      "Document architecture and deployment"
+    ].filter(Boolean)});
+  } catch(e){next(e);}
+});
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
