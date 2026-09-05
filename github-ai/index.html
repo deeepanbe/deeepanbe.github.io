@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ GitHub AI</title>
+<style>body{font-family:system-ui;margin:0;background:#0b1020;color:#eef2ff}main{max-width:1000px;margin:auto;padding:32px}.card{background:#121a2e;border:1px solid #26314d;border-radius:16px;padding:20px;margin:16px 0}button{padding:10px 14px;border:0;border-radius:9px;cursor:pointer}pre{white-space:pre-wrap;overflow:auto}small{color:#9aa8c7}</style></head>
+<body><main><h1>DJ GitHub AI</h1><p>Repository intelligence and controlled development agent.</p>
+<div class="card"><button id="load">Connect GitHub AI</button><span id="status"></span></div>
+<div class="card"><h2>Repositories</h2><div id="repos">Not connected.</div></div>
+<div class="card"><h2>Agent policy</h2><p>Read and analyse automatically. Repository writes require explicit approval. No autonomous merge, delete, permission changes, or secret handling.</p></div>
+<script>
+const API=window.DJ_GITHUB_AI_API||"";
+async function load(){const s=document.getElementById("status"),r=document.getElementById("repos");if(!API){s.textContent=" Configure DJ_GITHUB_AI_API for the deployed API.";return}try{const h=await fetch(API+"/health").then(x=>x.json());s.textContent=h.ok?" AI service online":" AI service unavailable";const d=await fetch(API+"/api/repos").then(x=>x.json());r.innerHTML=d.repositories?.length?d.repositories.map(x=>"<div style='padding:10px 0;border-bottom:1px solid #26314d'><b>"+x.full_name+"</b><br><small>"+(x.language||"Unknown")+" · "+x.open_issues+" open issues · updated "+new Date(x.updated_at).toLocaleDateString()+"</small></div>").join(""):"No repositories returned."}catch(e){s.textContent=" Connection failed";r.textContent=e.message}}</script>
+</main></body></html>
