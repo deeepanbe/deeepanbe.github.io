@@ -6,7 +6,8 @@
 <div class="card"><button id="load">Connect GitHub AI</button><span id="status"></span></div>
 <div class="card"><h2>Repositories</h2><div id="repos">Not connected.</div></div>
 <div class="card"><h2>Repository Intelligence</h2><select id="repoSelect"><option value="">Select a repository</option></select> <button id="analyze">Analyze</button><pre id="analysis">Choose a repository to see its development profile.</pre></div>
-<div class="card"><h2>Agent workflow</h2><p>Analyze → recommend → propose patch → explicit approval → apply → audit.</p></div>
+<div class="card"><h2>Development Plan</h2><button id="plan">Generate Improvement Plan</button><pre id="planOut">Select a repository first.</pre></div>
+<div class="card"><h2>Agent workflow</h2><p>Analyze → recommend → plan → propose patch → explicit approval → apply → audit.</p></div>
 <div class="card"><h2>Agent policy</h2><p>Read and analyse automatically. Repository writes require explicit approval. No autonomous merge, delete, permission changes, or secret handling.</p></div>
 <script>
 const API=window.DJ_GITHUB_AI_API||"";
