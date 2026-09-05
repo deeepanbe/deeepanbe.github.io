@@ -7,7 +7,8 @@
 <div class="card"><h2>Repositories</h2><div id="repos">Not connected.</div></div>
 <div class="card"><h2>Repository Intelligence</h2><select id="repoSelect"><option value="">Select a repository</option></select> <button id="analyze">Analyze</button><pre id="analysis">Choose a repository to see its development profile.</pre></div>
 <div class="card"><h2>Development Plan</h2><button id="plan">Generate Improvement Plan</button><pre id="planOut">Select a repository first.</pre></div>
-<div class="card"><h2>Agent workflow</h2><p>Analyze → recommend → plan → propose patch → explicit approval → apply → audit.</p></div>
+<div class="card"><h2>Code Agent</h2><input id="path" placeholder="File path, e.g. src/app.js" style="width:55%;padding:10px;border-radius:8px;border:1px solid #26314d;background:#0b1020;color:#eef2ff"> <button id="propose">Inspect & Propose</button><pre id="proposal">No proposal yet.</pre></div>
+<div class="card"><h2>Agent workflow</h2><p>Analyze → recommend → plan → inspect → propose → explicit approval → apply → audit.</p></div>
 <div class="card"><h2>Agent policy</h2><p>Read and analyse automatically. Repository writes require explicit approval. No autonomous merge, delete, permission changes, or secret handling.</p></div>
 <script>
 const API=window.DJ_GITHUB_AI_API||"";
