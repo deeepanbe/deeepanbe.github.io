@@ -698,7 +698,7 @@ function formatMessage(text) {
   return `<p>${text}</p>`.replace(/<p><\/p>/g, '');
 }
 
-async function sendMessage() {
+async async function sendMessage() {
   if (isStreaming) return;
   const input = document.getElementById('userInput');
   const text = input.value.trim();
