@@ -436,7 +436,7 @@
       <div class="welcome" id="welcomeScreen">
         <div class="welcome-logo">DJ</div>
         <h2>Hi, I'm DJ AI 👋</h2>
-        <p>Deepanraj's personal AI assistant — built on Claude. I know his projects, resume, skills, and story. Ask me anything.</p>
+        <p>Deepanraj's personal AI assistant — powered by his verified portfolio knowledge and AI backend. Ask me anything.</p>
         <div class="welcome-chips">
           <div class="welcome-chip" onclick="sendQuick('Tell me about Deepanraj\'s Power BI projects')">📊 Power BI projects</div>
           <div class="welcome-chip" onclick="sendQuick('Write a SQL query for sales analysis')">🗄️ SQL query help</div>
@@ -736,7 +736,7 @@ async function sendMessage() {
   try { authToken = localStorage.getItem('dj.auth.token') || ''; } catch { authToken = ''; }
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 20000);
+  const timeout = setTimeout(() => controller.abort(), 60000);
 
   let turnstileToken;
   try {
