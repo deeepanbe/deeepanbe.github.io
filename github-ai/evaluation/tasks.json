@@ -1,0 +1,10 @@
+{
+  "version":"1.0",
+  "tasks":[
+    {"id":"repo-understanding","goal":"Summarize architecture from repository files","metric":"factuality"},
+    {"id":"safe-refactor","goal":"Make a small requested refactor without unrelated changes","metric":"patch_correctness"},
+    {"id":"bug-fix","goal":"Diagnose and fix a reproducible bug","metric":"tests_pass"},
+    {"id":"security-review","goal":"Identify and prioritize realistic security issues","metric":"precision"},
+    {"id":"pr-quality","goal":"Produce a clear, reviewable pull request","metric":"review_score"}
+  ]
+}

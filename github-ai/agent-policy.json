@@ -1,0 +1,9 @@
+{
+  "version":"1.0",
+  "read_operations":["repositories","files","commits","issues","pull_requests","workflow_runs","dependabot_alerts"],
+  "write_operations":["create_branch","update_file","create_pull_request"],
+  "approval_required":["update_file","create_branch","create_pull_request"],
+  "blocked":["delete_repository","delete_branch","force_push","merge_pull_request","change_permissions","read_or_store_secret_files"],
+  "max_file_chars":120000,
+  "principles":["least privilege","human approval","auditability","small changes","test before merge"]
+}

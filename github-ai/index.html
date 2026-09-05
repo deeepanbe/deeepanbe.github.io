@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ GitHub AI</title>
+<style>body{font-family:system-ui;margin:0;background:#0b1020;color:#eef2ff}main{max-width:1000px;margin:auto;padding:32px}.card{background:#121a2e;border:1px solid #26314d;border-radius:16px;padding:20px;margin:16px 0}button{padding:10px 14px;border:0;border-radius:9px;cursor:pointer}pre{white-space:pre-wrap;overflow:auto}small{color:#9aa8c7}</style></head>
+<body><main><h1>DJ GitHub AI</h1><p>Repository intelligence and controlled development agent.</p>
+<div class="card"><button id="load">Connect GitHub AI</button> <small>Backend: <span id="apiEndpoint"></span></small><span id="status"></span></div>
+<div class="card"><h2>Repositories</h2><div id="repos">Not connected.</div></div>
+<div class="card"><h2>Repository Intelligence</h2><select id="repoSelect"><option value="">Select a repository</option></select> <button id="analyze">Analyze</button><pre id="analysis">Choose a repository to see its development profile.</pre></div>
+<div class="card"><h2>Development Plan</h2><button id="plan">Generate Improvement Plan</button><pre id="planOut">Select a repository first.</pre></div>
+<div class="card"><h2>Code Agent</h2><input id="path" placeholder="File path, e.g. src/app.js" style="width:55%;padding:10px;border-radius:8px;border:1px solid #26314d;background:#0b1020;color:#eef2ff"> <button id="propose">Generate AI Patch</button><pre id="proposal">No proposal yet.</pre></div>
+<div class="card"><h2>GitHub Utilities</h2><button id="summary">Portfolio Summary</button> <button id="issues">Open Issues</button> <button id="prs">Open PRs</button> <button id="commits">Recent Commits</button><pre id="utilityOut">Ready.</pre></div><div class="card"><h2>Portfolio Intelligence</h2><button id="intel">Scan All Repositories</button><pre id="intelOut">Ready.</pre></div>
+<div class="card"><h2>Agent Command</h2><input id="task" placeholder="e.g. Improve my weakest repository" style="width:70%;padding:10px;border-radius:8px;border:1px solid #26314d;background:#0b1020;color:#eef2ff"> <button id="runTask">Plan</button><pre id="taskOut">No task planned.</pre></div>
+<div class="card"><h2>Patch Validation</h2><p>Every generated change is checked before it can be applied.</p><button id="validate">Validate Current Proposal</button><pre id="validation">No validation run.</pre></div>
+<div class="card"><h2>DJ Next Action</h2><button id="next">Find Highest-Value Improvement</button><pre id="nextOut">Ready.</pre></div>
+<div class="card"><h2>Agent workflow</h2><p>Discover → analyze → prioritize → generate → validate → review → approve → branch → PR → learn.</p></div>
+<div class="card"><h2>Agent policy</h2><p>Read and analyse automatically. Repository writes require explicit approval. No autonomous merge, delete, permission changes, or secret handling.</p></div>
+<script>
+const API=(window.DJ_GITHUB_AI_API||"https://dj-ai-api.onrender.com").replace(/\/$/,"");
+const $=id=>document.getElementById(id);
+let currentProposal=null;
+
+async function api(path,options={}){
+  if(!API) throw new Error("API endpoint is not configured.");
+  const controller=new AbortController(); const timeout=setTimeout(()=>controller.abort(),30000);\n  let r; try { r=await fetch(API+path,{...options,signal:controller.signal,headers:{"Content-Type":"application/json",...(options.headers||{})}}); } finally { clearTimeout(timeout); }
+  const d=await r.json().catch(()=>({error:"Invalid server response"}));
+  if(!r.ok) throw new Error(d.error||d.message||("Request failed: "+r.status));
+  return d;
+}
+function show(id,value){$(id).textContent=typeof value==="string"?value:JSON.stringify(value,null,2)}
+
+$("apiEndpoint").textContent=API;\nasync function load(){
+  show("status"," Connecting...");
+  try{
+    const h=await api("/health");
+    $("status").textContent=h.ok?" AI service online":" AI service unavailable";
+    const d=await api("/api/repos");
+    const list=d.repositories||[];
+    $("repos").innerHTML=list.length?list.map(x=>`<div style="padding:10px 0;border-bottom:1px solid #26314d"><b>${x.full_name}</b><br><small>${x.language||"Unknown"} · ${x.open_issues||0} open issues · updated ${new Date(x.updated_at).toLocaleDateString()}</small></div>`).join(""):"No repositories returned.";
+    $("repoSelect").innerHTML='<option value="">Select a repository</option>'+list.map(x=>`<option value="${x.name||x.full_name.split("/").pop()}">${x.full_name}</option>`).join("");
+  }catch(e){$("status").textContent=" Connection failed";show("repos",e.message)}
+}
+$("load").onclick=load;
+
+$("analyze").onclick=async()=>{const repo=$("repoSelect").value;if(!repo)return show("analysis","Select a repository first.");try{show("analysis","Analyzing...");show("analysis",await api("/api/repos/"+encodeURIComponent(repo)+"/overview"))}catch(e){show("analysis",e.message)}};
+$("plan").onclick=async()=>{const repo=$("repoSelect").value;if(!repo)return show("planOut","Select a repository first.");try{show("planOut","Planning...");show("planOut",await api("/api/agent/task",{method:"POST",body:JSON.stringify({task:"Analyze and create a safe improvement plan for repository "+repo})}))}catch(e){show("planOut",e.message)}};
+$("propose").onclick=async()=>{const repo=$("repoSelect").value,path=$("path").value.trim(),instruction="Improve this file safely, preserving existing behavior and adding tests where appropriate.";if(!repo||!path)return show("proposal","Select a repository and enter a file path.");try{show("proposal","Generating AI patch...");currentProposal=await api("/api/agent/generate",{method:"POST",body:JSON.stringify({repo,path,instruction})});show("proposal",currentProposal)}catch(e){show("proposal",e.message)}};
+$("summary").onclick=async()=>{try{show("utilityOut","Loading...");show("utilityOut",await api("/api/utility-summary"))}catch(e){show("utilityOut",e.message)}};
+$("issues").onclick=async()=>{const r=$("repoSelect").value;if(!r)return show("utilityOut","Select a repository.");try{show("utilityOut",await api("/api/repos/"+encodeURIComponent(r)+"/issues"))}catch(e){show("utilityOut",e.message)}};
+$("prs").onclick=async()=>{const r=$("repoSelect").value;if(!r)return show("utilityOut","Select a repository.");try{show("utilityOut",await api("/api/repos/"+encodeURIComponent(r)+"/pulls"))}catch(e){show("utilityOut",e.message)}};
+$("commits").onclick=async()=>{const r=$("repoSelect").value;if(!r)return show("utilityOut","Select a repository.");try{show("utilityOut",await api("/api/repos/"+encodeURIComponent(r)+"/commits"))}catch(e){show("utilityOut",e.message)}};
+$("intel").onclick=async()=>{try{show("intelOut","Scanning all repositories...");show("intelOut",await api("/api/intelligence"))}catch(e){show("intelOut",e.message)}};
+$("runTask").onclick=async()=>{const task=$("task").value.trim();if(!task)return show("taskOut","Enter a task.");try{show("taskOut","Planning...");show("taskOut",await api("/api/agent/task",{method:"POST",body:JSON.stringify({task})}))}catch(e){show("taskOut",e.message)}};
+$("validate").onclick=async()=>{if(!currentProposal?.proposal_id)return show("validation","Generate a proposal first.");try{show("validation","Validating...");show("validation",await api("/api/agent/validate",{method:"POST",body:JSON.stringify({repo:$("repoSelect").value,path:$("path").value,proposal_id:currentProposal.proposal_id})}))}catch(e){show("validation",e.message)}};
+$("next").onclick=async()=>{try{show("nextOut","Ranking repositories...");show("nextOut",await api("/api/agent/next"))}catch(e){show("nextOut",e.message)}};
+</script>
+</main></body></html>
