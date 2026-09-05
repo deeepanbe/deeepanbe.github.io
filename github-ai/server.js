@@ -479,6 +479,25 @@ app.get("/api/evaluate",(req,res)=>{
   res.json({ok:true,score,promote:score>=85,criteria:{tests,validation,review,security_findings:security}});
 });
 
+
+app.get("/api/utility-summary", async (_req,res,next)=>{
+  try{
+    requireGithub();
+    const {data}=await github.repos.listForUser({username:owner,per_page:100,sort:"updated"});
+    const rows=[];
+    for(const r of data){
+      let issues=0,pulls=0,commits=0;
+      try{issues=(await github.issues.listForRepo({owner,repo:r.name,state:"open",per_page:100})).data.filter(x=>!x.pull_request).length}catch{}
+      try{pulls=(await github.pulls.list({owner,repo:r.name,state:"open",per_page:100})).data.length}catch{}
+      try{commits=(await github.repos.listCommits({owner,repo:r.name,per_page:10})).data.length}catch{}
+      rows.push({repo:r.name,issues,pulls,recent_commits:commits,language:r.language||"unknown",updated_at:r.updated_at});
+    }
+    const totalCommits=rows.reduce((a,x)=>a+x.recent_commits,0);
+    const totalIssues=rows.reduce((a,x)=>a+x.issues,0);
+    res.json({ok:true,summary:{repositories:rows.length,recent_commits:totalCommits,open_issues:totalIssues,open_prs:rows.reduce((a,x)=>a+x.pulls,0)},repositories:rows});
+  }catch(e){next(e)}
+});
+
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
