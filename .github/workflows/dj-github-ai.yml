@@ -1,0 +1,35 @@
+name: DJ GitHub AI CI
+
+on:
+  push:
+    branches: [main, "feature/**"]
+    paths: ["github-ai/backend/**", "github-ai/index.html", ".github/workflows/dj-github-ai.yml"]
+  pull_request:
+    paths: ["github-ai/backend/**", "github-ai/index.html"]
+
+permissions:
+  contents: read
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: github-ai/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m py_compile app.py
+      - run: |
+          python - <<'PY'
+          import os
+          os.environ["GITHUB_TOKEN"]=""
+          from app import app
+          c=app.test_client()
+          r=c.get("/health")
+          assert r.status_code==200 and r.json["ok"]
+          print(r.json)
+          PY
