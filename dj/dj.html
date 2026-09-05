@@ -569,15 +569,27 @@ function clearChat() {
 }
 async function checkBackend() {
   const pill=document.getElementById('connectionPill'), dot=document.getElementById('statusDot'), label=document.getElementById('statusText');
-  if (!DJ_BACKEND_CONFIGURED) { backendHealthy=false; pill.className='connection-pill offline'; dot.classList.add('offline'); label.textContent='Backend setup'; return; }
+  if (!DJ_BACKEND_CONFIGURED) {
+    backendHealthy=false; pill.className='connection-pill offline'; dot.classList.add('offline');
+    label.textContent='Backend setup'; return false;
+  }
+  label.textContent='Connecting…';
+  pill.className='connection-pill'; dot.classList.remove('offline');
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
   try {
-    const r=await fetch(DJ_BACKEND_URL + '/health', {cache:'no-store'});
+    const r=await fetch(DJ_BACKEND_URL.replace(/\\/$/, '') + '/health', {
+      cache:'no-store', signal:controller.signal,
+      headers:{'Accept':'application/json'}
+    });
     const data=await r.json();
-    backendHealthy=Boolean(r.ok && data && data.ok);
+    backendHealthy=Boolean(r.ok && data && data.ok === true);
   } catch { backendHealthy=false; }
+  finally { clearTimeout(timeout); }
   pill.className='connection-pill '+(backendHealthy?'online':'offline');
   dot.classList.toggle('offline',!backendHealthy);
   label.textContent=backendHealthy?'AI Online':'AI Offline';
+  return backendHealthy;
 }
 
 const DEEPANRAJ_BIO = `You are DJ AI — the personal AI assistant of Deepanraj Arumugam, a Data Analyst and Power BI Developer based in Tamil Nadu, India.
