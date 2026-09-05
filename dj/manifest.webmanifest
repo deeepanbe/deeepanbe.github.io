@@ -2,7 +2,7 @@
   "name": "DJ AI — Deepanraj Personal AI",
   "short_name": "DJ AI",
   "description": "Deepanraj's personal Data Analyst and BI portfolio AI assistant.",
-  "start_url": "./dj.html",
+  "start_url": "./dj.html?app=1",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0a0e1a",
