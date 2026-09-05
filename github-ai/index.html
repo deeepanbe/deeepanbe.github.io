@@ -11,7 +11,8 @@
 <div class="card"><h2>Portfolio Intelligence</h2><button id="intel">Scan All Repositories</button><pre id="intelOut">Ready.</pre></div>
 <div class="card"><h2>Agent Command</h2><input id="task" placeholder="e.g. Improve my weakest repository" style="width:70%;padding:10px;border-radius:8px;border:1px solid #26314d;background:#0b1020;color:#eef2ff"> <button id="runTask">Plan</button><pre id="taskOut">No task planned.</pre></div>
 <div class="card"><h2>Patch Validation</h2><p>Every generated change is checked before it can be applied.</p><button id="validate">Validate Current Proposal</button><pre id="validation">No validation run.</pre></div>
-<div class="card"><h2>Agent workflow</h2><p>Discover → analyze → plan → generate → validate → review → approve → branch → PR → learn.</p></div>
+<div class="card"><h2>DJ Next Action</h2><button id="next">Find Highest-Value Improvement</button><pre id="nextOut">Ready.</pre></div>
+<div class="card"><h2>Agent workflow</h2><p>Discover → analyze → prioritize → generate → validate → review → approve → branch → PR → learn.</p></div>
 <div class="card"><h2>Agent policy</h2><p>Read and analyse automatically. Repository writes require explicit approval. No autonomous merge, delete, permission changes, or secret handling.</p></div>
 <script>
 const API=window.DJ_GITHUB_AI_API||"";
