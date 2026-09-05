@@ -311,6 +311,61 @@ app.get("/api/repos/:repo/overview", async (req,res,next)=>{
   } catch(e){next(e);}
 });
 
+
+
+app.get("/api/intelligence", async (_req,res,next)=>{
+  try {
+    requireGithub();
+    const {data}=await github.repos.listForUser({username:owner,per_page:100,sort:"updated"});
+    const repositories=[];
+    for(const r of data){
+      try{
+        const [commits,issues,pulls]=await Promise.all([
+          github.repos.listCommits({owner,repo:r.name,per_page:5}),
+          github.issues.listForRepo({owner,repo:r.name,state:"open",per_page:10}),
+          github.pulls.list({owner,repo:r.name,state:"open",per_page:10})
+        ]);
+        const issueCount=issues.data.filter(x=>!x.pull_request).length;
+        const pullCount=pulls.data.length;
+        const activity=commits.data.length;
+        const score=Math.min(100,Math.round(45+activity*5+pullCount*4+Math.max(0,5-issueCount)*4));
+        repositories.push({name:r.name,private:r.private,language:r.language,updated_at:r.updated_at,open_issues:issueCount,open_pulls:pullCount,recent_commits:activity,development_score:score});
+      }catch{}
+    }
+    repositories.sort((a,b)=>a.development_score-b.development_score);
+    res.json({ok:true,owner,repositories,portfolio_score:repositories.length?Math.round(repositories.reduce((a,b)=>a+b.development_score,0)/repositories.length):0,lowest_priority:repositories[0]||null});
+  }catch(e){next(e);}
+});
+
+app.post("/api/agent/task", async (req,res,next)=>{
+  try{
+    requireGithub();
+    const task=String(req.body?.task||"").trim();
+    if(!task) throw Object.assign(new Error("task is required"),{status:400});
+    const {data}=await github.repos.listForUser({username:owner,per_page:100,sort:"updated"});
+    const selected=data.slice(0,100).map(r=>({name:r.name,language:r.language,private:r.private,updated_at:r.updated_at}));
+    const id=crypto.randomUUID();
+    audit.push({id,action:"agent_task_created",task,repository_count:selected.length,created_at:new Date().toISOString()});
+    res.status(202).json({ok:true,task_id:id,status:"planned",task,repository_count:selected.length,
+      next_steps:["select repository","inspect relevant files","generate patch","show diff","request approval","apply on branch","validate via CI","open PR"]});
+  }catch(e){next(e);}
+});
+
+app.get("/api/agent/learning", async (_req,res,next)=>{
+  try{
+    requireGithub();
+    const events=audit.slice(-100);
+    const counts=events.reduce((m,e)=>(m[e.action]=(m[e.action]||0)+1,m),{});
+    res.json({ok:true,learning:{events_considered:events.length,action_counts:counts,principles:[
+      "Prefer small reversible changes",
+      "Use repository history and CI results as feedback",
+      "Never treat generated code as trusted until validated",
+      "Require human approval for consequential writes",
+      "Improve recurring weaknesses across repositories"
+    ]}});
+  }catch(e){next(e);}
+});
+
 app.get("/api/audit",(_req,res)=>res.json({ok:true,events:audit.slice(-100)}));
 app.use((err,_req,res,_next)=>{
   const status=Number(err.status||err.statusCode||500);
